@@ -27,6 +27,8 @@ If you have any trouble with any of these steps, please do not slam your face ag
 ## 4.1 Getting set up
 Step 1, for most people, download Git from the official website: https://git-scm.com/downloads.
 
+Note, this guide assumes you are on Windows and using the graphical Git program. Mac users should be able to follow the guide, as the program is cross-platform; let me know if you have issues. If you want to use Git integrated with your IDE, or through the commandline, I'll sit down with you and try and help, but you're mostly on your own. Google is your best friend.
+
 Step 2, launch Git GUI through your start menu. Alternatively, you can right click on empty space on your desktop and click Git GUI Here. This should open a window that looks like this:
 
 ![setup-2][setup-2]
@@ -111,19 +113,19 @@ Note that you do not need to include a list of files you modified, your name, th
 
 ![work-9][work-9]
 
-Alright, you’re ready to commit. As you might guess, press the Commit button. Note the little message at the bottom saying that a commit was created, including the name of the hash and the commit message.
+Alright, you’re ready to commit. As you might guess, press the **Commit** button. Note the little message at the bottom saying that a commit was created, including the name of the hash and the commit message.
 
 ![work-10][work-10]
 
-Create as many commits as you would like for all of the changes you’ve made. Once you’re “done working,” I.E. you’re not going to work on this any more for the day, you’re going to bed, you’re going to grab lunch and come back, etc. etc., it’s a good idea to Push.
+Create as many commits as you would like for all of the changes you’ve made. Once you’re “done working,” I.E. you’re not going to work on this any more for the day, you’re going to bed, you’re going to grab lunch and come back, etc. etc., it’s a good idea to **Push**.
 
 ![work-11][work-11]
 
-This will open this window. Select the branch you’ve been working on; generally this will be master. Do not tick any of the boxes under Transfer Options unless you know what you’re doing. This is actually a good time to bring something up - if you ever see a tickbox or a button that has the word Force in it, you should think long and hard before you press it. Ask me, look up the consequences, do both. The word Force in Git generally corresponds to permanent deletion of repository history that may not be recoverable. This means you can accidentally delete the whole project. This is not disastrous, because Git is very robust, and the project can be restored from local copies - however, it will make me and other people working on it angry, waste time, and may result in lost data. Do not Force things unless you know what you’re doing.
+This will open this window. Select the branch you’ve been working on; generally this will be **master**. Do not tick any of the boxes under Transfer Options unless you know what you’re doing. This is actually a good time to bring something up - if you ever see a tickbox or a button that has the word **Force** in it, you should think long and hard before you press it. Ask me, look up the consequences, do both. The word **Force** in Git generally corresponds to permanent deletion of repository history that may not be recoverable. This means you can accidentally delete the whole project. This is not disastrous, because Git is very robust, and the project can be restored from local copies - however, it will make me and other people working on it angry, waste time, and may result in lost data. Do not **Force** things unless you know what you’re doing.
 
 Note, you may have to log in to the repository at this point. As you may guess, enter your username and password. You should not have to login at all after this - Github will remember that you accessed it from your current machine. This also means that you have to keep your machine safe - otherwise people can come in and do nasty things to the repo.
 
-Once you hit Push, a small window will pop up showing some logs:
+Once you hit **Push**, a small window will pop up showing some logs:
 
 ![work-12][work-12]
 
@@ -152,27 +154,27 @@ And that’s the basics of how you work with Git. You may notice there are about
 [work-14]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-14.png "work-14"
 
 # 5 Why don't we just use Google Drive
-Note, you can skip this section if you believe me and trust that Git is awesome and have accepted the fact that we’re using Github. This section is for everyone that’s thinking “Why do I have to learn another piece of software for this synthetic biology project.”
+**Note, you can skip this section if you believe me and trust that Git is awesome and have accepted the fact that we’re using Github. This section is for everyone that’s thinking “Why do I have to learn another piece of software for this synthetic biology project.”**
 
-There are a lot of answers to this question, but the most important ones are merging, revision control, branches, blame and consistency. Some of these are buzzwords used by the open source/version control community, so let me define them.
+There are a lot of answers to this question, but the most important ones are _merging, revision control, branches, blame and consistency_. Some of these are buzzwords used by the open source/version control community, so let me define them.
 
-Merging is best explained by an example. Let’s say we have two members working on the same project at the same time. One team members changes a hundred or so lines of code towards the top of the file in some class definitions, another changes the main method at the bottom of the file. Concurrently, two other team members are working on some HTML that makes use of these files.
+_Merging_ is best explained by an example. Let’s say we have two members working on the same project at the same time. One team members changes a hundred or so lines of code towards the top of the file in some class definitions, another changes the main method at the bottom of the file. Concurrently, two other team members are working on some HTML that makes use of these files.
 
 Before all team members started, the project was the same; now it is different. If we were using Google Drive or something else like it, all 4 team members would upload their changes, and whoever was the last to upload their changes would be the one who “wins.” Some work would be overwritten; it would not be lost, as Google Drive retains a history of all files uploaded, however, it wouldn’t be obvious that not everyone’s changes were applied, and someone would have to go in their and manually cut and paste in the changes made.
 
 Git does this all automatically. Team members commit their changes to their local repository, and then upload (push) those changes to our Github repository. Git tells you if there were any problems, and walks you through how to resolve them. 90% of the time however, its algorithms successfully merge all changes concurrently made by authors and saves everybody a lot of time and hassle.
 
-Revision control is the idea that any past changes to the project can be seen. This means that if you want to experiment with some code, completely break something, utterly ruin the functionality of the project, you don’t have to go through the trouble of making a backup and duplicating everything somewhere else on your machine. Because Git tracks the history of the entire project, if you mess something up, you can just press a button and it will restore the previous state of the project. This additionally means that, if you mess something up and don’t realize it until 10 days later, but you’ve made a bunch of changes you want to keep, you can rewind only the part that you messed up, and keep all of the changes that you’ve already made.
+_Revision_ control is the idea that any past changes to the project can be seen. This means that if you want to experiment with some code, completely break something, utterly ruin the functionality of the project, you don’t have to go through the trouble of making a backup and duplicating everything somewhere else on your machine. Because Git tracks the history of the entire project, if you mess something up, you can just press a button and it will restore the previous state of the project. This additionally means that, if you mess something up and don’t realize it until 10 days later, but you’ve made a bunch of changes you want to keep, you can rewind only the part that you messed up, and keep all of the changes that you’ve already made.
 
 In comparison, Google Drive has rough, automatic revision control that isn’t explicit. I’m pretty sure it also deletes revisions past a certain date.
 
-Branches are related to this. Branching is the idea that multiple team members can work on different versions of the project at the same time, upload their changes independently of one another, and then merge them down the line into one, consistent, holistic project. This is a bit of an advanced concept, and it may be hard to see the difference between it and merging. Shoot me a message if you want further clarification, otherwise trust me in saying that it’s extremely valuable.
+_Branches_ are related to this. Branching is the idea that multiple team members can work on different versions of the project at the same time, upload their changes independently of one another, and then merge them down the line into one, consistent, holistic project. This is a bit of an advanced concept, and it may be hard to see the difference between it and merging. Shoot me a message if you want further clarification, otherwise trust me in saying that it’s extremely valuable.
 
-Blame is the concept of being aware of who made what change and who contributed what work. When it comes to code, Google Drive only tracks whoever uploaded the last change. Because of the way that Git works, it tracks every contribution everyone has ever made to every single line of code in the entire project.
+_Blame_ is the concept of being aware of who made what change and who contributed what work. When it comes to code, Google Drive only tracks whoever uploaded the last change. Because of the way that Git works, it tracks every contribution everyone has ever made to every single line of code in the entire project.
 
 This both allows you to see who has contributed the most (vital for paying people reasonable amounts of money for their work), and who is causing problems in the code. You can see exactly when and where someone broke something. Or when and where someone fixed something.
 
-Lastly, consistency. Because Google Drive allows anyone with access to the drive to make a change, someone may do something that you don’t like without you realizing, breaking something that was important to you. Or you may do something stupid and break something without realizing it.
+Lastly, *consistency*. Because Google Drive allows anyone with access to the drive to make a change, someone may do something that you don’t like without you realizing, breaking something that was important to you. Or you may do something stupid and break something without realizing it.
 
 Reversing these changes is hard. Figuring out why problems are occurring is harder. Git is consistent in that you always have access to a working code base, even if people have made changes, because you can just rewind time, or switch to a branch that you know is working. In Google Drive, everyone is working with the work-in-progress, fresh-out-of-the-oven, gooey, sticky code that everyone's gotten their hands on. There is no isolation, and so things are more likely to break.
 
