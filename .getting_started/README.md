@@ -1,4 +1,4 @@
-# 1 What is this document
+# 1 Gitting Started!
 
 This is a quick primer, primarily aimed at individuals who have little to no experience with programming on how to use Git and Github. It’s also for programmers who have never used it before, have tried and failed to use it before, or haven’t used it in ages and need a refresher.
 
@@ -8,11 +8,11 @@ If you have any questions, feel free to shoot me a private message in GroupMe or
 
 # 2 Table of Contents
 
-1. What is this document
-2. Table of Contents
-3. What is Github
-4. Okay cool, how do I use it
-5. Why don't we just use Google Drive
+1. [Gitting Started](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#1-gitting-started)
+2. [Table of Contents](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#2-table-of-contents)
+3. [What is Github](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#3-what-is-github)
+4. [Okay cool, how do I use it](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-okay-cool-how-do-i-use-it)
+5. [Why don't we just use Google Drive](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#5-why-dont-we-just-use-google-drive)
 
 # 3 What is Github
 
