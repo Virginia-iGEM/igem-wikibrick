@@ -18,7 +18,7 @@ If you have any questions, feel free to shoot me a private message in GroupMe or
 
 [Github](https://github.com) is a source code repository hosting and sharing website that makes use of the Git Version Control System (Git VCS). In layman's terms, it’s kinda like Google Drive, but specifically meant for open-source, code-centric software projects that many people will be working on at once. Some projects that are hosted on Github include Linux, the Python programming language, and a majority of the code that makes websites like Facebook, Twitter, Google and Youtube run.
 
-If you don’t care about how Git/Github works and just want to get work done, just read Section 4, Okay cool, how do I use it. If you’re miffed that you have to learn how to use another damn program and/or are curious about how Git works and why we’re using it, you should probably read Section 5 first, Why don’t we just use Google Drive.
+If you don’t care about how Git/Github works and just want to get work done, just read [Section 4, Okay cool, how do I use it](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-okay-cool-how-do-i-use-it). If you’re miffed that you have to learn how to use another damn program and/or are curious about how Git works and why we’re using it, you should probably read [Section 5 first, Why don’t we just use Google Drive](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#5-why-dont-we-just-use-google-drive).
 
 # 4 Okay cool, how do I use it
 
