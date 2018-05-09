@@ -29,26 +29,26 @@ Step 1, for most people, download Git from the official website: https://git-scm
 
 Step 2, launch Git GUI through your start menu. Alternatively, you can right click on empty space on your desktop and click Git GUI Here. This should open a window that looks like this:
 
-![setup-1][setup-1]
+![setup-2][setup-2]
 
 Step 3, in the case of our project, you’ll want to click Clone Existing Repository.
 
-![setup-2][setup-2]
+![setup-3][setup-3]
 
 
 Then enter https://github.com/Mantissa-23/VGEM-2018.git into the Source Location field and a new folder of your choosing under Target Directory. You can of course use the Browse button to do this.
 
-![setup-3][setup-3]
+![setup-3-1][setup-3-1]
 
 If you get the following error:
 
-![setup-4][setup-4]
+![setup-3-2][setup-3-2]
 
 Or some such, it’s because the Target Directory must include the name of a nonexistant folder. This is the folder the project will be cloned into, and the program will automatically create it. So instead of entering, say, `C:\Users\DylanC`, try `C:\Users\DylanC\iGEM_Project` or `C:\Users\DylanC\VGEM-2018` or something like that.
 
 Congrats, you’re almost there! You should see the following window if you were successful:
 
-![setup-4][setup-4]
+![setup-3-4][setup-3-4]
 
 Step 4: So, that’s not it; there’s some administrative stuff you need to take care of. First, go to [github.com](https://github.com/join?source=header-home) and sign up for an account. This is free, do not pay them any money, all of the plans are for companies and large teams. Once you’ve done that, email me/text me **your full username, or the email address you used to sign up for Github**. It is important that this is correct, as it is the name/address I will use to add use to the project as a collaborator.
 
@@ -58,9 +58,17 @@ Step 5: While I’m adding you to the project (this may take some time), you’r
 
 There is a lot of stuff here that you don’t have to worry about. If you know what all these words mean, good for you. If you want to change them, and you know what you are doing, feel free to change them. If you don’t know what you’re doing, there’s only two fields you want to touch:
 
-![setup-6][setup-6]
+![setup-5-1][setup-5-1]
 
 Change these to the user name you created for Github and the email address you signed up with, then click **Save**. That’s all the setup you have to do, after you’ve done that, **and once I’ve added you to the project and sent you a message confirming this**, you’re ready to commit changes to the repo.
+
+[setup-2]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Setup-2.png "setup-2"
+[setup-3]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Setup-3.png "setup-3"
+[setup-3-1]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Setup-3-1.png "setup-3-1"
+[setup-3-2]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Setup-3-2.png "setup-3-2"
+[setup-3-4]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Setup-3-4.png "setup-3-4"
+[setup-5]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Setup-5.png "setup-5"
+[setup-5-1]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Setup-5-1.png "setup-5-1"
 
 ## 4.2 How do I do work
 
@@ -127,6 +135,21 @@ And now your changes are out there, on our Github page. You can view the current
 If you look at the repository now, you should be able to see the changes I’ve made already there. If you’ve followed this tutorial, you should also be able to see your own changes.
 
 And that’s the basics of how you work with Git. You may notice there are about 5 billion other settings and buttons and option menus and commands that you have access to. You may also not notice these things, because some functionality of Git is only available through the command line. These are all advanced functions often related to project management, and so it’s all junk I have to deal with. Regardless, if you’re curious about a certain function or command, feel free to ask. I normally used commandline Git, so if I missed anything in this tutorial that you’re seeing and I’m not, please let me know.
+
+[work-1]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-1.png "work-1"
+[work-2]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-2.png "work-2"
+[work-3]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-3.png "work-3"
+[work-4]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-4.png "work-4"
+[work-5]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-5.png "work-5"
+[work-6]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-6.png "work-6"
+[work-7]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-7.png "work-7"
+[work-8]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-8.png "work-8"
+[work-9]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-9.png "work-9"
+[work-10]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-10.png "work-10"
+[work-11]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-11.png "work-11"
+[work-12]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-12.png "work-12"
+[work-13]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-13.png "work-13"
+[work-14]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-14.png "work-14"
 
 # 5 Why don't we just use Google Drive
 Note, you can skip this section if you believe me and trust that Git is awesome and have accepted the fact that we’re using Github. This section is for everyone that’s thinking “Why do I have to learn another piece of software for this synthetic biology project.”
