@@ -160,9 +160,41 @@ In the event that someone else makes changes while you are making changes, and t
 
 Anyways, to do this, you're going to want to mouse over to `Remote > Fetch From > origin`. A small log window should appear and read successful.
 
->! If this option does not exist, hit `Remote > Add...`, name it `origin` and set the location to https://github.com/Mantissa-23/VGEM-2018.git. 
+> If this option does not exist, hit `Remote > Add...`, name it `origin` and set the location to https://github.com/Mantissa-23/VGEM-2018.git. 
+
+Now you need to **Merge.** To do this mouse over to `Merge > Local Merge`, and select the name of the branch you're merging from. This is probably going to be **master**. 
+
+The merge should be successful. If it is, you can skip the next part.
+
+If it is not, a big red error message will appear, and you will see merge conflicts in your unstaged changes:
+
+![merge-1][merge-1]
+
+In order to resolve these conflicts, open your text editor/IDE of choice, get in there and manually decide which changes should be kept and which changes should be discarded. If you are merging someone else's changes, you probably want to sit down and talk with them about how this should be done.
 
 
+[merge-1]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Merge-1.png "merge-1"
+
+In order to "keep" a change, simply delete the lines you don't want. You can also make edits, you don't have to keep either line.
+
+Note the following symbols:
+```
+<<<<<<< HEAD
++some line of code
+=======
++ some other line of code
+>>>>>>> --a long string of numbers and letters--
+```
+
+Rember to delete these lines when resolving merge conflicts. They are simply there to inform you which line of code came from which repository; the one on top is from yours, the one on the bottom is from the remote changes you're trying to merge in.
+
+> Some IDEs and text editors will have built-in merge conflict resolution tools. These are often dubbed difftools. If your editor has one, congratulations, using it will make this process will be slightly easier but also significantly more confusing. My text editor, Vim, has a built-in difftool and it took me 3 years before I actually got around to learning how to use it. If you've never used a difftool, I reccommend just getting in there and deleting/editing all of the necessary lines yourself, it's not that hard.
+
+Once you have resoled your conflicts, mouse over to and click `Commit > Stage To Commit`. Now you can continue as normal.
+
+In both cases (merge is auto resolved and merge conflict), you can now **Push** your changes. This is done the same way as described in Section 4.2.
+
+This concludes the guide on **Fetching** and **Merging**. I understand that was a lot; if you have any questions, again, don't be afraid to ask.
 
 # 5 Why don't we just use Google Drive
 **Note, you can skip this section if you believe me and trust that Git is awesome and have accepted the fact that we’re using Github. This section is for everyone that’s thinking “Why do I have to learn another piece of software for this synthetic biology project.”**
