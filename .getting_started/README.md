@@ -153,6 +153,17 @@ And that’s the basics of how you work with Git. You may notice there are about
 [work-13]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-13.png "work-13"
 [work-14]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Work-14.png "work-14"
 
+## 4.3 Pulling Changes
+You probably won't have to do this any time soon, so you may want to refer back to this section later once everyone starts working on the codebase.
+
+In the event that someone else makes changes while you are making changes, and that person commits those changes to their repository and pushes those changes to Github (this is more common than you think), you will have to **Fetch** their changes from the remote repository, **Merge** them together in a new commit (called a Merge commit), and then push your changes combined with theirs to the repository. This combined **Fetch** + **Merge** operation is called a **Pull.** Confusing terminology, I know. Trust me, that's like, child's play, there are also commands called **Cherrypick** and **Rebase,** I still have no idea what they do.
+
+Anyways, to do this, you're going to want to mouse over to `Remote > Fetch From > origin`. A small log window should appear and read successful.
+
+>! If this option does not exist, hit `Remote > Add...`, name it `origin` and set the location to https://github.com/Mantissa-23/VGEM-2018.git. 
+
+
+
 # 5 Why don't we just use Google Drive
 **Note, you can skip this section if you believe me and trust that Git is awesome and have accepted the fact that we’re using Github. This section is for everyone that’s thinking “Why do I have to learn another piece of software for this synthetic biology project.”**
 
