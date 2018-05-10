@@ -27,7 +27,7 @@ If you have any trouble with any of these steps, please do not slam your face ag
 ## 4.1 Getting set up
 Step 1, for most people, download Git from the official website: https://git-scm.com/downloads.
 
-Note, this guide assumes you are on Windows and using the graphical Git program. Mac users should be able to follow the guide, as the program is cross-platform; let me know if you have issues. If you want to use Git integrated with your IDE, or through the commandline, I'll sit down with you and try and help, but you're mostly on your own. Google is your best friend.
+Note, this guide assumes you are on Windows and using the graphical Git program. Mac and Linux users should be able to follow the guide, as the program is cross-platform; let me know if you have issues. If you want to use Git integrated with your IDE, or through the commandline, I'll sit down with you and try and help, but you're mostly on your own. Google is your best friend.
 
 Step 2, launch Git GUI through your start menu. Alternatively, you can right click on empty space on your desktop and click Git GUI Here. This should open a window that looks like this:
 
