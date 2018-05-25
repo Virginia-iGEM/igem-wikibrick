@@ -52,7 +52,7 @@ Congrats, you’re almost there! You should see the following window if you were
 
 ![setup-3-4][setup-3-4]
 
-Step 4: So, that’s not it; there’s some administrative stuff you need to take care of. First, go to [github.com](https://github.com/join?source=header-home) and sign up for an account. This is free, do not pay them any money, all of the plans are for companies and large teams. Once you’ve done that, email me/text me **your full username, or the email address you used to sign up for Github**. It is important that this is correct, as it is the name/address I will use to add use to the project as a collaborator.
+Step 4: So, that’s not it; there’s some administrative stuff you need to take care of. First, go to [github.com](https://github.com/join?source=header-home) and sign up for an account. This is free, do not pay them any money, all of the plans are for companies and large teams. Once you’ve done that, email me/text me **your full username you signed up with on Github**. It is important that this is correct, as it is the name/address I will use to add use to the project as a collaborator.
 
 Step 5: While I’m adding you to the project (this may take some time), you’re gonna want to set up your local Git program. Mouse up to the top menu and click on Edit > Settings. This will open the following mess of a window:
 
