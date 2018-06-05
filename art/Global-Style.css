@@ -4,6 +4,7 @@
     --highlight-color: #E57200;
     --text-light: #ffffff;
     --text-dark: #666666;
+    --link-color: #EB5F0Cff;
 }
 .container {
     padding: 80px 120px;
@@ -32,4 +33,11 @@ footer {
     background-color: var(--dark-background-color);
     color: var(--text-light);
     padding: 32px;
+}
+
+a:link {
+    color: var(--link-color);
+}
+ul.nav li a {
+    color: var(--link-color);
 }
