@@ -6,6 +6,10 @@
     --text-dark: #666666;
     --link-color: #EB5F0Cff;
 }
+* {
+  border-radius: 0 !important;
+}
+
 .container {
     padding: 80px 120px;
 }
@@ -19,10 +23,20 @@
 .category:hover {
     border-color: #f1f1f1;
 }
-.headliner {
+.navbar {
     padding: 100px 140px;
+    margin: 0px;
+    border: 2px;
     background-color: var(--dark-background-color);
     color: var(--text-light);
+}
+.interactive-experience {
+    padding: 50px;
+    margin: 0px;
+    border: 2px;
+    background-color: var(--dark-background-color);
+    color: var(--text-light);
+    height: 600px;
 }
 .body {
     padding: 20px 20px;
