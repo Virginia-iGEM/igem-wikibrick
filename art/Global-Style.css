@@ -32,14 +32,11 @@
 */
 
 body {
-    padding-top: 100px;
+    padding-top: 150px;
 }
 
 .container {
     padding: 80px 120px;
-}
-.category:hover {
-    border-color: #f1f1f1;
 }
 .navbar {
     border-radius: 0 !important;
@@ -61,7 +58,7 @@ footer {
     border-radius: 0 !important;
     background-color: var(--dark-background-color);
     color: var(--text-light);
-    padding: 32px;
+    padding: 25px;
 }
 
 a:link {

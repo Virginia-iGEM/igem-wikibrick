@@ -14,3 +14,6 @@
     height: 90%;
     opacity: 0.9;
 }
+.category:hover {
+    border-color: #f1f1f1;
+}
