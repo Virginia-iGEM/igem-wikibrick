@@ -1,3 +1,33 @@
+/* Override iGEM wiki settings */
+#sideMenu,
+#top_title {
+    display: none;
+}
+
+#content {
+    width: 100vw;
+    padding: 0px;
+    border: none;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    position: relative;
+}
+
+#globalWrapper {
+    font-size: inherit;
+    padding-bottom: 0;
+}
+
+#top_menu_under {
+    height: 0px;
+}
+
+ul {
+    list-style-image: none; //removes the iGEM wiki bullets
+}
+
 /* UVA Colors */
 :root {
     --dark-background-color:#232D4B;
@@ -66,4 +96,25 @@ a:link {
 }
 ul.nav li a {
     color: var(--link-color);
+}
+
+/* Home.html Styles */
+.interactive {
+    border-radius: 0 !important;
+    padding: 50px;
+    margin: 0px;
+    border: 2px;
+    background-color: var(--dark-background-color);
+    color: var(--text-light);
+    height: 600px;
+}
+.category {
+    border: 10px solid transparent;
+    margin-bottom: 25px;
+    width: 90%;
+    height: 90%;
+    opacity: 0.9;
+}
+.category:hover {
+    border-color: #f1f1f1;
 }
