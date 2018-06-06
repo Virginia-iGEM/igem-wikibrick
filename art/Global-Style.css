@@ -1,3 +1,4 @@
+/* UVA Colors */
 :root {
     --dark-background-color:#232D4B;
     --light-background-color:#ffffff;
@@ -7,37 +8,47 @@
     --link-color: #EB5F0Cff;
 }
 
+/* Cherenkov Colors
+:root {
+    --dark-background-color:#282828;
+    --light-background-color:#C3C3D8;
+    --highlight-color: #BFFBF9;
+    --text-light: #E8F9F9;
+    --text-dark: #001C4E;
+    --link-color: #3DD4DF;
+}
+*/
+
+
+/* Passion Fruit Colors
+:root {
+    --dark-background-color:#4F1832;
+    --light-background-color:#FAF4E0;
+    --highlight-color: #F5287F;
+    --text-light: #FFF0EF;
+    --text-dark: #1E0811;
+    --link-color: #FBB645;
+}
+*/
+
+body {
+    padding-top: 200px;
+}
+
 .container {
     padding: 80px 120px;
 }
-.category {
-    border: 10px solid transparent;
-    margin-bottom: 25px;
-    width: 90%;
-    height: 90%;
-    opacity: 0.9;
-}
-.category:hover {
-    border-color: #f1f1f1;
-}
 .navbar {
     border-radius: 0 !important;
-    padding: 100px 140px;
+    border-bottom: solid var(--highlight-color);
+    padding: 25px;
     margin: 0px;
-    border: 2px;
     background-color: var(--dark-background-color);
     color: var(--text-light);
-}
-.interactive-experience {
-    border-radius: 0 !important;
-    padding: 50px;
-    margin: 0px;
-    border: 2px;
-    background-color: var(--dark-background-color);
-    color: var(--text-light);
-    height: 600px;
 }
 .body {
+    border-top: 3px solid var(--highlight-color);
+    border-bottom: 3px solid var(--highlight-color);
     border-radius: 0 !important;
     padding: 20px 20px;
     background-color: var(--light-background-color);
@@ -47,7 +58,7 @@ footer {
     border-radius: 0 !important;
     background-color: var(--dark-background-color);
     color: var(--text-light);
-    padding: 32px;
+    padding: 25px;
 }
 
 a:link {
