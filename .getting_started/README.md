@@ -13,6 +13,7 @@ If you have any questions, feel free to shoot me a private message in GroupMe or
 3. [What is Github](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#3-what-is-github)
 4. [Okay cool, how do I use it](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-okay-cool-how-do-i-use-it)
 5. [Why don't we just use Google Drive](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#5-why-dont-we-just-use-google-drive)
+6. [Quick tutorial if you want to use the command prompt instead of the Git GUI](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#6-quick-tutorial-if-you-want-to-use-the-command-prompt-instead-of-the-git-gui)
 
 # 3 What is Github
 
@@ -220,4 +221,56 @@ This both allows you to see who has contributed the most (vital for paying peopl
 Lastly, *consistency*. Because Google Drive allows anyone with access to the drive to make a change, someone may do something that you don’t like without you realizing, breaking something that was important to you. Or you may do something stupid and break something without realizing it.
 
 Reversing these changes is hard. Figuring out why problems are occurring is harder. Git is consistent in that you always have access to a working code base, even if people have made changes, because you can just rewind time, or switch to a branch that you know is working. In Google Drive, everyone is working with the work-in-progress, fresh-out-of-the-oven, gooey, sticky code that everyone's gotten their hands on. There is no isolation, and so things are more likely to break.
+
+# 6 Quick tutorial if you want to use the command prompt instead of the Git GUI
+I personally find that using the command prompt (cmd) is easier and faster to use than the Git GUI, so here's a brief tutorial on how to use the cmd line to do the same thing. 
+
+You will first need to open the command prompt on your computer. Type "cmd" in the search bar on your laptop and it will be the first thing that pops up. On Windows, it will look like this:
+
+![cmd-1][cmd-1]
+
+You will need to find where you saved the cloned repository (that you downloaded way back when) on your computer. If you have not done downloaded the repository yet, refer back to [Okay cool, how do I use it](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-okay-cool-how-do-i-use-it) first, then read this section.
+
+To get to the folder where the cloned repository is saved, you need several Windows commands:
+1. **cd**: _cd name_of_subfolder_ allows you to access a subfolder. Ex. _cd "VA iGEM"_ will allow you to access the subfolder in the current folder that you are in. 
+2. **cd ..** allows you to jump backwards a folder, in case you cd into the wrong folder. 
+3. **dir**: typing _dir_ into the cmd shows all the subfolders in the current folder you are in. This is useful when you are trying to cd into a folder but you don't remember what the name of the folder is. 
+
+Using this commands, you can easily get into the folder where your cloned repository is located.
+
+![cmd-2][cmd-2]
+
+Note that the first part of each new line in the cmd denotes what the file path is (which folder you are in). 
+
+Once you are in the folder where you saved the cloned repository, you are ready to do a **pull**. 
+
+## 6.1 Pull
+Type _git pull origin master_. That's it. It's that easy.This allows you to pull from the master branch. Make sure to pull every time before you start editing stuff on GitHub. 
+
+![cmd-3][cmd-3]
+
+Note here that my GitHub repo is already up to date, but it's good practice to pull every time before you make changes. 
+
+## 6.2 Push
+This is a little more complicated. You want to **commit** and **push** your changes to the GitHub repo by following this steps.
+
+1. Type _git add ._
+2. Type _git commit -m **insert comments about your changes here**_. Adding comments is important, as it tells everyone else what changes you made (and is good coding practice)!
+3. Type _git remote -v_.This is a verification step to check that you are committing to the right repository. 
+4. Finally, type _git push origin master_. You're good to go! 
+
+![cmd-4][cmd-4]
+
+Throughout this, you may run into issues if your edits are in direct conflict with someone elses. In this case, you'll have to go back and manually search through your code to see what the differences are. Refer back to [Pulling Changes](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started##4.3PullingChanges) to see what you should do in that situation. 
+
+That's it! If you have any questions, feel free to talk to me in lab or just shoot me a message...and Google will be your best friend as well. 
+
+[cmd-1]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/cmd-1.png "cmd-1"
+[cmd-2]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/cmd-2.png "cmd-2"
+[cmd-3]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/cmd-3.png "cmd-3"
+[cmd-4]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/cmd-4.png "cmd-4"
+
+
+
+
 
