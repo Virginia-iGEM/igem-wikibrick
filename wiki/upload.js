@@ -12,6 +12,16 @@ const index = {
     page: 'INDEX'
 }
 
+const getPages = globby([ './pages/**/*.html' ]).then(function (pages) {
+    return pages.map(function (page) {
+        return {
+            type: 'page',
+            fileName: path.resolve(__dirname, page),
+            page: path.basename(page).replace('.html', '')
+        }
+    })
+})
+
 const getTemplates = globby([ './templates/**/*.html' ]).then(function (templates) {
     return templates.map(function (template) {
         return {
@@ -46,15 +56,15 @@ const getImages = globby([ './images/**/*.{png,jpg}' ]).then(images => images.ma
 
 Promise.all([
     Promise.resolve(index),
+    getPages,
     getTemplates,
     getCSS,
     getJS,
     getImages
 ]).then((confs) => {
     confs = _.flatten(confs)
-    console.log(confs)
+    //console.log(confs)
 
-    /*
     igemwiki.login().then((jar) => {
         confs = confs.map(c => ({
             jar: jar,
@@ -68,5 +78,4 @@ Promise.all([
             .then(() => console.log('Uploads completed'))
             .catch(console.error)
     })
-    */
 })
