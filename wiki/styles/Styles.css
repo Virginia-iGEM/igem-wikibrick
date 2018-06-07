@@ -28,7 +28,7 @@ ul {
     list-style-image: none; /* removes the iGEM wiki bullets */
 }
 
-/* UVA Colors */
+/* UVA Colors
 :root {
     --dark-background-color:#232D4B;
     --light-background-color:#ffffff;
@@ -37,8 +37,9 @@ ul {
     --text-dark: #666666;
     --link-color: #EB5F0Cff;
 }
+*/
 
-/* Cherenkov Colors
+/* Cherenkov Colors */
 :root {
     --dark-background-color:#282828;
     --light-background-color:#C3C3D8;
@@ -47,7 +48,6 @@ ul {
     --text-dark: #001C4E;
     --link-color: #3DD4DF;
 }
-*/
 
 
 /* Passion Fruit Colors

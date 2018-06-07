@@ -11,7 +11,7 @@ igemwiki.login()
 const index = {
     type: 'page',
     fileName: path.resolve(__dirname, './index.html'),
-    page: ''
+    page: 'INDEX'
 }
 
 const getTemplates = globby([ './templates/**/*.html' ]).then(function (templates) {
@@ -19,7 +19,7 @@ const getTemplates = globby([ './templates/**/*.html' ]).then(function (template
         return {
             type: 'template',
             fileName: path.resolve(__dirname, template),
-            page: 'templates/' + path.basename(template).replace('.html', '')
+            page: path.basename(template).replace('.html', '')
         }
     })
 })
@@ -29,7 +29,7 @@ const getCSS = globby([ './styles/**/*.css']).then((stylesheets) => {
         return {
             type: 'stylesheet',
             fileName: path.resolve(__dirname, stylesheet),
-            page: 'styles/' + path.basename(stylesheet).replace('.css', '')
+            page: path.basename(stylesheet).replace('.css', '')
         }
     })
 })
@@ -37,7 +37,7 @@ const getCSS = globby([ './styles/**/*.css']).then((stylesheets) => {
 const getJS = globby([ './scripts/**/*.js' ]).then(scripts => scripts.map(script => ({
     type: 'script',
     fileName: path.resolve(__dirname, script),
-    page: 'scripts/' + path.basename(script).replace('.js', '')
+    page: path.basename(script).replace('.js', '')
 })))
 
 const getImages = globby([ './images/**/*.{png,jpg} ']).then((images) => {
