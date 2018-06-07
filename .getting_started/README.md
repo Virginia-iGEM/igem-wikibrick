@@ -19,7 +19,7 @@ If you have any questions, feel free to shoot me a private message in GroupMe or
 
 [Github](https://github.com) is a source code repository hosting and sharing website that makes use of the Git Version Control System (Git VCS). In layman's terms, it’s kinda like Google Drive, but specifically meant for open-source, code-centric software projects that many people will be working on at once. Some projects that are hosted on Github include Linux, the Python programming language, and a majority of the code that makes websites like Facebook, Twitter, Google and Youtube run.
 
-If you don’t care about how Git/Github works and just want to get work done, just read [Section 4, Git GUI](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-git-gui-tutorial). If you're comfortable with using a terminal, or are willing to learn (it's really not that hard), check out [Section 5, Git Termianl](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#5-git-terminal-tutorial)If you’re miffed that you have to learn how to use another damn program and/or are curious about how Git works and why we’re using it, you should probably read [Section 5 first, Why don’t we just use Google Drive](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#6-why-dont-we-just-use-google-drive).
+If you don’t care about how Git/Github works and just want to get work done, just read [Section 4, Git GUI](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-git-gui-tutorial). If you're comfortable with using a terminal, or are willing to learn (it's really not that hard), check out [Section 5, Git Termianl](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#5-git-terminal-tutorial). The terminal makes more sense generally and allows you to move a bit faster. If you’re miffed that you have to learn how to use another damn program and/or are curious about how Git works and why we’re using it, you should probably read [Section 5 first, Why don’t we just use Google Drive](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#6-why-dont-we-just-use-google-drive).
 
 # 4 Git GUI Tutorial
 
@@ -199,7 +199,7 @@ This concludes the guide on **Fetching** and **Merging**. I understand that was 
 # 5 Git Terminal Tutorial
 I personally find that using the command prompt (cmd) is easier and faster to use than the Git GUI, so here's a brief tutorial on how to use the cmd line to do the same thing. 
 
-You will first need to open the command prompt on your computer. Type "cmd" in the search bar on your laptop and it will be the first thing that pops up. On Windows, it will look like this:
+You will first need to open the command prompt on your computer. Type "cmd" in the search bar on your laptop and it will be the first thing that pops up. Alternatively, you can use Git Bash by typing Bash in your start menu or right clicking in an open directory and clicking on Git Bash. Git Bash runs in a more complete terminal emulator than Cmd, and allows for things like custom themes, globbing, bash scripts, etc. etc. that will make your life easier if you know what you're doing. For this tutorial we'll use cmd.exe, but the process is nearly identical for both terminals. On Windows, cmd.exe will look like this:
 
 ![cmd-1](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-1.PNG)
 
