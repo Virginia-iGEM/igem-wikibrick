@@ -4,9 +4,9 @@ Contains all HTML, CSS and JS content that will be found on http://2018.igem.org
 
 ## Todo
 
-- Create an upload.js script to map and upload files to destinations on the iGEM wiki with igemwiki-api
+- Get upload.js to upload images
 - Add bower, enabling bootstrap and future packages as managed dependencies
-- Use Handlebars to establish local and web builds which correctly manage local/web images, CSS and JS.
+- Use Codekit + Handlebars to establish local and web builds which correctly manage links to local/web images, CSS and JS
 
 ## Roadmap
 
@@ -19,6 +19,9 @@ Contains all HTML, CSS and JS content that will be found on http://2018.igem.org
 4. Core concurrent tasks:
     - Finish all major pages, at least with filler content
     - Code interactive for home page
+    - Create a tool for the team to easily push their information to the wiki?
+5. Final tasks
+    - Run through the whole wiki, hosted on the iGEM website, check for inconsistencies
 
 ## Interactive
 
@@ -34,7 +37,7 @@ This is an interactive presentation that gives the reader an intuition for what 
 7. User is left to play around with the sandbox all they want. A little flashing blue arrow at the bottom of the game prompts them to scroll down to read about the project.
 
 ## Attributions and Works Cited
-- University of Toronto: igemwiki-api
+- University of Toronto: igemwiki-api, used to automate uploads to iGEM wiki
 - iGEM Peshawar 2016: General information regarding wiki development
 - Bootstrap 3.3.7
 -
