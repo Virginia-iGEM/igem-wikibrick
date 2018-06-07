@@ -32,36 +32,36 @@ Note, this guide assumes you are on Windows and using the graphical Git program.
 
 Step 2, launch Git GUI through your start menu. Alternatively, you can right click on empty space on your desktop and click Git GUI Here. This should open a window that looks like this:
 
-![setup-2][setup-2]
+![setup-2](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Setup-2.png)
 
 Step 3, in the case of our project, you’ll want to click Clone Existing Repository.
 
-![setup-3][setup-3]
+![setup-3](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Setup-3.png)
 
 
 Then enter https://github.com/Mantissa-23/VGEM-2018.git into the Source Location field and a new folder of your choosing under Target Directory. You can of course use the Browse button to do this.
 
-![setup-3-1][setup-3-1]
+![setup-3-1](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Setup-3-1.png)
 
 If you get the following error:
 
-![setup-3-2][setup-3-2]
+![setup-3-2](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Setup-3-2.png)
 
 Or some such, it’s because the Target Directory must include the name of a nonexistant folder. This is the folder the project will be cloned into, and the program will automatically create it. So instead of entering, say, `C:\Users\DylanC`, try `C:\Users\DylanC\iGEM_Project` or `C:\Users\DylanC\VGEM-2018` or something like that.
 
 Congrats, you’re almost there! You should see the following window if you were successful:
 
-![setup-3-4][setup-3-4]
+![setup-3-4](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Setup-3-4.png)
 
 Step 4: So, that’s not it; there’s some administrative stuff you need to take care of. First, go to [github.com](https://github.com/join?source=header-home) and sign up for an account. This is free, do not pay them any money, all of the plans are for companies and large teams. Once you’ve done that, email me/text me **your full username you signed up with on Github**. It is important that this is correct, as it is the name/address I will use to add use to the project as a collaborator.
 
 Step 5: While I’m adding you to the project (this may take some time), you’re gonna want to set up your local Git program. Mouse up to the top menu and click on Edit > Settings. This will open the following mess of a window:
 
-![setup-5][setup-5]
+![setup-5](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Setup-5.png)
 
 There is a lot of stuff here that you don’t have to worry about. If you know what all these words mean, good for you. If you want to change them, and you know what you are doing, feel free to change them. If you don’t know what you’re doing, there’s only two fields you want to touch:
 
-![setup-5-1][setup-5-1]
+![setup-5-1](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Setup-5-1.png)
 
 Change these to the user name you created for Github and the email address you signed up with, then click **Save**. That’s all the setup you have to do, after you’ve done that, **and once I’ve added you to the project and sent you a message confirming this**, you’re ready to commit changes to the repo.
 
@@ -77,32 +77,32 @@ Change these to the user name you created for Github and the email address you s
 
 Alright, you’ve got everything set up, let’s get some actual work done. Editing code is something you do on your own, Git is not an IDE, Git is not a text editor. Pop open Visual Studio or Pycharm or Eclipse or Notepad++ or Vim or EMACS or whatever you use to edit text files. Please do not use Word to edit text files. That is not okay. Enter the project and make whatever changes you want to make. In this example, I’m going to add a simple Python program, hello_world_dtc.py, to the directory /test/ in the project:
 
-![work-1][work-1]
-![work-2][work-2]
+![work-1](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-1.png)
+![work-2](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-2.png)
 
 The content of the program is as follows:
 
-![work-3][work-3]
+![work-3](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-3.png)
 
 Aaaaand confirming the program works:
 
-![work-4][work-4]
+![work-4](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-4.png)
 
 Cool. While in the same directory, right click on empty space and hit Git GUI Here. 
 
-![work-5][work-5]
+![work-5](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-5.png)
 
 If you still have the window open from setup, you can just use that, it’s the same window. **If you have the window open from last time, hit Rescan. You will want to press this button every time you make any changes and want to commit them. If you do not press it, changed files will not show up in the interface.**
 
-![work-6][work-6]
+![work-6](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-6.png)
 
 Notice your changed file listed under test/hello_world-dtc.py. This indicates that Git sees your changes. If you want, you can click on this file. It will show you what changes were made.
 
-![work-7][work-7]
+![work-7](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-7.png)
 
 This part is optional. Once you have your files you want to commit, go ahead and click on the **Stage Changed** button.
 
-![work-8][work-8]
+![work-8](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-8.png)
 
 This will move your file to the Staged Changes list. This means that the file will be part of the next commit. A commit is simply a collection of changes to various files that Git keeps track of. You can change as many or as few files as you want, create or delete files. Git will keep track of the changes.
 
@@ -112,15 +112,15 @@ Commit messages should succinctly summarize what changes were made during the co
 
 Note that you do not need to include a list of files you modified, your name, the date, or anything like that when writing this message. Git does this for you. You only need an executive summary.
 
-![work-9][work-9]
+![work-9](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-9.png)
 
 Alright, you’re ready to commit. As you might guess, press the **Commit** button. Note the little message at the bottom saying that a commit was created, including the name of the hash and the commit message.
 
-![work-10][work-10]
+![work-10](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-10.png)
 
 Create as many commits as you would like for all of the changes you’ve made. Once you’re “done working,” I.E. you’re not going to work on this any more for the day, you’re going to bed, you’re going to grab lunch and come back, etc. etc., it’s a good idea to **Push**.
 
-![work-11][work-11]
+![work-11](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-11.png)
 
 This will open this window. Select the branch you’ve been working on; generally this will be **master**. Do not tick any of the boxes under Transfer Options unless you know what you’re doing. This is actually a good time to bring something up - if you ever see a tickbox or a button that has the word **Force** in it, you should think long and hard before you press it. Ask me, look up the consequences, do both. The word **Force** in Git generally corresponds to permanent deletion of repository history that may not be recoverable. This means you can accidentally delete the whole project. This is not disastrous, because Git is very robust, and the project can be restored from local copies - however, it will make me and other people working on it angry, waste time, and may result in lost data. Do not **Force** things unless you know what you’re doing.
 
@@ -128,12 +128,12 @@ Note, you may have to log in to the repository at this point. As you may guess, 
 
 Once you hit **Push**, a small window will pop up showing some logs:
 
-![work-12][work-12]
+![work-12](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-12.png)
 
 And now your changes are out there, on our Github page. You can view the current state of the repository at https://github.com/Mantissa-23/VGEM-2018, where you can browse through the project and find your files, if you so choose.
 
-![work-13][work-13]
-![work-14][work-14]
+![work-13](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-13.png)
+![work-14](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Work-14.png)
 
 If you look at the repository now, you should be able to see the changes I’ve made already there. If you’ve followed this tutorial, you should also be able to see your own changes.
 
@@ -169,10 +169,9 @@ The merge should be successful. If it is, you can skip the next part.
 
 If it is not, a big red error message will appear, and you will see merge conflicts in your unstaged changes:
 
-![merge-1][merge-1]
+![merge-1](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/Merge-1.png)
 
 In order to resolve these conflicts, open your text editor/IDE of choice, get in there and manually decide which changes should be kept and which changes should be discarded. If you are merging someone else's changes, you probably want to sit down and talk with them about how this should be done.
-
 
 [merge-1]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/Merge-1.png "merge-1"
 
@@ -227,7 +226,7 @@ I personally find that using the command prompt (cmd) is easier and faster to us
 
 You will first need to open the command prompt on your computer. Type "cmd" in the search bar on your laptop and it will be the first thing that pops up. On Windows, it will look like this:
 
-![cmd-1][cmd-1]
+![cmd-1](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-1.PNG)
 
 You will need to find where you saved the cloned repository (that you downloaded way back when) on your computer. If you have not done downloaded the repository yet, refer back to [Okay cool, how do I use it](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-okay-cool-how-do-i-use-it) first, then read this section.
 
@@ -238,7 +237,7 @@ To get to the folder where the cloned repository is saved, you need several Wind
 
 Using this commands, you can easily get into the folder where your cloned repository is located.
 
-![cmd-2][cmd-2]
+![cmd-2](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-2.PNG)
 
 Note that the first part of each new line in the cmd denotes what the file path is (which folder you are in). 
 
@@ -247,7 +246,7 @@ Once you are in the folder where you saved the cloned repository, you are ready 
 ## 6.1 Pull
 Type _git pull origin master_. That's it. It's that easy.This allows you to pull from the master branch. Make sure to pull every time before you start editing stuff on GitHub. 
 
-![cmd-3][cmd-3]
+![cmd-3](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-3.PNG)
 
 Note here that my GitHub repo is already up to date, but it's good practice to pull every time before you make changes. 
 
@@ -259,16 +258,11 @@ This is a little more complicated. You want to **commit** and **push** your chan
 3. Type _git remote -v_.This is a verification step to check that you are committing to the right repository. 
 4. Finally, type _git push origin master_. You're good to go! 
 
-![cmd-4][cmd-4]
+![cmd-4](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-4.PNG)
 
 Throughout this, you may run into issues if your edits are in direct conflict with someone elses. In this case, you'll have to go back and manually search through your code to see what the differences are. Refer back to [Pulling Changes](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started##4.3PullingChanges) to see what you should do in that situation. 
 
 That's it! If you have any questions, feel free to talk to me in lab or just shoot me a message...and Google will be your best friend as well. 
-
-[cmd-1]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/cmd-1.png "cmd-1"
-[cmd-2]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/cmd-2.png "cmd-2"
-[cmd-3]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/cmd-3.png "cmd-3"
-[cmd-4]: https://raw.githubusercontent.com/Mantissa-23/VGEM-2018/master/.getting_started/images/cmd-4.png "cmd-4"
 
 
 
