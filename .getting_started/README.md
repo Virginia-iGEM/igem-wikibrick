@@ -11,17 +11,17 @@ If you have any questions, feel free to shoot me a private message in GroupMe or
 1. [Gitting Started](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#1-gitting-started)
 2. [Table of Contents](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#2-table-of-contents)
 3. [What is Github](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#3-what-is-github)
-4. [Okay cool, how do I use it](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-okay-cool-how-do-i-use-it)
-5. [Why don't we just use Google Drive](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#5-why-dont-we-just-use-google-drive)
-6. [Quick tutorial if you want to use the command prompt instead of the Git GUI](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#6-quick-tutorial-if-you-want-to-use-the-command-prompt-instead-of-the-git-gui)
+4. [Git GUI Tutorial](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-git-gui-tutorial)
+5. [Git Terminal Tutorial](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#6-quick-tutorial-if-you-want-to-use-the-command-prompt-instead-of-the-git-gui)
+6. [Why don't we just use Google Drive](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#5-why-dont-we-just-use-google-drive)
 
 # 3 What is Github
 
 [Github](https://github.com) is a source code repository hosting and sharing website that makes use of the Git Version Control System (Git VCS). In layman's terms, it’s kinda like Google Drive, but specifically meant for open-source, code-centric software projects that many people will be working on at once. Some projects that are hosted on Github include Linux, the Python programming language, and a majority of the code that makes websites like Facebook, Twitter, Google and Youtube run.
 
-If you don’t care about how Git/Github works and just want to get work done, just read [Section 4, Okay cool, how do I use it](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-okay-cool-how-do-i-use-it). If you’re miffed that you have to learn how to use another damn program and/or are curious about how Git works and why we’re using it, you should probably read [Section 5 first, Why don’t we just use Google Drive](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#5-why-dont-we-just-use-google-drive).
+If you don’t care about how Git/Github works and just want to get work done, just read [Section 4, Git GUI](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-git-gui-tutorial). If you're comfortable with using a terminal, or are willing to learn (it's really not that hard), check out [Section 5, Git Termianl](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#5-git-terminal-tutorial)If you’re miffed that you have to learn how to use another damn program and/or are curious about how Git works and why we’re using it, you should probably read [Section 5 first, Why don’t we just use Google Drive](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#6-why-dont-we-just-use-google-drive).
 
-# 4 Okay cool, how do I use it
+# 4 Git GUI Tutorial
 
 If you have any trouble with any of these steps, please do not slam your face against your desk and try to fix things for hours. Talk to me. Setup should only take 5 minutes. Committing and pushing changes should take about 20 seconds. If it’s taking longer than this, I’ll sit down with you and work you through it, or answer any questions you have.
 
@@ -196,7 +196,51 @@ In both cases (merge is auto resolved and merge conflict), you can now **Push** 
 
 This concludes the guide on **Fetching** and **Merging**. I understand that was a lot; if you have any questions, again, don't be afraid to ask.
 
-# 5 Why don't we just use Google Drive
+# 5 Git Terminal Tutorial
+I personally find that using the command prompt (cmd) is easier and faster to use than the Git GUI, so here's a brief tutorial on how to use the cmd line to do the same thing. 
+
+You will first need to open the command prompt on your computer. Type "cmd" in the search bar on your laptop and it will be the first thing that pops up. On Windows, it will look like this:
+
+![cmd-1](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-1.PNG)
+
+You will need to find where you saved the cloned repository (that you downloaded way back when) on your computer. If you have not done downloaded the repository yet, refer back to Section 4 or 5 first, then read this section.
+
+To get to the folder where the cloned repository is saved, you need several Windows commands:
+1. **cd**: _cd name_of_subfolder_ allows you to access a subfolder. Ex. _cd "VA iGEM"_ will allow you to access the subfolder in the current folder that you are in. 
+2. **cd ..** allows you to jump backwards a folder, in case you cd into the wrong folder. 
+3. **dir**: typing _dir_ into the cmd shows all the subfolders in the current folder you are in. This is useful when you are trying to cd into a folder but you don't remember what the name of the folder is. 
+
+Using this commands, you can easily get into the folder where your cloned repository is located.
+
+![cmd-2](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-2.PNG)
+
+Note that the first part of each new line in the cmd denotes what the file path is (which folder you are in). 
+
+Once you are in the folder where you saved the cloned repository, you are ready to do a **pull**. 
+
+## 5.1 Pull
+Type _git pull origin master_. That's it. It's that easy.This allows you to pull from the master branch. Make sure to pull every time before you start editing stuff on GitHub. 
+
+![cmd-3](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-3.PNG)
+
+Note here that my GitHub repo is already up to date, but it's good practice to pull every time before you make changes. 
+
+## 5.2 Push
+This is a little more complicated. You want to **commit** and **push** your changes to the GitHub repo by following this steps.
+
+1. Type _git add ._
+2. Type _git commit -m **insert comments about your changes here**_. Adding comments is important, as it tells everyone else what changes you made (and is good coding practice)!
+3. Type _git remote -v_.This is a verification step to check that you are committing to the right repository. 
+4. Finally, type _git push origin master_. You're good to go! 
+
+![cmd-4](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-4.PNG)
+
+Throughout this, you may run into issues if your edits are in direct conflict with someone elses. In this case, you'll have to go back and manually search through your code to see what the differences are. Refer back to [Pulling Changes](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#43-pulling-changes) to see what you should do in that situation. 
+
+That's it! If you have any questions, feel free to talk to me in lab or just shoot me a message...and Google will be your best friend as well. 
+
+# 6 Why don't we just use Google Drive
+
 **Note, you can skip this section if you believe me and trust that Git is awesome and have accepted the fact that we’re using Github. This section is for everyone that’s thinking “Why do I have to learn another piece of software for this synthetic biology project.”**
 
 There are a lot of answers to this question, but the most important ones are _merging, revision control, branches, blame and consistency_. Some of these are buzzwords used by the open source/version control community, so let me define them.
@@ -220,51 +264,4 @@ This both allows you to see who has contributed the most (vital for paying peopl
 Lastly, *consistency*. Because Google Drive allows anyone with access to the drive to make a change, someone may do something that you don’t like without you realizing, breaking something that was important to you. Or you may do something stupid and break something without realizing it.
 
 Reversing these changes is hard. Figuring out why problems are occurring is harder. Git is consistent in that you always have access to a working code base, even if people have made changes, because you can just rewind time, or switch to a branch that you know is working. In Google Drive, everyone is working with the work-in-progress, fresh-out-of-the-oven, gooey, sticky code that everyone's gotten their hands on. There is no isolation, and so things are more likely to break.
-
-# 6 Quick tutorial if you want to use the command prompt instead of the Git GUI
-I personally find that using the command prompt (cmd) is easier and faster to use than the Git GUI, so here's a brief tutorial on how to use the cmd line to do the same thing. 
-
-You will first need to open the command prompt on your computer. Type "cmd" in the search bar on your laptop and it will be the first thing that pops up. On Windows, it will look like this:
-
-![cmd-1](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-1.PNG)
-
-You will need to find where you saved the cloned repository (that you downloaded way back when) on your computer. If you have not done downloaded the repository yet, refer back to [Okay cool, how do I use it](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#4-okay-cool-how-do-i-use-it) first, then read this section.
-
-To get to the folder where the cloned repository is saved, you need several Windows commands:
-1. **cd**: _cd name_of_subfolder_ allows you to access a subfolder. Ex. _cd "VA iGEM"_ will allow you to access the subfolder in the current folder that you are in. 
-2. **cd ..** allows you to jump backwards a folder, in case you cd into the wrong folder. 
-3. **dir**: typing _dir_ into the cmd shows all the subfolders in the current folder you are in. This is useful when you are trying to cd into a folder but you don't remember what the name of the folder is. 
-
-Using this commands, you can easily get into the folder where your cloned repository is located.
-
-![cmd-2](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-2.PNG)
-
-Note that the first part of each new line in the cmd denotes what the file path is (which folder you are in). 
-
-Once you are in the folder where you saved the cloned repository, you are ready to do a **pull**. 
-
-## 6.1 Pull
-Type _git pull origin master_. That's it. It's that easy.This allows you to pull from the master branch. Make sure to pull every time before you start editing stuff on GitHub. 
-
-![cmd-3](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-3.PNG)
-
-Note here that my GitHub repo is already up to date, but it's good practice to pull every time before you make changes. 
-
-## 6.2 Push
-This is a little more complicated. You want to **commit** and **push** your changes to the GitHub repo by following this steps.
-
-1. Type _git add ._
-2. Type _git commit -m **insert comments about your changes here**_. Adding comments is important, as it tells everyone else what changes you made (and is good coding practice)!
-3. Type _git remote -v_.This is a verification step to check that you are committing to the right repository. 
-4. Finally, type _git push origin master_. You're good to go! 
-
-![cmd-4](https://github.com/Mantissa-23/VGEM-2018/blob/master/.getting_started/images/cmd-4.PNG)
-
-Throughout this, you may run into issues if your edits are in direct conflict with someone elses. In this case, you'll have to go back and manually search through your code to see what the differences are. Refer back to [Pulling Changes](https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started##4.3PullingChanges) to see what you should do in that situation. 
-
-That's it! If you have any questions, feel free to talk to me in lab or just shoot me a message...and Google will be your best friend as well. 
-
-
-
-
 
