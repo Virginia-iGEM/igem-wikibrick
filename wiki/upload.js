@@ -6,6 +6,8 @@ const Promise = require('bluebird')
 const globby = require ('globby')
 const _ = require('lodash')
 
+igemwiki.login()
+
 const index = {
     type: 'page',
     fileName: path.resolve(__dirname, './index.html'),
@@ -38,6 +40,16 @@ const getJS = globby([ './scripts/**/*.js' ]).then(scripts => scripts.map(script
     page: 'scripts/' + path.basename(script).replace('.js', '')
 })))
 
+const getImages = globby([ './images/**/*.{png,jpg} ']).then((images) => {
+    return images.map((image) => {
+        return {
+            type: 'image',
+            fileName: path.resolve(__dirname, image),
+            page: path.basename(image)
+        }
+    })
+})
+
 Promise.all([
     Promise.resolve(index),
     getTemplates,
@@ -45,5 +57,18 @@ Promise.all([
     getJS
 ]).then((confs) => {
     confs = _.flatten(confs)
-    console.log(confs)
+
+    igemwiki.login().then((jar) => {
+        confs = confs.map(c => ({
+            jar: jar,
+            type: c.type,
+            dest: c.page,
+            source: c.fileName,
+            // force: true
+        }))
+
+        Promise.map(confs, conf => igemwiki.upload(conf), { concurrency: 1})
+            .then(() => console.log('Uploads completed'))
+            .catch(console.error)
+    })
 })
