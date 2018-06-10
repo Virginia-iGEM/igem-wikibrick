@@ -1,12 +1,22 @@
 # Wiki
 
-Contains all HTML, CSS and JS content that will be found on http://2018.igem.org/Team:Virginia.
+Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia.
+
+## Build
+
+Our build system (will soon!) support two types of builds: A Development build and a Live build.
+
+In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by entering the following command in any console with npm on its path:  
+`npm install -D bower gulp gulp-handlebars gulp-csso gulp-concat gulp-sourcemaps gulp-handlebars gulp-wrap gulp-declare gulp-igemwiki globby lodash bluebird handlebars igemwiki-api`
+
+Development files can be built with the console command `gulp dev`. This will place a bunch of baked files, HTML, JS and CSS under `wiki/build`. These files can be directly opened by any modern web browser, yielding a 100% offline version of the wiki where all internal links should be traversible. This allows our team to work on the wiki without uploading to iGEM every time, reducing our iteration times and making things more efficient, as well as allowing us to work without a stable internet connection.
+
+A live build can be published with `gulp live`. This will generate files almost identical to the development build, except for the fact that all image templates will be replaced with their URLs hosted on `2018.igem.org` instead of their local paths in the build direcotry. In addition to building these files, `gulp live` will also automatically initiate an upload of all compiled HTML, CSS and JS to `2018.igem.org/Team:Virginia`. You will need to enter your username and password for this to work, so don't just livebuild and leave.
 
 ## Todo
 
-- Get upload.js to upload images
 - Add bower, enabling bootstrap and future packages as managed dependencies
-- Use Codekit + Handlebars to establish local and web builds which correctly manage links to local/web images, CSS and JS
+- Use Handlebars to establish local and web builds which correctly manage links to local/web images, CSS and JS
 
 ## Roadmap
 
