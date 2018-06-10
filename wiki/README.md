@@ -37,7 +37,31 @@ This is an interactive presentation that gives the reader an intuition for what 
 7. User is left to play around with the sandbox all they want. A little flashing blue arrow at the bottom of the game prompts them to scroll down to read about the project.
 
 ## Attributions and Works Cited
+
 - University of Toronto: igemwiki-api, used to automate uploads to iGEM wiki
 - iGEM Peshawar 2016: General information regarding wiki development
+
+## Build Dependencies
+
+- Node.js
+- bower
+- gulp
+  - gulp-handlebars
+  - gulp-csso
+  - gulp-concat
+  - gulp-sourcemaps
+  - gulp-handlebars
+  - gulp-wrap
+  - gulp-declare
+  - gulp-igemwiki
+    - globby
+    - lodash
+    - bluebird
+- handlebars
+- igemwiki-api
+
+## Live Dependencies
+
+- JQuery
 - Bootstrap 3.3.7
--
+- Handlebars Minified Runtime
