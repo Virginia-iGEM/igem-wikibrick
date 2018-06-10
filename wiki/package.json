@@ -19,6 +19,9 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.1",
-    "gulp-sourcemaps": "^2.6.4"
+    "gulp-declare": "^0.3.0",
+    "gulp-handlebars": "^5.0.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-wrap": "^0.14.0"
   }
 }
