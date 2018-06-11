@@ -8,11 +8,11 @@ const _ = require('lodash')
 
 const index = {
     type: 'page',
-    fileName: path.resolve(__dirname, './index.html'),
+    fileName: path.resolve(__dirname, './build/index.html'),
     page: 'INDEX'
 }
 
-const getPages = globby([ './pages/**/*.html' ]).then(function (pages) {
+const getPages = globby([ './build/pages/**/*.html' ]).then(function (pages) {
     return pages.map(function (page) {
         return {
             type: 'page',
@@ -22,7 +22,7 @@ const getPages = globby([ './pages/**/*.html' ]).then(function (pages) {
     })
 })
 
-const getTemplates = globby([ './templates/**/*.html' ]).then(function (templates) {
+const getTemplates = globby([ './build/templates/**/*.html' ]).then(function (templates) {
     return templates.map(function (template) {
         return {
             type: 'template',
@@ -32,7 +32,7 @@ const getTemplates = globby([ './templates/**/*.html' ]).then(function (template
     })
 })
 
-const getCSS = globby([ './styles/**/*.css']).then((stylesheets) => {
+const getCSS = globby([ './build/styles/**/*.css']).then((stylesheets) => {
     return stylesheets.map((stylesheet) => {
         return {
             type: 'stylesheet',
@@ -42,13 +42,13 @@ const getCSS = globby([ './styles/**/*.css']).then((stylesheets) => {
     })
 })
 
-const getJS = globby([ './scripts/**/*.js' ]).then(scripts => scripts.map(script => ({
+const getJS = globby([ './build/scripts/**/*.js' ]).then(scripts => scripts.map(script => ({
     type: 'script',
     fileName: path.resolve(__dirname, script),
     page: path.basename(script).replace('.js', '')
 })))
 
-const getImages = globby([ './images/**/*.{png,jpg}' ]).then(images => images.map(image => ({
+const getImages = globby([ './build/images/**/*.{png,jpg}' ]).then(images => images.map(image => ({
     type: 'image',
     fileName: path.resolve(__dirname, image),
     page: path.basename(image)
