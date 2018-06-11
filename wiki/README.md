@@ -132,7 +132,7 @@ Once these files are staged in the build directory, you can enter the build dire
 
 **Note:** As mentioned above, Live Build is not fully functional. This description is for a fully functional live build. The transform mentioned below that changes relative to absolute URLs is not yet implemented.
 
-The live build essentially performs the dev build with the exception that all HTML files are transformed by changing their relative URLs to absolute URLs. With a normal webserver, this would not be necessary, however because iGEM uses mediawiki to enable teams of all technological backgrounds to create their own sites.
+The live build essentially performs the dev build with the exception that all HTML files are transformed by changing their relative URLs to absolute URLs. With a normal webserver, this would not be necessary, however because iGEM uses mediawiki to enable teams of all technological backgrounds to create their own sites. The issue with this is that it works differently than all other web servers and so we have to tip-toe around it.
 
 See todo list for up-to-date description of future changes to be made to live build.
 
