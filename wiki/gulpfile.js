@@ -6,8 +6,9 @@ var log = require('fancy-log');
 var uglify = require('gulp-uglify');
 var mainBowerFiles = require('main-bower-files');
 var imagemin = require('gulp-imagemin');
+var runsequence = require('run-sequence');
 
-//var upload = require('./upload');
+var upload = require('./upload.js');
 
 function prepHTML(src, dest) {
     return function() {
@@ -80,12 +81,13 @@ gulp.task('images', function() {
     .pipe(gulp.dest(dests.images))
 })
 
-/*
 gulp.task('push', function(){
     upload()
 });
-*/
 
 //gulp.task('publish', ['default', 'push']);
 
 gulp.task('default', [ 'index', 'pages', 'templates', 'css', 'js', 'images', 'bower:js', 'bower:css' ]);
+gulp.task('live', function(done) {
+    runsequence('default', 'push');
+});
