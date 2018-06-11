@@ -48,7 +48,7 @@ const getJS = globby([ './build/scripts/**/*.js' ]).then(scripts => scripts.map(
     page: path.basename(script).replace('.js', '')
 })))
 
-const getImages = globby([ './images/**/*.{png,jpg}' ]).then(images => images.map(image => ({
+const getImages = globby([ './build/images/**/*.{png,jpg}' ]).then(images => images.map(image => ({
     type: 'image',
     fileName: path.resolve(__dirname, image),
     page: path.basename(image)

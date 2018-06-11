@@ -5,13 +5,14 @@ var sourcemaps = require('gulp-sourcemaps');
 var log = require('fancy-log');
 var uglify = require('gulp-uglify');
 var mainBowerFiles = require('main-bower-files');
+var imagemin = require('gulp-imagemin');
 
 //var upload = require('./upload');
 
 function prepHTML(src, dest) {
     return function() {
         gulp.src(src)
-    .pipe(gulp.dest(dest))
+        .pipe(gulp.dest(dest))
     }
 }
 
@@ -73,13 +74,11 @@ gulp.task('bower:css', () => gulp
     .pipe(gulp.dest(dests.bowercss))
 );
 
-/* image staging - not needed because upload.js can look at content outside of the build folder.
 gulp.task('images', function() {
     return gulp.src(srcs.images)
+    .pipe(imagemin())
     .pipe(gulp.dest(dests.images))
-
 })
-*/
 
 /*
 gulp.task('push', function(){
@@ -89,4 +88,4 @@ gulp.task('push', function(){
 
 //gulp.task('publish', ['default', 'push']);
 
-gulp.task('default', [ 'index', 'pages', 'templates', 'css', 'js', 'bower:js', 'bower:css' ]);
+gulp.task('default', [ 'index', 'pages', 'templates', 'css', 'js', 'images', 'bower:js', 'bower:css' ]);
