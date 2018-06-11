@@ -13,6 +13,10 @@ Development files can be built with the console command `gulp dev`. This will pl
 
 A live build can be published with `gulp live`. This will generate files almost identical to the development build, except for the fact that all image templates will be replaced with their URLs hosted on `2018.igem.org` instead of their local paths in the build direcotry. In addition to building these files, `gulp live` will also automatically initiate an upload of all compiled HTML, CSS and JS to `2018.igem.org/Team:Virginia`. You will need to enter your username and password for this to work, so don't just livebuild and leave.
 
+### Details
+
+TODO: Detailed explanation of build pipeline for future teams.
+
 ## Todo
 
 - Add bower, enabling bootstrap and future packages as managed dependencies
@@ -60,15 +64,10 @@ This is an interactive presentation that gives the reader an intuition for what 
   - gulp-csso
   - gulp-concat
   - gulp-sourcemaps
-  - gulp-handlebars
-  - gulp-wrap
-  - gulp-declare
-  - gulp-igemwiki
-    - globby
-    - lodash
-    - bluebird
-- handlebars
 - igemwiki-api
+  - globby
+  - lodash
+  - bluebird
 
 ## Live Dependencies
 
