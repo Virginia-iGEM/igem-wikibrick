@@ -48,24 +48,25 @@ gulp.task('css', function(){
 gulp.task('js', function(){
     return gulp.src(srcs.js)
     .pipe(sourcemaps.init())
+    .pipe(uglify({ preserveComments: 'license'}))
     .pipe(concat('wiki.min.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(dests.js))
 });
 
 gulp.task('bower:js', () => gulp
-    .src(mainBowerFiles('**/*.js'), {base: './bower_components' )
+    .src(mainBowerFiles('**/*.js'), {base: './bower_components' })
     .pipe(concat('vendor.js'))
     .pipe(uglify().on('error', log))
     .pipe(gulp.dest(dests.bowerjs))
-})
+)
 
 gulp.task('bower:css', () => gulp
-    .src(mainBowerFiles('**/*.css'), {base: './bower_components' )
+    .src(mainBowerFiles('**/*.css'), {base: './bower_components' })
     .pipe(concat('vendor.css'))
     .pipe(minifyCSS())
     .pipe(gulp.dest(dests.bowercss))
-})
+)
 
 /*
 gulp.task('push', function(){
