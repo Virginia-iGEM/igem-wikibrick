@@ -60,10 +60,13 @@ This is an interactive presentation that gives the reader an intuition for what 
 - Node.js
 - bower
 - gulp
-  - gulp-handlebars
   - gulp-csso
   - gulp-concat
   - gulp-sourcemaps
+  - fancy-log
+  - gulp-uglify
+  - main-bower-files
+  - gulp-imagemin
 - igemwiki-api
   - globby
   - lodash
