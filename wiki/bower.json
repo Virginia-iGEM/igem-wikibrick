@@ -17,5 +17,14 @@
   ],
   "dependencies": {
     "bootstrap": "^4.1.1"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.js",
+        "dist/css/bootstrap.css",
+        "less/bootstrap.less"
+      ]
+    }
   }
 }
