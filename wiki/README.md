@@ -64,6 +64,12 @@ Fourth of all, the build pipeline is flexible. Adding a templating engine like [
 
 Lastly, successful iGEM teams don't just get by with the template given to them by iGEM HQ. The simple fact is that most winning wikis have more in common with a modern website than they do with a Mediawiki site. They have fixed headers, animations, modern navigation bars, material or other modern design aesthetics, and sometimes interactive minigames that demonstrate the concept at hand. A Mediawiki template can scrape by, but to wow, one needs a full-blown website. This tool enables that to happen efficiently.
 
+Much of this reasoning was developed from articles published by previous iGEM teams:
+
+- [Peshawar 2016, general reccommendations for advanced wiki development](https://2016.igem.org/Team:Peshawar/Wiki)
+- [Toronto 2017, igemwiki-api Node.js API and CLI for automated uploads](https://github.com/igemuoftATG/igemwiki-api)
+  - [Recipe page describing how Mediawiki API is used to automate uploads](https://github.com/igemuoftATG/igemwiki-api/blob/master/recipes/README.md)
+
 ### Details
 
 This is a high-level overview of what the build system is doing. To get an idea of what the code is actually doing, see the files mentioned at the top of each section. Each of these files are heavily commented to making understanding what they do easier.
