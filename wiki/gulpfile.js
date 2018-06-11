@@ -21,6 +21,7 @@ const srcs = {
     templates: './templates/*.html',
     css: './styles/*.css',
     js: './scripts/*.js',
+    images: './images/*{png,jpg}'
 }
 
 const dests = {
@@ -30,7 +31,8 @@ const dests = {
     css: './build/css/',
     js: './build/js/',
     bowerjs: './build/dist/js/',
-    bowercss: './build/dist/css/'
+    bowercss: './build/dist/css/',
+    images: './build/images/'
 }
 
 // TODO: Insert Handlebars into pipeline to add successful templating
@@ -56,10 +58,11 @@ gulp.task('js', function(){
     .pipe(gulp.dest(dests.js))
 });
 
+
 gulp.task('bower:js', () => gulp
     .src(mainBowerFiles('**/*.js'), {base: './bower_components' })
-    .pipe(concat('vendor.js'))
     .pipe(uglify().on('error', log))
+    .pipe(concat('vendor.js'))
     .pipe(gulp.dest(dests.bowerjs))
 );
 
@@ -69,6 +72,14 @@ gulp.task('bower:css', () => gulp
     .pipe(minifyCSS())
     .pipe(gulp.dest(dests.bowercss))
 );
+
+/* image staging - not needed because upload.js can look at content outside of the build folder.
+gulp.task('images', function() {
+    return gulp.src(srcs.images)
+    .pipe(gulp.dest(dests.images))
+
+})
+*/
 
 /*
 gulp.task('push', function(){
