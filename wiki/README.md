@@ -22,24 +22,27 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 Our build system (will soon!) support two types of builds: A Development build and a Live build.
 
-In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by entering the following command in any console with npm on its path:  
+In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by entering the following command in any console with npm on its path:
+
 `npm install -D bower gulp gulp-csso gulp-concat gulp-sourcemaps fancy-log gulp-uglify main-bower-files gulp-imagemin run-sequence igemwiki-api globby lodash bluebird`
+
+`bower install components-bootstrap#3.3.7`
 
 Type `gulp dev` to build a local copy that will be located under `wiki/build`. The files produced by this build can be opened in a normal file explorer by any modern web browser.
 
-Type `gulp live` to build a copy with absolute URLs that will then be pushed to the iGEM wiki. In order to do this, you will need to enter your wiki username and password, so have them ready. Note that this copy will *not* 
+Type `gulp live` to build a copy with absolute URLs that will then be pushed to the iGEM wiki. In order to do this, you will need to enter your wiki username and password, so have them ready. Note that this copy will *not* run offline correctly, use `gulp dev` files instead.
 
 **Note:** `gulp live` currently is not fully functional. All expected functions work, however, URLs in HTML files are not changed from relative to absolute, and so all images, JS and CSS, including Bootstrap and JQuery will not function.
 
 ### Justification
 
-This whole system sounds very complicated; it may not be immediately obvious why we have this complex build system with so many different external dependencies, especially when the Mediawiki framework the iGEM wiki is built on is designed to be easily edited by anyone.
+Under the hood, this build tool is fairly complicated; it may not be immediately obvious why we have this complex build system with so many different external dependencies, especially when the Mediawiki framework the iGEM wiki is built on is designed to be easily edited by anyone.
 
 Well, first of all, the guts are complicated, but one doesn't need intimate knowledge of the guts to get it to work. Install Node.js, install build and live dependencies, run `gulp dev` to test and `gulp live` and enter your credentials to publish. Simple, easy, no frills. The system took a few man hours to set up, and will save many more in the future.
 
 Second of all, even if one were to work in the confines of a Mediawiki template, uploading images and making changes to many pages is still a hassle. One has to upload each image one-by-one. If some keyword changes, or some image starts going by a different name, one must go through every single page by hand and make that change to the raw HTML. With this tool, and powerful modern text editors, such tasks are either completely automated or one search-and-replace away.
 
-Third of all, this system supports the non-CS members of the team. Like it or not, one has to deal with HTML and Javascript when it comes to a Mediawiki site, at some point. Because of gulp, one can abstract away the HTML and use Markdown instead; instead of writing this:
+Third of all, this system supports the non-CS members of the team. Like it or not, one has to deal with HTML and Javascript when it comes to a Mediawiki site, at some point. Because of gulp, one can abstract away the HTML and use Markdown; instead of writing this:
 
 ```html
 <p>
@@ -47,10 +50,10 @@ Third of all, this system supports the non-CS members of the team. Like it or no
     Lorem <b>ipsum</b> <i>dolor</i> sit amet...
     <h2>Topic 1</h2>
     ...
-</P>
+</p>
 ```
 
-A non-technical member of the team can instead write this:
+A member of the team contributing content (but not code) to the wiki can instead write this:
 
 ```markdown
 # Title
@@ -58,11 +61,13 @@ A non-technical member of the team can instead write this:
 Lorem **ipsum** _dolor_ sit amet...
 
 ## Topic 1
+
+...
 ```
 
-Fourth of all, the build pipeline is flexible. Adding a templating engine like [Handlebars](https://www.npmjs.com/package/handlebars) to make code-reuse easy, using [{less} CSS](http://lesscss.org/) to improve the readability and flexibility of CSS, or including [Impact JS](http://impactjs.com/), which makes creating interactive games embedded in the site easy and lightweight, are all almost completley automated, involving just a few console commands or a few lines of code changed, instead of fiddling with Mediawiki and copy-pasting code into various `<script>` tags scattered across the website.
+Fourth of all, the build pipeline is flexible. Adding a templating engine like [Handlebars](https://www.npmjs.com/package/handlebars) to make code-reuse easy, using [{less} CSS](http://lesscss.org/) to improve the readability and flexibility of CSS, or including [Impact JS](http://impactjs.com/), which makes creating interactive games embedded in the site easy and lightweight, are all almost completely automated. Adding them involves just a few console commands or a few lines of code changed, instead of fiddling with Mediawiki and copy-pasting code into various `<script>` tags scattered across the website.
 
-Lastly, successful iGEM teams don't just get by with the template given to them by iGEM HQ. The simple fact is that most winning wikis have more in common with a modern website than they do with a Mediawiki site. They have fixed headers, animations, modern navigation bars, material or other modern design aesthetics, and sometimes interactive minigames that demonstrate the concept at hand. A Mediawiki template can scrape by, but to wow, one needs a full-blown website. This tool enables that to happen efficiently.
+Lastly, successful iGEM teams don't just get by with the template given to them by iGEM HQ. The simple fact is that most winning wikis have more in common with a modern website than they do with a Mediawiki site. They have fixed headers, animations, modern navigation bars, material or other modern design aesthetics, and sometimes interactive minigames that demonstrate the concept at hand. A Mediawiki template can scrape by, but to really *wow*, one needs a full-blown website. This tool enables that to happen efficiently.
 
 Much of this reasoning was developed from articles published by previous iGEM teams:
 
@@ -73,6 +78,24 @@ Much of this reasoning was developed from articles published by previous iGEM te
 ### Details
 
 This is a high-level overview of what the build system is doing. To get an idea of what the code is actually doing, see the files mentioned at the top of each section. Each of these files are heavily commented to making understanding what they do easier.
+
+Note that understanding the build system minimally requires a basic, conceptual understanding of the following:
+
+- [Hypertext Markup Langauge (HTML)](https://www.w3schools.com/Html/)
+- [Cascading Style Sheets (CSS)](https://www.w3schools.com/Css/)
+- [JavaScript (JS)](https://www.w3schools.com/Css/)
+- What [an API](https://en.wikipedia.org/wiki/Application_programming_interface) is
+  - [The igemwiki-api](https://github.com/igemuoftATG/igemwiki-api)
+- What a webserver is, particularly [Mediawiki](https://en.wikipedia.org/wiki/MediaWiki)
+   -[Some additional reading by Toronto 2017](https://github.com/igemuoftATG/igemwiki-api/blob/master/recipes/README.md)
+- [What Node.js is](https://nodejs.org/en/)
+- Familiarity with [build automation and build tools](https://en.wikipedia.org/wiki/Build_automation)
+  - [gulp](https://gulpjs.com/)
+- Understanding what package management is and what a dependency is
+  - [npm](https://www.npmjs.com/)
+  - [bower](https://bower.io/)
+
+Linked above are reccommended readings for understanding these things. Note that you do not need to follow all of these tutorials ot the end or read every article in detail; they are simply to give a general understanding of what each of these core components are and what they do.
 
 #### Development Build
 
@@ -103,9 +126,15 @@ Once these files are staged in the build directory, you can enter the build dire
 
 #### Live Build
 
+[/wiki/gulpfile.js](https://github.com/Mantissa-23/VGEM-2018/blob/igemwiki-api/wiki/gulpfile.js)
+
+[/wiki/upload.js](https://github.com/Mantissa-23/VGEM-2018/blob/igemwiki-api/wiki/upload.js)
+
 **Note:** As mentioned above, Live Build is not fully functional. This description is for a fully functional live build. The transform mentioned below that changes relative to absolute URLs is not yet implemented.
 
-The live build essentially performs the dev build with the exception that all HTML files are transformed by changing their relative URLs to absolute URLs. With a normal webserver, this would not be necessary, however because iGEM uses mediawiki to enable teams of all technological backgrounds to create their own sites. 
+The live build essentially performs the dev build with the exception that all HTML files are transformed by changing their relative URLs to absolute URLs. With a normal webserver, this would not be necessary, however because iGEM uses mediawiki to enable teams of all technological backgrounds to create their own sites.
+
+See todo list for up-to-date description of future changes to be made to live build.
 
 ## 4 Todo
 
@@ -114,6 +143,8 @@ The live build essentially performs the dev build with the exception that all HT
 - Create a gulp task that parses HTML files and replaces relative (development) links with absolute (live) links on the wiki.
   - [Cheerio](https://github.com/cheeriojs/cheerio) is a really good candidate for an HTML parser, it's popular and mature.
 - Implement simple [JQuery HTML Templates](https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac) for Footers and Headers.
+- Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
+  - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
 - Update templating system to accept Markdown files:
   - Scan directory for .md files for Index and Pages
   - Compile markdown to HTML using [marked](https://www.npmjs.com/package/marked)
@@ -122,8 +153,6 @@ The live build essentially performs the dev build with the exception that all HT
 
 ### Medium Priority
 
-- Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
-  - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
 - Move source-destination mappings located in upload.js into their own separate json file to compartmentalize out data
   - Same for gulpfile source-destination mappings.
 
