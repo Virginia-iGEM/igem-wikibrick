@@ -1,3 +1,4 @@
+// See https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki for descriptions of packages
 var gulp = require('gulp');
 var minifyCSS = require('gulp-csso');
 var concat = require('gulp-concat');
@@ -10,6 +11,8 @@ var runsequence = require('run-sequence');
 
 var upload = require('./upload.js');
 
+// Function shared by all HTML processing tasks for development builds. 
+// Currently just stages HTML files to build folder.
 function prepHTML(src, dest) {
     return function() {
         gulp.src(src)
@@ -17,6 +20,9 @@ function prepHTML(src, dest) {
     }
 }
 
+// TODO: Add prepHTMLLive function for live builds
+
+// Listed file sources for all tasks. Note use of glob patterns and wildcarding.
 const srcs = {
     index: './index.html',
     pages: './pages/*.html',
@@ -26,6 +32,7 @@ const srcs = {
     images: './images/*{png,jpg}'
 }
 
+// Listed destination directories for all builds.
 const dests = {
     index: './build/',
     pages: './build/pages/',
@@ -37,30 +44,38 @@ const dests = {
     images: './build/images/'
 }
 
-// TODO: Insert Handlebars into pipeline to add successful templating
+// TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
+
+// Task to prep index.html which is uploaded as the home page
 gulp.task('index', prepHTML(srcs.index, dests.index));
 
+// Task to prep all non-home pages, I.E. Project Description, Team, etc.
 gulp.task('pages', prepHTML(srcs.pages, dests.pages));
 
+// Task to prep templates like headers, footers, etc. that can be reused on many pages
 gulp.task('templates', prepHTML(srcs.templates, dests.templates));
 
-// Optional: Include less() in pipeline before minifyCSS
+// Task to minify and stage our in-house CSS stylesheets
+// Optional: Include less() in pipeline before minifyCSS to use {less} CSS package
 gulp.task('css', function(){
     return gulp.src(srcs.css)
-    .pipe(minifyCSS())
+    .pipe(minifyCSS()) // Minification increases load speeds
     .pipe(gulp.dest(dests.css))
 });
 
-//.pipe(uglify().on('error', log))
+// Task to minify and stage our in-house JavaScript files.
+// TODO: Fix JS minificatoin for in-house JS
 gulp.task('js', function(){
     return gulp.src(srcs.js)
-    .pipe(sourcemaps.init())
-    .pipe(concat('wiki.min.js'))
+    .pipe(sourcemaps.init()) // Used for debugging
+    //.pipe(uglify().on('error', log)) // Minification increases load speeds
+    .pipe(concat('wiki.min.js')) // Note use of concat to compact all JS files into one
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(dests.js))
 });
 
-
+// Task to stage library JS, such as JQuery, Bootstrap and any future live dependencies.
+// Note: See bower.json for exceptions important to successfully uploading bootstrap.
 gulp.task('bower:js', () => gulp
     .src(mainBowerFiles('**/*.js'), {base: './bower_components' })
     .pipe(uglify().on('error', log))
@@ -68,6 +83,7 @@ gulp.task('bower:js', () => gulp
     .pipe(gulp.dest(dests.bowerjs))
 );
 
+// Task to stage library CSS, particularly Bootstrap.
 gulp.task('bower:css', () => gulp
     .src(mainBowerFiles('**/*.css'), {base: './bower_components' })
     .pipe(concat('vendor.css'))
@@ -75,20 +91,26 @@ gulp.task('bower:css', () => gulp
     .pipe(gulp.dest(dests.bowercss))
 );
 
+// Task to stage all images, .png or .jpg
 gulp.task('images', function() {
     return gulp.src(srcs.images)
-    .pipe(imagemin())
+    .pipe(imagemin()) // Minification increases load speeds
     .pipe(gulp.dest(dests.images))
 })
 
+// Special task that calls upload.js, which pushes all files with a compatible mapping
+// staged in the build folder to the iGEM Wiki. Not entirely automatic; requires credentials.
 gulp.task('push', function(){
     upload()
 });
 
-//gulp.task('publish', ['default', 'push']);
-
+// Default task runs both dev and live build
 gulp.task('default', [ 'index', 'pages', 'templates', 'css', 'js', 'images', 'bower:js', 'bower:css' ]);
+
+// Dev task is currently analagous to default, will change in future
 gulp.task('dev', ['default']);
+
+// Live build runs dev and then uploads, will change in future
 gulp.task('live', function(done) {
     runsequence('default', 'push');
 });
