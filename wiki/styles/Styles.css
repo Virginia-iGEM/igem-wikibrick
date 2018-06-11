@@ -28,6 +28,8 @@ ul {
     list-style-image: none; /* removes the iGEM wiki bullets */
 }
 
+/* Begin actual Virginia iGEm 2018 Code */
+
 /* UVA Colors
 :root {
     --dark-background-color:#232D4B;
@@ -96,6 +98,10 @@ a:link {
 }
 ul.nav li a {
     color: var(--link-color);
+}
+
+h1 {
+    font-family: arial;
 }
 
 /* Home.html Styles */
