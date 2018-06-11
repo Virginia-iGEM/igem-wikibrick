@@ -2,23 +2,23 @@ var gulp = require('gulp');
 var minifyCSS = require('gulp-csso');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
+var handlebars = require('gulp-handlebars');
+var wrap = require('gulp-wrap');
+var declare = require('gulp-declare');
+
 //var upload = require('./upload');
 
+function prepHTML(src, dest) {
+    return gulp.src(src)
+    .pipe(gulp.dest(dest));
+}
+
 // TODO: Insert Handlebars into pipeline to add successful templating
-gulp.task('index', function() {
-    return gulp.src('./index.html')
-    .pipe(gulp.dest('build/'))
-});
+gulp.task('index', prepHTML('./index.html', 'build/'));
 
-gulp.task('pages', function() {
-    return gulp.src('./pages/*.html')
-    .pipe(gulp.dest('build/pages'))
-});
+gulp.task('pages', prepHTML('./pages/*.html', 'build/pages'));
 
-gulp.task('templates', function() {
-    return gulp.src('./templates/*.html')
-    .pipe(gulp.dest('build/templates'))
-});
+gulp.task('templates', prepHTML('./templates/*.html', 'build/templates'));
 
 // Optional: Include less() in pipeline before minifyCSS
 gulp.task('css', function(){
