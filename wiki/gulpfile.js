@@ -88,6 +88,7 @@ gulp.task('push', function(){
 //gulp.task('publish', ['default', 'push']);
 
 gulp.task('default', [ 'index', 'pages', 'templates', 'css', 'js', 'images', 'bower:js', 'bower:css' ]);
+gulp.task('dev', ['default']);
 gulp.task('live', function(done) {
     runsequence('default', 'push');
 });
