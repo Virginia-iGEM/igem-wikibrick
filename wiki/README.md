@@ -22,7 +22,7 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 Our build system (will soon!) support two types of builds: A Development build and a Live build.
 
-In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by entering the following command in any console with npm on its path:
+In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by entering the following commands in any console with npm on its path:
 
 `npm install -D bower gulp gulp-csso gulp-concat gulp-sourcemaps fancy-log gulp-uglify main-bower-files gulp-imagemin run-sequence igemwiki-api globby lodash bluebird`
 
@@ -87,7 +87,7 @@ Note that understanding the build system minimally requires a basic, conceptual 
 - What [an API](https://en.wikipedia.org/wiki/Application_programming_interface) is
   - [The igemwiki-api](https://github.com/igemuoftATG/igemwiki-api)
 - What a webserver is, particularly [Mediawiki](https://en.wikipedia.org/wiki/MediaWiki)
-   -[Some additional reading by Toronto 2017](https://github.com/igemuoftATG/igemwiki-api/blob/master/recipes/README.md)
+  - [Some additional reading by Toronto 2017](https://github.com/igemuoftATG/igemwiki-api/blob/master/recipes/README.md)
 - [What Node.js is](https://nodejs.org/en/)
 - Familiarity with [build automation and build tools](https://en.wikipedia.org/wiki/Build_automation)
   - [gulp](https://gulpjs.com/)
@@ -116,11 +116,11 @@ The following tasks are defined in the file:
 - bower:css: Minifies CSS, same as above.
 - images: Minifies images and stages them.
 - push: Special task, covered under Live Build.
-- default: The task that's run when one simply types `gulp` into the console with no arguments. Shorthand for dev build.
+- default: The task that's run when one simply types `gulp` into the console with no arguments. Shorthand for dev build. Runs every single task except for push.
 - dev: Same as above.
 - live: Covered under Live Build.
 
-Note that every task begins with some kind of `gulp.src()` function and ends with some kind of `.pipe(gulp.dest(<some destination>))` function. These sources and destinations can be seen at the top of the file, and map working files to build files. Whenever `gulp` is run with a certain task, it takes in these source files, transforms them in some way using pipes and various gulp plugins (these are usually prefixed with `gulp-` under dependencies), and then spits them out under our build directory (what I call staging).
+Note that every task begins with some kind of `gulp.src()` function and ends with some kind of `.pipe(gulp.dest(<some destination>))` function. These sources and destinations can be seen at the top of the file, and map working files to build files. Whenever `gulp` is run with a certain task, it takes in these source files, transforms them in some way using pipes and various gulp plugins (these are usually prefixed with `gulp-` under dependencies), and then spits them out under our build directory (what I call staging). The only exception is `push`, which is special and does not transform files.
 
 Once these files are staged in the build directory, you can enter the build directory and open the website with your favorite browser, hosted entirely locally on your machine. This enables work to be done on the website even offline, and allows one to iterate on the site without pushing to the iGEM wiki every single time. This makes iterations faster, and (not that this matters to us) saves iGEM HQ some bandwidth.
 
