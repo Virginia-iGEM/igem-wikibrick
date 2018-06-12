@@ -22,7 +22,7 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 Our build system (will soon!) support two types of builds: A Development build and a Live build.
 
-In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by entering the following commands in any console with npm on its path:
+In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by first entering the `wiki` directory, I.E.with `cd wiki` and entering the following commands in any console with npm on its path:
 
 `npm install`
 
