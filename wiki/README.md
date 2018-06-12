@@ -3,7 +3,6 @@
 ## 1 Description
 Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia.
 
-
 ## 2 Table of Contents
 
 1. **Description**
@@ -22,11 +21,13 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 Our build system (will soon!) support two types of builds: A Development build and a Live build.
 
-In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by entering the following commands in any console with npm on its path:
+In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by first entering the `wiki` directory, I.E.with `cd wiki` and entering the following commands in any console with npm on its path:
 
-`npm install -D bower gulp gulp-csso gulp-concat gulp-sourcemaps fancy-log gulp-uglify main-bower-files gulp-imagemin run-sequence igemwiki-api globby lodash bluebird`
+`npm install`
 
-`bower install components-bootstrap#3.3.7`
+`bower install`
+
+**Note:** You must currently checkout the igemwiki-api branch with `git checkout --track origin/igemwiki-api` to get the build system. Master does not yet contain the build system.
 
 Type `gulp dev` to build a local copy that will be located under `wiki/build`. The files produced by this build can be opened in a normal file explorer by any modern web browser.
 
