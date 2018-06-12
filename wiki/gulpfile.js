@@ -29,7 +29,7 @@ const srcs = {
     templates: './templates/*.html',
     css: './styles/*.css',
     js: './scripts/*.js',
-    images: './images/*{png,jpg}'
+    images: './images/*.{png,jpg}'
 }
 
 // Listed destination directories for all builds.
