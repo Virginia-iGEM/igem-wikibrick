@@ -8,6 +8,8 @@ var uglify = require('gulp-uglify');
 var mainBowerFiles = require('main-bower-files');
 var imagemin = require('gulp-imagemin');
 var runsequence = require('run-sequence');
+var gulpif = require('gulp-if');
+var cheerio = require('gulp-cheerio');
 
 var upload = require('./upload.js');
 
@@ -16,6 +18,9 @@ var upload = require('./upload.js');
 function prepHTML(src, dest) {
     return function() {
         gulp.src(src)
+        .pipe(gulpif(livebuild, cheerio(function ($, file) {
+            // Insert HTML parsing here
+        })))
         .pipe(gulp.dest(dest))
     }
 }
