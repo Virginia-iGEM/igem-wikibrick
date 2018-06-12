@@ -1,13 +1,13 @@
 {
-  "name": "wiki",
-  "version": "1.0.0",
-  "description": "",
+  "name": "vgem-2018-wiki",
+  "version": "0.0.1",
+  "description": "Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dylan Culfogienis",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
@@ -28,5 +28,13 @@
     "lodash": "^4.17.10",
     "main-bower-files": "^2.13.1",
     "run-sequence": "^2.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mantissa-23/VGEM-2018.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mantissa-23/VGEM-2018/issues"
+  },
+  "homepage": "https://github.com/Mantissa-23/VGEM-2018#readme"
 }
