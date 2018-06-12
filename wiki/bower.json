@@ -16,7 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^4.1.1"
+    "bootstrap": "^3.3.7"
   },
   "overrides": {
     "bootstrap": {
