@@ -3,7 +3,6 @@
 ## 1 Description
 Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia.
 
-
 ## 2 Table of Contents
 
 1. **Description**
@@ -27,6 +26,8 @@ In order to build both, you will need to first install [Node.js](https://nodejs.
 `npm install`
 
 `bower install`
+
+**Note:** You must currently checkout the igemwiki-api branch with `git checkout --track origin/igemwiki-api` to get the build system. Master does not yet contain the build system.
 
 Type `gulp dev` to build a local copy that will be located under `wiki/build`. The files produced by this build can be opened in a normal file explorer by any modern web browser.
 
