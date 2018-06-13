@@ -9,7 +9,10 @@
   "keywords": [],
   "author": "Dylan Culfogienis",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "jshint": "^2.9.5",
+    "npm": "^6.1.0"
+  },
   "devDependencies": {
     "bluebird": "^3.5.1",
     "bower": "^1.8.4",

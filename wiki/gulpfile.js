@@ -46,7 +46,8 @@ const srcs = {
     templates: './templates/*.html',
     css: './css/*.css',
     js: './js/*.js',
-    images: './images/*.{png,jpg}'
+    images: './images/*.{png,jpg}',
+	markdownpages: './pages/*.md'
 }
 
 // Listed destination directories for all builds.
@@ -58,7 +59,8 @@ const dests = {
     js: './build/js/',
     bowerjs: './build/dist/js/',
     bowercss: './build/dist/css/',
-    images: './build/images/'
+    images: './build/images/',
+	markdownpages: './build/pages/'
 }
 
 // TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
@@ -137,9 +139,8 @@ gulp.task('publish', function(done) {
 });
 
 //task that uses markdown to convert text blocks from Markdown to HTML easily
-//FIX LATER
 gulp.task('markdown', function() {
-	gulp.src('test.md') //what files to use for the task
-	.pipe(markdown())
-	.pipe(gulp.dest('dist')) //where to output the files once the task is complete
+	gulp.src(srcs.markdownpages) //what files to use for the task, pulled from the srcs array
+	.pipe(markdown()) //using the markdown program
+	.pipe(gulp.dest(dests.markdownpages)) //where to output the files once the task is complete, pulled from dests array
 });
