@@ -148,7 +148,7 @@ See todo list for up-to-date description of future changes to be made to live bu
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
   - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
 - [In-Progress, Grace] Update templating system to accept Markdown files:
-  - Scan directory for .md files for Index and Pages
+  - Scan directory for .md files for Index and Pages [done]
   - Compile markdown to HTML using [marked](https://www.npmjs.com/package/marked)
   - Insert compiled HTML into a template that includes necessary CSS and JS in the head, sandwiched between header and footer template
   - Output compiled HTML + Template as HTML files for dev build/live build
