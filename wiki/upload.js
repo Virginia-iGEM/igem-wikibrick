@@ -2,6 +2,7 @@
 module.exports = function() {
     // Core node, https://nodejs.org/api/path.html
     const path = require('path')
+    const url = require('url')
 
     const igemwiki = require('igemwiki-api')({ year: 2018, teamName: 'Virginia'})
     const Promise = require('bluebird')
@@ -38,18 +39,18 @@ module.exports = function() {
     })
 
     // Mapping for CSS
-    const getCSS = globby([ './build/styles/**/*.css']).then((stylesheets) => {
+    const getCSS = globby([ './build/**/*.css']).then((stylesheets) => {
         return stylesheets.map((stylesheet) => {
             return {
                 type: 'stylesheet',
                 fileName: path.resolve(__dirname, stylesheet),
-                page: path.basename(stylesheet).replace('.css', '')
+                page: (path.basename(stylesheet).replace('.css', ''))
             }
         })
     })
 
     // Mapping for Javascript
-    const getJS = globby([ './build/scripts/**/*.js' ]).then(scripts => scripts.map(script => ({
+    const getJS = globby([ './build/**/*.js' ]).then(scripts => scripts.map(script => ({
         type: 'script',
         fileName: path.resolve(__dirname, script),
         page: path.basename(script).replace('.js', '')
@@ -69,11 +70,10 @@ module.exports = function() {
         getPages,
         getTemplates,
         getCSS,
-        getJS,
-        getImages
+        getJS
+        //getImages
     ]).then((confs) => {
         confs = _.flatten(confs)
-        //console.log(confs) // Uncomment to log mappings to console
 
         // Encapsulate files in a configuration file compatible with igemwiki-api
         igemwiki.login().then((jar) => {

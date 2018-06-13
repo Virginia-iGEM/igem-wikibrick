@@ -12,20 +12,21 @@ var gulpif = require('gulp-if');
 var cheerio = require('gulp-cheerio');
 var markdown = require('gulp-markdown');
 
+var relative2absolute = require('./relative2absolute.js');
 var upload = require('./upload.js');
 
-var livebuild = false;
+var livebuild = true;
 
 // Function shared by all HTML processing tasks for development builds. 
 // Currently just stages HTML files to build folder.
 function prepHTML(src, dest) {
     return function() {
         gulp.src(src)
-        .pipe(gulpif(livebuild, cheerio(function ($, file) {
-            $('img').each(function () {
-                var img = $(this);
-                img.attr('src') = '';
-            });
+        .pipe(gulpif(livebuild, cheerio({
+            run: relative2absolute,
+            parserOptions: {
+                decodeEntities: false
+            }
         })))
         .pipe(gulp.dest(dest))
     }
@@ -38,8 +39,8 @@ const srcs = {
     index: './index.html',
     pages: './pages/*.html',
     templates: './templates/*.html',
-    css: './styles/*.css',
-    js: './scripts/*.js',
+    css: './css/*.css',
+    js: './js/*.js',
     images: './images/*.{png,jpg}'
 }
 
@@ -70,7 +71,7 @@ gulp.task('templates', prepHTML(srcs.templates, dests.templates));
 // Optional: Include less() in pipeline before minifyCSS to use {less} CSS package
 gulp.task('css', function(){
     return gulp.src(srcs.css)
-    .pipe(minifyCSS()) // Minification increases load speeds
+    //.pipe(minifyCSS()) // Minification increases load speeds
     .pipe(gulp.dest(dests.css))
 });
 
@@ -80,7 +81,7 @@ gulp.task('js', function(){
     return gulp.src(srcs.js)
     .pipe(sourcemaps.init()) // Used for debugging
     //.pipe(uglify().on('error', log)) // Minification increases load speeds
-    .pipe(concat('wiki.min.js')) // Note use of concat to compact all JS files into one
+    .pipe(concat('wiki.js')) // Note use of concat to compact all JS files into one
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(dests.js))
 });
@@ -98,7 +99,7 @@ gulp.task('bower:js', () => gulp
 gulp.task('bower:css', () => gulp
     .src(mainBowerFiles('**/*.css'), {base: './bower_components' })
     .pipe(concat('vendor.css'))
-    .pipe(minifyCSS())
+    //.pipe(minifyCSS())
     .pipe(gulp.dest(dests.bowercss))
 );
 
