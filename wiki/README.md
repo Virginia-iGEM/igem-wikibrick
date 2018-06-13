@@ -22,7 +22,7 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 Our build system supports two types of builds: A Development build and a Live build.
 
-In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by first entering the `wiki` directory, I.E.with `cd wiki` and entering the following commands in any console with npm on its path:
+In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by first entering the `wiki` directory, e.g. with `cd wiki` and entering the following commands in any console with npm on its path:
 
 `npm install`
 
@@ -36,7 +36,7 @@ One can type `gulp live build` to check HTML for correct parsing. This will not 
 
 Note 1: One can call `gulp dev publish`, nothing is preventing it. However, it will just upload HTML files with relative paths to the wiki, which will be very ugly and likely nonfunctional.
 
-Note 2: Reversing the order of tasks, I.E. `gulp publish dev` or `gulp publish live` will result in incorrect behaviour. Order matters here.
+Note 2: Reversing the order of tasks, i.e. `gulp publish dev` or `gulp publish live` will result in incorrect behaviour. Order matters here.
 
 ### Justification
 
@@ -112,7 +112,7 @@ This gulpfile is analagous to a Makefile; the tasks contained within it can be r
 The following tasks are defined in the file:
 
 - index: Preps and stages the HTML for the special file, index.html, which is our homepage
-- pages: Preps and stages HTML for subpages of our website, I.E. [Project Description](http://2018.igem.org/Team:Virginia/Description) or [Team](http://2018.igem.org/Team:Virginia/Team).
+- pages: Preps and stages HTML for subpages of our website, e.g. [Project Description](http://2018.igem.org/Team:Virginia/Description) or [Team](http://2018.igem.org/Team:Virginia/Team).
 - templates: Preps and stages HTML for templates such as the header and footer seen on every page
 - css: Minifies (reduces the size of) our home-made stylesheets and stages them.
 - js: Minifies all JS files and stages them.
