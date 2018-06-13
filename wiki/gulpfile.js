@@ -14,13 +14,18 @@ var markdown = require('gulp-markdown');
 
 var upload = require('./upload.js');
 
+var livebuild = false;
+
 // Function shared by all HTML processing tasks for development builds. 
 // Currently just stages HTML files to build folder.
 function prepHTML(src, dest) {
     return function() {
         gulp.src(src)
         .pipe(gulpif(livebuild, cheerio(function ($, file) {
-            // Insert HTML parsing here
+            $('img').each(function () {
+                var img = $(this);
+                img.attr('src') = '';
+            });
         })))
         .pipe(gulp.dest(dest))
     }
