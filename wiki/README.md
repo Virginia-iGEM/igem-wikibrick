@@ -142,8 +142,9 @@ See todo list for up-to-date description of future changes to be made to live bu
 
 ### High Priority
 
-- [In-Progress, Dylan] Create a gulp task that parses HTML files and replaces relative (development) links with absolute (live) links on the wiki.
+- [Tentatively Completed, Dylan] Create a gulp task that parses HTML files and replaces relative (development) links with absolute (live) links on the wiki.
   - [Cheerio](https://github.com/cheeriojs/cheerio) is a really good candidate for an HTML parser, it's popular and mature.
+  - Currently user has to enter their username and password twice to do a full push
 - Implement simple [JQuery HTML Templates](https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac) for Footers and Headers.
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
   - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
