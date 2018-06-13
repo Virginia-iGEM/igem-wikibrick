@@ -9,7 +9,6 @@ var mainBowerFiles = require('main-bower-files');
 var imagemin = require('gulp-imagemin');
 var runsequence = require('run-sequence');
 var markdown = require('gulp-markdown');
-
 var upload = require('./upload.js');
 
 // Function shared by all HTML processing tasks for development builds. 
@@ -31,6 +30,7 @@ const srcs = {
     css: './styles/*.css',
     js: './scripts/*.js',
     images: './images/*{png,jpg}'
+	markdownpages: './pages/*.md'
 }
 
 // Listed destination directories for all builds.
@@ -43,6 +43,7 @@ const dests = {
     bowerjs: './build/dist/js/',
     bowercss: './build/dist/css/',
     images: './build/images/'
+	markdownpages: './build/pages/'
 }
 
 // TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
@@ -119,7 +120,7 @@ gulp.task('live', function(done) {
 //task that uses markdown to convert text blocks from Markdown to HTML easily
 //FIX LATER
 gulp.task('markdown', function() {
-	gulp.src('test.md') //what files to use for the task
+	gulp.src(srcs.markdownpages) //what files to use for the task
 	.pipe(markdown())
-	.pipe(gulp.dest('dist')) //where to output the files once the task is complete
+	.pipe(gulp.dest(dests.markdownpages)) //where to output the files once the task is complete
 });
