@@ -39,7 +39,7 @@ const srcs = {
     templates: './templates/*.html',
     css: './styles/*.css',
     js: './scripts/*.js',
-    images: './images/*{png,jpg}'
+    images: './images/*{png,jpg}',
 	markdownpages: './pages/*.md'
 }
 
@@ -52,7 +52,7 @@ const dests = {
     js: './build/js/',
     bowerjs: './build/dist/js/',
     bowercss: './build/dist/css/',
-    images: './build/images/'
+    images: './build/images/',
 	markdownpages: './build/pages/'
 }
 
@@ -128,9 +128,8 @@ gulp.task('live', function(done) {
 });
 
 //task that uses markdown to convert text blocks from Markdown to HTML easily
-//FIX LATER
 gulp.task('markdown', function() {
-	gulp.src(srcs.markdownpages) //what files to use for the task
-	.pipe(markdown())
-	.pipe(gulp.dest(dests.markdownpages)) //where to output the files once the task is complete
+	gulp.src(srcs.markdownpages) //what files to use for the task, pulled from the srcs array
+	.pipe(markdown()) //using the markdown program
+	.pipe(gulp.dest(dests.markdownpages)) //where to output the files once the task is complete, pulled from dests array
 });
