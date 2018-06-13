@@ -160,16 +160,19 @@ See todo list for up-to-date description of future changes to be made to live bu
   - Structure: Build Src -> Build Destination == Upload Source -> Upload Destination
   - Build srcs, build destinations, upload srcs and upload destinations are currently all separately defined in-script, should be defined in .json files.
   - Build destinations and upload sources should be made identical, they are currently the same.
+- Eliminate code duplication in upload.js
 
 ### Medium Priority
 
 - Move source-destination mappings located in upload.js into their own separate json file to compartmentalize out data
   - Same for gulpfile source-destination mappings.
+- Switch to compiled SASS/LESS from CSS to make stylesheets cleaner
 
 ### Low Priority
 
 - Eliminate `run-sequence` dependency by using gulp's in-built sequencing syntax, as detailed in the [Gulp Documentation on Async Tasks](https://github.com/gulpjs/gulp/blob/v3.9.1/docs/API.md#async-task-support)
 - Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies.
+- Pick a JavaScript styleguide, fix the awful inconsistencies in style to adhere to it.
 
 ## 5 Roadmap
 
