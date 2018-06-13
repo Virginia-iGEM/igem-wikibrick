@@ -152,6 +152,7 @@ See todo list for up-to-date description of future changes to be made to live bu
   - Compile markdown to HTML using [marked](https://www.npmjs.com/package/marked)
   - Insert compiled HTML into a template that includes necessary CSS and JS in the head, sandwiched between header and footer template
   - Output compiled HTML + Template as HTML files for dev build/live build
+- Make it so upload.js can upoad specific items instead of having to upload everything. Probably gonna do this with gulp.
 - Consolidate team name and year into .json file. Have relative2absolute.js pull from this file and generate URLs. Also have upload.js pull from this file for team name and year.
   - A potential alternative is to have relative2absolute.js pull from igemwiki-api if it exposes the URLs it uses.
   - This is important because it is not immediately obvious to future teams that they need to change these variables in both upload.js and realtive2absolute.js
