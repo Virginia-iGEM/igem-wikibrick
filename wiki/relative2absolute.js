@@ -1,6 +1,7 @@
 module.exports = function($, file) {
     const path = require('path');
     const url = require('url');
+    const fs = require('fs');
 
     const urls = {
         standard: 'http://2018.igem.org/Team:Virginia/',
@@ -10,6 +11,9 @@ module.exports = function($, file) {
         images: 'http://2018.igem.org/File:T--Virginia--2018_'
     }
 
+    // This part is synchronous and probably doesn't need to be
+    var imagemap = JSON.parse(fs.readFileSync('./build/imagemap.json', 'utf8'));
+
     const suffixes = {
         js: '?action=raw&ctype=text/javascript',
         css: '?action=raw&ctype=text/css'
@@ -18,7 +22,7 @@ module.exports = function($, file) {
     // Set absolute paths for images
     $('img').each(function () {
         var img = $(this);
-        img.attr('src', urls.images.concat(path.basename(img.attr('src'))));
+        img.attr('src', imagemap[path.basename(img.attr('src'))]);
     });
 
     // Set absolute path for stylesheets

@@ -1,8 +1,7 @@
 // See https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki for descriptions of packages
-module.exports = function() {
+module.exports.uploadContent = function(done) {
     // Core node, https://nodejs.org/api/path.html
     const path = require('path')
-    const url = require('url')
 
     const igemwiki = require('igemwiki-api')({ year: 2018, teamName: 'Virginia'})
     const Promise = require('bluebird')
@@ -56,13 +55,6 @@ module.exports = function() {
         page: path.basename(script).replace('.js', '')
     })))
 
-    // Mapping for images
-    const getImages = globby([ './build/images/**/*.{png,jpg}' ]).then(images => images.map(image => ({
-        type: 'image',
-        fileName: path.resolve(__dirname, image),
-        page: path.basename(image)
-    })))
-
     // Run all mapping functions asynchronously with bluebird, 
     // generating an actual map list from the patterns we specified.
     Promise.all([
@@ -71,7 +63,6 @@ module.exports = function() {
         getTemplates,
         getCSS,
         getJS
-        //getImages
     ]).then((confs) => {
         confs = _.flatten(confs)
 
@@ -85,9 +76,68 @@ module.exports = function() {
                 // force: true // Uncomment to ignore errors
             }))
 
+            var imagemap = new Object();
             // Now begin uploading them
-            Promise.map(confs, conf => igemwiki.upload(conf), { concurrency: 1})
-                .then(() => console.log('Uploads completed'))
+            Promise.map(confs, conf => igemwiki.upload(conf), {concurrency: 1})
+                .then(() => {
+                    console.log('Uploads completed')
+                    done();
+                })
+                .catch(console.error)
+        })
+    })
+}
+
+module.exports.uploadImages = function (done) {
+    // Core node, https://nodejs.org/api/path.html
+    const path = require('path')
+    const fs = require('fs');
+
+    const igemwiki = require('igemwiki-api')({ year: 2018, teamName: 'Virginia'})
+    const Promise = require('bluebird')
+    const globby = require ('globby')
+    const _ = require('lodash')
+
+    const imagemapfilename = './build/imagemap.json';
+
+    // Mapping for images
+    const getImages = globby([ './build/images/**/*.{png,jpg}' ]).then(images => images.map(image => ({
+        type: 'image',
+        fileName: path.resolve(__dirname, image),
+        page: path.basename(image)
+    })))
+
+    Promise.all([
+        getImages
+    ]).then((confs) => {
+        confs = _.flatten(confs)
+
+        // Encapsulate files in a configuration file compatible with igemwiki-api
+        igemwiki.login().then((jar) => {
+            confs = confs.map(c => ({
+                jar: jar,
+                type: c.type, // Type is a switch that determines how igemwiki-api uploads files
+                dest: c.page, // Send files to the page specified under mapping
+                source: c.fileName, // Take from the source specified in fileName
+                // force: true // Uncomment to ignore errors
+            }))
+
+            var imagemap = new Object();
+            // Now begin uploading them
+            Promise.map(confs, conf => igemwiki.upload(conf).then(results => {
+                    imagemap[conf.dest] = results.target;
+                }),
+                {concurrency: 1})
+                .then(() => {
+                        fs.writeFile(imagemapfilename, JSON.stringify(imagemap), 'utf8', () => {
+
+                        console.log('Wrote image mappings to '.concat(imagemapfilename));
+
+                        console.log('Image uploads completed');
+
+                        done();
+                    });
+                })
                 .catch(console.error)
         })
     })

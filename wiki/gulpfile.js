@@ -108,23 +108,27 @@ gulp.task('images', function() {
     return gulp.src(srcs.images)
     .pipe(imagemin()) // Minification increases load speeds
     .pipe(gulp.dest(dests.images))
-})
+});
 
 // Special task that calls upload.js, which pushes all files with a compatible mapping
 // staged in the build folder to the iGEM Wiki. Not entirely automatic; requires credentials.
-gulp.task('push', function(){
-    upload()
+gulp.task('pushcontent', function(done){
+    upload.uploadContent(done);
+});
+
+gulp.task('pushimages', function(done) {
+    upload.uploadImages(done);
 });
 
 // Default task runs both dev and live build
-gulp.task('default', [ 'index', 'pages', 'templates', 'css', 'js', 'images', 'bower:js', 'bower:css' ]);
+gulp.task('dev', [ 'index', 'pages', 'templates', 'css', 'js', 'images', 'bower:js', 'bower:css' ]);
 
 // Dev task is currently analagous to default, will change in future
-gulp.task('dev', ['default']);
+gulp.task('default', ['dev']);
 
 // Live build runs dev and then uploads, will change in future
 gulp.task('live', function(done) {
-    runsequence('default', 'push');
+    runsequence('pushimages', 'dev', 'pushcontent', done);
 });
 
 //task that uses markdown to convert text blocks from Markdown to HTML easily
