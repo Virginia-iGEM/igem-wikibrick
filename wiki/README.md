@@ -20,15 +20,13 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 ### Use
 
-Our build system (will soon!) support two types of builds: A Development build and a Live build.
+Our build system supports two types of builds: A Development build and a Live build.
 
 In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by first entering the `wiki` directory, I.E.with `cd wiki` and entering the following commands in any console with npm on its path:
 
 `npm install`
 
 `bower install`
-
-**Note:** You must currently checkout the igemwiki-api branch with `git checkout --track origin/igemwiki-api` to get the build system. Master does not yet contain the build system.
 
 Type `gulp build --env dev` or `gulp dev build` to build a local copy that will be located under `wiki/build`. The files produced by this build can be opened in a normal file explorer by any modern web browser.
 
@@ -85,7 +83,7 @@ Much of this reasoning was developed from articles published by previous iGEM te
 
 This is a high-level overview of what the build system is doing. To get an idea of what the code is actually doing, see the files mentioned at the top of each section. Each of these files are heavily commented to making understanding what they do easier.
 
-Note that understanding the build system minimally requires a basic, conceptual understanding of the following:
+Understanding the build system minimally requires a basic, conceptual understanding of the following:
 
 - [Hypertext Markup Langauge (HTML)](https://www.w3schools.com/Html/)
 - [Cascading Style Sheets (CSS)](https://www.w3schools.com/Css/)
@@ -101,7 +99,7 @@ Note that understanding the build system minimally requires a basic, conceptual 
   - [npm](https://www.npmjs.com/)
   - [bower](https://bower.io/)
 
-Linked above are reccommended readings for understanding these things. Note that you do not need to follow all of these tutorials ot the end or read every article in detail; they are simply to give a general understanding of what each of these core components are and what they do.
+Linked above are reccommended readings for understanding these things. You do not need to follow all of these tutorials ot the end or read every article in detail; they are simply to give a general understanding of what each of these core components are and what they do.
 
 #### Development Build
 
@@ -116,17 +114,17 @@ The following tasks are defined in the file:
 - index: Preps and stages the HTML for the special file, index.html, which is our homepage
 - pages: Preps and stages HTML for subpages of our website, I.E. [Project Description](http://2018.igem.org/Team:Virginia/Description) or [Team](http://2018.igem.org/Team:Virginia/Team).
 - templates: Preps and stages HTML for templates such as the header and footer seen on every page
-- css: Minifies (reduces the size of) our home-made stylesheets.
-- js: Minifies JS and stages it.
-- bower:js: Minifies JS for dependencies like bootstrap and jquery and stages it.
-- bower:css: Minifies CSS, same as above.
+- css: Minifies (reduces the size of) our home-made stylesheets and stages them.
+- js: Minifies all JS files and stages them.
+- bower:js: Minifies JS for dependencies like bootstrap and jquery and stages them.
+- bower:css: Minifies CSS and stages, same as above.
 - images: Minifies images and stages them.
-- push: Special task, covered under Live Build.
-- default: The task that's run when one simply types `gulp` into the console with no arguments. Shorthand for dev build. Runs every single task except for push.
+- pushimages and pushcontent: Special tasks, covered under Live Build.
+- default: The task that's run when one simply types `gulp` into the console with no arguments. Shorthand for dev build. Runs every single task except for pushes.
 - dev: Same as above.
 - live: Covered under Live Build.
 
-Note that every task begins with some kind of `gulp.src()` function and ends with some kind of `.pipe(gulp.dest(<some destination>))` function. These sources and destinations can be seen at the top of the file, and map working files to build files. Whenever `gulp` is run with a certain task, it takes in these source files, transforms them in some way using pipes and various gulp plugins (these are usually prefixed with `gulp-` under dependencies), and then spits them out under our build directory (what I call staging). The only exceptions are `pushimages` and `pushcontent`, which are special and does not transform files.
+Every task begins with some kind of `gulp.src()` function and ends with some kind of `.pipe(gulp.dest(<some destination>))` function. These sources and destinations can be seen at the top of the file, and map working files to build files. Whenever `gulp` is run with a certain task, it takes in these source files, transforms them in some way using pipes and various gulp plugins (these are usually prefixed with `gulp-` under dependencies), and then spits them out under our build directory (what I call staging). The only exceptions are `pushimages` and `pushcontent`, which are special and does not transform files.
 
 Once these files are staged in the build directory, you can enter the build directory and open the website with your favorite browser, hosted entirely locally on your machine. This enables work to be done on the website even offline, and allows one to iterate on the site without pushing to the iGEM wiki every single time. This makes iterations faster, and (not that this matters to us) saves iGEM HQ some bandwidth.
 
@@ -141,24 +139,27 @@ The live build essentially performs the dev build with the exception that all HT
 
 The exact sequence of events are as follows:
 
-1. In order to correctly substitute image URLs, `gulp live publish` first pushes images (`pushimages`) to the iGEM Wiki and then retrieves the generated image URLs from the wiki. These URLs are saved temporarily to `imagemap.json` under `/wiki/build`.
-2. A `build` is then performed, identical to `gulp dev build` save for the fact
+1. pushimages: In order to correctly substitute image URLs, `gulp live publish` first pushes images to the iGEM Wiki and then retrieves the generated image URLs from the wiki. These URLs are saved temporarily to `imagemap.json` under `/wiki/build`.
+2. build: A `build` is then performed, identical to `gulp dev build` save for the fact that all URLs in relevant HTML tags are replaced with their absolute equivalents.
+3. pushcontent: Pushes remaining (non-image) content to the wiki.
 
 ## 4 Todo
 
 ### High Priority
 
-- [Completed] Create a gulp task that parses HTML files and replaces relative (development) links with absolute (live) links on the wiki.
+- Ensure FontAwesome has doesn't need any overrides in bower
+- [Dylan] Create a gulp task that parses HTML files and replaces relative (development) links with absolute (live) links on the wiki. [done]
   - Currently user has to enter their username and password twice to do a full push
+  - Update inline documentation
 - Implement simple [JQuery HTML Templates](https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac) for Footers and Headers.
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
   - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
-- [In-Progress, Grace] Update templating system to accept Markdown files:
+- [Grace] Update templating system to accept Markdown files:
   - Scan directory for .md files for Index and Pages [done]
   - Compile markdown to HTML using [marked](https://www.npmjs.com/package/marked) [done]
   - Insert compiled HTML into a template that includes necessary CSS and JS in the head, sandwiched between header and footer template
   - Output compiled HTML + Template as HTML files for dev build/live build
-- Make it so upload.js can upoad specific items instead of having to upload everything. Probably gonna do this with gulp.
+- Make it so upload.js can upload specific items instead of having to upload everything. Probably gonna do this with gulp.
 - Consolidate team name and year into .json file. Have relative2absolute.js pull from this file and generate URLs. Also have upload.js pull from this file for team name and year.
   - A potential alternative is to have relative2absolute.js pull from igemwiki-api if it exposes the URLs it uses.
   - This is important because it is not immediately obvious to future teams that they need to change these variables in both upload.js and realtive2absolute.js
@@ -177,12 +178,15 @@ The exact sequence of events are as follows:
 - Switch to compiled SASS/LESS from CSS to make stylesheets cleaner
 - Modify gulpfile.js so that running `gulp live build` correctly throws errors when images have not been first pushed to the wiki.
 - Simplify `dev` and `live` gulpfile tasks so they're less interconnected.
+- Refactor relative2absolute.js so that it recognizes absolute URLs and does not mangle them.
 
 ### Low Priority
 
-- Eliminate `run-sequence` dependency by using gulp's in-built sequencing syntax, as detailed in the [Gulp Documentation on Async Tasks](https://github.com/gulpjs/gulp/blob/v3.9.1/docs/API.md#async-task-support)
 - Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies.
 - Pick a JavaScript styleguide, fix the awful inconsistencies in style to adhere to it.
+- [Warning, read fully] Eliminate `run-sequence` dependency by using gulp's in-built sequencing syntax, as detailed in the [Gulp Documentation on Async Tasks](https://github.com/gulpjs/gulp/blob/v3.9.1/docs/API.md#async-task-support)
+  - This is no longer relevant because this format for running sequential tasks was deprecated in Gulp 4. Gulp 4 has its own native support for task sequencing, but we are not upgrading to Gulp 4 yet as I do not want to break the build tool.
+  - As a result, `run-sequence` stays for now. See [this guide](https://www.joezimjs.com/javascript/complete-guide-upgrading-gulp-4/) if you would like to begin upgrading our tool to Gulp 4.
 
 ## 5 Roadmap
 
@@ -214,40 +218,47 @@ This is an interactive presentation that gives the reader an intuition for what 
 
 ## 7 Build Dependencies
 
+Unless explicitly noted, these are Node.js dependencies and can be installed with `npm`, Node.js's package manager.
+
 Note: Build system is currently under active development and so build dependencies are being added and removed on a daily basis. Watch this list for changes.
 
-- Node.js: Javascript interpreter
-  - Our entire build runs on this. Also comes with npm, which is used to install all these packages.
+- bluebird: Promise library.
+  - Enables one to make synchronous functions, esp. IO asynchronous and non-blocking.
 - bower: Package manager for Live Dependencies
   - Used to manage JQuery, Bootstrap 3.3.7, and future modules
-- gulp: Task automation and parallelization module
-- gulp-csso: CSS Minifier
-  - Small CSS loads faster
-- gulp-concat: Concatenates files, used to pack all JS into one file
-- gulp-sourcemaps: Adds sourcemaps to minified Javascript, enabling debugging
 - fancy-log: Adds timestamps to error logs
-- gulp-uglify: JavaScript Minifier
-  - Small JavaScript loads faster
-- main-bower-files: Allows access to files stored by bower
-  - Used to package Bootstrap and JQuery for upload
-- gulp-imagemin: Image minfier; uses lossless compression to allow images to load faster
-  - Small images load faster
-- run-sequence: gulp normally parallelizes all tasks. This module supports sequencing.
-  - Used to ensure build completes before upload for live builds.
-- igemwiki-api: Automates uploads of all files to iGEM Wiki
-  - The legwork for uploading files from our build to the wiki
 - globby: JavaScript implementation of Glob pattern recognition
   - Used for picking out which files to upload
+- gulp: Task automation and parallelization module
+- gulp-cheerio: Wrapper for [cheerio](https://github.com/cheeriojs/cheerio), an HTML parsing library
+- gulp-concat: Concatenates files, used to pack all JS into one file
+- gulp-csso: CSS Minifier
+  - Small CSS loads faster
+- gulp-declare: [Pending removal]
+- gulp-environments: Used to handle different build environments, namely `dev` and `live`
+- gulp-if: Used for modifying conditions in tasks, supports `dev` and `live` builds
+- gulp-imagemin: Image minfier; uses lossless compression to allow images to load faster
+- gulp-markdown: Used to compile `.md` files to `.html`. Used for all standard pages.
+  - Small images load faster
+- gulp-sourcemaps: Adds sourcemaps to minified Javascript, enabling debugging
+- gulp-uglify: JavaScript Minifier
+  - Small JavaScript loads faster
+- gulp-wrap: [Pending removal]
+- igemwiki-api: Automates uploads of all files to iGEM Wiki
+  - The legwork for uploading files from our build to the wiki
 - lodash: Various JS utilities
-- bluebird: Promise library.
-  - Enables one to make functions, esp. IO asynchronous and non-blocking.
+- main-bower-files: Allows access to files stored by bower
+  - Used to package Bootstrap and JQuery for upload
+- run-sequence: gulp normally parallelizes all tasks. This module supports sequencing.
+  - Used to ensure build completes before upload for live builds.
 
 ## 8 Live Dependencies
 
-Note that we have few live dependencies. It doesn't matter how many build deps we have because we don't really care if a build takes 5 seconds or 2 seconds. On the other hand, the more, larger live dependencies we have, the more code has to be sent to our users. As a result, each live dependency increases load times, which can make a website look sluggish if they're longer than a second on a fast network. So we keep live depenencies as small as possible.
+Notice that we have few live dependencies. It doesn't matter how many build deps we have because we don't really care if a build takes 5 seconds or 2 seconds. On the other hand, the more, larger live dependencies we have, the more code has to be sent to our users. As a result, each live dependency increases load times, which can make a website look sluggish if they're longer than a second on a fast network. So we keep live depenencies as small as possible.
 
 - JQuery: Makes interacting with HTML easy.
 - Bootstrap 3.3.7: Layout package, makes responsive, attractive design easy.
+- FontAwesome 5.0.13: _Easy_ fonts and icons.
 
 ## 9 Attributions and Works Cited
 
