@@ -156,6 +156,10 @@ See todo list for up-to-date description of future changes to be made to live bu
 - Consolidate team name and year into .json file. Have relative2absolute.js pull from this file and generate URLs. Also have upload.js pull from this file for team name and year.
   - A potential alternative is to have relative2absolute.js pull from igemwiki-api if it exposes the URLs it uses.
   - This is important because it is not immediately obvious to future teams that they need to change these variables in both upload.js and realtive2absolute.js
+- Also consolidate sources and destinations for both build and upload into a .json file:
+  - Structure: Build Src -> Build Destination == Upload Source -> Upload Destination
+  - Build srcs, build destinations, upload srcs and upload destinations are currently all separately defined in-script, should be defined in .json files.
+  - Build destinations and upload sources should be made identical, they are currently the same.
 
 ### Medium Priority
 
