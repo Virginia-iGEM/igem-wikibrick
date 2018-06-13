@@ -8,14 +8,24 @@ var uglify = require('gulp-uglify');
 var mainBowerFiles = require('main-bower-files');
 var imagemin = require('gulp-imagemin');
 var runsequence = require('run-sequence');
+var gulpif = require('gulp-if');
+var cheerio = require('gulp-cheerio');
 var markdown = require('gulp-markdown');
 var upload = require('./upload.js');
+
+var livebuild = false;
 
 // Function shared by all HTML processing tasks for development builds. 
 // Currently just stages HTML files to build folder.
 function prepHTML(src, dest) {
     return function() {
         gulp.src(src)
+        .pipe(gulpif(livebuild, cheerio(function ($, file) {
+            $('img').each(function () {
+                var img = $(this);
+                img.attr('src') = '';
+            });
+        })))
         .pipe(gulp.dest(dest))
     }
 }
