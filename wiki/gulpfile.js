@@ -11,18 +11,23 @@ var runsequence = require('run-sequence');
 var gulpif = require('gulp-if');
 var cheerio = require('gulp-cheerio');
 var markdown = require('gulp-markdown');
+var environments = require('gulp-environments');
 
 var relative2absolute = require('./relative2absolute.js');
 var upload = require('./upload.js');
 
-var livebuild = true;
+var dev = environments.make('dev');
+var live = environments.make('live');
+
+gulp.task('dev', dev.task);
+gulp.task('live', live.task);
 
 // Function shared by all HTML processing tasks for development builds. 
 // Currently just stages HTML files to build folder.
 function prepHTML(src, dest) {
     return function() {
         gulp.src(src)
-        .pipe(gulpif(livebuild, cheerio({
+        .pipe(gulpif(live(), cheerio({
             run: relative2absolute,
             parserOptions: {
                 decodeEntities: false
@@ -121,13 +126,13 @@ gulp.task('pushimages', function(done) {
 });
 
 // Default task runs both dev and live build
-gulp.task('dev', [ 'index', 'pages', 'templates', 'css', 'js', 'images', 'bower:js', 'bower:css' ]);
+gulp.task('build', [ 'index', 'pages', 'templates', 'css', 'js', 'images', 'bower:js', 'bower:css' ]);
 
 // Dev task is currently analagous to default, will change in future
-gulp.task('default', ['dev']);
+gulp.task('default', ['build']);
 
 // Live build runs dev and then uploads, will change in future
-gulp.task('live', function(done) {
+gulp.task('publish', function(done) {
     runsequence('pushimages', 'dev', 'pushcontent', done);
 });
 

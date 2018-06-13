@@ -30,17 +30,21 @@ In order to build both, you will need to first install [Node.js](https://nodejs.
 
 **Note:** You must currently checkout the igemwiki-api branch with `git checkout --track origin/igemwiki-api` to get the build system. Master does not yet contain the build system.
 
-Type `gulp dev` to build a local copy that will be located under `wiki/build`. The files produced by this build can be opened in a normal file explorer by any modern web browser.
+Type `gulp build --env dev` or `gulp dev build` to build a local copy that will be located under `wiki/build`. The files produced by this build can be opened in a normal file explorer by any modern web browser.
 
-Type `gulp live` to build a copy with absolute URLs that will then be pushed to the iGEM wiki. In order to do this, you will need to enter your wiki username and password, so have them ready. Note that this copy will *not* run offline correctly, use `gulp dev` files instead.
+Type `gulp publish --env live` or `gulp live publish` to build a copy with absolute URLs that will then be pushed to the iGEM wiki. In order to do this, you will need to enter your wiki username and password, so have them ready. Note that this copy will *not* run offline correctly, use `gulp dev build` files instead.
 
-**Note:** `gulp live` currently is not fully functional. All expected functions work, however, URLs in HTML files are not changed from relative to absolute, and so all images, JS and CSS, including Bootstrap and JQuery will not function.
+One can type `gulp live build` to check HTML for correct parsing. This will not work if new images have been added but not pushed to the wiki; this will be fixed in the future, adding errors that are correctly thrown instead of simply failing.
+
+Note 1: One can call `gulp dev publish`, nothing is preventing it. However, it will just upload HTML files with relative paths to the wiki, which will be very ugly and likely nonfunctional.
+
+Note 2: Reversing the order of tasks, I.E. `gulp publish dev` or `gulp publish live` will result in incorrect behaviour. Order matters here.
 
 ### Justification
 
 Under the hood, this build tool is fairly complicated; it may not be immediately obvious why we have this complex build system with so many different external dependencies, especially when the Mediawiki framework the iGEM wiki is built on is designed to be easily edited by anyone.
 
-Well, first of all, the guts are complicated, but one doesn't need intimate knowledge of the guts to get it to work. Install Node.js, install build and live dependencies, run `gulp dev` to test and `gulp live` and enter your credentials to publish. Simple, easy, no frills. The system took a few man hours to set up, and will save many more in the future.
+Well, first of all, the guts are complicated, but one doesn't need intimate knowledge of the guts to get it to work. Install Node.js, install build and live dependencies, run `gulp dev build` to test and `gulp live publish` and enter your credentials to publish. Simple, easy, no frills. The system took a few man hours to set up, and will save many more in the future.
 
 Second of all, even if one were to work in the confines of a Mediawiki template, uploading images and making changes to many pages is still a hassle. One has to upload each image one-by-one. If some keyword changes, or some image starts going by a different name, one must go through every single page by hand and make that change to the raw HTML. With this tool, and powerful modern text editors, such tasks are either completely automated or one search-and-replace away.
 
@@ -122,28 +126,29 @@ The following tasks are defined in the file:
 - dev: Same as above.
 - live: Covered under Live Build.
 
-Note that every task begins with some kind of `gulp.src()` function and ends with some kind of `.pipe(gulp.dest(<some destination>))` function. These sources and destinations can be seen at the top of the file, and map working files to build files. Whenever `gulp` is run with a certain task, it takes in these source files, transforms them in some way using pipes and various gulp plugins (these are usually prefixed with `gulp-` under dependencies), and then spits them out under our build directory (what I call staging). The only exception is `push`, which is special and does not transform files.
+Note that every task begins with some kind of `gulp.src()` function and ends with some kind of `.pipe(gulp.dest(<some destination>))` function. These sources and destinations can be seen at the top of the file, and map working files to build files. Whenever `gulp` is run with a certain task, it takes in these source files, transforms them in some way using pipes and various gulp plugins (these are usually prefixed with `gulp-` under dependencies), and then spits them out under our build directory (what I call staging). The only exceptions are `pushimages` and `pushcontent`, which are special and does not transform files.
 
 Once these files are staged in the build directory, you can enter the build directory and open the website with your favorite browser, hosted entirely locally on your machine. This enables work to be done on the website even offline, and allows one to iterate on the site without pushing to the iGEM wiki every single time. This makes iterations faster, and (not that this matters to us) saves iGEM HQ some bandwidth.
 
-#### Live Build
+
+#### Live Build & Publish
 
 [/wiki/gulpfile.js](https://github.com/Mantissa-23/VGEM-2018/blob/igemwiki-api/wiki/gulpfile.js)
 
 [/wiki/upload.js](https://github.com/Mantissa-23/VGEM-2018/blob/igemwiki-api/wiki/upload.js)
 
-**Note:** As mentioned above, Live Build is not fully functional. This description is for a fully functional live build. The transform mentioned below that changes relative to absolute URLs is not yet implemented.
-
 The live build essentially performs the dev build with the exception that all HTML files are transformed by changing their relative URLs to absolute URLs. With a normal webserver, this would not be necessary, however because iGEM uses mediawiki to enable teams of all technological backgrounds to create their own sites. The issue with this is that it works differently than all other web servers and so we have to tip-toe around it.
 
-See todo list for up-to-date description of future changes to be made to live build.
+The exact sequence of events are as follows:
+
+1. In order to correctly substitute image URLs, `gulp live publish` first pushes images (`pushimages`) to the iGEM Wiki and then retrieves the generated image URLs from the wiki. These URLs are saved temporarily to `imagemap.json` under `/wiki/build`.
+2. A `build` is then performed, identical to `gulp dev build` save for the fact
 
 ## 4 Todo
 
 ### High Priority
 
-- [Tentatively Completed, Dylan] Create a gulp task that parses HTML files and replaces relative (development) links with absolute (live) links on the wiki.
-  - [Cheerio](https://github.com/cheeriojs/cheerio) is a really good candidate for an HTML parser, it's popular and mature.
+- [Completed] Create a gulp task that parses HTML files and replaces relative (development) links with absolute (live) links on the wiki.
   - Currently user has to enter their username and password twice to do a full push
 - Implement simple [JQuery HTML Templates](https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac) for Footers and Headers.
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
@@ -163,13 +168,15 @@ See todo list for up-to-date description of future changes to be made to live bu
   - Build destinations and upload sources should be made identical, they are currently the same.
 - Eliminate code duplication in upload.js
 - Remove synchronous file read in relative2absolute.js
-- Cache username and password so that user does not have to enter them twice.
+- Cache username and password so that user does not have to enter them twice for publish.
 
 ### Medium Priority
 
 - Move source-destination mappings located in upload.js into their own separate json file to compartmentalize out data
   - Same for gulpfile source-destination mappings.
 - Switch to compiled SASS/LESS from CSS to make stylesheets cleaner
+- Modify gulpfile.js so that running `gulp live build` correctly throws errors when images have not been first pushed to the wiki.
+- Simplify `dev` and `live` gulpfile tasks so they're less interconnected.
 
 ### Low Priority
 
