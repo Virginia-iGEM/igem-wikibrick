@@ -1,6 +1,7 @@
 # Wiki
 
 ## 1 Description
+
 Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia.
 
 ## 2 Table of Contents
@@ -141,16 +142,19 @@ See todo list for up-to-date description of future changes to be made to live bu
 
 ### High Priority
 
-- Create a gulp task that parses HTML files and replaces relative (development) links with absolute (live) links on the wiki.
+- [In-Progress, Dylan] Create a gulp task that parses HTML files and replaces relative (development) links with absolute (live) links on the wiki.
   - [Cheerio](https://github.com/cheeriojs/cheerio) is a really good candidate for an HTML parser, it's popular and mature.
 - Implement simple [JQuery HTML Templates](https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac) for Footers and Headers.
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
   - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
-- Update templating system to accept Markdown files:
+- [In-Progress, Grace] Update templating system to accept Markdown files:
   - Scan directory for .md files for Index and Pages
   - Compile markdown to HTML using [marked](https://www.npmjs.com/package/marked)
   - Insert compiled HTML into a template that includes necessary CSS and JS in the head, sandwiched between header and footer template
   - Output compiled HTML + Template as HTML files for dev build/live build
+- Consolidate team name and year into .json file. Have relative2absolute.js pull from this file and generate URLs. Also have upload.js pull from this file for team name and year.
+  - A potential alternative is to have relative2absolute.js pull from igemwiki-api if it exposes the URLs it uses.
+  - This is important because it is not immediately obvious to future teams that they need to change these variables in both upload.js and realtive2absolute.js
 
 ### Medium Priority
 
