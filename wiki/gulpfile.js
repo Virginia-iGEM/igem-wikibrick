@@ -10,6 +10,7 @@ var imagemin = require('gulp-imagemin');
 var runsequence = require('run-sequence');
 var gulpif = require('gulp-if');
 var cheerio = require('gulp-cheerio');
+var markdown = require('gulp-markdown');
 
 var upload = require('./upload.js');
 
@@ -118,4 +119,12 @@ gulp.task('dev', ['default']);
 // Live build runs dev and then uploads, will change in future
 gulp.task('live', function(done) {
     runsequence('default', 'push');
+});
+
+//task that uses markdown to convert text blocks from Markdown to HTML easily
+//FIX LATER
+gulp.task('markdown', function() {
+	gulp.src('test.md') //what files to use for the task
+	.pipe(markdown())
+	.pipe(gulp.dest('dist')) //where to output the files once the task is complete
 });
