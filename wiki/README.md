@@ -161,6 +161,8 @@ See todo list for up-to-date description of future changes to be made to live bu
   - Build srcs, build destinations, upload srcs and upload destinations are currently all separately defined in-script, should be defined in .json files.
   - Build destinations and upload sources should be made identical, they are currently the same.
 - Eliminate code duplication in upload.js
+- Remove synchronous file read in relative2absolute.js
+- Cache username and password so that user does not have to enter them twice.
 
 ### Medium Priority
 
