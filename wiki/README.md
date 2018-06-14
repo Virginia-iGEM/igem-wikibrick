@@ -128,7 +128,6 @@ Every task begins with some kind of `gulp.src()` function and ends with some kin
 
 Once these files are staged in the build directory, you can enter the build directory and open the website with your favorite browser, hosted entirely locally on your machine. This enables work to be done on the website even offline, and allows one to iterate on the site without pushing to the iGEM wiki every single time. This makes iterations faster, and (not that this matters to us) saves iGEM HQ some bandwidth.
 
-
 #### Live Build & Publish
 
 [/wiki/gulpfile.js](https://github.com/Mantissa-23/VGEM-2018/blob/igemwiki-api/wiki/gulpfile.js)
@@ -169,7 +168,8 @@ The exact sequence of events are as follows:
   - Build destinations and upload sources should be made identical, they are currently the same.
 - Eliminate code duplication in upload.js
 - Remove synchronous file read in relative2absolute.js
-- Cache username and password so that user does not have to enter them twice for publish.
+- Cache username and password when gulpfile runs so that user does not have to enter them twice for publish.
+- Decide whether or not to switch to [Bourbon Neat](https://goamplifi.com/5-reasons-we-chose-bourbonneat-over-foundation-or-bootstrap/) instead of Bootstrap.
 
 ### Medium Priority
 
@@ -179,6 +179,7 @@ The exact sequence of events are as follows:
 - Modify gulpfile.js so that running `gulp live build` correctly throws errors when images have not been first pushed to the wiki.
 - Simplify `dev` and `live` gulpfile tasks so they're less interconnected.
 - Refactor relative2absolute.js so that it recognizes absolute URLs and does not mangle them.
+- Fix MathJax with [#10 from this article](https://2016.igem.org/Team:Peshawar/Wiki)
 
 ### Low Priority
 
@@ -187,6 +188,7 @@ The exact sequence of events are as follows:
 - [Warning, read fully] Eliminate `run-sequence` dependency by using gulp's in-built sequencing syntax, as detailed in the [Gulp Documentation on Async Tasks](https://github.com/gulpjs/gulp/blob/v3.9.1/docs/API.md#async-task-support)
   - This is no longer relevant because this format for running sequential tasks was deprecated in Gulp 4. Gulp 4 has its own native support for task sequencing, but we are not upgrading to Gulp 4 yet as I do not want to break the build tool.
   - As a result, `run-sequence` stays for now. See [this guide](https://www.joezimjs.com/javascript/complete-guide-upgrading-gulp-4/) if you would like to begin upgrading our tool to Gulp 4.
+  - Also [this piece of documentation](https://fettblog.eu/gulp-4-parallel-and-series/)
 
 ## 5 Roadmap
 
