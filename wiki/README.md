@@ -30,7 +30,8 @@ In order to build both, you will need to first install [Node.js](https://nodejs.
 
 Type `gulp build --env dev` or `gulp dev build` to build a local copy that will be located under `wiki/build`. The files produced by this build can be opened in a normal file explorer by any modern web browser.
 
-Type `gulp publish --env live` or `gulp live publish` to build a copy with absolute URLs that will then be pushed to the iGEM wiki. In order to do this, you will need to enter your wiki username and password, so have them ready. Note that this copy will *not* run offline correctly, use `gulp dev build` files instead.
+Type `gulp publish --env live` or `gulp live publish` to build a copy with absolute URLs that will then be pushed to the iGEM wiki. In order to do this, you will need to enter your wiki username and password, so have them ready. Note:w
+that this copy will *not* run offline correctly, use `gulp dev build` files instead.
 
 One can type `gulp live build` to check HTML for correct parsing. This will not work if new images have been added but not pushed to the wiki; this will be fixed in the future, adding errors that are correctly thrown instead of simply failing.
 
@@ -166,8 +167,9 @@ The exact sequence of events are as follows:
   - Structure: Build Src -> Build Destination == Upload Source -> Upload Destination
   - Build srcs, build destinations, upload srcs and upload destinations are currently all separately defined in-script, should be defined in .json files.
   - Build destinations and upload sources should be made identical, they are currently the same.
-- Eliminate code duplication in upload.js
-- Remove synchronous file read in relative2absolute.js
+  - Should probably be labeled as projectdir -> staging/builddir -> pushtarget, or something similar
+- Eliminate code duplication in upload.js between pushimages and pushcontent
+- Eliminate synchronous file read in relative2absolute.js
 - Cache username and password when gulpfile runs so that user does not have to enter them twice for publish.
 - Decide whether or not to switch to [Bourbon Neat](https://goamplifi.com/5-reasons-we-chose-bourbonneat-over-foundation-or-bootstrap/) instead of Bootstrap.
 
@@ -179,7 +181,9 @@ The exact sequence of events are as follows:
 - Modify gulpfile.js so that running `gulp live build` correctly throws errors when images have not been first pushed to the wiki.
 - Simplify `dev` and `live` gulpfile tasks so they're less interconnected.
 - Refactor relative2absolute.js so that it recognizes absolute URLs and does not mangle them.
-- Fix MathJax with [#10 from this article](https://2016.igem.org/Team:Peshawar/Wiki)
+- Fix MathJax with [#10 - Misc from this article](https://2016.igem.org/Team:Peshawar/Wiki)
+- Standardize variable and function naming schemes.
+- Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed. 
 
 ### Low Priority
 

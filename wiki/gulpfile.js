@@ -139,8 +139,9 @@ gulp.task('publish', function(done) {
 });
 
 gulp.task('clean', function(done) {
-    del('./build', done);
+    delete('./build', done);
 });
+
 //task that uses markdown to convert text blocks from Markdown to HTML easily
 gulp.task('markdown', function() {
 	gulp.src(srcs.markdownpages) //what files to use for the task, pulled from the srcs array
