@@ -8,7 +8,7 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 1. **Description**
 2. **Table of Contents**
-3. **Building**: Section for our as-of-yet-unnamed build tool, used to automate preprocessing of files and pushing them to the iGEM wiki.
+3. **Build-Tool**: Section for `wiki-competent`, used to automate preprocessing of files and pushing them to the iGEM wiki.
 4. **Todo**: Fine-grained todo list. _Look here if you need something to do._
 5. **Roadmap:** Long-term task lisk. Broadly outlines what is needed to bring the wiki to completion.
 6. **Interactive**: Section describing the interactive component that will be the centerpiece of our home page.
@@ -16,7 +16,19 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 8. **Live Dependencies**: Bower packages that must be uploaded to the iGEM wiki for our content to function properly.
 9. **Attributions and Works Cited**
 
-## 3 Building
+## 3 Build Tool: `wiki-competent`
+
+Note: Name is tentative and should probably get a vote. You should probably also make this paragraph less passive-aggressive.
+
+`wiki-competent` is a Node.js-based tool built by Virginia's 2018 iGEM team to fully automate the process of standard web development on the iGEM wiki. We've built this tool because we believe Mediawiki is not up to the standards that a website regarding complex synthetic biology tools should be at. We wanted our website to be easy to use, fluid, fast and convey our ideas and findings as quickly as possible to any reader, from layman to post-doc. We also wanted to build something that would allow us to put time wasted clicking the `upload` button on the iGEM wiki towards something more useful.
+
+Our tool does a few important things to standardize editing the wiki through a standard web-development process:
+
+- **Single-command build tool.** Once installed and set up, you can automatically inject your own pure HTML+CSS+JS website onto your wiki page, you type `gulp live publish`, enter your iGEM credentials, grab some tea and watch `wiki-competent` do the hard work for you. No need to upload images to the wiki by hand, no need to copy-and-paste HTML into a wiki's _Edit Page_ tool. Use your favorite text editor, your favorite CSS templates, and Node.JS packages of your choice without worrying.
+- **URL Substitution.** "But wait," you say, "I want to iterate on my machine. Uploading takes time, and I make a lot of mistakes." Fear not, young web developer, `wiki-competent` has your back. Any scripts, stylesheets, links or images you add to your HTML can simply use a relative path to a local file on your machine. Type `gulp dev build`, and you have a fully functional, completely offline wiki you can work on in the comfort of your own operating system. Then, when you `gulp live publish`, all these relative paths are automatically converted to URLs compatible with your team's wiki page.
+- **Flexible Build and Package support.** Becuase we're using `gulp`, you can add thousands of gulp plugins and Node.js modules to your wiki to do all the things you ever wished you could. Want to add a 3d shoot-em-up arcade game where you blast bacteriophages to your homepage? `bower install impactjs`. Want to use more advanced templating to reuse as much code as you can? `npm install -D gulp-handlebars`. Want to use SASS instead of CSS? `npm install -D gulp-sass`. Your favorite plugins and packages are a few lines of configuration away.
+- **Markdown Support.** "Hold up, hold up, I'm the only programmer on my team. I don't want to write the small novel that is an iGEM Team Wiki page." Luckily for you, `wiki-competent` is non-programmer friendly. Your teammates can write their lab notes, lab reports and modeling writeups in the easy-to-understand Markdown styling language. The tool can convert these files into valid, crisp HTML, complete with your navigation menu, footer, interactive JavaScript elements and any other templated HTML you'd like to add.
+- **Logging (pending).** You wake up one morning, coffee in hand, and like any good iGEMmer, you open your wiki. Some incompetent team member has defaced your home page! The spans are all the wrong size, none of the scripts are working, the background is *chartreuse*. Who did this? Well, you know exactly who, because a `log.js` file was pushed to your wiki page containing the perpetrator's account name, the Git commit hash they pushed from, and when they pushed. The disadvantage is of course your team captain will always know when you messed up.
 
 ### Use
 
