@@ -162,10 +162,6 @@ The exact sequence of events are as follows:
 ### High Priority
 
 - Ensure FontAwesome has doesn't need any overrides in bower
-- [Dylan] Create a gulp task that parses HTML files and replaces relative (development) links with absolute (live) links on the wiki. [done]
-  - Currently user has to enter their username and password twice to do a full push
-  - Update inline documentation
-- Implement simple [JQuery HTML Templates](https://medium.com/@AmyScript/how-to-reduce-reuse-and-recycle-your-code-389e6742e4ac) for Footers and Headers.
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
   - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
 - [Grace] Update templating system to accept Markdown files:
@@ -184,7 +180,6 @@ The exact sequence of events are as follows:
   - Should probably be labeled as projectdir -> staging/builddir -> pushtarget, or something similar
 - Eliminate code duplication in upload.js between pushimages and pushcontent
 - Eliminate synchronous file read in relative2absolute.js
-- Cache username and password when gulpfile runs so that user does not have to enter them twice for publish.
 - Decide whether or not to switch to [Bourbon Neat](https://goamplifi.com/5-reasons-we-chose-bourbonneat-over-foundation-or-bootstrap/) instead of Bootstrap.
 
 ### Medium Priority
