@@ -117,11 +117,6 @@ gulp.task('images', function() {
     .pipe(gulp.dest(dests.images))
 });
 
-// Login to iGEM wiki, store credentials temporarily
-gulp.task('login', function(done) {
-    upload.login().then(done);
-});
-
 // Special task that calls upload.js, which pushes all files with a compatible mapping
 // staged in the build folder to the iGEM Wiki. Not entirely automatic; requires credentials.
 gulp.task('pushcontent', function(done){
@@ -140,7 +135,7 @@ gulp.task('default', ['build']);
 
 // Live build runs dev and then uploads, will change in future
 gulp.task('publish', function(done) {
-    runsequence('login', 'pushimages', 'dev', 'pushcontent', done);
+    runsequence('pushimages', 'dev', 'pushcontent', done);
 });
 
 gulp.task('clean', function(done) {

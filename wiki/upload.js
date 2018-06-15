@@ -14,6 +14,9 @@ const imagemapfilename = './build/imagemap.json';
 var loggedin = false;
 var loginjar;
 
+// Split off login into a separate function so that the user does not have to login more than once
+// If we need to grab credentials, ask for them in console. Otherwise just continue on.
+// Call it a lazy login.
 login = function() {
     return new Promise((resolve, reject) => {
         if (!loggedin) {
@@ -30,6 +33,7 @@ login = function() {
     })
 }
 
+// Upload everything but images
 uploadContent = function() {
     return new Promise((resolve, reject) => {
         // Mapping for index (home) page
@@ -113,6 +117,7 @@ uploadContent = function() {
     });
 }
 
+// Upload images
 uploadImages = function () {
     return new Promise((resolve, reject) => {
         // Mapping for images
