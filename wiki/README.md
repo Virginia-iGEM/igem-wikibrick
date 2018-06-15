@@ -100,7 +100,9 @@ Understanding the build system minimally requires a basic, conceptual understand
 
 - [Hypertext Markup Langauge (HTML)](https://www.w3schools.com/Html/)
 - [Cascading Style Sheets (CSS)](https://www.w3schools.com/Css/)
-- [JavaScript (JS)](https://www.w3schools.com/Css/)
+- [JavaScript (JS)](https://www.w3schools.com/Js/)
+  - Familiarity with the [asynchronous](https://www.pluralsight.com/guides/introduction-to-asynchronous-javascript) nature of Node.js and JS in general
+  - Familiarity with [callbacks](http://recurial.com/programming/understanding-callback-functions-in-javascript/) and [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 - What [an API](https://en.wikipedia.org/wiki/Application_programming_interface) is
   - [The igemwiki-api](https://github.com/igemuoftATG/igemwiki-api)
 - What a webserver is, particularly [Mediawiki](https://en.wikipedia.org/wiki/MediaWiki)
