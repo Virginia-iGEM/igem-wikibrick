@@ -72,13 +72,11 @@ body {
 }
 
 header {
-    border-radius: 0 !important;
-    border-bottom: solid $accent-color;
+    border-bottom: 3px solid $accent-color;
     padding: 25px;
-    margin: 0px;
     background-color: $dark-background-color;
     color: $text-light;
-    ul {
+    ul.nav {
         $grid: ( 
             columns: 9,
             gutter: 10px
@@ -88,34 +86,41 @@ header {
 
         li {
             @include grid-column(1, $grid);
+            list-style: none;
+            text-align: center;
+            border: 2px solid $dark-background-color;
+            border-radius: 4px;
+            &:hover {
+                background-color: $light-accent-color;
+                border-color: $light-accent-color;
+                color: $text-dark;
+            }
+            li.dropdown {
+            }
         }
     }
 }
-.body {
-    border-top: 3px solid $accent-color;
-    border-bottom: 3px solid $accent-color;
-    border-radius: 0 !important;
+.content {
     padding: 20px 20px;
     background-color: $light-background-color;
     color: $text-dark;
+    border-left: 10rem solid #ebebeb;
+    border-right: 10rem solid #ebebeb;
 }
 footer {
-    border-radius: 0 !important;
+    @include grid-container;
     background-color: $dark-background-color;
+    border-top: 3px solid $accent-color;
     color: $text-light;
     padding: 25px;
+
+    div {
+        @include grid-column(4);
+
+        text-align: center;
+    }
 }
 
 a:link {
     color: $link-color;
-}
-ul.nav {
-    li {
-        a {
-        color: $link-color;
-        }
-        &:hover {
-            border-bottom: 2px solid $light-accent-color;
-        }
-    }
 }
