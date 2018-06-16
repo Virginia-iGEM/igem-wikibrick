@@ -1,4 +1,5 @@
 // See https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki for descriptions of packages
+const Promise = require('bluebird');
 const gulp = require('gulp');
 const minifyCSS = require('gulp-csso');
 const concat = require('gulp-concat');
@@ -34,17 +35,19 @@ dests = targets.buildtarget;
 
 // Function shared by all HTML processing tasks for development builds. 
 // Currently just stages HTML files to build folder.
+
 function prepHTML(src, dest) {
     return function() {
         gulp.src(src)
+        .pipe(gulpif(src.extname === '.md', markdown)) // Run file through the markdown processor ony if it is a markdown file
         .pipe(gulpif(live(), cheerio({
             run: relative2absolute,
             parserOptions: {
                 decodeEntities: false
             }
-        })))
+        }))) // Think about using lazypipe here
         .pipe(gulp.dest(dest));
-    }
+    };
 };
 
 // TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
@@ -128,7 +131,7 @@ gulp.task('browsersync', function() {
     })
 });
 
-const buildtasks = [ 'index', 'pages', 'templates', 'sass', 'js', 'images', 'bower:js', 'bower:css' , 'markdown'];
+const buildtasks = [ 'index', 'pages', 'templates', 'sass', 'js', 'images', 'bower:js', 'bower:css'];
 
 // Default task runs both dev and live build
 gulp.task('build', function(done) {

@@ -30,8 +30,8 @@ const teaminfo = {
 
 // Listed file sources for all tasks. Note use of glob patterns and wildcarding.
 const buildsrc = {
-    index: './index.html',
-    pages: './pages/**/*.html',
+    index: './index.{html,md}',
+    pages: './pages/**/*.{html,md}',
     templates: './templates/**/*.html',
     css: './css/**/*.css',
     scss: './scss/**/*.scss',
