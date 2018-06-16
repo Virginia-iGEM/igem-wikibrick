@@ -39,7 +39,10 @@ dests = targets.buildtarget;
 function prepHTML(src, dest) {
     return function() {
         gulp.src(src)
-        .pipe(gulpif(src.extname === '.md', markdown)) // Run file through the markdown processor ony if it is a markdown file
+        /*.pipe(markdown()) // Run file through the markdown processor ony if it is a markdown file
+        .pipe(rename(function (path) {
+            path.extname = '.html';
+        }))*/
         .pipe(gulpif(live(), cheerio({
             run: relative2absolute,
             parserOptions: {
@@ -159,6 +162,7 @@ gulp.task('clean', function(done) {
 });
 
 //task that uses markdown to convert text blocks from Markdown to HTML easily
+/*
 gulp.task('markdown', function() {
 	gulp.src(srcs.markdownpages) //what files to use for the task, pulled from the srcs array
     .pipe(markdown()) //using the markdown program
@@ -167,3 +171,4 @@ gulp.task('markdown', function() {
     }))
 	.pipe(gulp.dest(dests.markdownpages)) //where to output the files once the task is complete, pulled from dests array
 });
+*/
