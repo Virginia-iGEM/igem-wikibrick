@@ -16,6 +16,8 @@ const sass = require('gulp-sass');
 const bourbon = require('node-bourbon').includePaths;
 const neat = require('node-neat').includePaths;
 const browsersync = require('browser-sync');
+const rename = require('gulp-rename');
+const del = require('del');
 
 const targets = require('./js/targets.js');
 const relative2absolute = require('./relative2absolute.js');
@@ -126,7 +128,7 @@ gulp.task('browsersync', function() {
     })
 });
 
-const buildtasks = [ 'index', 'pages', 'templates', 'sass', 'js', 'images', 'bower:js', 'bower:css' ];
+const buildtasks = [ 'index', 'pages', 'templates', 'sass', 'js', 'images', 'bower:js', 'bower:css' , 'markdown'];
 
 // Default task runs both dev and live build
 gulp.task('build', function(done) {
@@ -150,12 +152,15 @@ gulp.task('publish', function(done) {
 });
 
 gulp.task('clean', function(done) {
-    delete('./build', done);
+    del('./build', done);
 });
 
 //task that uses markdown to convert text blocks from Markdown to HTML easily
 gulp.task('markdown', function() {
 	gulp.src(srcs.markdownpages) //what files to use for the task, pulled from the srcs array
-	.pipe(markdown()) //using the markdown program
+    .pipe(markdown()) //using the markdown program
+    .pipe(rename(function (path) {
+        path.extname = '.html'
+    }))
 	.pipe(gulp.dest(dests.markdownpages)) //where to output the files once the task is complete, pulled from dests array
 });
