@@ -4,7 +4,9 @@
 const path = require('path')
 const fs = require('fs');
 
-const igemwiki = require('igemwiki-api')({ year: 2018, teamName: 'Virginia'})
+const targets = require('./js/targets.js');
+
+const igemwiki = require('igemwiki-api')(targets.teaminfo)
 const Promise = require('bluebird')
 const globby = require ('globby')
 const _ = require('lodash')
@@ -39,12 +41,12 @@ uploadContent = function() {
         // Mapping for index (home) page
         const index = {
             type: 'page',
-            fileName: path.resolve(__dirname, './build/index.html'),
+            fileName: path.resolve(__dirname, targets.uploadsrc.index),
             page: 'INDEX'
         }
 
         // Mapping for all standard HTML pages. Note use of Globby wildcards to find files.
-        const getPages = globby([ './build/pages/**/*.html' ]).then(function (pages) {
+        const getPages = globby([ targets.uploadsrc.pages ]).then(function (pages) {
             return pages.map(function (page) {
                 return {
                     type: 'page',
@@ -55,7 +57,7 @@ uploadContent = function() {
         })
 
         // Mapping for templates.
-        const getTemplates = globby([ './build/templates/**/*.html' ]).then(function (templates) {
+        const getTemplates = globby([ targets.uploadsrc.templates ]).then(function (templates) {
             return templates.map(function (template) {
                 return {
                     type: 'template',
@@ -66,7 +68,7 @@ uploadContent = function() {
         })
 
         // Mapping for CSS
-        const getCSS = globby([ './build/**/*.css']).then((stylesheets) => {
+        const getCSS = globby([ targets.uploadsrc.css ]).then((stylesheets) => {
             return stylesheets.map((stylesheet) => {
                 return {
                     type: 'stylesheet',
@@ -77,7 +79,7 @@ uploadContent = function() {
         })
 
         // Mapping for Javascript
-        const getJS = globby([ './build/**/*.js' ]).then(scripts => scripts.map(script => ({
+        const getJS = globby([ targets.uploadsrc.js ]).then(scripts => scripts.map(script => ({
             type: 'script',
             fileName: path.resolve(__dirname, script),
             page: path.basename(script).replace('.js', '')
@@ -104,7 +106,6 @@ uploadContent = function() {
                     // force: true // Uncomment to ignore errors
                 }))
 
-                var imagemap = new Object();
                 // Now begin uploading them
                 Promise.map(confs, conf => igemwiki.upload(conf), {concurrency: 1})
                     .then(() => {
@@ -121,7 +122,7 @@ uploadContent = function() {
 uploadImages = function () {
     return new Promise((resolve, reject) => {
         // Mapping for images
-        const getImages = globby([ './build/images/**/*.{png,jpg}' ]).then(images => images.map(image => ({
+        const getImages = globby([ targets.uploadsrc.images ]).then(images => images.map(image => ({
             type: 'image',
             fileName: path.resolve(__dirname, image),
             page: path.basename(image)

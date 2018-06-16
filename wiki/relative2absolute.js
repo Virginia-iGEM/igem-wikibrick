@@ -1,21 +1,14 @@
+const path = require('path');
+const url = require('url');
+const fs = require('fs');
+
+const targets = require('./js/targets.js');
+
+const urls = targets.urls;
+const suffixes = targets.suffixes;
+
 module.exports = function($, file) {
     return new Promise((resolve, reject) => {
-        const path = require('path');
-        const url = require('url');
-        const fs = require('fs');
-
-        const urls = {
-            standard: 'http://2018.igem.org/Team:Virginia/',
-            template: 'http://2018.igem.org/Template:Virginia/',
-            js: 'http://2018.igem.org/Template:Virginia/js/',
-            css: 'http://2018.igem.org/Template:Virginia/css/',
-            images: 'http://2018.igem.org/File:T--Virginia--2018_'
-        }
-
-        const suffixes = {
-            js: '?action=raw&ctype=text/javascript',
-            css: '?action=raw&ctype=text/css'
-        }
 
         // This part is synchronous and probably doesn't need to be
         var imagemap = JSON.parse(fs.readFileSync('./build/imagemap.json', 'utf8'));
