@@ -66,7 +66,7 @@ const uploadsrc = {
 }
 
 const urls = {
-    standard: 'http://{0}.igem.org/Team:{1}/.'.format([teaminfo.year, teaminfo.teamName]),
+    standard: 'http://{0}.igem.org/Team:{1}/'.format([teaminfo.year, teaminfo.teamName]),
     template: 'http://{0}.igem.org/Template:{1}/'.format([teaminfo.year, teaminfo.teamName]),
     js: 'http://{0}.igem.org/Template:{1}/js/'.format([teaminfo.year, teaminfo.teamName]),
     css: 'http://{0}.igem.org/Template:{1}/css/'.format([teaminfo.year, teaminfo.teamName]),
