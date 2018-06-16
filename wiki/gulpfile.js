@@ -12,6 +12,7 @@ var gulpif = require('gulp-if');
 var cheerio = require('gulp-cheerio');
 var markdown = require('gulp-markdown');
 var environments = require('gulp-environments');
+var sass = require('gulp-sass');
 
 var relative2absolute = require('./relative2absolute.js');
 var upload = require('./upload.js');
@@ -33,22 +34,23 @@ function prepHTML(src, dest) {
                 decodeEntities: false
             }
         })))
-        .pipe(gulp.dest(dest))
+        .pipe(gulp.dest(dest));
     }
-}
+};
 
 // TODO: Add prepHTMLLive function for live builds
 
 // Listed file sources for all tasks. Note use of glob patterns and wildcarding.
 const srcs = {
     index: './index.html',
-    pages: './pages/*.html',
-    templates: './templates/*.html',
-    css: './css/*.css',
-    js: './js/*.js',
-    images: './images/*.{png,jpg}',
-	markdownpages: './pages/*.md'
-}
+    pages: './pages/**/*.html',
+    templates: './templates/**/*.html',
+    css: './css/**/*.css',
+    sass: './sass/**/*.scss',
+    js: './js/**/*.js',
+    images: './images/**/*.{png,jpg}',
+    markdownpages: './pages/**/*.md'
+};
 
 // Listed destination directories for all builds.
 const dests = {
@@ -61,7 +63,7 @@ const dests = {
     bowercss: './build/dist/css/',
     images: './build/images/',
 	markdownpages: './build/pages/'
-}
+};
 
 // TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
 
@@ -79,7 +81,13 @@ gulp.task('templates', prepHTML(srcs.templates, dests.templates));
 gulp.task('css', function(){
     return gulp.src(srcs.css)
     //.pipe(minifyCSS()) // Minification increases load speeds
-    .pipe(gulp.dest(dests.css))
+    .pipe(gulp.dest(dests.css));
+});
+
+gulp.task('sass', function(){
+    return gulp.src(srcs.sass)
+    .pipe(sass().on('error', sass.logError)) // Minification increases load speeds
+    .pipe(gulp.dest(dests.css));
 });
 
 // Task to minify and stage our in-house JavaScript files.
@@ -90,7 +98,7 @@ gulp.task('js', function(){
     //.pipe(uglify().on('error', log)) // Minification increases load speeds
     .pipe(concat('wiki.js')) // Note use of concat to compact all JS files into one
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(dests.js))
+    .pipe(gulp.dest(dests.js));
 });
 
 // Task to stage library JS, such as JQuery, Bootstrap and any future live dependencies.
@@ -114,7 +122,7 @@ gulp.task('bower:css', () => gulp
 gulp.task('images', function() {
     return gulp.src(srcs.images)
     .pipe(imagemin()) // Minification increases load speeds
-    .pipe(gulp.dest(dests.images))
+    .pipe(gulp.dest(dests.images));
 });
 
 // Special task that calls upload.js, which pushes all files with a compatible mapping
@@ -128,7 +136,7 @@ gulp.task('pushimages', function(done) {
 });
 
 // Default task runs both dev and live build
-gulp.task('build', [ 'index', 'pages', 'templates', 'css', 'js', 'images', 'bower:js', 'bower:css' ]);
+gulp.task('build', [ 'index', 'pages', 'templates', 'sass', 'js', 'images', 'bower:js', 'bower:css' ]);
 
 // Dev task is currently analagous to default, will change in future
 gulp.task('default', ['build']);
