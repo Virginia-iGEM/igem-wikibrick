@@ -67,7 +67,7 @@ gulp.task('css', function(){
 });
 
 gulp.task('sass', function(){
-    return gulp.src(srcs.sass)
+    return gulp.src(srcs.scss)
     .pipe(sass({
         includePaths: bourbon, 
         includePaths: neat})

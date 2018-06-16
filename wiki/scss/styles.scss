@@ -117,7 +117,7 @@ ul.nav li a {
     width: 90%;
     height: 90%;
     opacity: 0.9;
-}
-.category:hover {
-    border-color: #f1f1f1;
+    &:hover {
+        border-color: #f1f1f1;
+    }
 }
