@@ -33,91 +33,89 @@ ul {
 /* Begin actual Virginia iGEm 2018 Code */
 
 /* UVA Colors */
-:root {
-    --dark-background-color:#232D4B;
-    --light-background-color:#ffffff;
-    --highlight-color: #E57200;
-    --text-light: #ffffff;
-    --text-dark: #666666;
-    --link-color: #EB5F0Cff;
-}
+$dark-background-color:     #232D4B;
+$light-background-color:    #ffffff;
+$accent-color:              #E57200;
+$light-accent-color:        rgb(255, 191, 128);
+$text-light:                #ffffff;
+$text-dark:                 #666666;
+$link-color:                #EB5F0C;
 
 /* Cherenkov Colors
-:root {
-    --dark-background-color:#282828;
-    --light-background-color:#C3C3D8;
-    --highlight-color: #BFFBF9;
-    --text-light: #E8F9F9;
-    --text-dark: #001C4E;
-    --link-color: #3DD4DF;
-}
+$dark-background-color:#282828;
+$light-background-color:#C3C3D8;
+$accent-color: #BFFBF9;
+$text-light: #E8F9F9;
+$text-dark: #001C4E;
+$link-color: #3DD4DF;
 */
 
 /* Passion Fruit Colors
-:root {
-    --dark-background-color:#4F1832;
-    --light-background-color:#FAF4E0;
-    --highlight-color: #F5287F;
-    --text-light: #FFF0EF;
-    --text-dark: #1E0811;
-    --link-color: #FBB645;
-}
+$dark-background-color:#4F1832;
+$light-background-color:#FAF4E0;
+$accent-color: #F5287F;
+$text-light: #FFF0EF;
+$text-dark: #1E0811;
+$link-color: #FBB645;
 */
 
-body {
-    padding-top: 150px;
+%img-circular {
+    border-radius: 50%;
 }
 
 .container {
-    padding: 80px 120px;
+    //padding: 80px 120px;
 }
-.navbar {
+
+body {
+    margin: 0px;
+}
+
+header {
     border-radius: 0 !important;
-    border-bottom: solid var(--highlight-color);
+    border-bottom: solid $accent-color;
     padding: 25px;
     margin: 0px;
-    background-color: var(--dark-background-color);
-    color: var(--text-light);
+    background-color: $dark-background-color;
+    color: $text-light;
+    ul {
+        $grid: ( 
+            columns: 9,
+            gutter: 10px
+        );
+
+        @include grid-container;
+
+        li {
+            @include grid-column(1, $grid);
+        }
+    }
 }
 .body {
-    border-top: 3px solid var(--highlight-color);
-    border-bottom: 3px solid var(--highlight-color);
+    border-top: 3px solid $accent-color;
+    border-bottom: 3px solid $accent-color;
     border-radius: 0 !important;
     padding: 20px 20px;
-    background-color: var(--light-background-color);
-    color: var(--text-dark);
+    background-color: $light-background-color;
+    color: $text-dark;
 }
 footer {
     border-radius: 0 !important;
-    background-color: var(--dark-background-color);
-    color: var(--text-light);
+    background-color: $dark-background-color;
+    color: $text-light;
     padding: 25px;
 }
 
 a:link {
-    color: var(--link-color);
+    color: $link-color;
 }
-ul.nav li a {
-    color: var(--link-color);
-}
-
-/* Home.html Styles */
-.interactive {
-    border-radius: 0 !important;
-    padding: 50px;
-    margin: 0px;
-    border: 2px;
-    background-color: var(--dark-background-color);
-    color: var(--text-light);
-    height: 600px;
-}
-.category {
-    border: 10px solid transparent;
-    margin-bottom: 25px;
-    width: 90%;
-    height: 90%;
-    opacity: 0.9;
-    &:hover {
-        border-color: #f1f1f1;
+ul.nav {
+    li {
+        a {
+        color: $link-color;
+        }
+        &:hover {
+            border-bottom: 2px solid $light-accent-color;
+        }
     }
 }

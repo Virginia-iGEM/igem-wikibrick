@@ -76,7 +76,8 @@ gulp.task('sass', function(){
     return gulp.src(srcs.scss)
     .pipe(sass({
         includePaths: bourbon, 
-        includePaths: neat})
+        includePaths: neat
+        })
         .on('error', sass.logError)) // Minification increases load speeds
     .pipe(gulp.dest(dests.css));
 });

@@ -1,0 +1,42 @@
+@import "styles";
+
+.interactive {
+    border-radius: 0 !important;
+    padding: 50px;
+    margin: 0px;
+    border: 2px;
+    background-color: $dark-background-color;
+    color: $text-light;
+    height: 600px;
+}
+
+
+.category-gallery {
+    $grid: (
+        gutter: 30px,
+        media: 1000px,
+        direction: ltr
+    );
+
+    @include grid-container;
+
+    div {
+        @include grid-column(6);
+
+        @include grid-media($grid) {
+            @include grid-column(2);
+        }
+
+        img {
+            @extend %img-circular;
+            border: 10px solid transparent;
+            margin-bottom: 25px;
+            width: 90%;
+            height: 90%;
+            opacity: 0.9;
+            &:hover {
+                border-color: #f1f1f1;
+            }
+        }
+    }
+}

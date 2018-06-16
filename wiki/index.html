@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="dist/css/vendor.css">
     <script src="dist/js/vendor.js"></script>
     <!-- Our stylesheet must come after the Bootstrap stylesheet in order for our overrides to apply.-->
-    <link rel="stylesheet" href="css/styles.css">
+    <!--link rel="stylesheet" href="css/styles.css"-->
+    <link rel="stylesheet" href="css/index.css">
     <!--<script src="js/wiki.js"></script>-->
     <!--script>
         $(function() {
@@ -17,14 +18,14 @@
 </head>
 
 <body>
-    <div class="container-fluid text-center navbar navbar-fixed-top">
+    <header>
         <div class="row">
                 <h1>[Insert winning/catchy name here!]</h1>
         </div>
 
         <br>
 
-        <ul class="nav nav-pills nav-justified">
+        <ul class="nav">
             <li>
                 <a class="internal" href="index.html">Home</a>
             </li>
@@ -90,76 +91,73 @@
                 <a href="https://igem.org/2018_Judging_Form?team=Virginia.html">Judging Form ⇗</a>
             </li>
         </ul>
-    </div>
+    </header>
 
-    <div class="container-fluid interactive">
+    <div class="interactive">
         <p>Placeholder for interactive element</p>
     </div>
 
-    <div class="container-fluid text-center body">
+    <div class="body">
         <h3>[Insert winning/catchy name here]</h3>
         <p><em>Improving yields through quorum sensing</em></p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <br>
         <!--Published images should be square, to maintain consistency, keeps it as a circle-->
 		<!--I cropped some pictures and then added the corresponding links to the wiki-->
-        <div class="row">
-            <div class="col-sm-4">
+        <div class="category-gallery">
+            <div>
                 <p><strong>Team</strong></p>
 				<a class="internal" href="Team.html">
-					<img class="category img-responsive img-circle" src="images/vgem-logo.png" alt="Team">
+					<img class="category" src="images/vgem-logo.png" alt="Team">
 				</a>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <p><strong>Project</strong></p>
 				<a class="internal" href="Description.html">
-					<img class="category img-responsive img-circle" src="images/lab-project.jpg" alt="Project">
+					<img class="category" src="images/lab-project.jpg" alt="Project">
 				</a>
 			</div>
-            <div class="col-sm-4">
+            <div>
                 <p><strong>Parts</strong></p>
 				<a class="internal" href="Parts.html">
-					<img class="category img-responsive img-circle" src="images/vgem-logo.png" alt="Parts">
+					<img class="category" src="images/vgem-logo.png" alt="Parts">
 				</a>
             </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-sm-4">
+            <div>
                 <p><strong>Safety</strong></p>
 				<a class="internal" href="Safety.html">
-					<img class="category img-responsive img-circle" src="images/vgem-logo.png" alt="Safety">
+					<img class="category" src="images/vgem-logo.png" alt="Safety">
 				</a>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <p><strong>Human Practices</strong></p>
 				<a class="internal" href="Human_Practices.html">
-					<img class="category img-responsive img-circle" src="images/vgem-logo.png" alt="Human Practices">
+					<img class="category" src="images/vgem-logo.png" alt="Human Practices">
 				</a>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <p><strong>Awards</strong></p>
-                <img class="category img-responsive img-circle" src="images/vgem-logo.png" alt="Awards">
+				<a class="internal" href="Awards.html">
+                    <img class="category" src="images/vgem-logo.png" alt="Awards">
+                </a>
             </div>
         </div>
     </div>
 
     <footer>
-        <div class="row">
-            <div class="col-sm-4 text-left">
-                <br>
-                <h3>Virginia iGEM 2018</h3>
-            </div>
-            <div class="col-sm-4 text-center">
-                <br>
-                <a class="up-arrow" href="#top">
-                    <span class="glyphicon glyphicon-chevron-up"></span>
-                    <h4>To top</h4>
-                </a>
-            </div>
-            <div class="col-sm-4">
-                <img class="text-right img-responsive" style="max-width:20%" align="right" src="images/Wireframe_Logo_Light.png" alt="Virginia iGEM Logo">
-            </div>
+        <div>
+            <br>
+            <h3>Virginia iGEM 2018</h3>
+        </div>
+        <div>
+            <br>
+            <a class="up-arrow" href="#top">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+                <h4>To top</h4>
+            </a>
+        </div>
+        <div>
+            <img class="text-right img-responsive" style="max-width:20%" align="right" src="images/Wireframe_Logo_Light.png" alt="Virginia iGEM Logo">
         </div>
     </footer>
 </body>
