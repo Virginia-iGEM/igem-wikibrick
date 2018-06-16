@@ -34,6 +34,7 @@ const buildsrc = {
     pages: './pages/**/*.html',
     templates: './templates/**/*.html',
     css: './css/**/*.css',
+    sass: './sass/**/*.scss',
     js: './js/**/*.js',
     images: './images/**/*.{png,jpg}',
 	markdownpages: './pages/**/*.md'
