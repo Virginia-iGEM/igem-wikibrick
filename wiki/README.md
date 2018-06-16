@@ -159,9 +159,10 @@ The exact sequence of events are as follows:
 
 ## 4 Todo
 
-### High Priority
+### Build Tool
 
-- Ensure FontAwesome has doesn't need any overrides in bower
+#### High Priority
+
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
   - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
 - [Grace] Update templating system to accept Markdown files:
@@ -170,33 +171,24 @@ The exact sequence of events are as follows:
   - Insert compiled HTML into a template that includes necessary CSS and JS in the head, sandwiched between header and footer template
   - Output compiled HTML + Template as HTML files for dev build/live build
 - Make it so upload.js can upload specific items instead of having to upload everything. Probably gonna do this with gulp.
-- Consolidate team name and year into .json file. Have relative2absolute.js pull from this file and generate URLs. Also have upload.js pull from this file for team name and year.
-  - A potential alternative is to have relative2absolute.js pull from igemwiki-api if it exposes the URLs it uses.
-  - This is important because it is not immediately obvious to future teams that they need to change these variables in both upload.js and realtive2absolute.js
-- Also consolidate sources and destinations for both build and upload into a .json file:
-  - Structure: Build Src -> Build Destination == Upload Source -> Upload Destination
-  - Build srcs, build destinations, upload srcs and upload destinations are currently all separately defined in-script, should be defined in .json files.
-  - Build destinations and upload sources should be made identical, they are currently the same.
-  - Should probably be labeled as projectdir -> staging/builddir -> pushtarget, or something similar
-- Eliminate code duplication in upload.js between pushimages and pushcontent
 - Eliminate synchronous file read in relative2absolute.js
-- Decide whether or not to switch to [Bourbon Neat](https://goamplifi.com/5-reasons-we-chose-bourbonneat-over-foundation-or-bootstrap/) instead of Bootstrap.
 
-### Medium Priority
+#### Medium Priority
 
-- Move source-destination mappings located in upload.js into their own separate json file to compartmentalize out data
-  - Same for gulpfile source-destination mappings.
-- Switch to compiled SASS/LESS from CSS to make stylesheets cleaner
-- Modify gulpfile.js so that running `gulp live build` correctly throws errors when images have not been first pushed to the wiki.
-- Simplify `dev` and `live` gulpfile tasks so they're less interconnected.
+- Modify gulpfile.js so that running `gulp live build` throws a reasonable error when images have not been first pushed to the wiki.
+- Refactor gulpfile.js
+  - It's a complete mess
+  - Simplify `dev` and `live` gulpfile tasks so they're less interconnected.
 - Refactor relative2absolute.js so that it recognizes absolute URLs and does not mangle them.
+  - Currently using `internal` class as a solution; relative2absolute.js will only change URLs marked as internal.
 - Fix MathJax with [#10 - Misc from this article](https://2016.igem.org/Team:Peshawar/Wiki)
 - Standardize variable and function naming schemes.
-- Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed. 
+- Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed.
 
-### Low Priority
+#### Low Priority
 
-- Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies.
+- Eliminate code duplication in upload.js between pushimages and pushcontent
+- Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies for team members.
 - Pick a JavaScript styleguide, fix the awful inconsistencies in style to adhere to it.
 - [Warning, read fully] Eliminate `run-sequence` dependency by using gulp's in-built sequencing syntax, as detailed in the [Gulp Documentation on Async Tasks](https://github.com/gulpjs/gulp/blob/v3.9.1/docs/API.md#async-task-support)
   - This is no longer relevant because this format for running sequential tasks was deprecated in Gulp 4. Gulp 4 has its own native support for task sequencing, but we are not upgrading to Gulp 4 yet as I do not want to break the build tool.
