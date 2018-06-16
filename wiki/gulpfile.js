@@ -15,6 +15,7 @@ const environments = require('gulp-environments');
 const sass = require('gulp-sass');
 const bourbon = require('node-bourbon').includePaths;
 const neat = require('node-neat').includePaths;
+const browsersync = require('browser-sync');
 
 const targets = require('./js/targets.js');
 const relative2absolute = require('./relative2absolute.js');
@@ -117,8 +118,28 @@ gulp.task('pushimages', function(done) {
     upload.uploadImages(done).then(done);
 });
 
+gulp.task('browsersync', function() {
+    browsersync({
+        server: {
+            baseDir: './build'
+        }
+    })
+});
+
+const buildtasks = [ 'index', 'pages', 'templates', 'sass', 'js', 'images', 'bower:js', 'bower:css' ];
+
 // Default task runs both dev and live build
-gulp.task('build', [ 'index', 'pages', 'templates', 'sass', 'js', 'images', 'bower:js', 'bower:css' ]);
+gulp.task('build', function(done) {
+    if (!live()) {
+        runsequence(
+        buildtasks,
+        //'browsersync',
+        done);
+    }
+    else {
+        runsequence(buildtasks, done);
+    }
+});
 
 // Dev task is currently analagous to default, will change in future
 gulp.task('default', ['build']);
