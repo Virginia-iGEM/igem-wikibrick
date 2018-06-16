@@ -13,6 +13,8 @@ const cheerio = require('gulp-cheerio');
 const markdown = require('gulp-markdown');
 const environments = require('gulp-environments');
 const sass = require('gulp-sass');
+const bourbon = require('node-bourbon').includePaths;
+const neat = require('node-neat').includePaths;
 
 const targets = require('./js/targets.js');
 const relative2absolute = require('./relative2absolute.js');
@@ -63,7 +65,10 @@ gulp.task('css', function(){
 
 gulp.task('sass', function(){
     return gulp.src(srcs.sass)
-    .pipe(sass().on('error', sass.logError)) // Minification increases load speeds
+    .pipe(sass({
+        includePaths: bourbon, 
+        includePaths: neat})
+        .on('error', sass.logError)) // Minification increases load speeds
     .pipe(gulp.dest(dests.css));
 });
 
