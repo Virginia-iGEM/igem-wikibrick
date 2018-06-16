@@ -1,27 +1,31 @@
 // See https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki for descriptions of packages
-var gulp = require('gulp');
-var minifyCSS = require('gulp-csso');
-var concat = require('gulp-concat');
-var sourcemaps = require('gulp-sourcemaps');
-var log = require('fancy-log');
-var uglify = require('gulp-uglify');
-var mainBowerFiles = require('main-bower-files');
-var imagemin = require('gulp-imagemin');
-var runsequence = require('run-sequence');
-var gulpif = require('gulp-if');
-var cheerio = require('gulp-cheerio');
-var markdown = require('gulp-markdown');
-var environments = require('gulp-environments');
-var sass = require('gulp-sass');
+const gulp = require('gulp');
+const minifyCSS = require('gulp-csso');
+const concat = require('gulp-concat');
+const sourcemaps = require('gulp-sourcemaps');
+const log = require('fancy-log');
+const uglify = require('gulp-uglify');
+const mainBowerFiles = require('main-bower-files');
+const imagemin = require('gulp-imagemin');
+const runsequence = require('run-sequence');
+const gulpif = require('gulp-if');
+const cheerio = require('gulp-cheerio');
+const markdown = require('gulp-markdown');
+const environments = require('gulp-environments');
+const sass = require('gulp-sass');
 
-var relative2absolute = require('./relative2absolute.js');
-var upload = require('./upload.js');
+const targets = require('./js/targets.js');
+const relative2absolute = require('./relative2absolute.js');
+const upload = require('./upload.js');
 
-var dev = environments.make('dev');
-var live = environments.make('live');
+const dev = environments.make('dev');
+const live = environments.make('live');
 
 gulp.task('dev', dev.task);
 gulp.task('live', live.task);
+
+srcs = targets.buildsrc;
+dests = targets.buildtarget;
 
 // Function shared by all HTML processing tasks for development builds. 
 // Currently just stages HTML files to build folder.
@@ -36,33 +40,6 @@ function prepHTML(src, dest) {
         })))
         .pipe(gulp.dest(dest));
     }
-};
-
-// TODO: Add prepHTMLLive function for live builds
-
-// Listed file sources for all tasks. Note use of glob patterns and wildcarding.
-const srcs = {
-    index: './index.html',
-    pages: './pages/**/*.html',
-    templates: './templates/**/*.html',
-    css: './css/**/*.css',
-    sass: './sass/**/*.scss',
-    js: './js/**/*.js',
-    images: './images/**/*.{png,jpg}',
-    markdownpages: './pages/**/*.md'
-};
-
-// Listed destination directories for all builds.
-const dests = {
-    index: './build/',
-    pages: './build/pages/',
-    templates: './build/templates/',
-    css: './build/css/',
-    js: './build/js/',
-    bowerjs: './build/dist/js/',
-    bowercss: './build/dist/css/',
-    images: './build/images/',
-	markdownpages: './build/pages/'
 };
 
 // TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
