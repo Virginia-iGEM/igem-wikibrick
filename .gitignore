@@ -175,3 +175,6 @@ typings/
 
 # Serverless directories
 .serverless
+
+# Ignore scratch work directory
+**/spike
