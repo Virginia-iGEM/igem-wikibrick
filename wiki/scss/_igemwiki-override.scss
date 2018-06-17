@@ -1,0 +1,29 @@
+/* Override iGEM wiki settings, removing everything but the top navbar. */
+#sideMenu,
+#top_title {
+    display: none;
+}
+
+#content {
+    width: 100vw;
+    padding: 0px;
+    border: none;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    position: relative;
+}
+
+#globalWrapper {
+    font-size: inherit;
+    padding-bottom: 0;
+}
+
+#top_menu_under {
+    height: 0px;
+}
+
+ul {
+    list-style-image: none; /* removes the iGEM wiki bullets */
+}
