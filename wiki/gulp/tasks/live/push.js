@@ -1,17 +1,18 @@
 // See https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki for descriptions of packages
+var gulp = require('gulp');
 
 // Core node, https://nodejs.org/api/path.html
 const path = require('path')
 const fs = require('fs');
 
-const targets = require('./js/targets.js');
+const targets = require(global.targets);
 
 const igemwiki = require('igemwiki-api')(targets.teaminfo)
 const Promise = require('bluebird')
 const globby = require ('globby')
 const _ = require('lodash')
 
-const imagemapfilename = './build/imagemap.json';
+const imagemapfilename = path.join(global.buildRoot, '/build/imagemap.json');
 
 var loggedin = false;
 var loginjar;
@@ -165,8 +166,12 @@ uploadImages = function () {
     });
 }
 
-module.exports = {
-    login: login,
-    uploadContent: uploadContent,
-    uploadImages: uploadImages
-}
+// Special task that calls upload.js, which pushes all files with a compatible mapping
+// staged in the build folder to the iGEM Wiki. Not entirely automatic; requires credentials.
+gulp.task('pushcontent', function(done){
+    uploadContent().then(done);
+});
+
+gulp.task('pushimages', function(done) {
+    uploadImages(done).then(done);
+});

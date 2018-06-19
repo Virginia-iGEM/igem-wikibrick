@@ -1,13 +1,21 @@
+var gulp = require('gulp');
+var gulpif = require('gulp-if');
+var markdown = require('gulp-markdown');
+var cheerio = require('gulp-cheerio');
+var Promise = require('bluebird');
+
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
 
-const targets = require('./js/targets.js');
+const targets = require(global.targets);
+var srcs = targets.buildsrc;
+var dests = targets.buildtarget;
 
 const urls = targets.urls;
 const suffixes = targets.suffixes;
 
-module.exports = function($, file) {
+relative2absolute = function($, file) {
     return new Promise((resolve, reject) => {
 
         // This part is synchronous and probably doesn't need to be
@@ -58,3 +66,33 @@ module.exports = function($, file) {
         Promise.all([images, stylesheets, scripts, index, links]).then(resolve);
     });
 }
+// Function shared by all HTML processing tasks for development builds. 
+// Currently just stages HTML files to build folder.
+
+function prepHTML(src, dest) {
+    return function() {
+        return gulp.src(src)
+        /*.pipe(markdown()) // Run file through the markdown processor ony if it is a markdown file
+        .pipe(rename(function (path) {
+            path.extname = '.html';
+        }))*/
+        .pipe(gulpif(global.live(), cheerio({
+            run: relative2absolute,
+            parserOptions: {
+                decodeEntities: false
+            }
+        }))) // Think about using lazypipe here
+        .pipe(gulp.dest(dest));
+    }
+};
+
+// TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
+
+// Task to prep index.html which is uploaded as the home page
+gulp.task('index', prepHTML(srcs.index, dests.index));
+
+// Task to prep all non-home pages, I.E. Project Description, Team, etc.
+gulp.task('pages', prepHTML(srcs.pages, dests.pages));
+
+// Task to prep templates like headers, footers, etc. that can be reused on many pages
+gulp.task('templates', prepHTML(srcs.templates, dests.templates));

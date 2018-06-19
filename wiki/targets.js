@@ -28,29 +28,32 @@ const teaminfo = {
     teamName: 'Virginia'
 }
 
+const src = global.buildRoot + '/app/';
+const build = global.buildRoot + '/build/';
+
 // Listed file sources for all tasks. Note use of glob patterns and wildcarding.
 const buildsrc = {
-    index: './index.{html,md}',
-    pages: './pages/**/*.{html,md}',
-    templates: './templates/**/*.html',
-    css: './css/**/*.css',
-    scss: './scss/**/*.scss',
-    js: './js/**/*.js',
-    images: './images/**/*.{png,jpg}',
-	markdownpages: './pages/**/*.md'
+    index: src + 'index.{html,md}',
+    pages: src + 'pages/**/*.{html,md}',
+    templates: src + 'templates/**/*.html',
+    css: src + 'css/**/*.css',
+    scss: src + 'scss/**/*.scss',
+    js: src + 'js/**/*.js',
+    images: src + 'images/**/*.{png,jpg}',
+	markdownpages: src + 'pages/**/*.md'
 }
 
 // Destination directory for build, source directories for upload
 const buildtarget = {
-    index: './build/',
-    pages: './build/pages/',
-    templates: './build/templates/',
-    css: './build/css/',
-    js: './build/js/',
-    bowerjs: './build/dist/js/',
-    bowercss: './build/dist/css/',
-    images: './build/images/',
-	markdownpages: './build/pages/'
+    index: build,
+    pages: build + 'pages/',
+    templates: build + 'templates/',
+    css: build + 'css/',
+    js: build + 'js/',
+    bowerjs: build + 'dist/js/',
+    bowercss: build + 'dist/css/',
+    images: build + 'images/',
+	markdownpages: build + 'pages/'
 }
 
 const uploadsrc = {
@@ -78,4 +81,21 @@ const suffixes = {
     css: '?action=raw&ctype=text/css'
 }
 
-module.exports = {teaminfo: teaminfo, buildsrc: buildsrc, buildtarget: buildtarget, uploadsrc: uploadsrc, urls: urls, suffixes: suffixes};
+module.exports = {
+    src: src,
+    build: build,
+    teaminfo: teaminfo, 
+    buildsrc: buildsrc, 
+    buildtarget: buildtarget, 
+    uploadsrc: uploadsrc, 
+    urls: urls, 
+    suffixes: suffixes,
+    browsersync: {
+        development: {
+            server: {
+                basedir: build
+            },
+            port: 9999
+        }
+    }
+};
