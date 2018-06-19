@@ -4,7 +4,7 @@
 
 /* Begin actual Virginia iGEm 2018 Code */
 
-/* UVA Colors */
+/* UVA Colors
 $dark-background-color:     #232D4B;
 $light-background-color:    #ffffff;
 $accent-color:              #E57200;
@@ -12,6 +12,7 @@ $light-accent-color:        rgb(255, 191, 128);
 $text-light:                #ffffff;
 $text-dark:                 #666666;
 $link-color:                #EB5F0C;
+*/
 
 /* Cherenkov Colors
 $dark-background-color:#282828;
@@ -23,18 +24,38 @@ $link-color: #3DD4DF;
 */
 
 /* Passion Fruit Colors
-$dark-background-color:#4F1832;
-$light-background-color:#FAF4E0;
+$dark-background-color:#FAF4E0;
+$light-background-color:rgb(128, 39, 81);
 $accent-color: #F5287F;
-$text-light: #FFF0EF;
-$text-dark: #1E0811;
+$light-accent-color: rgb(255, 142, 189);
+$text-light: #1E0811;
+$text-dark: #FFF0EF;
 $link-color: #FBB645;
 */
+
+$dark-background-color:white;
+$light-background-color: white;
+$accent-color: rgb(70, 70, 70);
+$light-accent-color: rgb(148, 148, 148);
+$text-light: rgb(105, 105, 105);
+$text-dark: rgb(105, 105, 105);
+$link-color: rgb(255, 218, 159);
 
 %img-circular {
     border-radius: 50%;
 }
 
+@mixin top-stick {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
 .container {
     //padding: 80px 120px;
 }
@@ -43,11 +64,18 @@ body {
     margin: 0px;
 }
 
+img {
+    max-width: 100%;
+    overflow: hidden;
+}
 header {
+    @include top-stick;
+    background-color: white;
     border-bottom: 3px solid $accent-color;
     padding: 25px;
     background-color: $dark-background-color;
     color: $text-light;
+    box-shadow: 0px -10px 8px #888888;
     ul.nav {
         $grid: ( 
             columns: 9,
