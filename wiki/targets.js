@@ -33,8 +33,8 @@ const build = global.buildRoot + '/build/';
 
 // Listed file sources for all tasks. Note use of glob patterns and wildcarding.
 const buildsrc = {
-    index: src + 'index.{html,md}',
-    pages: src + 'pages/**/*.{html,md}',
+    index: src + 'index.html',
+    pages: src + 'pages/**/*.html',
     templates: src + 'templates/**/*.html',
     css: src + 'css/**/*.css',
     scss: src + 'scss/**/*.scss',
@@ -57,7 +57,7 @@ const buildtarget = {
 }
 
 const uploadsrc = {
-    index: assembleUploadSrc(buildsrc.index, buildtarget.index),
+    index: assembleUploadSrc('index.html', buildtarget.index),
     pages: assembleUploadSrc(buildsrc.pages, buildtarget.pages),
     templates: assembleUploadSrc(buildsrc.templates, buildtarget.templates),
     css: assembleUploadSrc(buildsrc.css, buildtarget.css),

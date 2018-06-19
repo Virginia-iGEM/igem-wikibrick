@@ -12,7 +12,7 @@ const Promise = require('bluebird')
 const globby = require ('globby')
 const _ = require('lodash')
 
-const imagemapfilename = path.join(global.buildRoot, '/build/imagemap.json');
+const imagemapfilename = path.join(global.buildRoot, 'build/imagemap.json').toString();
 
 var loggedin = false;
 var loginjar;
@@ -108,7 +108,9 @@ uploadContent = function() {
                 }))
 
                 // Now begin uploading them
-                Promise.map(confs, conf => igemwiki.upload(conf), {concurrency: 1})
+                Promise.map(confs, conf => igemwiki.upload(conf)
+                .then(console.log('1s delay')).delay(1000)
+                , {concurrency: 1})
                     .then(() => {
                         console.log('Uploads completed')
                         resolve();
@@ -148,7 +150,7 @@ uploadImages = function () {
             // Now begin uploading them
             Promise.map(confs, conf => igemwiki.upload(conf).then(results => {
                     imagemap[conf.dest] = results.target;
-                }),
+                }).then(console.log('1s delay')).delay(1000),
                 {concurrency: 1})
                 .then(() => {
                         fs.writeFile(imagemapfilename, JSON.stringify(imagemap), 'utf8', () => {
