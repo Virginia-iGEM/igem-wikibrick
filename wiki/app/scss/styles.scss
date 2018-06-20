@@ -1,3 +1,4 @@
+@import "bourbon";
 @import "neat";
 @import "igemwiki-override";
 
@@ -33,15 +34,15 @@ $text-dark: #FFF0EF;
 $link-color: #FBB645;
 */
 
-$dark-background-color:white;
-$light-background-color: white;
-$accent-color: rgb(70, 70, 70);
-$light-accent-color: rgb(148, 148, 148);
-$text-light: rgb(105, 105, 105);
+$dark-background-color: rgb(88, 88, 88);
+$light-background-color: rgb(255, 253, 235);
+$accent-color: rgb(56, 189, 175);
+$light-accent-color: rgb(150, 223, 215);
+$text-light: rgb(255, 253, 235);
 $text-dark: rgb(105, 105, 105);
 $link-color: rgb(255, 218, 159);
 
-%img-circular {
+@mixin img-circular {
     border-radius: 50%;
 }
 
@@ -70,6 +71,7 @@ img {
 }
 
 header {
+    $navigation-height: 60px;
     @include top-stick;
     background-color: white;
     border-bottom: 3px solid $accent-color;
@@ -77,43 +79,50 @@ header {
     background-color: $dark-background-color;
     color: $text-light;
     box-shadow: 0px -10px 8px #888888;
-    ul.nav {
-        $grid: ( 
-            columns: 9,
-            gutter: 10px
-        );
-        $other-custom-grid-for-print: (
-            columns: 14,
-            gutter: 1.5rem,
-            media: print,
-        );
+    nav {
+        ul {
+            > li{
+                background: $dark-background-color;
+                display: block;
+                line-height: $navigation-height;
+                overflow: hidden;
+                padding-right: 20px;
+                text-align: right;
+                width: 100%;
+                z-index: 999;
+                &:focus, &:hover {
+                    background-color: $light-accent-color;
+                    border-color: $light-accent-color;
+                    color: $text-dark;
+                }
+                a {
+                    color: $accent-color;
+                    display: inline-block;
+                    outline: none;
+                    text-decoration: none;
 
-        @include grid-container;
-
-        li{
-            /*@include grid-column(1, $grid ); */
-            list-style: none;
-            text-align: center;
-            border: 2px solid $dark-background-color;
-            border-radius: 4px;
-            z-index: 0;
-            position: relative;
-            display: block;
-            &:hover {
-                background-color: $light-accent-color;
-                border-color: $light-accent-color;
-                color: $text-dark;
+                    &:focus, &:hover {
+                        color: $link-color;
+                    }
+                }
             }
-            
+            > li.dropdown {
+                overflow: visible;
+                > li {
+                    > a::after {
+                        @include position(absolute, auto -0.4em auto auto);
+                        color: $accent-color;
+                        content: "\25BE";
+                    }
+                }
+            }
         }
     }
 }
 .content {
-    padding: 20px 20px;
+    padding: 30px 15%;
     background-color: $light-background-color;
     color: $text-dark;
-    border-left: 10rem solid #ebebeb;
-    border-right: 10rem solid #ebebeb;
 }
 footer {
     @include grid-container;

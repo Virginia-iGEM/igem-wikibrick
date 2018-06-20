@@ -40,7 +40,7 @@
         text-align: center;
 
         img {
-            @extend %img-circular;
+            @include img-circular;
             border: 10px solid transparent;
             margin-bottom: 25px;
             width: 90%;

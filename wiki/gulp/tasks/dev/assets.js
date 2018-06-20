@@ -32,10 +32,7 @@ gulp.task('css', function(){
 
 gulp.task('sass', function(){
     return gulp.src(srcs.scss)
-    .pipe(sass({
-        includePaths: bourbon, 
-        includePaths: neat
-        })
+    .pipe(sass({includePaths: [].concat(bourbon, neat)})
         .on('error', sass.logError)) // Minification increases load speeds
     .pipe(gulp.dest(dests.css));
 });
