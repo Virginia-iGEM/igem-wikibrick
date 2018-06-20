@@ -1,3 +1,4 @@
+@import "bourbon";
 @import "neat";
 @import "igemwiki-override";
 
@@ -34,15 +35,15 @@ $text-dark: #FFF0EF;
 $link-color: #FBB645;
 */
 
-$dark-background-color:white;
-$light-background-color: white;
-$accent-color: rgb(70, 70, 70);
-$light-accent-color: rgb(148, 148, 148);
-$text-light: rgb(105, 105, 105);
+$dark-background-color: rgb(88, 88, 88);
+$light-background-color: rgb(255, 253, 235);
+$accent-color: rgb(56, 189, 175);
+$light-accent-color: rgb(150, 223, 215);
+$text-light: rgb(255, 253, 235);
 $text-dark: rgb(105, 105, 105);
 $link-color: rgb(255, 218, 159);
 
-%img-circular {
+@mixin img-circular {
     border-radius: 50%;
 }
 
@@ -72,34 +73,46 @@ img {
 
 header {
     @include top-stick;
-    background-color: white;
-    border-bottom: 3px solid $accent-color;
-    padding: 25px;
-    background-color: $dark-background-color;
-    color: $text-light;
-    box-shadow: 0px -10px 8px #888888;
-    ul.nav {
-        $grid: ( 
-            columns: 9,
-            gutter: 10px
-        );
-        @include grid-container;
-
-        li{
-            @include grid-column(1, $grid ); 
+    nav {
+        $nav-height: 60px;
+        float: right;
+        ul {
             list-style: none;
-            text-align: center;
-            border: 2px solid $dark-background-color;
-            border-radius: 4px;
-            z-index: 0;
-            position: relative;
-            display: block;
-            &:hover {
-                background-color: $light-accent-color;
-                border-color: $light-accent-color;
-                color: $text-dark;
+            margin: 0;
+            padding: 0;
+            li {
+                float: left;
+                position: relative;
+                a, a:visited {
+                    display: block;
+                    padding: 0 20px;
+                    line-height: $nav-height;
+                    background: $dark-background-color;
+                    color: $text-light;
+                    text-decoration: none;
+                    &:hover{
+                        background: $accent-color;
+                        color: $link-color;
+                    }
+                    &:not(:only-child):after {
+                        padding-left: 4px;
+                        content: ' ▾';
+                    }
+                }
+                ul {
+                    display: none;
+                    position: absolute;
+                    min-width: 160px;
+                    a {
+                        padding: 15px;
+                        line-height: 20px;
+                    }
+                }
+                &:focus > ul, &:hover > ul {
+                    display: block;
+                }
+                
             }
-            
         }
     }
 }
