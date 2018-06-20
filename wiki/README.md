@@ -8,15 +8,74 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 1. **Description**
 2. **Table of Contents**
-3. **Build-Tool**: Section for `wiki-competent`, used to automate preprocessing of files and pushing them to the iGEM wiki.
-4. **Todo**: Fine-grained todo list. _Look here if you need something to do._
-5. **Roadmap:** Long-term task lisk. Broadly outlines what is needed to bring the wiki to completion.
-6. **Interactive**: Section describing the interactive component that will be the centerpiece of our home page.
+3. **Todo**: Fine-grained todo list. _Look here if you need something to do._
+4. **Roadmap:** Long-term task lisk. Broadly outlines what is needed to bring the wiki to completion.
+5. **Interactive**: Section describing the interactive component that will be the centerpiece of our home page.
+6. **Build-Tool**: Section for `wiki-competent`, used to automate preprocessing of files and pushing them to the iGEM wiki.
 7. **Build Dependencies**: Node Package Manager (NPM) packages required to run the build tool.
 8. **Live Dependencies**: Bower packages that must be uploaded to the iGEM wiki for our content to function properly.
 9. **Attributions and Works Cited**
 
-## 3 Build Tool: `wiki-competent`
+## 3 Todo
+
+### Build Tool
+
+#### High Priority
+
+- Make JQuery/Handlebars templates for headers and footers work.
+- Modify dev/html.js so that it also accepts markdown files.
+  - The code's there, just commented out; need to keep markdown processor from mangling `<!DOCTYPE>` tag.
+
+#### Medium Priority
+
+- Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
+  - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
+- Modify gulpfile.js so that running `gulp live build` throws a reasonable error when images have not been first pushed to the wiki.
+- Refactor push.js so that it recognizes absolute URLs without prompting and does not mangle them.
+  - Currently using `internal` class as a solution; relative2absolute.js will only absolutify URLs marked as internal.
+- Fix MathJax with [#10 - Misc from this article](https://2016.igem.org/Team:Peshawar/Wiki)
+- Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed.
+- Make it so upload.js can upload specific items instead of having to upload everything. Probably gonna do this with gulp.
+- Eliminate synchronous file read in gulp task live/push.js
+
+#### Low Priority
+
+- Eliminate code duplication in upload.js between pushimages and pushcontent
+- Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies for team members and future teams.
+- Add git hook that causes an npm install and bower install on package.json or bower.json change.
+- Pick a JavaScript styleguide, fix the awful inconsistencies in style to adhere to it.
+  - Standardize variable and function naming schemes.
+  - Should probably 'use strict'.
+
+## 4 Roadmap
+
+1. [Completed] Write an upload script using igemwiki-api to push all pages, images and other content to the iGEM wiki.
+2. [Completed] Create a build tool that can compile to working HTML for both the iGEM wiki and local machine testing.
+3. Decide on and implement wiki style
+    - Template should have a header and a footer that contain a snazzy navbar and team information respectively.
+    - Template should also contain styling that allows for quick development of webpages wihout needing style attributes in HTML.
+    - Ideally, template can be written in markdown and compiled to enable other team members to edit things fairly easily.
+4. Core concurrent tasks:
+    - Finish all major pages, at least with filler content
+    - Code interactive for home page
+    - Create a tool for the team to easily push their information to the wiki?
+5. Final tasks
+    - Run through the whole wiki, hosted on the iGEM website, check for inconsistencies
+
+## 5 Interactive
+
+This is an interactive presentation that gives the reader an intuition for what our device is doing. It goes fairly simply:
+
+1. Start with an empty "petri dish" that looks like it's just part of the webpage. A little "click me" prompt gets the user to interact with it.
+2. When the user clicks, they will add a single E. Coli, a CFU, to the dish
+3. The user can then incubate the cell and it will divide to form a few cells
+4. When the cells hit quorum, many will begin to flash a bright blue color to indicate their genes have been activated; but only about 50% will flash initially.
+5. The user can then sterilize/clean the dish with a button, and switch to the Virginia iGEM quorum sensing genes
+    - Maybe have a short animatic where the user transforms some bacteria
+6. Upon redoing the experiment, they'll find that nearly all the bacteria flash
+7. User is left to play around with the sandbox all they want. A little flashing blue arrow at the bottom of the game prompts them to scroll down to read about the project.
+
+## 6 Build Tool: `wiki-competent`
 
 Note: Name is tentative and should probably get a vote. You should probably also make this paragraph less passive-aggressive.
 
@@ -24,10 +83,10 @@ Note: Name is tentative and should probably get a vote. You should probably also
 
 Our tool does a few important things to standardize editing the wiki through a standard web-development process:
 
-- **Single-command build tool.** Once installed and set up, you can automatically inject your own pure HTML+CSS+JS website onto your wiki page, you type `gulp live publish`, enter your iGEM credentials, grab some tea and watch `wiki-competent` do the hard work for you. No need to upload images to the wiki by hand, no need to copy-and-paste HTML into a wiki's _Edit Page_ tool. Use your favorite text editor, your favorite CSS templates, and Node.JS packages of your choice without worrying.
-- **URL Substitution.** "But wait," you say, "I want to iterate on my machine. Uploading takes time, and I make a lot of mistakes." Fear not, young web developer, `wiki-competent` has your back. Any scripts, stylesheets, links or images you add to your HTML can simply use a relative path to a local file on your machine. Type `gulp dev build`, and you have a fully functional, completely offline wiki you can work on in the comfort of your own operating system. Then, when you `gulp live publish`, all these relative paths are automatically converted to URLs compatible with your team's wiki page.
+- **Single-command build tool.** Once installed and set up, you can automatically inject your own pure HTML+CSS+JS website onto your wiki page: type `gulp live publish`, enter your iGEM credentials, grab some tea and watch `wiki-competent` do the hard work for you. No need to upload images to the wiki by hand, no need to copy-and-paste HTML into a wiki's _Edit Page_ tool. Use your favorite text editor, your favorite CSS templates, and Node.JS packages of your choice without worrying.
+- **URL Substitution.** "But wait," you say, "I want to iterate on my machine. Uploading takes time, and I make a lot of mistakes." Fear not, young web developer, `wiki-competent` has your back. Any scripts, stylesheets, links or images you add to your HTML can simply use a relative path to a local file on your machine. Type `gulp dev build`, and you have a fully functional, completely offline wiki you can work on in the comfort of your own operating system. Then, when you `gulp live publish`, all these relative paths are automatically absolutified to URLs compatible with your team's wiki page.
 - **Flexible Build and Package support.** Becuase we're using `gulp`, you can add thousands of gulp plugins and Node.js modules to your wiki to do all the things you ever wished you could. Want to add a 3d shoot-em-up arcade game where you blast bacteriophages to your homepage? `bower install impactjs`. Want to use more advanced templating to reuse as much code as you can? `npm install -D gulp-handlebars`. Want to use SASS instead of CSS? `npm install -D gulp-sass`. Your favorite plugins and packages are a few lines of configuration away.
-- **Markdown Support.** "Hold up, hold up, I'm the only programmer on my team. I don't want to write the small novel that is an iGEM Team Wiki page." Luckily for you, `wiki-competent` is non-programmer friendly. Your teammates can write their lab notes, lab reports and modeling writeups in the easy-to-understand Markdown styling language. The tool can convert these files into valid, crisp HTML, complete with your navigation menu, footer, interactive JavaScript elements and any other templated HTML you'd like to add.
+- **Markdown Support (pending).** "Hold up, hold up, I'm the only programmer on my team. I don't want to write the small novel that is an iGEM Team Wiki page." Luckily for you, `wiki-competent` is non-programmer friendly. Your teammates can write their lab notes, lab reports and modeling writeups in the easy-to-understand Markdown styling language. The tool can convert these files into valid, crisp HTML, complete with your navigation menu, footer, interactive JavaScript elements and any other templated HTML you'd like to add.
 - **Logging (pending).** You wake up one morning, coffee in hand, and like any good iGEMmer, you open your wiki. Some incompetent team member has defaced your home page! The spans are all the wrong size, none of the scripts are working, the background is *chartreuse*. Who did this? Well, you know exactly who, because a `log.js` file was pushed to your wiki page containing the perpetrator's account name, the Git commit hash they pushed from, and when they pushed. The disadvantage is of course your team captain will always know when you messed up.
 
 ### Use
@@ -42,12 +101,11 @@ In order to build both, you will need to first install [Node.js](https://nodejs.
 
 Type `gulp build --env dev` or `gulp dev build` to build a local copy that will be located under `wiki/build`. The files produced by this build can be opened in a normal file explorer by any modern web browser.
 
-Type `gulp publish --env live` or `gulp live publish` to build a copy with absolute URLs that will then be pushed to the iGEM wiki. In order to do this, you will need to enter your wiki username and password, so have them ready. Note:w
-that this copy will *not* run offline correctly, use `gulp dev build` files instead.
+Type `gulp publish --env live` or `gulp live publish` to build a copy with absolute URLs that will then be pushed to the iGEM wiki. In order to do this, you will need to enter your wiki username and password, so have them ready. Note that this copy will *not* run offline correctly, use `gulp dev build` files instead.
 
 One can type `gulp live build` to check HTML for correct parsing. This will not work if new images have been added but not pushed to the wiki; this will be fixed in the future, adding errors that are correctly thrown instead of simply failing.
 
-Note 1: One can call `gulp dev publish`, nothing is preventing it. However, it will just upload HTML files with relative paths to the wiki, which will be very ugly and likely nonfunctional.
+Note 1: One can call `gulp dev publish`, nothing is preventing it. However, it will just upload HTML files with relative paths to the wiki, which will be very ugly and nonfunctional.
 
 Note 2: Reversing the order of tasks, i.e. `gulp publish dev` or `gulp publish live` will result in incorrect behaviour. Order matters here.
 
@@ -157,72 +215,6 @@ The exact sequence of events are as follows:
 2. build: A `build` is then performed, identical to `gulp dev build` save for the fact that all URLs in relevant HTML tags are replaced with their absolute equivalents.
 3. pushcontent: Pushes remaining (non-image) content to the wiki.
 
-## 4 Todo
-
-### Build Tool
-
-#### High Priority
-
-- Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
-  - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
-- [Grace] Update templating system to accept Markdown files:
-  - Scan directory for .md files for Index and Pages [done]
-  - Compile markdown to HTML using [marked](https://www.npmjs.com/package/marked) [done]
-  - Insert compiled HTML into a template that includes necessary CSS and JS in the head, sandwiched between header and footer template
-  - Output compiled HTML + Template as HTML files for dev build/live build
-- Make it so upload.js can upload specific items instead of having to upload everything. Probably gonna do this with gulp.
-- Eliminate synchronous file read in relative2absolute.js
-
-#### Medium Priority
-
-- Modify gulpfile.js so that running `gulp live build` throws a reasonable error when images have not been first pushed to the wiki.
-- Refactor gulpfile.js
-  - It's a complete mess
-  - Simplify `dev` and `live` gulpfile tasks so they're less interconnected.
-- Refactor relative2absolute.js so that it recognizes absolute URLs and does not mangle them.
-  - Currently using `internal` class as a solution; relative2absolute.js will only change URLs marked as internal.
-- Fix MathJax with [#10 - Misc from this article](https://2016.igem.org/Team:Peshawar/Wiki)
-- Standardize variable and function naming schemes.
-- Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed.
-
-#### Low Priority
-
-- Eliminate code duplication in upload.js between pushimages and pushcontent
-- Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies for team members.
-- Pick a JavaScript styleguide, fix the awful inconsistencies in style to adhere to it.
-- [Warning, read fully] Eliminate `run-sequence` dependency by using gulp's in-built sequencing syntax, as detailed in the [Gulp Documentation on Async Tasks](https://github.com/gulpjs/gulp/blob/v3.9.1/docs/API.md#async-task-support)
-  - This is no longer relevant because this format for running sequential tasks was deprecated in Gulp 4. Gulp 4 has its own native support for task sequencing, but we are not upgrading to Gulp 4 yet as I do not want to break the build tool.
-  - As a result, `run-sequence` stays for now. See [this guide](https://www.joezimjs.com/javascript/complete-guide-upgrading-gulp-4/) if you would like to begin upgrading our tool to Gulp 4.
-  - Also [this piece of documentation](https://fettblog.eu/gulp-4-parallel-and-series/)
-
-## 5 Roadmap
-
-1. [Completed] Write an upload script using igemwiki-api to push all pages, images and other content to the iGEM wiki.
-2. Create a build tool that can compile to working HTML for both the iGEM wiki and local machine testing.
-    - Template should have a header and a footer that contain a snazzy navbar and team information respectively.
-    - Template should also contain styling that allows for quick development of webpages
-    - Ideally, template can be written in markdown and compiled to enable other team members to edit things fairly easily.
-3. Decide on a goddamn colorscheme
-4. Core concurrent tasks:
-    - Finish all major pages, at least with filler content
-    - Code interactive for home page
-    - Create a tool for the team to easily push their information to the wiki?
-5. Final tasks
-    - Run through the whole wiki, hosted on the iGEM website, check for inconsistencies
-
-## 6 Interactive
-
-This is an interactive presentation that gives the reader an intuition for what our device is doing. It goes fairly simply:
-
-1. Start with an empty "petri dish" that looks like it's just part of the webpage. A little "click me" prompt gets the user to interact with it.
-2. When the user clicks, they will add a single E. Coli, a CFU, to the dish
-3. The user can then incubate the cell and it will divide to form a few cells
-4. When the cells hit quorum, many will begin to flash a bright blue color to indicate their genes have been activated; but only about 50% will flash initially.
-5. The user can then sterilize/clean the dish with a button, and switch to the Virginia iGEM quorum sensing genes
-    - Maybe have a short animatic where the user transforms some bacteria
-6. Upon redoing the experiment, they'll find that nearly all the bacteria flash
-7. User is left to play around with the sandbox all they want. A little flashing blue arrow at the bottom of the game prompts them to scroll down to read about the project.
-
 ## 7 Build Dependencies
 
 Unless explicitly noted, these are Node.js dependencies and can be installed with `npm`, Node.js's package manager.
@@ -264,8 +256,8 @@ Note: Build system is currently under active development and so build dependenci
 Notice that we have few live dependencies. It doesn't matter how many build deps we have because we don't really care if a build takes 5 seconds or 2 seconds. On the other hand, the more, larger live dependencies we have, the more code has to be sent to our users. As a result, each live dependency increases load times, which can make a website look sluggish if they're longer than a second on a fast network. So we keep live depenencies as small as possible.
 
 - JQuery: Makes interacting with HTML easy.
-- Bootstrap 3.3.7: Layout package, makes responsive, attractive design easy.
-- FontAwesome 5.0.13: _Easy_ fonts and icons.
+- Bourbon: SASS Mixins that smooth out CSS development.
+- Neat: Bourbon-based CSS grid system, used for organizing content.
 
 ## 9 Attributions and Works Cited
 
