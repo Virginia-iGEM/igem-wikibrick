@@ -1,6 +1,5 @@
-@import "neat";
 @import "igemwiki-override";
-
+@import "neat";
 
 /* Begin actual Virginia iGEm 2018 Code */
 
@@ -68,6 +67,7 @@ img {
     max-width: 100%;
     overflow: hidden;
 }
+
 header {
     @include top-stick;
     background-color: white;
@@ -76,6 +76,7 @@ header {
     background-color: $dark-background-color;
     color: $text-light;
     box-shadow: 0px -10px 8px #888888;
+    
     ul.nav {
         $grid: ( 
             columns: 9,
@@ -83,22 +84,37 @@ header {
         );
 
         @include grid-container;
-
+        
+        
         li {
             @include grid-column(1, $grid);
             list-style: none;
             text-align: center;
             border: 2px solid $dark-background-color;
             border-radius: 4px;
+            font-family: "Lato";
             &:hover {
                 background-color: $light-accent-color;
                 border-color: $light-accent-color;
                 color: $text-dark;
             }
-            li.dropdown {
+        }
+        
+        
+        .dropdown-menu {
+            font-family: "Lato";
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            float: left;
+            overflow: hidden;
             }
         }
-    }
+
+    
 }
 .content {
     padding: 20px 20px;

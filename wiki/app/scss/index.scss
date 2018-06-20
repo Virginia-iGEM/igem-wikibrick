@@ -1,5 +1,4 @@
 @import "styles";
-@import "neat";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,900italic,500italic,500,400italic);
 
 .interactive {
@@ -21,7 +20,8 @@
 }
 
 .category-gallery {
-    background-color: #bd337b; //pasion fruit
+    color: black;
+
     $grid: (
         gutter: 30px,
         media: 1000px,
