@@ -1,4 +1,5 @@
 footer {
+    $footer-height: 100px; // Footer height
     @include grid-container;
     background-color: $dark-background-color;
     border-top: 3px solid $accent-color;

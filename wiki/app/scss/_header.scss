@@ -1,4 +1,5 @@
 header {
+    $nav-height: 60px; // Navbar height
     @include top-stick;
     nav {
         @include block-height($nav-height);
