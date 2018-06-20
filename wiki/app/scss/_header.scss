@@ -1,0 +1,49 @@
+header {
+    @include top-stick;
+    nav {
+        @include block-height($nav-height);
+        float: right;
+        //padding: 10px 10px;
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li {
+                float: left;
+                position: relative;
+                @include block-height($nav-height);
+                a, a:visited {
+                    @include easeOutAll(0.2s);
+                    display: inline-block;
+                    padding: 0 20px;
+                    background: $dark-background-color;
+                    color: $text-light;
+                    text-decoration: none;
+                    &:hover{
+                        background: $accent-color;
+                        color: $link-color;
+                    }
+                    &:not(:only-child):after {
+                        padding-left: 4px;
+                        content: ' ▾';
+                    }
+                }
+                ul {
+                    display: none;
+                    position: absolute;
+                    min-width: 160px;
+                    li {
+                        a {
+                            padding: 15px;
+                            line-height: 20px;
+                        }
+                    }
+                }
+                &:focus > ul, &:hover > ul {
+                    display: block;
+                }
+                
+            }
+        }
+    }
+}

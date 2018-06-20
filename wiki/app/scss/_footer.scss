@@ -1,0 +1,14 @@
+footer {
+    @include grid-container;
+    background-color: $dark-background-color;
+    border-top: 3px solid $accent-color;
+    color: $text-light;
+    padding: 25px;
+
+    div {
+        @include grid-column(6);
+        @include block-height($footer-height);
+
+        text-align: center;
+    }
+}

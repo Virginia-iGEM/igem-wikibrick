@@ -2,8 +2,6 @@
 @import "neat";
 @import "igemwiki-override";
 
-
-
 /* Begin actual Virginia iGEm 2018 Code */
 
 /* UVA Colors
@@ -35,6 +33,7 @@ $text-dark: #FFF0EF;
 $link-color: #FBB645;
 */
 
+// Current site colors
 $dark-background-color: rgb(88, 88, 88);
 $light-background-color: rgb(255, 253, 235);
 $accent-color: rgb(56, 189, 175);
@@ -42,6 +41,17 @@ $light-accent-color: rgb(150, 223, 215);
 $text-light: rgb(255, 253, 235);
 $text-dark: rgb(105, 105, 105);
 $link-color: rgb(255, 218, 159);
+
+$breakpoint: 1000px; // If the screen is under this width, switch to mobile view
+$nav-height: 60px; // Navbar height
+$footer-height: 100px; // Footer height
+
+@mixin easeOutAll($time) {
+  -webkit-transition: all $time ease-out;
+  -moz-transition: all $time ease-out;
+  -o-transition: all $time ease-out;
+  transition: all $time ease-out;
+}
 
 @mixin img-circular {
     border-radius: 50%;
@@ -53,69 +63,25 @@ $link-color: rgb(255, 218, 159);
     z-index: 99;
 }
 
+@mixin block-height($height) {
+    line-height: $height;
+    height: $height;
+}
+
 * {
     margin: 0;
     padding: 0;
     border: 0;
 }
-.container {
-    //padding: 80px 120px;
-}
-
-body {
-    margin: 0px;
-}
 
 img {
+    width: auto; 
+    height: auto;
+    max-height: 100%;
     max-width: 100%;
     overflow: hidden;
 }
 
-header {
-    @include top-stick;
-    nav {
-        $nav-height: 60px;
-        float: right;
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            li {
-                float: left;
-                position: relative;
-                a, a:visited {
-                    display: block;
-                    padding: 0 20px;
-                    line-height: $nav-height;
-                    background: $dark-background-color;
-                    color: $text-light;
-                    text-decoration: none;
-                    &:hover{
-                        background: $accent-color;
-                        color: $link-color;
-                    }
-                    &:not(:only-child):after {
-                        padding-left: 4px;
-                        content: ' ▾';
-                    }
-                }
-                ul {
-                    display: none;
-                    position: absolute;
-                    min-width: 160px;
-                    a {
-                        padding: 15px;
-                        line-height: 20px;
-                    }
-                }
-                &:focus > ul, &:hover > ul {
-                    display: block;
-                }
-                
-            }
-        }
-    }
-}
 .interactive{
     /*need to set grid_media so it will resize based on mobile/desktop versions*/
     /*@include grid-container;*/
@@ -158,20 +124,5 @@ header {
     
 }
 
-footer {
-    @include grid-container;
-    background-color: $dark-background-color;
-    border-top: 3px solid $accent-color;
-    color: $text-light;
-    padding: 25px;
-
-    div {
-        @include grid-column(6);
-
-        text-align: center;
-    }
-}
-
-a:link {
-    color: $link-color;
-}
+@import "header";
+@import "footer";
