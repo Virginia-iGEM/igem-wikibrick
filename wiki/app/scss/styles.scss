@@ -71,50 +71,46 @@ img {
 }
 
 header {
-    $navigation-height: 60px;
     @include top-stick;
-    background-color: white;
-    border-bottom: 3px solid $accent-color;
-    padding: 25px;
-    background-color: $dark-background-color;
-    color: $text-light;
-    box-shadow: 0px -10px 8px #888888;
     nav {
+        $nav-height: 60px;
+        float: right;
         ul {
-            > li{
-                background: $dark-background-color;
-                display: block;
-                line-height: $navigation-height;
-                overflow: hidden;
-                padding-right: 20px;
-                text-align: right;
-                width: 100%;
-                z-index: 999;
-                &:focus, &:hover {
-                    background-color: $light-accent-color;
-                    border-color: $light-accent-color;
-                    color: $text-dark;
-                }
-                a {
-                    color: $accent-color;
-                    display: inline-block;
-                    outline: none;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li {
+                float: left;
+                position: relative;
+                a, a:visited {
+                    display: block;
+                    padding: 0 20px;
+                    line-height: $nav-height;
+                    background: $dark-background-color;
+                    color: $text-light;
                     text-decoration: none;
-
-                    &:focus, &:hover {
+                    &:hover{
+                        background: $accent-color;
                         color: $link-color;
                     }
-                }
-            }
-            > li.dropdown {
-                overflow: visible;
-                > li {
-                    > a::after {
-                        @include position(absolute, auto -0.4em auto auto);
-                        color: $accent-color;
-                        content: "\25BE";
+                    &:not(:only-child):after {
+                        padding-left: 4px;
+                        content: ' ▾';
                     }
                 }
+                ul {
+                    display: none;
+                    position: absolute;
+                    min-width: 160px;
+                    a {
+                        padding: 15px;
+                        line-height: 20px;
+                    }
+                }
+                &:focus > ul, &:hover > ul {
+                    display: block;
+                }
+                
             }
         }
     }
