@@ -16,7 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.7",
     "fontawesome": "^5.0.13",
     "bourbon": "^5.0.1",
     "neat": "^2.1.0"
