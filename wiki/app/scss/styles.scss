@@ -1,5 +1,6 @@
-@import "igemwiki-override";
 @import "neat";
+@import "igemwiki-override";
+
 
 /* Begin actual Virginia iGEm 2018 Code */
 
@@ -32,11 +33,11 @@ $text-dark: #FFF0EF;
 $link-color: #FBB645;
 */
 
-$dark-background-color:rgb(58, 58, 58);
+$dark-background-color:white;
 $light-background-color: white;
 $accent-color: rgb(70, 70, 70);
 $light-accent-color: rgb(148, 148, 148);
-$text-light: rgb(236, 236, 236);
+$text-light: rgb(105, 105, 105);
 $text-dark: rgb(105, 105, 105);
 $link-color: rgb(255, 218, 159);
 
@@ -50,51 +51,13 @@ $link-color: rgb(255, 218, 159);
     z-index: 99;
 }
 
-@mixin shadow-1 {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
-
-@mixin shadow-2 {
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-
-@mixin shadow-3 {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-}
-
-@mixin shadow-4 {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
-
-@mixin shadow-5 {
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-}
-
-@mixin innershadow-1 {
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
-
-@mixin innershadow-2 {
-    box-shadow: inset 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
-
-@mixin innershadow-3 {
-    box-shadow: inset 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-}
-
-@mixin innershadow-4 {
-    box-shadow: inset 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
-
-@mixin innershadow-5 {
-    box-shadow: inset 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-}
-
-
 * {
     margin: 0;
     padding: 0;
     border: 0;
+}
+.container {
+    //padding: 80px 120px;
 }
 
 body {
@@ -109,61 +72,53 @@ img {
 header {
     @include top-stick;
     background-color: white;
-    border-bottom: 1px solid $accent-color;
+    border-bottom: 3px solid $accent-color;
     padding: 25px;
-    background-color: $light-background-color;
+    background-color: $dark-background-color;
     color: $text-light;
     box-shadow: 0px -10px 8px #888888;
-    @include shadow-1;
     ul.nav {
         $grid: ( 
             columns: 9,
             gutter: 10px
         );
+        $other-custom-grid-for-print: (
+            columns: 14,
+            gutter: 1.5rem,
+            media: print,
+        );
 
         @include grid-container;
-        
-        
-        li {
-            @include grid-column(1, $grid);
+
+        li{
+            /*@include grid-column(1, $grid ); */
             list-style: none;
             text-align: center;
-            border: 1px solid $light-background-color;
+            border: 2px solid $dark-background-color;
             border-radius: 4px;
-            font-family: "Lato";
+            z-index: 0;
+            position: relative;
+            display: block;
             &:hover {
                 background-color: $light-accent-color;
                 border-color: $light-accent-color;
                 color: $text-dark;
             }
+            
         }
-        
-        
-        .dropdown-menu {
-            font-family: "Lato";
-            display: none;
-            position: absolute;
-            background-color: #f1f1f1;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            float: left;
-            overflow: hidden;
-            }
-        }
-
-    
+    }
 }
 .content {
-    padding: 20px 15%;
+    padding: 20px 20px;
     background-color: $light-background-color;
     color: $text-dark;
-    border-bottom: 1px solid $accent-color;
+    border-left: 10rem solid #ebebeb;
+    border-right: 10rem solid #ebebeb;
 }
 footer {
-    @include innershadow-3;
     @include grid-container;
     background-color: $dark-background-color;
+    border-top: 3px solid $accent-color;
     color: $text-light;
     padding: 25px;
 
