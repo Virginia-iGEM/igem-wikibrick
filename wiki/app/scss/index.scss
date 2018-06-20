@@ -5,16 +5,15 @@
     border-bottom: 1px solid $accent-color;
     background-color: white;
     color: $text-dark;
-    height: 600px;
+    height: 700px;
     background-image: url('../images/mountains.jpg');
     background-size: cover;
     font-size: 2rem;
     font-family: "Lato";
 }
-
 .text{
     font-family: "Lato";
-    font-size: 1rem;
+    font-size: 1.25rem;
     color: $text-dark;
 }
 
@@ -23,11 +22,10 @@
     color: white;
     text-align: center;
     background-color: #bd337b; //pasion fruit
+    height: 200px;
 }
-
 .category-gallery {
     color: black;
-
     $grid: (
         gutter: 30px,
         media: 1000px,

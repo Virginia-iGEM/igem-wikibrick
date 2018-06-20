@@ -1,7 +1,7 @@
 @import "bourbon";
 @import "neat";
 @import "igemwiki-override";
-
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,900italic,500italic,500,400italic);
 
 
 /* Begin actual Virginia iGEm 2018 Code */
@@ -25,7 +25,8 @@ $text-dark: #001C4E;
 $link-color: #3DD4DF;
 */
 
-/* Passion Fruit Colors
+/*Passion Fruit Colors*/
+/*
 $dark-background-color:#FAF4E0;
 $light-background-color:rgb(128, 39, 81);
 $accent-color: #F5287F;
@@ -35,13 +36,15 @@ $text-dark: #FFF0EF;
 $link-color: #FBB645;
 */
 
+
 $dark-background-color: rgb(88, 88, 88);
 $light-background-color: rgb(255, 253, 235);
 $accent-color: rgb(56, 189, 175);
 $light-accent-color: rgb(150, 223, 215);
-$text-light: rgb(255, 253, 235);
+$text-light: rgb(255, 253, 255);
 $text-dark: rgb(105, 105, 105);
 $link-color: rgb(255, 218, 159);
+
 
 @mixin img-circular {
     border-radius: 50%;
@@ -52,14 +55,15 @@ $link-color: rgb(255, 218, 159);
     top: 0;
     z-index: 99;
 }
-
+/*Applies to all*/
 * {
+    font-family: "Lato";
     margin: 0;
     padding: 0;
     border: 0;
 }
 .container {
-    //padding: 80px 120px;
+    /*padding: 80px 120px;*/
 }
 
 body {
@@ -80,6 +84,7 @@ header {
             list-style: none;
             margin: 0;
             padding: 0;
+            /*navigation bar*/
             li {
                 float: left;
                 position: relative;
@@ -116,37 +121,13 @@ header {
         }
     }
 }
-.interactive{
-    /*need to set grid_media so it will resize based on mobile/desktop versions*/
-    /*@include grid-container;*/
-    $my-content-grid:(
-        columns: 2,
-        gutter: 12px,
-        direction: ltr, /*left to right*/
-        );
-    @include grid-column(2);
-    @include grid-container; /*clearfix*/
-}
-/*
-.text{
 
-}
-*/
 .content { /*This is close to the bottom with the circles*/
     /*padding: 20px 20px;*/
-    /*background-color: $light-accent-color;*/
-    color: black;
-    /*
+    color: $light-accent-color;
+    background-color:$dark-background-color;
     border-left: 10rem solid #ebebeb;
     border-right: 10rem solid #ebebeb;
-    */
-    /*
-    $neat-grid: (
-        columns: 12,
-        gutter: 20px,
-        direction: ltr,
-        );
-        */
     
     div.interactive{    
         @include grid-column(4);
@@ -163,7 +144,7 @@ footer {
     background-color: $dark-background-color;
     border-top: 3px solid $accent-color;
     color: $text-light;
-    padding: 25px;
+    /*padding: 25px;*/
 
     div {
         @include grid-column(6);
