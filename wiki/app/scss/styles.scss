@@ -3,6 +3,7 @@
 @import "igemwiki-override";
 
 
+
 /* Begin actual Virginia iGEm 2018 Code */
 
 /* UVA Colors
@@ -115,11 +116,48 @@ header {
         }
     }
 }
-.content {
-    padding: 30px 15%;
-    background-color: $light-background-color;
-    color: $text-dark;
+.interactive{
+    /*need to set grid_media so it will resize based on mobile/desktop versions*/
+    /*@include grid-container;*/
+    $my-content-grid:(
+        columns: 2,
+        gutter: 12px,
+        direction: ltr, /*left to right*/
+        );
+    @include grid-column(2);
+    @include grid-container; /*clearfix*/
 }
+/*
+.text{
+
+}
+*/
+.content { /*This is close to the bottom with the circles*/
+    /*padding: 20px 20px;*/
+    /*background-color: $light-accent-color;*/
+    color: black;
+    /*
+    border-left: 10rem solid #ebebeb;
+    border-right: 10rem solid #ebebeb;
+    */
+    /*
+    $neat-grid: (
+        columns: 12,
+        gutter: 20px,
+        direction: ltr,
+        );
+        */
+    
+    div.interactive{    
+        @include grid-column(4);
+        text-align: center;
+    }
+    div.text{
+        @include grid-column(8);
+    }
+    
+}
+
 footer {
     @include grid-container;
     background-color: $dark-background-color;
@@ -128,7 +166,7 @@ footer {
     padding: 25px;
 
     div {
-        @include grid-column(4);
+        @include grid-column(6);
 
         text-align: center;
     }
