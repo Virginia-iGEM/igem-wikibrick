@@ -1,5 +1,6 @@
 header {
     $nav-height: 60px; // Navbar height
+    /*Keeps the nav bar sticking on the top*/ 
     @include top-stick;
     nav {
         @include block-height($nav-height);
@@ -12,8 +13,11 @@ header {
             li {
                 float: left;
                 position: relative;
+                /*makes all the nav bar the same*/
                 @include block-height($nav-height);
+                /*a, related to link*/
                 a, a:visited {
+                	/*transition time*/
                     @include easeOutAll(0.2s);
                     display: inline-block;
                     padding: 0 20px;
@@ -24,12 +28,14 @@ header {
                         background: $accent-color;
                         color: $link-color;
                     }
+                    /*adds the arrow on the nav bar, selects not only-child*/
                     &:not(:only-child):after {
                         padding-left: 4px;
                         content: ' ▾';
                     }
                 }
                 ul {
+                	/*remains hidden*/
                     display: none;
                     position: absolute;
                     min-width: 160px;

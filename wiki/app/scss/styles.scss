@@ -95,7 +95,6 @@ img {
         );
     @include grid-column(2);
     @include grid-container; /*clearfix*/
-}
     color: $light-accent-color;
     background-color:$dark-background-color;
     border-left: 10rem solid #ebebeb;
