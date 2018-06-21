@@ -1,4 +1,5 @@
 header {
+    // Establish variables
     $nav-height: 60px; // Navbar height
     $nav-background-color: $light-background-color;
     $nav-text-color: $text-dark;
@@ -12,15 +13,12 @@ header {
         gutter: 0px,
     );
 
-    @include top-stick;
-    background-color: $nav-background-color;
+    @include top-stick; // Navbar sticks to top of screen
+
     nav {
-        @include block-height($nav-height);
+        @include block-height($nav-height); // Set container and line height to nav-height. Centers and 
         width: 100%;
 
-        img {
-
-        }
 
         //padding: 10px 10px;
         ul {
@@ -37,8 +35,13 @@ header {
                 position: relative;
                 @include block-height($nav-height);
                 a, a:visited {
+                    img {
+                        margin-right: 10px;
+                        max-height: 70%;
+                    }
                     @include easeOutAll(0.2s);
-                    display: inline-block;
+                    display: flex;
+                    align-items: center;
                     padding: 0 20px;
                     height: 100%;
                     width: 100%;
