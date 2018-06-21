@@ -121,15 +121,14 @@ body {
     width: auto;
     height: auto;
     @include grid-container;
+    @include grid-visual;
     
     div.interactive{    
         @include grid-column(4, $grid-content);
-        @include grid-visual;
         text-align: center;
     }
     div.text{
         @include grid-column(8, $grid-content);
-        @include grid-visual;
         h1 {
             padding: 3% 1%;
         }

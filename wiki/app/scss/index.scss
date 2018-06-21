@@ -53,7 +53,7 @@
 .petri-dish {
     @include circular;
     background-color: $background-dark-color;
-    width: 90%;
-    height: 90%;
+    width: 500px;
+    height: 500px;
     margin: 2%;
 }
