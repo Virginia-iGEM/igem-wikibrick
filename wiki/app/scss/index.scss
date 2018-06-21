@@ -5,7 +5,7 @@
     border-bottom: 1px solid $accent-color;
     background-color: white;
     color: $text-dark-color;
-    height: 700px;
+    //height: 700px;
     background-image: url('../images/mountains.jpg');
     background-size: cover;
 }
@@ -25,19 +25,35 @@
         @include grid-media($category-grid) {
             @include grid-column(2);
         }
-
         text-align: center;
 
-        img {
-            @include img-circular;
-            border: 10px solid transparent;
-            margin-bottom: 25px;
-            width: 90%;
-            height: 90%;
-            opacity: 0.9;
-            &:hover {
-                border-color: $accent-color;
+        a {
+            p {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: -99;
+            }
+
+            img {
+                @include circular;
+                transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+                margin-bottom: 25px;
+                width: 90%;
+                height: 90%;
+                &:hover {
+                    @include shadow-2;
+                }
             }
         }
     }
+}
+
+.petri-dish {
+    @include circular;
+    background-color: $background-dark-color;
+    width: 90%;
+    height: 90%;
+    margin: 2%;
 }

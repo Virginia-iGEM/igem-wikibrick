@@ -16,6 +16,7 @@ header {
     );
 
     @include top-stick; // Navbar sticks to top of screen
+    @include shadow-2;
 
     nav {
         @include block-height($nav-height); // Set container and line height to nav-height. Centers and 
@@ -50,9 +51,12 @@ header {
                     background: $nav-background-color;
                     color: $nav-text-color;
                     text-decoration: none;
+                    white-space: nowrap;
                     &:hover{
-                        background: $nav-accent-color;
-                        color: $nav-link-color;
+                        //background: $nav-accent-color;
+                        color: $nav-accent-color;
+                        text-shadow: 0px 0px 8px $nav-accent-color;
+                        //box-shadow: inset 0px 0px 5px $nav-accent-color;
                     }
                     &:not(:only-child):after {
                         padding-left: 4px;
@@ -72,6 +76,7 @@ header {
                     visibility: hidden;
                     opacity: 0;
                     transform: translateY(-2em);
+                    @include shadow-2;
                     transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
                 }
                 &:focus > ul, &:hover > ul {
