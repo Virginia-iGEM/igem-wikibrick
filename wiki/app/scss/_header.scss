@@ -70,9 +70,6 @@ header {
                     }
                 }
                 ul {
-                	/*remains hidden*/
-                    display: none;
-                ul { 
                     @include grid-container;
                     position: absolute;
                     li {
@@ -82,6 +79,7 @@ header {
                     // For animation
                     //display: none;
                     z-index: -1;
+                	/*remains hidden*/
                     visibility: hidden;
                     opacity: 0;
                     transform: translateY(-2em);
@@ -97,7 +95,6 @@ header {
                     transform: translateY(0%); // Slides down
                     transition-delay: 0s, 0s, 0.3s;
                 }
-                
             }
         }
     }
