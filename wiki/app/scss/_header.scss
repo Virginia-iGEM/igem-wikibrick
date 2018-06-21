@@ -57,16 +57,29 @@ header {
                         content: ' ▾';
                     }
                 }
-                ul {
+                ul { 
                     @include grid-container;
-                    display: none;
                     position: absolute;
                     li {
                         @include grid-column(1, $nav-grid-dropdown);
+                        overflow: hidden;
                     }
+                    // For animation
+                    //display: none;
+                    z-index: -1;
+                    visibility: hidden;
+                    opacity: 0;
+                    transform: translateY(-2em);
+                    transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
                 }
                 &:focus > ul, &:hover > ul {
-                    display: block;
+                    // All for animation
+                    //display: block;
+                    z-index: 1; // Is placed underneath navbar
+                    visibility: visible; // Becomes visible
+                    opacity: 1; // Fades in
+                    transform: translateY(0%); // Slides down
+                    transition-delay: 0s, 0s, 0.3s;
                 }
                 
             }
