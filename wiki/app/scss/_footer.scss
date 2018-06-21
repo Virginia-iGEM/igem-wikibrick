@@ -1,15 +1,29 @@
 footer {
-    $footer-height: 100px; // Footer height
+    $footer-height: 75px; // Footer height
     @include grid-container;
     background-color: $background-dark-color;
     border-top: 3px solid $accent-color;
     color: $text-light-color;
     padding: 25px;
+    //@include grid-visual;
 
-    div {
-        @include grid-column(6);
+    div.scroll-up {
+        @include grid-column(2);
         @include block-height($footer-height);
 
         text-align: center;
+    }
+    div.footer-name{
+        @include grid-column(6);
+        @include block-height($footer-height);
+
+        text-align: left;
+    }
+    div.footer-logo{
+        @include grid-column(6);
+        @include block-height($footer-height);
+
+        text-align: left;
+
     }
 }

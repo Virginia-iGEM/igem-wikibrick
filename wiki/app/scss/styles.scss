@@ -84,13 +84,12 @@ $breakpoint: 1000px; // If the screen is under this width, switch to mobile view
     top: 0;
     z-index: 99;
 }
-/*Applies to all*/
 
 @mixin block-height($height) {
     line-height: $height;
     height: $height;
 }
-
+/*Applies to all*/
 * {
     font-family: "Lato";
     margin: 0;
@@ -122,7 +121,7 @@ body {
     width: auto;
     height: auto;
     @include grid-container;
-    @include grid-visual;
+    //@include grid-visual;
     
     div.interactive{    
         @include grid-column(4, $grid-content);
