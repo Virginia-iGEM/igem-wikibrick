@@ -4,21 +4,19 @@
 .interactive {
     border-bottom: 1px solid $accent-color;
     background-color: white;
-    color: $text-dark;
+    color: $text-dark-color;
     height: 700px;
     background-image: url('../images/mountains.jpg');
     background-size: cover;
 }
 
 .category-gallery {
-    //@include grid-column(12);
-    margin: 5% 3%;
     $category-grid: (
         gutter: 30px,
         media: 1000px,
     );
+    padding: 2% 5%;
 
-    @include grid-collapse($category-grid);
     @include grid-container;
 
     div {

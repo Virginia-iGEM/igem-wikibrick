@@ -1,8 +1,10 @@
 header {
     // Establish variables
     $nav-height: 60px; // Navbar height
-    $nav-background-color: $dark-background-color;
-    $nav-text-color: $text-light;
+    $nav-background-color: $background-dark-color;
+    $nav-text-color: $text-light-color;
+    $nav-accent-color: $accent-light-color;
+    $nav-link-color: $link-color;
 
     $nav-grid: (
         columns: 8,
@@ -49,8 +51,8 @@ header {
                     color: $nav-text-color;
                     text-decoration: none;
                     &:hover{
-                        background: $accent-color;
-                        color: $link-color;
+                        background: $nav-accent-color;
+                        color: $nav-link-color;
                     }
                     &:not(:only-child):after {
                         padding-left: 4px;

@@ -6,42 +6,42 @@
 /* Begin actual Virginia iGEm 2018 Code */
 
 /* UVA Colors
-$dark-background-color:     #232D4B;
-$light-background-color:    #ffffff;
+$background-dark-color:     #232D4B;
+$background-light-color:    #ffffff;
 $accent-color:              #E57200;
 $light-accent-color:        rgb(255, 191, 128);
 $text-light:                #ffffff;
-$text-dark:                 #666666;
+$text-dark-color:                 #666666;
 $link-color:                #EB5F0C;
 */
 
 /* Cherenkov Colors
-$dark-background-color:#282828;
-$light-background-color:#C3C3D8;
+$background-dark-color:#282828;
+$background-light-color:#C3C3D8;
 $accent-color: #BFFBF9;
 $text-light: #E8F9F9;
-$text-dark: #001C4E;
+$text-dark-color: #001C4E;
 $link-color: #3DD4DF;
 */
 
 /*Passion Fruit Colors*/
 /*
-$dark-background-color:#FAF4E0;
-$light-background-color:rgb(128, 39, 81);
+$background-dark-color:#FAF4E0;
+$background-light-color:rgb(128, 39, 81);
 $accent-color: #F5287F;
 $light-accent-color: rgb(255, 142, 189);
 $text-light: #1E0811;
-$text-dark: #FFF0EF;
+$text-dark-color: #FFF0EF;
 $link-color: #FBB645;
 */
 
 // Current site colors
-$dark-background-color: rgb(88, 88, 88);
-$light-background-color: rgb(255, 253, 235);
+$background-dark-color: rgb(37, 37, 37);
+$background-light-color: rgb(247, 245, 233);
 $accent-color: rgb(44, 106, 148);
-$light-accent-color: rgb(44, 106, 148);
-$text-light: rgb(255, 253, 255);
-$text-dark: rgb(105, 105, 105);
+$accent-light-color: rgb(0, 163, 212);
+$text-light-color: rgb(255, 253, 255);
+$text-dark-color: rgb(129, 127, 116);
 $link-color: rgb(255, 218, 159);
 
 $breakpoint: 1000px; // If the screen is under this width, switch to mobile view
@@ -89,8 +89,10 @@ img {
         columns: 12,
         gutter: 60px,
     );
-    color: $text-dark;
-    background-color:$light-background-color;
+    color: $text-dark-color;
+    background-color:$background-light-color;
+    min-height: 100%;
+    padding: 3% 5%;
     
     div.interactive{    
         @include grid-column(4, $grid-content);
