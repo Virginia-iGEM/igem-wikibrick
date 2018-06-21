@@ -1,8 +1,8 @@
 header {
     // Establish variables
     $nav-height: 60px; // Navbar height
-    $nav-background-color: $light-background-color;
-    $nav-text-color: $text-dark;
+    $nav-background-color: $dark-background-color;
+    $nav-text-color: $text-light;
 
     $nav-grid: (
         columns: 8,

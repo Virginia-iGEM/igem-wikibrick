@@ -38,8 +38,8 @@ $link-color: #FBB645;
 // Current site colors
 $dark-background-color: rgb(88, 88, 88);
 $light-background-color: rgb(255, 253, 235);
-$accent-color: rgb(64, 154, 214);
-$light-accent-color: rgb(151, 205, 241);
+$accent-color: rgb(44, 106, 148);
+$light-accent-color: rgb(44, 106, 148);
 $text-light: rgb(255, 253, 255);
 $text-dark: rgb(105, 105, 105);
 $link-color: rgb(255, 218, 159);
@@ -84,30 +84,27 @@ img {
     overflow: hidden;
 }
 
-.interactive{
-    /*need to set grid_media so it will resize based on mobile/desktop versions*/
-    /*@include grid-container;*/
-    $my-content-grid:(
-        columns: 2,
-        gutter: 12px,
-        direction: ltr, /*left to right*/
-        );
-    @include grid-column(2);
-    @include grid-container; /*clearfix*/
-}
-
 .content {
-    color: $light-accent-color;
-    background-color:$dark-background-color;
-    border-left: 10rem solid #ebebeb;
-    border-right: 10rem solid #ebebeb;
+    $grid-content: (
+        columns: 12,
+        gutter: 60px,
+    );
+    color: $text-dark;
+    background-color:$light-background-color;
     
     div.interactive{    
-        @include grid-column(4);
+        @include grid-column(4, $grid-content);
         text-align: center;
     }
     div.text{
-        @include grid-column(8);
+        @include grid-column(8, $grid-content);
+        h1 {
+            margin: 3% 1%;
+        }
+        p {
+            margin: 1%;
+            line-height: 1.5em;
+        }
     }
     
 }

@@ -8,36 +8,23 @@
     height: 700px;
     background-image: url('../images/mountains.jpg');
     background-size: cover;
-    font-size: 2rem;
-    font-family: "Lato";
-}
-.text{
-    font-family: "Lato";
-    font-size: 1.25rem;
-    color: $text-dark;
 }
 
-.row{
-    font-family: "Lato";
-    color: white;
-    text-align: center;
-    background-color: #bd337b; //pasion fruit
-    height: 200px;
-}
 .category-gallery {
-    color: black;
-    $grid: (
+    //@include grid-column(12);
+    margin: 5% 3%;
+    $category-grid: (
         gutter: 30px,
         media: 1000px,
-        direction: ltr
     );
 
+    @include grid-collapse($category-grid);
     @include grid-container;
 
     div {
         @include grid-column(6);
 
-        @include grid-media($grid) {
+        @include grid-media($category-grid) {
             @include grid-column(2);
         }
 
@@ -51,7 +38,7 @@
             height: 90%;
             opacity: 0.9;
             &:hover {
-                border-color: #f1f1f1;
+                border-color: $accent-color;
             }
         }
     }
