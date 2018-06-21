@@ -15,9 +15,9 @@
         gutter: 30px,
         media: 1000px,
     );
-    padding: 2% 5%;
 
     @include grid-container;
+    margin: 3% 5%;
 
     div {
         @include grid-column(6);

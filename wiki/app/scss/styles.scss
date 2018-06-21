@@ -84,13 +84,16 @@ img {
     overflow: hidden;
 }
 
+body {
+    background-color:$background-light-color;
+}
+
 .content {
     $grid-content: (
         columns: 12,
         gutter: 60px,
     );
     color: $text-dark-color;
-    background-color:$background-light-color;
     min-height: 100%;
     padding: 3% 5%;
     
