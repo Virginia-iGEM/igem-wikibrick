@@ -1,6 +1,8 @@
 header {
     // Establish variables
     $nav-height: 60px; // Navbar height
+    /*Keeps the nav bar sticking on the top*/ 
+    @include top-stick;
     $nav-background-color: $background-dark-color;
     $nav-text-color: $text-light-color;
     $nav-accent-color: $accent-light-color;
@@ -36,8 +38,11 @@ header {
                 @include grid-column(1, $nav-grid);
                 float: left;
                 position: relative;
+                /*makes all the nav bar the same*/
                 @include block-height($nav-height);
+                /*a, related to link*/
                 a, a:visited {
+                	/*transition time*/
                     img {
                         margin-right: 10px;
                         max-height: 70%;
@@ -58,11 +63,15 @@ header {
                         text-shadow: 0px 0px 8px $nav-accent-color;
                         //box-shadow: inset 0px 0px 5px $nav-accent-color;
                     }
+                    /*adds the arrow on the nav bar, selects not only-child*/
                     &:not(:only-child):after {
                         padding-left: 4px;
                         content: ' ▾';
                     }
                 }
+                ul {
+                	/*remains hidden*/
+                    display: none;
                 ul { 
                     @include grid-container;
                     position: absolute;
