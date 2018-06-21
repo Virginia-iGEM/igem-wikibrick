@@ -6,46 +6,67 @@
 /* Begin actual Virginia iGEm 2018 Code */
 
 /* UVA Colors
-$dark-background-color:     #232D4B;
-$light-background-color:    #ffffff;
+$background-dark-color:     #232D4B;
+$background-light-color:    #ffffff;
 $accent-color:              #E57200;
 $light-accent-color:        rgb(255, 191, 128);
 $text-light:                #ffffff;
-$text-dark:                 #666666;
+$text-dark-color:                 #666666;
 $link-color:                #EB5F0C;
 */
 
 /* Cherenkov Colors
-$dark-background-color:#282828;
-$light-background-color:#C3C3D8;
+$background-dark-color:#282828;
+$background-light-color:#C3C3D8;
 $accent-color: #BFFBF9;
 $text-light: #E8F9F9;
-$text-dark: #001C4E;
+$text-dark-color: #001C4E;
 $link-color: #3DD4DF;
 */
 
 /*Passion Fruit Colors*/
 /*
-$dark-background-color:#FAF4E0;
-$light-background-color:rgb(128, 39, 81);
+$background-dark-color:#FAF4E0;
+$background-light-color:rgb(128, 39, 81);
 $accent-color: #F5287F;
 $light-accent-color: rgb(255, 142, 189);
 $text-light: #1E0811;
-$text-dark: #FFF0EF;
+$text-dark-color: #FFF0EF;
 $link-color: #FBB645;
 */
 
 // Current site colors
-$dark-background-color: rgb(88, 88, 88);
-$light-background-color: rgb(255, 253, 235);
-$accent-color: rgb(56, 189, 175);
-$light-accent-color: rgb(150, 223, 215);
-$text-light: rgb(255, 253, 255);
-$text-dark: rgb(105, 105, 105);
+$background-dark-color: rgb(37, 37, 37);
+$background-light-color: rgb(247, 245, 233);
+$accent-color: rgb(44, 106, 148);
+$accent-light-color: rgb(0, 195, 255);
+$text-light-color: rgb(255, 253, 255);
+$text-dark-color: rgb(129, 127, 116);
 $link-color: rgb(255, 218, 159);
 
-
 $breakpoint: 1000px; // If the screen is under this width, switch to mobile view
+
+@mixin shadow-1 {
+
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+@mixin shadow-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+@mixin shadow-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+@mixin shadow-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+@mixin shadow-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
 
 @mixin easeOutAll($time) {
   -webkit-transition: all $time ease-out;
@@ -54,7 +75,7 @@ $breakpoint: 1000px; // If the screen is under this width, switch to mobile view
   transition: all $time ease-out;
 }
 
-@mixin img-circular {
+@mixin circular {
     border-radius: 50%;
 }
 
@@ -85,29 +106,49 @@ img {
     overflow: hidden;
 }
 
-.interactive{
-    /*need to set grid_media so it will resize based on mobile/desktop versions*/
-    /*@include grid-container;*/
-    $my-content-grid:(
-        columns: 2,
-        gutter: 12px,
-        direction: ltr, /*left to right*/
-        );
-    @include grid-column(2);
-    @include grid-container; /*clearfix*/
-    color: $light-accent-color;
-    background-color:$dark-background-color;
-    border-left: 10rem solid #ebebeb;
-    border-right: 10rem solid #ebebeb;
+
+body {
+    background-color:$background-light-color;
+}
+
+.content {
+    $grid-content: (
+        columns: 12,
+        gutter: 60px,
+        color: blue,
+    );
+    color: $text-dark-color;
+    padding: 3% 5%;
+    width: auto;
+    height: auto;
+    @include grid-container;
     
     div.interactive{    
-        @include grid-column(4);
+        @include grid-column(4, $grid-content);
+        @include grid-visual;
         text-align: center;
     }
     div.text{
-        @include grid-column(8);
+        @include grid-column(8, $grid-content);
+        @include grid-visual;
+        h1 {
+            padding: 3% 1%;
+        }
+        p {
+            margin: 1%;
+            line-height: 2em;
+        }
     }
     
+}
+
+a {
+    text-decoration: none;
+    color: $accent-color;
+    transition: all 0.2s ease-in-out 0s;
+    &:hover {
+        color: $accent-light-color;
+    }
 }
 
 @import "header";

@@ -1,16 +1,41 @@
 header {
+    // Establish variables
     $nav-height: 60px; // Navbar height
     /*Keeps the nav bar sticking on the top*/ 
     @include top-stick;
+    $nav-background-color: $background-dark-color;
+    $nav-text-color: $text-light-color;
+    $nav-accent-color: $accent-light-color;
+    $nav-link-color: $link-color;
+
+    $nav-grid: (
+        columns: 8,
+        gutter: 0px,
+    );
+    $nav-grid-dropdown: (
+        columns: 1,
+        gutter: 0px,
+    );
+
+    @include top-stick; // Navbar sticks to top of screen
+    @include shadow-2;
+
     nav {
-        @include block-height($nav-height);
-        float: right;
+        @include block-height($nav-height); // Set container and line height to nav-height. Centers and 
+        width: 100%;
+
+
         //padding: 10px 10px;
         ul {
+            * {
+                box-sizing: border-box;
+            }
+            @include grid-container;
             list-style: none;
             margin: 0;
             padding: 0;
             li {
+                @include grid-column(1, $nav-grid);
                 float: left;
                 position: relative;
                 /*makes all the nav bar the same*/
@@ -18,15 +43,25 @@ header {
                 /*a, related to link*/
                 a, a:visited {
                 	/*transition time*/
+                    img {
+                        margin-right: 10px;
+                        max-height: 70%;
+                    }
                     @include easeOutAll(0.2s);
-                    display: inline-block;
+                    display: flex;
+                    align-items: center;
                     padding: 0 20px;
-                    background: $dark-background-color;
-                    color: $text-light;
+                    height: 100%;
+                    width: 100%;
+                    background: $nav-background-color;
+                    color: $nav-text-color;
                     text-decoration: none;
+                    white-space: nowrap;
                     &:hover{
-                        background: $accent-color;
-                        color: $link-color;
+                        //background: $nav-accent-color;
+                        color: $nav-accent-color;
+                        text-shadow: 0px 0px 8px $nav-accent-color;
+                        //box-shadow: inset 0px 0px 5px $nav-accent-color;
                     }
                     /*adds the arrow on the nav bar, selects not only-child*/
                     &:not(:only-child):after {
@@ -37,17 +72,30 @@ header {
                 ul {
                 	/*remains hidden*/
                     display: none;
+                ul { 
+                    @include grid-container;
                     position: absolute;
-                    min-width: 160px;
                     li {
-                        a {
-                            padding: 15px;
-                            line-height: 20px;
-                        }
+                        @include grid-column(1, $nav-grid-dropdown);
+                        overflow: hidden;
                     }
+                    // For animation
+                    //display: none;
+                    z-index: -1;
+                    visibility: hidden;
+                    opacity: 0;
+                    transform: translateY(-2em);
+                    @include shadow-2;
+                    transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
                 }
                 &:focus > ul, &:hover > ul {
-                    display: block;
+                    // All for animation
+                    //display: block;
+                    z-index: 1; // Is placed underneath navbar
+                    visibility: visible; // Becomes visible
+                    opacity: 1; // Fades in
+                    transform: translateY(0%); // Slides down
+                    transition-delay: 0s, 0s, 0.3s;
                 }
                 
             }

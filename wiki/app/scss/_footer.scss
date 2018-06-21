@@ -1,9 +1,9 @@
 footer {
     $footer-height: 100px; // Footer height
     @include grid-container;
-    background-color: $dark-background-color;
+    background-color: $background-dark-color;
     border-top: 3px solid $accent-color;
-    color: $text-light;
+    color: $text-light-color;
     padding: 25px;
 
     div {
