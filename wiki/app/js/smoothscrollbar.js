@@ -1,5 +1,3 @@
-
-
 $(window).scroll(function() {
     if ($(this).scrollTop() > 50 ) {
         $('.scrolltop:hidden').stop(true, true).fadeIn();
