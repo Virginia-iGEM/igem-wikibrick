@@ -121,6 +121,7 @@ body {
     width: auto;
     height: auto;
     @include grid-container;
+    background-color: $background-light-color;
     //@include grid-visual;
     
     div.interactive{    
@@ -141,7 +142,7 @@ body {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
     color: $accent-color;
     transition: all 0.2s ease-in-out 0s;
     &:hover {

@@ -1,4 +1,8 @@
 header {
+    box-sizing: border-box;
+    * {
+        box-sizing: border-box;
+    }
     // Establish variables
     $nav-height: 60px; // Navbar height
     /*Keeps the nav bar sticking on the top*/ 
@@ -23,18 +27,12 @@ header {
     nav {
         @include block-height($nav-height); // Set container and line height to nav-height. Centers and 
         width: 100%;
-
-
-        //padding: 10px 10px;
         ul {
-            * {
-                box-sizing: border-box;
-            }
             @include grid-container;
             list-style: none;
             margin: 0px;
             padding: 0px;
-            marign-left: 0px;
+            margin-left: 0px;
             margin-top: 0px;
             background-color: $nav-background-color;
             li {
