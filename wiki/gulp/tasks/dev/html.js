@@ -63,6 +63,12 @@ relative2absolute = function($, file) {
             a.attr('href', urls.standard.concat(path.basename(a.attr('href')).replace('.html', '')));
         })
 
+        // Unwrap head and body elements
+        unwrap = $('head, body').each(function () {
+            var u = $(this);
+            u.replaceWith(u.html());
+        })
+
         Promise.all([images, stylesheets, scripts, index, links]).then(resolve);
     });
 }
