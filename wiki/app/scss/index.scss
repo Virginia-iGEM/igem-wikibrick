@@ -3,7 +3,7 @@
 
 .interactive {
     //border-bottom: 1px solid $accent-color;
-    background-color: $background-light-color;
+    //background-color: $background-light-color;
     color: $text-dark-color;
     //height: 700px;
     //background-image: url('../images/mountains.jpg');
@@ -59,7 +59,7 @@
 .petri-dish {
     @include circular;
     background-color: $background-dark-color;
-    width: 500px;
-    height: 500px;
+    width: 200;
+    height: 200;
     margin: 2%;
 }
