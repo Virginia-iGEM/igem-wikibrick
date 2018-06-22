@@ -6,7 +6,6 @@
     //background-color: $background-light-color;
     color: $text-dark-color;
     //height: 700px;
-    //background-image: url('../images/mountains.jpg');
     background-size: cover;
 }
 
@@ -35,11 +34,6 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 z-index: 99; /*overlay text over*/
-   /*             float: left;
-                margin: 10px;
-                width: 100%;
-                height: 170px;
-                text-align: center;*/
             }
             img {
                 @include circular;
@@ -47,7 +41,6 @@
                 margin-bottom: 25px;
                 width: 90%;
                 height: 90%;
-                /*float:left;*/
                 &:hover {
                     @include shadow-2;
                 }
