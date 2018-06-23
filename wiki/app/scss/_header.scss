@@ -1,19 +1,15 @@
 header {
-    box-sizing: border-box;
-    * {
-        box-sizing: border-box;
-    }
     // Establish variables
-    $nav-height: 60px; // Navbar height
+    $nav-height: 3rem; // Navbar height
     /*Keeps the nav bar sticking on the top*/ 
-    @include top-stick;
     $nav-background-color: $background-dark-color;
     $nav-text-color: $text-light-color;
     $nav-accent-color: $accent-light-color;
     $nav-link-color: $link-color;
 
+    // Custom grids for navbar and dropdown
     $nav-grid: (
-        columns: 8,
+        columns: 8, // 1 column for each item
         gutter: 0px,
     );
     $nav-grid-dropdown: (
@@ -21,34 +17,43 @@ header {
         gutter: 0px,
     );
 
-    @include top-stick; // Navbar sticks to top of screen
-    @include shadow-2;
+    // BEGIN STYLING
+    &, * {
+        box-sizing: border-box; // Use box sizing for entire navbar to avoid clipping
+    }
+    // Stick to top of window
+    position: sticky;
+    top: 0;
+    z-index: 999;
 
     nav {
-        @include block-height($nav-height); // Set container and line height to nav-height. Centers and 
+        height: $nav-height;
         width: 100%;
+        display: block;
+        @include shadow-2;
         ul {
             @include grid-container;
             list-style: none;
-            margin: 0px;
-            padding: 0px;
-            margin-left: 0px;
-            margin-top: 0px;
+            //margin: 0px;
+            //padding: 0px;
+            //margin-left: 0px;
+            //margin-top: 0px;
             background-color: $nav-background-color;
             li {
                 @include grid-column(1, $nav-grid);
                 float: left;
                 position: relative;
-                /*makes all the nav bar the same*/
-                @include block-height($nav-height);
+                line-height: $nav-height; // Center text
+                height: $nav-height; // Set container height to navbar height
                 /*a, related to link*/
                 a, a:visited {
-                	/*transition time*/
                     img {
-                        margin-right: 10px;
-                        max-height: 70%;
+                        display: inline-block;
+                        padding: 0.5rem;
+                        max-height: 100%;
+                        height: auto;
+                        width: auto;
                     }
-                    @include easeOutAll(0.2s);
                     display: flex;
                     align-items: center;
                     padding: 0 20px;
@@ -56,15 +61,14 @@ header {
                     width: 100%;
                     background: $nav-background-color;
                     color: $nav-text-color;
-                    text-decoration: none;
-                    white-space: nowrap;
-                    &:hover{
-                        //background: $nav-accent-color;
-                        color: $nav-accent-color;
-                        text-shadow: 0px 0px 8px $nav-accent-color;
-                        //box-shadow: inset 0px 0px 5px $nav-accent-color;
+                    white-space: nowrap; // Text is occlude dinstead of wrapped
+                    // Re-add link glow to fix animation
+                    transition: all 0.2s ease-in-out;
+                    &:hover {
+                        color: $accent-light-color;
+                        text-shadow: 0px 0px 8px $accent-light-color;
                     }
-                    /*adds the arrow on the nav bar, selects not only-child*/
+                    /*adds the arrow to dropdowns, selects not only-child*/
                     &:not(:only-child):after {
                         padding-left: 4px;
                         content: ' ▾';
@@ -72,20 +76,20 @@ header {
                 }
                 ul {
                     @include grid-container;
+                    @include shadow-2;
                     position: absolute;
+
+                    // Slide-down animation
+                    z-index: -1; // Show up underneath the navbar
+                    visibility: hidden;
+                    opacity: 0;
+                    transform: translateY(-2em);
+                    transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+
                     li {
                         @include grid-column(1, $nav-grid-dropdown);
                         overflow: hidden;
                     }
-                    // For animation
-                    //display: none;
-                    z-index: -1;
-                	/*remains hidden*/
-                    visibility: hidden;
-                    opacity: 0;
-                    transform: translateY(-2em);
-                    @include shadow-2;
-                    transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
                 }
                 &:focus > ul, &:hover > ul {
                     // All for animation

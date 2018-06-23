@@ -2,11 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,900italic,500italic,500,400italic);
 
 .interactive {
-    //border-bottom: 1px solid $accent-color;
-    //background-color: $background-light-color;
     color: $text-dark-color;
-    //height: 700px;
-    background-size: cover;
 }
 
 .category-gallery {
@@ -26,24 +22,21 @@
         }
         text-align: center;
 
-        a {
-            
-            p {
-                position: relative;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: 99; /*overlay text over*/
-            }
-            img {
-                @include circular;
-                transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-                margin-bottom: 25px;
-                width: 90%;
-                height: 90%;
-                &:hover {
-                    @include shadow-2;
-                }
+        a p {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9; /*overlay text over*/
+        }
+        a img {
+            @include circular;
+            transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            margin-bottom: 25px;
+            width: 90%;
+            height: 90%;
+            &:hover {
+                @include shadow-2;
             }
         }
     }
@@ -52,7 +45,8 @@
 .petri-dish {
     @include circular;
     background-color: $background-dark-color;
-    width: 200;
-    height: 200;
-    margin: 2%;
+    width: 20rem;
+    height: 20rem;
+    margin: 10%;
+    position: sticky;
 }
