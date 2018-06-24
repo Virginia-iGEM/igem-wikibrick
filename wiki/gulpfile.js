@@ -38,7 +38,7 @@ gulp.task('build', gulp.parallel(buildtasks));
 gulp.task('default', gulp.series('dev', 'build'));
 
 // Live build runs dev and then uploads, will change in future
-gulp.task('publish', gulp.series('pushimages', 'build', 'pushcontent'));
+gulp.task('publish', gulp.series('push:images', 'build', 'push:content'));
 
 var target = require(global.targets).browsersync.development;
 

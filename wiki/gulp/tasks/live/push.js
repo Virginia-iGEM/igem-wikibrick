@@ -36,144 +36,146 @@ login = function() {
     })
 }
 
-// Upload everything but images
-uploadContent = function() {
-    return new Promise((resolve, reject) => {
-        // Mapping for index (home) page
-        const index = {
+// Mapping for index (home) page
+const index = [{
+    type: 'page',
+    fileName: path.resolve(__dirname, targets.uploadsrc.index),
+    page: 'INDEX'
+}];
+
+// Mapping for all standard HTML pages. Note use of Globby wildcards to find files.
+const getPages = globby([ targets.uploadsrc.pages ]).then(function (pages) {
+    return pages.map(function (page) {
+        return {
             type: 'page',
-            fileName: path.resolve(__dirname, targets.uploadsrc.index),
-            page: 'INDEX'
+            fileName: path.resolve(__dirname, page),
+            page: path.basename(page).replace('.html', '')
         }
+    })
+})
 
-        // Mapping for all standard HTML pages. Note use of Globby wildcards to find files.
-        const getPages = globby([ targets.uploadsrc.pages ]).then(function (pages) {
-            return pages.map(function (page) {
-                return {
-                    type: 'page',
-                    fileName: path.resolve(__dirname, page),
-                    page: path.basename(page).replace('.html', '')
-                }
-            })
+// Mapping for templates.
+const getTemplates = globby([ targets.uploadsrc.templates ]).then(function (templates) {
+    return templates.map(function (template) {
+        return {
+            type: 'template',
+            fileName: path.resolve(__dirname, template),
+            page: path.basename(template).replace('.html', '')
+        }
+    })
+})
+
+// Mapping for CSS
+const getCSS = globby([ targets.uploadsrc.css ]).then((stylesheets) => {
+    return stylesheets.map((stylesheet) => {
+        return {
+            type: 'stylesheet',
+            fileName: path.resolve(__dirname, stylesheet),
+            page: (path.basename(stylesheet).replace('.css', ''))
+        }
+    })
+})
+
+// Mapping for Javascript
+const getJS = globby([ targets.uploadsrc.js ]).then(scripts => scripts.map(script => ({
+    type: 'script',
+    fileName: path.resolve(__dirname, script),
+    page: path.basename(script).replace('.js', '')
+})))
+
+// Mapping for images
+const getImages = globby([ targets.uploadsrc.images ]).then(images => images.map(image => ({
+    type: 'image',
+    fileName: path.resolve(__dirname, image),
+    page: path.basename(image)
+})))
+
+/*var retryUpload = function(conf, retries) {
+    return new Promise((resolve, reject) => {
+        igemwiki.upload(conf).catch(error => {
+            retries--;
+            if (retries > 0) {
+                console.log("Upload failed, retrying upload...");
+                retryUpload(conf, retries);
+            }
+            else{
+                console.log("Retry count exceeded.")
+                throw error;
+                reject();
+            }
         })
+        .then(resolve)
+    })
+}*/
 
-        // Mapping for templates.
-        const getTemplates = globby([ targets.uploadsrc.templates ]).then(function (templates) {
-            return templates.map(function (template) {
-                return {
-                    type: 'template',
-                    fileName: path.resolve(__dirname, template),
-                    page: path.basename(template).replace('.html', '')
-                }
-            })
-        })
-
-        // Mapping for CSS
-        const getCSS = globby([ targets.uploadsrc.css ]).then((stylesheets) => {
-            return stylesheets.map((stylesheet) => {
-                return {
-                    type: 'stylesheet',
-                    fileName: path.resolve(__dirname, stylesheet),
-                    page: (path.basename(stylesheet).replace('.css', ''))
-                }
-            })
-        })
-
-        // Mapping for Javascript
-        const getJS = globby([ targets.uploadsrc.js ]).then(scripts => scripts.map(script => ({
-            type: 'script',
-            fileName: path.resolve(__dirname, script),
-            page: path.basename(script).replace('.js', '')
-        })))
-
+upload = function(promises) {
+    return new Promise((resolve, reject) => {
         // Run all mapping functions asynchronously with bluebird, 
         // generating an actual map list from the patterns we specified.
-        Promise.all([
-            Promise.resolve(index),
-            getPages,
-            getTemplates,
-            getCSS,
-            getJS
-        ]).then((confs) => {
-            confs = _.flatten(confs)
+        Promise.all(promises).then((confs) => {
+            confs = _.flatten(confs);
+            var imagemap = new Object(); // We don't necessarily need this for every kind of upload,
+            // but it's there for image uploads.
 
             // Encapsulate files in a configuration file compatible with igemwiki-api
             login(() => {}).then((jar) => {
                 confs = confs.map(c => ({
                     jar: loginjar,
                     type: c.type, // Type is a switch that determines how igemwiki-api uploads files
-                    dest: c.page, // Send files to the page specified under mapping
+                    dest: c.page, //Send files to the page specified under mapping
                     source: c.fileName, // Take from the source specified in fileName
-                    // force: true // Uncomment to ignore errors
+                    // force: true
                 }))
-
-                // Now begin uploading them
+                var imageupload = false;
                 Promise.map(confs, conf => igemwiki.upload(conf)
-                .then(console.log('1s delay')).delay(1000)
+                .then(results => {
+                    if(conf.type == 'image') {
+                        imageupload = true;
+                        imagemap[conf.dest] = results.target;
+                    }
+                })
                 , {concurrency: 1})
-                    .then(() => {
-                        console.log('Uploads completed')
-                        resolve();
-                    })
-                    .catch(console.error)
-            });
-        });
-    });
-}
-
-// Upload images
-uploadImages = function () {
-    return new Promise((resolve, reject) => {
-        // Mapping for images
-        const getImages = globby([ targets.uploadsrc.images ]).then(images => images.map(image => ({
-            type: 'image',
-            fileName: path.resolve(__dirname, image),
-            page: path.basename(image)
-        })))
-
-        Promise.all([
-            getImages
-        ]).then((confs) => {
-            confs = _.flatten(confs)
-
-            // Encapsulate files in a configuration file compatible with igemwiki-api
-            login(() => {}).then((jar) => {
-            confs = confs.map(c => ({
-                jar: loginjar,
-                type: c.type, // Type is a switch that determines how igemwiki-api uploads files
-                dest: c.page, // Send files to the page specified under mapping
-                source: c.fileName, // Take from the source specified in fileName
-                // force: true // Uncomment to ignore errors
-            }))
-
-            var imagemap = new Object();
-            // Now begin uploading them
-            Promise.map(confs, conf => igemwiki.upload(conf).then(results => {
-                    imagemap[conf.dest] = results.target;
-                }).then(console.log('1s delay')).delay(1000),
-                {concurrency: 1})
                 .then(() => {
+                    if(imageupload) {
                         fs.writeFile(imagemapfilename, JSON.stringify(imagemap), 'utf8', () => {
-
                         console.log('Wrote image mappings to '.concat(imagemapfilename));
-
-                        console.log('Image uploads completed');
-
-                        resolve();
-                    });
+                        });
+                    }
+                })
+                .then(() => {
+                    console.log('Uploads completed')
+                    resolve();
                 })
                 .catch(console.error)
-            });
-        });
-    });
+            })
+        })
+    })
 }
 
 // Special task that calls upload.js, which pushes all files with a compatible mapping
 // staged in the build folder to the iGEM Wiki. Not entirely automatic; requires credentials.
-gulp.task('pushcontent', function(done){
-    uploadContent().then(done);
+gulp.task('push:index', function(done){
+    upload(index).then(done);
 });
 
-gulp.task('pushimages', function(done) {
-    uploadImages(done).then(done);
+gulp.task('push:pages', function(done){
+    upload(getPages).then(done);
 });
+
+gulp.task('push:templates', function(done){
+    upload(getTemplates).then(done);
+});
+
+gulp.task('push:css', function(done) {
+    upload(getCSS).then(done);
+});
+
+gulp.task('push:js', function(done) {
+    upload(getJS).then(done);
+});
+
+gulp.task('push:images', function(done) {
+    upload(getImages).then(done);
+});
+
+gulp.task('push:content', gulp.series('push:index', 'push:pages', 'push:templates', 'push:css', 'push:js'));
