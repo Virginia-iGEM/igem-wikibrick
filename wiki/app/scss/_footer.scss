@@ -5,36 +5,34 @@ $iconColor     : $accent-color; //#ff003c;
 $accent        : $accent-light-color; //#c648c8;
 
 footer {
-    box-sizing: border-box;
-    $footer-height: 75px; // Footer height
+    $footer-height: 6rem; // Footer height
+    $footer-grid: (
+        columns: 12,
+        gutter: 0px
+    );
     @include grid-container;
+    box-sizing: border-box;
     background-color: $background-dark-color;
-    border-top: 3px solid $accent-color;
+    border-top: 1px solid $accent-color;
     color: $text-light-color;
     padding: 25px;
     //@include grid-visual;
 
-    div.scroll-up {
-        @include grid-column(3);
+    div.footer-name{
+        @include grid-column(5, $footer-grid);
         @include block-height($footer-height);
-
+        * {
+            float: left;
+            margin: auto 1rem;
+        }
+    }
+    div.spacer {
+        @include grid-column(4, $footer-grid);
+        @include block-height($footer-height);
         //text-align: center;
     }
-    div.footer-name{
-        @include grid-column(3);
-        @include block-height($footer-height);
-
-        //text-align: left;
-    }
-    div.footer-logo{
-        @include grid-column(3);
-        @include block-height($footer-height);
-
-        //text-align: left;
-
-    }
     div.social-container{
-        @include grid-column(3); 
+        @include grid-column(3, $footer-grid); 
     }
 
 }
