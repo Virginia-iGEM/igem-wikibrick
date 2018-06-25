@@ -2,7 +2,6 @@ header {
     // Establish variables
     $nav-height: 3rem; // Navbar height
     /*Keeps the nav bar sticking on the top*/ 
-    $igem-navbar-height: 16px;
     $nav-background-color: $background-dark-color;
     $nav-text-color: $text-light-color;
     $nav-accent-color: $accent-light-color;
@@ -23,9 +22,9 @@ header {
         box-sizing: border-box; // Use box sizing for entire navbar to avoid clipping
     }
     // Stick to top of window
-    position: sticky;
-    top: $igem-navbar-height;
-    z-index: 999;
+    position: sticky; // Stick to top of screen
+    top: $igem-navbar-height; // Compensate for the iGEM Wiki builtin navbar.
+    z-index: 999; // This goes over *everything*
 
     #navbar {
         height: $nav-height;

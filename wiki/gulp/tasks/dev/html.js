@@ -71,7 +71,10 @@ relative2absolute = function($, file) {
             u.replaceWith(u.html());
         })
 
-        Promise.all([images, stylesheets, scripts, index, links]).then(resolve);
+        // Remove iGEM Navbar Placeholder
+        removeplaceholders = $('#igem-navbar-placeholder').replaceWith('');
+
+        Promise.all([images, stylesheets, scripts, index, links, removeplaceholders]).then(resolve);
     });
 }
 // Function shared by all HTML processing tasks for development builds. 

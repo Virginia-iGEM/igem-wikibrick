@@ -1,10 +1,12 @@
+$igem-navbar-height: 16px; // Variable for the height of the required iGEM Navbar. Use for sizing your own navbar.
+
 /* Override iGEM wiki settings, removing everything but the top navbar. */
 #sideMenu,
 #top_title {
     display: none;
 }
 
-#content {
+#content { // Make content behave like one would expect a body to
     width: 100vw;
     padding: 0px;
     border: none;
@@ -20,7 +22,7 @@
     padding-bottom: 0;
 }
 
-#top_menu_under {
+#top_menu_under { // Remove spacer between iGEM navbar and content
     height: 0px;
 }
 
@@ -30,7 +32,19 @@ ul {
     margin: 0;
 }
 
-#mw-content-text > p {
+#mw-content-text > p { // make <p> containing <head> tags invisible
     width: 0px;
     height: 0px;
+}
+
+#igem-navbar-placeholder {
+    height: $igem-navbar-height - 2px;
+    position: fixed;
+    display: block;
+    background-color: #383838;
+    border-bottom: solid black 2px;
+    color: white;
+    z-index: 9999;
+    width: 100%;
+    font-size: 0.75em;
 }
