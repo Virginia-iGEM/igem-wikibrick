@@ -48,7 +48,7 @@ $link-color: rgb(255, 218, 159);
 $breakpoint: 1000px; // If the screen is under this width, switch to mobile view
 
 /*Applies to all*/
-* {
+body, #mw-content-text {
     font-family: "Lato";
     margin: 0;
     padding: 0;
