@@ -2,6 +2,7 @@ header {
     // Establish variables
     $nav-height: 3rem; // Navbar height
     /*Keeps the nav bar sticking on the top*/ 
+    $igem-navbar-height: 16px;
     $nav-background-color: $background-dark-color;
     $nav-text-color: $text-light-color;
     $nav-accent-color: $accent-light-color;
@@ -23,10 +24,10 @@ header {
     }
     // Stick to top of window
     position: sticky;
-    top: 0;
+    top: $igem-navbar-height;
     z-index: 999;
 
-    nav {
+    #navbar {
         height: $nav-height;
         width: 100%;
         display: block;
@@ -34,10 +35,8 @@ header {
         ul {
             @include grid-container;
             list-style: none;
-            //margin: 0px;
-            //padding: 0px;
-            //margin-left: 0px;
-            //margin-top: 0px;
+            margin: 0px;
+            padding: 0px;
             background-color: $nav-background-color;
             li {
                 @include grid-column(1, $nav-grid);
