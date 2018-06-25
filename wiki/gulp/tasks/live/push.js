@@ -90,7 +90,7 @@ const getImages = globby([ targets.uploadsrc.images ]).then(images => images.map
     page: path.basename(image)
 })))
 
-/*var retryUpload = function(conf, retries) {
+var retryUpload = function(conf, retries) {
     return new Promise((resolve, reject) => {
         igemwiki.upload(conf).catch(error => {
             retries--;
@@ -106,7 +106,7 @@ const getImages = globby([ targets.uploadsrc.images ]).then(images => images.map
         })
         .then(resolve)
     })
-}*/
+}
 
 upload = function(promises) {
     return new Promise((resolve, reject) => {
@@ -127,7 +127,7 @@ upload = function(promises) {
                     // force: true
                 }))
                 var imageupload = false;
-                Promise.map(confs, conf => igemwiki.upload(conf)
+                Promise.map(confs, conf => retryUpload(conf)
                 .then(results => {
                     if(conf.type == 'image') {
                         imageupload = true;
