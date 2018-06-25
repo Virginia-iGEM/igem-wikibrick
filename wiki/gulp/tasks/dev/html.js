@@ -4,6 +4,7 @@ var markdown = require('gulp-markdown');
 var cheerio = require('gulp-cheerio');
 var Promise = require('bluebird');
 var browsersync = require('browser-sync');
+var replace = require('gulp-replace');
 
 const path = require('path');
 const url = require('url');
@@ -89,6 +90,7 @@ function prepHTML(src, dest) {
                 decodeEntities: false
             }
         }))) // Think about using lazypipe here
+        .pipe(gulpif(global.live(), replace(/<!DOCTYPE html>/g, '')))
         .pipe(gulpif(global.serve(), browsersync.stream()))
         .pipe(gulp.dest(dest));
     }
