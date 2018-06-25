@@ -1,3 +1,4 @@
+// Adapted from iGEM Peshawar 2016 iGEM Wiki Overrides, used with their Codekit build system
 $igem-navbar-height: 16px; // Variable for the height of the required iGEM Navbar. Use for sizing your own navbar.
 
 /* Override iGEM wiki settings, removing everything but the top navbar. */
@@ -37,7 +38,7 @@ ul {
     height: 0px;
 }
 
-#igem-navbar-placeholder {
+#igem-navbar-placeholder { // Placeholder that "subs in" for the iGEM navbar on dev builds
     height: $igem-navbar-height - 2px;
     position: fixed;
     display: block;
