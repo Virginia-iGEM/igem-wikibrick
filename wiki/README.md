@@ -25,6 +25,8 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 - Make JQuery/Handlebars templates for headers and footers work.
 - Modify dev/html.js so that it also accepts markdown files.
   - The code's there, just commented out; need to keep markdown processor from mangling `<!DOCTYPE>` tag.
+- Update tutorials to reflect Build-Tool's current state
+- Automatically prepend watermark/license to the beginning of every file produced with the tool. Something along the lines of "THIS FILE WAS PRODUCED WITH [BUILD-TOOL-NAME], DEVELOPED BY THE VIRGINIA 2018 IGEM TEAM MEMBERS [WIKI TEAM MEMBERS]"
 
 #### Medium Priority
 
