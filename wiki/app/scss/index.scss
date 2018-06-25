@@ -37,7 +37,7 @@
                 opacity: 0.5;
             }
             img {
-                @include circular;
+                @include circle;
                 transition: all 0.3s cubic-bezier(.25,.8,.25,1);
                 margin-bottom: 25px;
                 width: 90%;
