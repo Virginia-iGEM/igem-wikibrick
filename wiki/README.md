@@ -34,26 +34,25 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 - Refactor push.js so that it recognizes absolute URLs without prompting and does not mangle them.
   - Currently using `internal` class as a solution; relative2absolute.js will only absolutify URLs marked as internal.
 - Fix MathJax with [#10 - Misc from this article](https://2016.igem.org/Team:Peshawar/Wiki)
-- Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed.
-- Make it so upload.js can upload specific items instead of having to upload everything. Probably gonna do this with gulp.
 - Eliminate synchronous file read in gulp task live/push.js
 
 #### Low Priority
 
-- Eliminate code duplication in upload.js between pushimages and pushcontent
 - Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies for team members and future teams.
-- Add git hook that causes an npm install and bower install on package.json or bower.json change.
+  - Add git hook that causes an npm install and bower install on package.json or bower.json change.
 - Pick a JavaScript styleguide, fix the awful inconsistencies in style to adhere to it.
   - Standardize variable and function naming schemes.
   - Should probably 'use strict'.
+- Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed.
+- Added error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
 
 ## 4 Roadmap
 
 1. [Completed] Write an upload script using igemwiki-api to push all pages, images and other content to the iGEM wiki.
 2. [Completed] Create a build tool that can compile to working HTML for both the iGEM wiki and local machine testing.
 3. Decide on and implement wiki style
-    - Template should have a header and a footer that contain a snazzy navbar and team information respectively.
-    - Template should also contain styling that allows for quick development of webpages wihout needing style attributes in HTML.
+    - [Completed] Template should have a header and a footer that contain a snazzy navbar and team information respectively.
+    - [Completed] Template should also contain styling that allows for quick development of webpages wihout needing style attributes in HTML.
     - Ideally, template can be written in markdown and compiled to enable other team members to edit things fairly easily.
 4. Core concurrent tasks:
     - Finish all major pages, at least with filler content
@@ -75,23 +74,23 @@ This is an interactive presentation that gives the reader an intuition for what 
 6. Upon redoing the experiment, they'll find that nearly all the bacteria flash
 7. User is left to play around with the sandbox all they want. A little flashing blue arrow at the bottom of the game prompts them to scroll down to read about the project.
 
-## 6 Build Tool: `wiki-competent`
+## 6 Build Tool: `igemwiki-transform`
 
 Note: Name is tentative and should probably get a vote. You should probably also make this paragraph less passive-aggressive.
 
-`wiki-competent` is a Node.js-based tool built by Virginia's 2018 iGEM team to fully automate the process of standard web development on the iGEM wiki. We've built this tool because we believe Mediawiki is not up to the standards that a website regarding complex synthetic biology tools should be at. We wanted our website to be easy to use, fluid, fast and convey our ideas and findings as quickly as possible to any reader, from layman to post-doc. We also wanted to build something that would allow us to put time wasted clicking the `upload` button on the iGEM wiki towards something more useful.
+`igemwiki-transform` is an open-source Node.js-based build system built by Virginia's 2018 iGEM Team to fully automate the process of standard web development on the iGEM wiki. We've built this tool because we believe Mediawiki is not up to the standards that a website regarding complex synthetic biology tools should be at. We wanted our website to be easy to use, fluid, fast and convey our ideas and findings as quickly as possible to any reader, from layman to post-doc. We also wanted to build something that would allow us to put time wasted clicking the `upload` button on the iGEM wiki towards something more useful.
 
 Our tool does a few important things to standardize editing the wiki through a standard web-development process:
 
 - **Single-command build tool.** Once installed and set up, you can automatically inject your own pure HTML+CSS+JS website onto your wiki page: type `gulp live publish`, enter your iGEM credentials, grab some tea and watch `wiki-competent` do the hard work for you. No need to upload images to the wiki by hand, no need to copy-and-paste HTML into a wiki's _Edit Page_ tool. Use your favorite text editor, your favorite CSS templates, and Node.JS packages of your choice without worrying.
-- **URL Substitution.** "But wait," you say, "I want to iterate on my machine. Uploading takes time, and I make a lot of mistakes." Fear not, young web developer, `wiki-competent` has your back. Any scripts, stylesheets, links or images you add to your HTML can simply use a relative path to a local file on your machine. Type `gulp dev build`, and you have a fully functional, completely offline wiki you can work on in the comfort of your own operating system. Then, when you `gulp live publish`, all these relative paths are automatically absolutified to URLs compatible with your team's wiki page.
+- **URL Substitution.** "But wait," you say, "I want to iterate on my machine. Uploading takes time, and I make a lot of mistakes." Fear not, young web developer, `igemwiki-transfect` has your back. Any scripts, stylesheets, links or images you add to your HTML can simply use a relative path to a local file on your machine. Type `gulp dev build`, and you have a fully functional, completely offline wiki you can work on in the comfort of your own operating system. Then, when you `gulp live publish`, all these relative paths are automatically absolutified to URLs compatible with your team's wiki page.
 - **Flexible Build and Package support.** Becuase we're using `gulp`, you can add thousands of gulp plugins and Node.js modules to your wiki to do all the things you ever wished you could. Want to add a 3d shoot-em-up arcade game where you blast bacteriophages to your homepage? `bower install impactjs`. Want to use more advanced templating to reuse as much code as you can? `npm install -D gulp-handlebars`. Want to use SASS instead of CSS? `npm install -D gulp-sass`. Your favorite plugins and packages are a few lines of configuration away.
-- **Markdown Support (pending).** "Hold up, hold up, I'm the only programmer on my team. I don't want to write the small novel that is an iGEM Team Wiki page." Luckily for you, `wiki-competent` is non-programmer friendly. Your teammates can write their lab notes, lab reports and modeling writeups in the easy-to-understand Markdown styling language. The tool can convert these files into valid, crisp HTML, complete with your navigation menu, footer, interactive JavaScript elements and any other templated HTML you'd like to add.
+- **Markdown, Google Docs and Word Document Conversion (pending).** "Hold up, hold up, I'm the only programmer on my team. I don't want to write the small novel that is an iGEM Team Wiki page." Luckily for you, `igemwiki-transfect` is non-programmer friendly. Your teammates can write their lab notes, lab reports and modeling writeups in the easy-to-understand Markdown styling language, Google Docs or in Microsoft Word. The tool can convert these files into valid, crisp HTML, complete with your navigation menu, footer, interactive JavaScript elements and any other templated HTML you'd like to add.
 - **Logging (pending).** You wake up one morning, coffee in hand, and like any good iGEMmer, you open your wiki. Some incompetent team member has defaced your home page! The spans are all the wrong size, none of the scripts are working, the background is *chartreuse*. Who did this? Well, you know exactly who, because a `log.js` file was pushed to your wiki page containing the perpetrator's account name, the Git commit hash they pushed from, and when they pushed. The disadvantage is of course your team captain will always know when you messed up.
 
 ### Use
 
-Our build system supports two types of builds: A Development build and a Live build.
+Our build system supports two different build environments: `dev - development`, meant for running the wiki on your local machine, and `live`, which produces content that can be automatically uploaded to your team's iGEM Wiki page.
 
 In order to build both, you will need to first install [Node.js](https://nodejs.org/), then install all Node packages listed under [Build Dependencies](https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki#build-dependencies). This can be done by first entering the `wiki` directory, e.g. with `cd wiki` and entering the following commands in any console with npm on its path:
 
@@ -101,13 +100,22 @@ In order to build both, you will need to first install [Node.js](https://nodejs.
 
 Type `gulp build --env dev` or `gulp dev build` to build a local copy that will be located under `wiki/build`. The files produced by this build can be opened in a normal file explorer by any modern web browser.
 
-Type `gulp publish --env live` or `gulp live publish` to build a copy with absolute URLs that will then be pushed to the iGEM wiki. In order to do this, you will need to enter your wiki username and password, so have them ready. Note that this copy will *not* run offline correctly, use `gulp dev build` files instead.
+Additionally, you can enter `gulp serve` to first build a local copy, run a local webserver, open a browser page and then watch for changes. This task will run in the background, and the pages displayed in the browser will be updated as the files are built. This is very useful for understanding how changes to HTML/CSS will affect the appearance of your wiki, and allows for much faster iteration than typing `gulp dev buil` after every tiny change.
+
+Type `gulp publish --env live` or `gulp publish` to build a copy with absolute URLs that will then be pushed to the iGEM wiki. In order to do this, you will need to enter your wiki username and password, so have them ready. Note that this copy will *not* run offline correctly, use `gulp dev build` files instead.
 
 One can type `gulp live build` to check HTML for correct parsing. This will not work if new images have been added but not pushed to the wiki; this will be fixed in the future, adding errors that are correctly thrown instead of simply failing.
 
-Note 1: One can call `gulp dev publish`, nothing is preventing it. However, it will just upload HTML files with relative paths to the wiki, which will be very ugly and nonfunctional.
+Breakdown of all tasks:
 
-Note 2: Reversing the order of tasks, i.e. `gulp publish dev` or `gulp publish live` will result in incorrect behaviour. Order matters here.
+- `dev, live`: These are special tasks that add 'flavors' to the build environment. `live` enables URL substitution and some other small changes and hacks that make files ready for display on the iGEM Wiki. `dev` is the default, technically not required, and is there in the event that it is ever needed. They currently only affect certain `build` tasks; `publish` automatically sets the environment to `live`, and `serve` currently sets the environment to a special `serve` variable that streams data to Browsersync.
+- `build`, `build:index`, `build:pages`, `build:templates`, `build:sass`, `build:css`, `build:js`, `build:images`, `build:bower:css`, `build:bower:js`: All of these build tasks build different units of the website, and are fairly self descriptive. Tasks prefixed with bower specifically stage any relevant files from packages installed with Bower. Build, as one might guess, runs all of these tasks.
+- `push:content`, `push:images`, `push:index`, `push:pages`, `push:templates`, `push:css`, `push:js`: These are particular tasks which handle uploading built files to the iGEM wiki. *Only* live files should be pushed to the wiki, otherwise only raw HTML will be displayed on the wiki with whatever default styling exists.
+- `publish`: Special task. First calls `live` to set the environment, then calls `push:images`; `push:images` generates an `imagemap.json` file under build which then informs the `live build`, which is called next. Once the build is complete, files are uploaded with `push:content`, which uploads everything *except* for images. This upload order is necessary because images uploaded to the iGEM wiki (manually or automatically) do not have predictable URLs, and so the image uploads must first occur to generate the URLs, which are then passed to the URL substituter in the actual `build`.
+
+All of these tasks can be called in any order with `gulp`. For example, if one has already pushed images and has an `imagemap.json` file already generated, one can type `gulp live build push:content` to update only HTML, CSS and JS without dealing with image uploads.
+
+Note 2: Reversing the order of tasks, i.e. `gulp publish dev` or `gulp publish live` will result in incorrect behaviour. Order matters here; tasks are executed in order of listing, first-to-last.
 
 ### Justification
 
@@ -197,7 +205,7 @@ The following tasks are defined in the file:
 - dev: Same as above.
 - live: Covered under Live Build.
 
-Every task begins with some kind of `gulp.src()` function and ends with some kind of `.pipe(gulp.dest(<some destination>))` function. These sources and destinations can be seen at the top of the file, and map working files to build files. Whenever `gulp` is run with a certain task, it takes in these source files, transforms them in some way using pipes and various gulp plugins (these are usually prefixed with `gulp-` under dependencies), and then spits them out under our build directory (what I call staging). The only exceptions are `pushimages` and `pushcontent`, which are special and does not transform files.
+Every task begins with some kind of `gulp.src()` function and ends with some kind of `.pipe(gulp.dest(<some destination>))` function. These sources and destinations can be seen at the top of the file, and map working files to build files. Whenever `gulp` is run with a certain task, it takes in these source files, transforms them in some way using pipes and various gulp plugins (these are usually prefixed with `gulp-` under dependencies), and then spits them out under our build directory (what I call staging). The only exceptions are all `push:` tasks, which are special and do not transform files.
 
 Once these files are staged in the build directory, you can enter the build directory and open the website with your favorite browser, hosted entirely locally on your machine. This enables work to be done on the website even offline, and allows one to iterate on the site without pushing to the iGEM wiki every single time. This makes iterations faster, and (not that this matters to us) saves iGEM HQ some bandwidth.
 
@@ -211,9 +219,9 @@ The live build essentially performs the dev build with the exception that all HT
 
 The exact sequence of events are as follows:
 
-1. pushimages: In order to correctly substitute image URLs, `gulp live publish` first pushes images to the iGEM Wiki and then retrieves the generated image URLs from the wiki. These URLs are saved temporarily to `imagemap.json` under `/wiki/build`.
+1. push:images: In order to correctly substitute image URLs, `gulp live publish` first pushes images to the iGEM Wiki and then retrieves the generated image URLs from the wiki. These URLs are saved temporarily to `imagemap.json` under `/wiki/build`.
 2. build: A `build` is then performed, identical to `gulp dev build` save for the fact that all URLs in relevant HTML tags are replaced with their absolute equivalents.
-3. pushcontent: Pushes remaining (non-image) content to the wiki.
+3. push:content: Pushes remaining (non-image) content to the wiki.
 
 ## 7 Build Dependencies
 
