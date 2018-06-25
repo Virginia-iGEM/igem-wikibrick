@@ -83,15 +83,19 @@ img {
     padding: 3% 5%;
     width: auto;
     height: auto;
+    position: relative;
     @include grid-container;
     background-color: $background-light-color;
     //@include grid-visual;
     
-    div.interactive{    
+    div#media{    
         @include grid-column(4, $grid-content);
         text-align: center;
+        position: absolute;
+        top: 40px;
+        bottom: 20px;
     }
-    div.text{
+    div#text{
         @include grid-column(8, $grid-content);
         h1 {
             padding: 3% 1%;

@@ -8,7 +8,8 @@
     );
 
     @include grid-container;
-    margin: 3% 5%;
+    padding: 3% 5%;
+    background-color: $background-light-color;
 
     div {
         //@include grid-visual;
@@ -25,16 +26,21 @@
             min-height: 100%;
             display: block;
             p {
+                display: none;
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%, -50%);
+                transform: translate(-50%, -100%);
                 z-index: 9; /*overlay text over*/
+                transition: all 0.2s;
             }
             &:hover img {
-                background-color: #000000cc;
+                background-color: #4799b4cc;
                 filter: blur(2px) contrast(25%) brightness(25%);
                 opacity: 0.5;
+            }
+            &:hover p {
+                display: block;
             }
             img {
                 @include circle;
@@ -49,10 +55,12 @@
 
 .petri-dish {
     @include circular;
-    display: flex;
     background-color: $background-dark-color;
-    width: 25rem;
-    height: 25rem;
     margin: 10%;
-    position: sticky;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
 }
