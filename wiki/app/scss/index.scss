@@ -54,13 +54,14 @@
 }
 
 .petri-dish {
+    display: none;
     @include circular;
     background-color: $background-dark-color;
-    margin: 10%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 50%;
-    height: 50%;
+    //margin: 10%;
+    //position: absolute;
+    //top: 50%;
+    //left: 50%;
+    //width: 50%;
+    //height: 50%;
     transform: translate(-50%, -50%);
 }
