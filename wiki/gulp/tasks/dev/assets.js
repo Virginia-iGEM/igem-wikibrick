@@ -6,6 +6,8 @@ var sass = require('gulp-sass');
 var imagemin = require('imagemin');
 var bourbon = require('node-bourbon').includePaths;
 var neat = require('node-neat').includePaths;
+var gulpif = require('gulp-if');
+var browsersync = require('browser-sync');
 
 var targets = require(global.targets);
 var srcs = targets.buildsrc;
@@ -19,6 +21,7 @@ gulp.task('build:js', function(){
     //.pipe(uglify().on('error', log)) // Minification increases load speeds
     .pipe(concat('wiki.js')) // Note use of concat to compact all JS files into one
     .pipe(sourcemaps.write())
+    .pipe(gulpif(global.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.js));
 });
 
@@ -27,6 +30,7 @@ gulp.task('build:js', function(){
 gulp.task('build:css', function(){
     return gulp.src(srcs.css)
     //.pipe(minifyCSS()) // Minification increases load speeds
+    .pipe(gulpif(global.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.css));
 });
 
@@ -34,6 +38,7 @@ gulp.task('build:sass', function(){
     return gulp.src(srcs.scss)
     .pipe(sass({includePaths: [].concat(bourbon, neat)})
         .on('error', sass.logError)) // Minification increases load speeds
+    .pipe(gulpif(global.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.css));
 });
 
@@ -41,5 +46,6 @@ gulp.task('build:sass', function(){
 gulp.task('build:images', function() {
     return gulp.src(srcs.images)
     //.pipe(imagemin()) // Minification increases load speeds
+    .pipe(gulpif(global.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.images));
 });

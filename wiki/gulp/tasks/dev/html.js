@@ -3,6 +3,7 @@ var gulpif = require('gulp-if');
 var markdown = require('gulp-markdown');
 var cheerio = require('gulp-cheerio');
 var Promise = require('bluebird');
+var browsersync = require('browser-sync');
 
 const path = require('path');
 const url = require('url');
@@ -88,6 +89,7 @@ function prepHTML(src, dest) {
                 decodeEntities: false
             }
         }))) // Think about using lazypipe here
+        .pipe(gulpif(global.serve(), browsersync.stream()))
         .pipe(gulp.dest(dest));
     }
 };

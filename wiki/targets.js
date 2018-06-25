@@ -92,9 +92,7 @@ module.exports = {
     suffixes: suffixes,
     browsersync: {
         development: {
-            server: {
-                basedir: build
-            },
+            server: './build',
             port: 9999
         }
     }
