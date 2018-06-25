@@ -29,7 +29,7 @@ hub(['./gulp/tasks/**/*.js']);
 // Tell gulp to use tasks just loaded
 //gulp.registry(hub);
 
-const buildtasks = [ 'index', 'pages', 'templates', 'sass', 'js', 'images', 'bower:js', 'bower:css'];
+const buildtasks = [ 'build:index', 'build:pages', 'build:templates', 'build:sass', 'build:js', 'build:images', 'build:bower:js', 'bower:css'];
 
 // Default task runs both dev and live build
 gulp.task('build', gulp.parallel(buildtasks));
@@ -38,7 +38,7 @@ gulp.task('build', gulp.parallel(buildtasks));
 gulp.task('default', gulp.series('dev', 'build'));
 
 // Live build runs dev and then uploads, will change in future
-gulp.task('publish', gulp.series('push:images', 'build', 'push:content'));
+gulp.task('publish', gulp.series('live', 'push:images', 'build', 'push:content'));
 
 var target = require(global.targets).browsersync.development;
 

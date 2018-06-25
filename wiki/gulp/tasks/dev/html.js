@@ -95,10 +95,10 @@ function prepHTML(src, dest) {
 // TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
 
 // Task to prep index.html which is uploaded as the home page
-gulp.task('index', prepHTML(srcs.index, dests.index));
+gulp.task('build:index', prepHTML(srcs.index, dests.index));
 
 // Task to prep all non-home pages, I.E. Project Description, Team, etc.
-gulp.task('pages', prepHTML(srcs.pages, dests.pages));
+gulp.task('build:pages', prepHTML(srcs.pages, dests.pages));
 
 // Task to prep templates like headers, footers, etc. that can be reused on many pages
-gulp.task('templates', prepHTML(srcs.templates, dests.templates));
+gulp.task('build:templates', prepHTML(srcs.templates, dests.templates));

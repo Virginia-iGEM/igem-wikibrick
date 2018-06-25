@@ -13,7 +13,7 @@ var dests = targets.buildtarget;
 
 // Task to minify and stage our in-house JavaScript files.
 // TODO: Fix JS minificatoin for in-house JS
-gulp.task('js', function(){
+gulp.task('build:js', function(){
     return gulp.src(srcs.js)
     .pipe(sourcemaps.init()) // Used for debugging
     //.pipe(uglify().on('error', log)) // Minification increases load speeds
@@ -24,13 +24,13 @@ gulp.task('js', function(){
 
 // Task to minify and stage our in-house CSS stylesheets
 // Optional: Include less() in pipeline before minifyCSS to use {less} CSS package
-gulp.task('css', function(){
+gulp.task('build:css', function(){
     return gulp.src(srcs.css)
     //.pipe(minifyCSS()) // Minification increases load speeds
     .pipe(gulp.dest(dests.css));
 });
 
-gulp.task('sass', function(){
+gulp.task('build:sass', function(){
     return gulp.src(srcs.scss)
     .pipe(sass({includePaths: [].concat(bourbon, neat)})
         .on('error', sass.logError)) // Minification increases load speeds
@@ -38,7 +38,7 @@ gulp.task('sass', function(){
 });
 
 // Task to stage all images, .png or .jpg
-gulp.task('images', function() {
+gulp.task('build:images', function() {
     return gulp.src(srcs.images)
     //.pipe(imagemin()) // Minification increases load speeds
     .pipe(gulp.dest(dests.images));
