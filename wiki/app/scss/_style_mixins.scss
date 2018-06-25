@@ -21,3 +21,8 @@
 @mixin circular {
     border-radius: 50%;
 }
+
+@mixin block-height($height) {
+    line-height: $height;
+    height: $height;
+}

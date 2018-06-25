@@ -42,7 +42,7 @@ header {
             li {
                 @include grid-column(1, $nav-grid);
                 float: left;
-                position: relative;
+                position: relative; // This is required for dropdowns to be positioned relative to the navbar instead of the browser window
                 line-height: $nav-height; // Center text
                 height: $nav-height; // Set container height to navbar height
                 /*a, related to link*/
