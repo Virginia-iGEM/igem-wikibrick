@@ -90,6 +90,7 @@ const getImages = globby([ targets.uploadsrc.images ]).then(images => images.map
     page: path.basename(image)
 })))
 
+// Drop-in replacement for igemwiki.upload under `upload`
 var retryUpload = function(conf, retries) {
     return new Promise((resolve, reject) => {
         igemwiki.upload(conf).catch(error => {
@@ -108,6 +109,7 @@ var retryUpload = function(conf, retries) {
     })
 }
 
+// Uploads a bunch of files one-by-one to the igemwiki following their mappings
 upload = function(promises) {
     return new Promise((resolve, reject) => {
         // Run all mapping functions asynchronously with bluebird, 
@@ -127,15 +129,15 @@ upload = function(promises) {
                     // force: true
                 }))
                 var imageupload = false;
-                Promise.map(confs, conf => retryUpload(conf)
-                .then(results => {
+                Promise.map(confs, conf => retryUpload(conf, 5) // Do the actual upload, retry 5 times upon failure
+                .then(results => { // Generate imagemaps if we're uploading any images
                     if(conf.type == 'image') {
                         imageupload = true;
                         imagemap[conf.dest] = results.target;
                     }
                 })
                 , {concurrency: 1})
-                .then(() => {
+                .then(() => { // Write out imagemaps if they've been generated
                     if(imageupload) {
                         fs.writeFile(imagemapfilename, JSON.stringify(imagemap), 'utf8', () => {
                         console.log('Wrote image mappings to '.concat(imagemapfilename));
