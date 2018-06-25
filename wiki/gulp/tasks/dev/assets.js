@@ -8,6 +8,8 @@ var bourbon = require('node-bourbon').includePaths;
 var neat = require('node-neat').includePaths;
 var gulpif = require('gulp-if');
 var browsersync = require('browser-sync');
+var postcss = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
 
 var targets = require(global.targets);
 var srcs = targets.buildsrc;
@@ -29,7 +31,8 @@ gulp.task('build:js', function(){
 // Optional: Include less() in pipeline before minifyCSS to use {less} CSS package
 gulp.task('build:css', function(){
     return gulp.src(srcs.css)
-    //.pipe(minifyCSS()) // Minification increases load speeds
+    .pipe(postcss([ autoprefixer() ]))
+    .pipe(minifyCSS()) // Minification increases load speeds
     .pipe(gulpif(global.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.css));
 });
