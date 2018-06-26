@@ -20,7 +20,7 @@ var loginjar;
 // Split off login into a separate function so that the user does not have to login more than once
 // If we need to grab credentials, ask for them in console. Otherwise just continue on.
 // Call it a lazy login.
-login = function() {
+var login = function(logincount) {
     return new Promise((resolve, reject) => {
         if (!loggedin) {
             loggedin = true;
@@ -28,7 +28,16 @@ login = function() {
                 loginjar = jar;
                 resolve();
             })
-            .catch(console.error);
+            .catch(error =>{
+                if(error.toString().match(/RequestError: Error: connect ETIMEDOUT.*/) &&logincount > 0){
+                    console.log("Error. Login failed. Try again.");
+                    logincount--;
+                    login(logincount).then(resolve);
+                }
+                else{
+                    throw error;
+                }
+            });
         }
         else {
             resolve();
@@ -91,10 +100,14 @@ const getImages = globby([ targets.uploadsrc.images ]).then(images => images.map
 })))
 
 // Drop-in replacement for igemwiki.upload under `upload`
+var myError = new Error('RequestError');
 var retryUpload = function(conf, retries) {
     return new Promise((resolve, reject) => {
         igemwiki.upload(conf).catch(error => {
             retries--;
+            if(error.toString().match(/RequestError: Error: connect ETIMEDOUT.*/)){
+                console.log("Request Error. Trying again...");
+            }
             if (retries > 0) {
                 console.log("Upload failed, retrying upload...");
                 retryUpload(conf, retries);
@@ -120,7 +133,7 @@ upload = function(promises) {
             // but it's there for image uploads.
 
             // Encapsulate files in a configuration file compatible with igemwiki-api
-            login(() => {}).then((jar) => {
+            login(3).then((jar) => {
                 confs = confs.map(c => ({
                     jar: loginjar,
                     type: c.type, // Type is a switch that determines how igemwiki-api uploads files
