@@ -27,6 +27,9 @@ relative2absolute = function($, file) {
 
         // This part is synchronous and probably doesn't need to be
         var imagemap = JSON.parse(fs.readFileSync('./build/imagemap.json', 'utf8'));
+        if(imagemap == '' || imagemap == null) {
+            console.log("No imagemap found, image paths will not be substituted. Run push:images to generate imagemap.")
+        }
 
         // Set absolute paths for images
         images =  $('img').each(function () {
