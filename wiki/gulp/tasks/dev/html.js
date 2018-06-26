@@ -17,6 +17,10 @@ var dests = targets.buildtarget;
 const urls = targets.urls;
 const suffixes = targets.suffixes;
 
+var urlIsRelative = (str) => {
+    return !str.match(/^https?:\/\//);
+}
+
 relative2absolute = function($, file) {
     return new Promise((resolve, reject) => {
 
@@ -26,31 +30,36 @@ relative2absolute = function($, file) {
         // Set absolute paths for images
         images =  $('img').each(function () {
             var img = $(this);
-            img.attr('src', imagemap[path.basename(img.attr('src'))]);
+            var relname = img.attr('src');
+            if (relname != null && urlIsRelative(relname) && imagemap.hasOwnProperty(path.basename(relname))) { // Check to see if a map exists, otherwise do not change
+                img.attr('src', imagemap[path.basename(relname)]);
+            }
         });
 
         // Set absolute path for stylesheets
         stylesheets = $('link[rel=stylesheet]', 'head').each(function () {
             var link = $(this);
-            link.attr('href', urls.css.concat(path.basename(link.attr('href')).replace('.css', '')).concat(suffixes.css));
+            var relname = link.attr('href');
+            if (relname != null && urlIsRelative(relname)) {
+                link.attr('href', urls.css.concat(path.basename(relname).replace('.css', '')).concat(suffixes.css));
+            }
         });
 
         // Set absolute paths for scripts
         scripts = $('script', 'head').each(function () {
             var script = $(this);
-            if (script.attr('src') != null) {
-                script.attr('src', urls.js.concat(path.basename(script.attr('src')).replace('.js', '')).concat(suffixes.js));
+            var relname = script.attr('src');
+            if (relname != null && urlIsRelative(relname)) {
+                script.attr('src', urls.js.concat(path.basename(relname).replace('.js', '')).concat(suffixes.js));
             }
             
-            /*
             if(script.text() != null) {
                 urlReplace = new RegExp("\\.load\\( *'\\.\\/(.*)\\.html' *\\);", 'g');
 
                 script.text(script.text().replace(urlReplace, function (match, $1, offest, original) {
-                    return ".load('".concat(urls.template).concat(path.basename($1)).concat("');");
+                    return ".load('".concat(urls.template).concat(path.basename($1)).concat(targets.suffixes.js).concat("');");
                 }));
             }
-            */
         });
 
         // Set absolute path for index
@@ -60,9 +69,12 @@ relative2absolute = function($, file) {
         });
 
         // Set absolute path for all internal links
-        links = $('a[class=internal]').each(function () {
+        links = $('a').each(function () {
             var a = $(this);
-            a.attr('href', urls.standard.concat(path.basename(a.attr('href')).replace('.html', '')));
+            var relname = a.attr('href');
+            if (relname != null && relname != "index.html" && urlIsRelative(relname)) {
+                a.attr('href', urls.standard.concat(path.basename(a.attr('href')).replace('.html', '')));
+            }
         })
 
         // Unwrap head and body elements
