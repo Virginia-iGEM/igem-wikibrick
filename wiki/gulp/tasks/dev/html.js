@@ -5,6 +5,7 @@ var cheerio = require('gulp-cheerio');
 var Promise = require('bluebird');
 var browsersync = require('browser-sync');
 var replace = require('gulp-replace');
+var rename = require('gulp-rename');
 
 const path = require('path');
 const url = require('url');
@@ -95,10 +96,13 @@ relative2absolute = function($, file) {
 function prepHTML(src, dest) {
     return function() {
         return gulp.src(src)
-        /*.pipe(markdown()) // Run file through the markdown processor ony if it is a markdown file
+        /*.pipe(markdown({
+            sanitize: false,
+            mangle: false
+        })) // Run file through the markdown processor ony if it is a markdown file
         .pipe(rename(function (path) {
             path.extname = '.html';
-        }))*/
+        })) */
         .pipe(gulpif(global.live(), cheerio({
             run: relative2absolute,
             parserOptions: {
