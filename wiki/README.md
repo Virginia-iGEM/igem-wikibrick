@@ -26,6 +26,7 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 - Make JQuery/Handlebars templates for headers and footers work.
 - Modify dev/html.js so that it also accepts markdown files.
   - The code's there, just commented out; need to keep markdown processor from mangling `<!DOCTYPE>` tag.
+  - Should probably compile explicitly markdown files and load them in using templates.
 - Update tutorials to reflect Build-Tool's current state
 - Automatically prepend watermark/license to the beginning of every file produced with the tool. Something along the lines of "THIS FILE WAS PRODUCED WITH [BUILD-TOOL-NAME], DEVELOPED BY THE VIRGINIA 2018 IGEM TEAM MEMBERS [WIKI TEAM MEMBERS]"
 
@@ -33,11 +34,7 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
   - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
-- Modify gulpfile.js so that running `gulp live build` throws a reasonable error when images have not been first pushed to the wiki.
-- Refactor push.js so that it recognizes absolute URLs without prompting and does not mangle them.
-  - Currently using `internal` class as a solution; relative2absolute.js will only absolutify URLs marked as internal.
 - Fix MathJax with [#10 - Misc from this article](https://2016.igem.org/Team:Peshawar/Wiki)
-- Eliminate synchronous file read in gulp task live/push.js
 
 #### Low Priority
 
@@ -48,6 +45,8 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
   - Should probably 'use strict'.
 - Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed.
 - Added error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
+- Eliminate synchronous file read in gulp task live/push.js
+  - JSON.parse is synchronous anyways, so will need a different JSON library?
 
 ## 4 Roadmap
 
