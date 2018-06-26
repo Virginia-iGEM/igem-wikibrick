@@ -22,6 +22,7 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 #### High Priority
 
+- Fork igemwiki-api and modify line ~90 of upload.js to correctly catch timeout errors instead of erroring out before... Continuing execution on user input.
 - Make JQuery/Handlebars templates for headers and footers work.
 - Modify dev/html.js so that it also accepts markdown files.
   - The code's there, just commented out; need to keep markdown processor from mangling `<!DOCTYPE>` tag.
