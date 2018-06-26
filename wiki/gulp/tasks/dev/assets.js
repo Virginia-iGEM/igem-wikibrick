@@ -48,7 +48,7 @@ gulp.task('build:sass', function(){
 // Task to stage all images, .png or .jpg
 gulp.task('build:images', function() {
     return gulp.src(srcs.images)
-    //.pipe(imagemin()) // Minification increases load speeds
+    .pipe(imagemin()) // Minification increases load speeds
     .pipe(gulpif(global.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.images));
 });
