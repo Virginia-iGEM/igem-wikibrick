@@ -113,6 +113,7 @@ function prepHTML(src, dest) {
             }
         }))) // Think about using lazypipe here
         .pipe(gulpif(global.live(), replace(/<!DOCTYPE html>/g, '')))
+        .pipe(targets.banner.html)
         .pipe(gulpif(global.serve(), browsersync.stream()))
         .pipe(gulp.dest(dest));
     }

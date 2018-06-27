@@ -23,10 +23,6 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 #### High Priority
 
 - Fork igemwiki-api and modify line ~90 of upload.js to correctly catch timeout errors instead of erroring out before... Continuing execution on user input.
-- Make JQuery/Handlebars templates for headers and footers work.
-- Modify dev/html.js so that it also accepts markdown files.
-  - The code's there, just commented out; need to keep markdown processor from mangling `<!DOCTYPE>` tag.
-  - Should probably compile explicitly markdown files and load them in using templates.
 - Update tutorials to reflect Build-Tool's current state
 - Automatically prepend watermark/license to the beginning of every file produced with the tool. Something along the lines of "THIS FILE WAS PRODUCED WITH [BUILD-TOOL-NAME], DEVELOPED BY THE VIRGINIA 2018 IGEM TEAM MEMBERS [WIKI TEAM MEMBERS]"
 
@@ -35,18 +31,27 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
   - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
 - Fix MathJax with [#10 - Misc from this article](https://2016.igem.org/Team:Peshawar/Wiki)
+- Modify dev/html.js so that it also accepts markdown files.
+  - The code's there, just commented out; need to keep markdown processor from mangling `<!DOCTYPE>` tag.
+  - Should probably compile markdown files exclusively and load them in using templates.
+  - Also add Google Drive support?
 
 #### Low Priority
 
 - Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies for team members and future teams.
   - Add git hook that causes an npm install and bower install on package.json or bower.json change.
+  - Must be added on a repository-by-repository basis
 - Pick a JavaScript styleguide, fix the awful inconsistencies in style to adhere to it.
   - Standardize variable and function naming schemes.
   - Should probably 'use strict'.
-- Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed.
 - Added error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
+
+#### Questionable Value
+
 - Eliminate synchronous file read in gulp task live/push.js
   - JSON.parse is synchronous anyways, so will need a different JSON library?
+- Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed.
+  - Probably not that necessary, just more work for little gain considering how fast builds are
 
 ## 4 Roadmap
 
