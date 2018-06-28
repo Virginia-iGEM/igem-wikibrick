@@ -1,15 +1,6 @@
 @import "styles";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,900italic,500italic,500,400italic);
 
-.interactive {
-    border-bottom: 1px solid $accent-color;
-    background-color: white;
-    color: $text-dark-color;
-    //height: 700px;
-    background-image: url('../images/mountains.jpg');
-    background-size: cover;
-}
-
 .category-gallery {
     $category-grid: (
         gutter: 30px,
@@ -17,43 +8,62 @@
     );
 
     @include grid-container;
-    margin: 3% 5%;
+    padding: 3% 5%;
+    background-color: $background-light-color;
 
     div {
+        //@include grid-visual;
         @include grid-column(6);
-
         @include grid-media($category-grid) {
             @include grid-column(2);
         }
-        text-align: center;
+        position: relative;
 
         a {
+            position: relative;
+            text-align: center;
+            min-width: 100%;
+            min-height: 100%;
+            display: block;
             p {
+                display: none;
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: -99;
+                transform: translate(-50%, -100%);
+                z-index: 9; /*overlay text over*/
+                transition: all 0.2s;
             }
-
+            &:hover img {
+                background-color: #4799b4cc;
+                image-orientation: from-image;
+                filter: blur(2px) contrast(25%) brightness(25%);
+                opacity: 0.5;
+            }
+            &:hover p {
+                display: block;
+            }
             img {
                 @include circular;
+                image-orientation: from-image;
                 transition: all 0.3s cubic-bezier(.25,.8,.25,1);
                 margin-bottom: 25px;
                 width: 90%;
                 height: 90%;
-                &:hover {
-                    @include shadow-2;
-                }
             }
         }
     }
 }
 
 .petri-dish {
+    display: none;
     @include circular;
     background-color: $background-dark-color;
-    width: 500px;
-    height: 500px;
-    margin: 2%;
+    //margin: 10%;
+    //position: absolute;
+    //top: 50%;
+    //left: 50%;
+    //width: 50%;
+    //height: 50%;
+    transform: translate(-50%, -50%);
 }

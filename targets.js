@@ -1,4 +1,5 @@
 const path = require('path');
+const header = require('gulp-header');
 
 String.prototype.format = function (args) {
 			var str = this;
@@ -81,7 +82,36 @@ const suffixes = {
     css: '?action=raw&ctype=text/css'
 }
 
+// using data from package.json
+var pkg = require('./package.json');
+var banner_js = ['/**',
+  ' * <%= pkg.name %> - <%= pkg.description %>',
+  ' * @version v<%= pkg.version %>',
+  ' * @link <%= pkg.homepage %>',
+  ' * @license <%= pkg.license %>',
+  ' */',
+  ''].join('\n');
+var banner_html = ['<!--',
+  ' * <%= pkg.name %> - <%= pkg.description %>',
+  ' * @version v<%= pkg.version %>',
+  ' * @link <%= pkg.homepage %>',
+  ' * @license <%= pkg.license %>',
+  ' *-->',
+  ''].join('\n');
+var banner_css = ['/**',
+  ' * <%= pkg.name %> - <%= pkg.description %>',
+  ' * @version v<%= pkg.version %>',
+  ' * @link <%= pkg.homepage %>',
+  ' * @license <%= pkg.license %>',
+  ' */',
+  ''].join('\n');
+ 
 module.exports = {
+    banner: {
+        html: header(banner_html, {pkg: pkg}),
+        css: header(banner_css, {pkg: pkg}),
+        js: header(banner_js, {pkg: pkg})
+    },
     src: src,
     build: build,
     teaminfo: teaminfo, 
@@ -92,9 +122,7 @@ module.exports = {
     suffixes: suffixes,
     browsersync: {
         development: {
-            server: {
-                basedir: build
-            },
+            server: './build',
             port: 9999
         }
     }
