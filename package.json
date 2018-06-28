@@ -1,6 +1,6 @@
 {
   "name": "vgem-2018-wiki",
-  "version": "0.0.2",
+  "version": "0.3",
   "description": "Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia.",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,7 @@
     "gulp-csso": "^3.0.1",
     "gulp-declare": "^0.3.0",
     "gulp-environments": "^0.1.2",
+    "gulp-header": "^2.0.5",
     "gulp-hub": "^0.8.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^4.1.0",
