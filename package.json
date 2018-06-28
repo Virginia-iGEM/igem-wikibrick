@@ -1,6 +1,6 @@
 {
   "name": "vgem-2018-wiki",
-  "version": "0.3",
+  "version": "0.0.3",
   "description": "Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia.",
   "main": "index.js",
   "scripts": {
