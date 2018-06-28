@@ -22,6 +22,7 @@ Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia
 
 #### High Priority
 
+- Figure out why `gulp publish` sometimes doesn't perform the URL replace.
 - Fork igemwiki-api and modify line ~90 of upload.js to correctly catch timeout errors instead of erroring out before... Continuing execution on user input.
 - Update tutorials to reflect Build-Tool's current state
 - Automatically prepend watermark/license to the beginning of every file produced with the tool. Something along the lines of "THIS FILE WAS PRODUCED WITH [BUILD-TOOL-NAME], DEVELOPED BY THE VIRGINIA 2018 IGEM TEAM MEMBERS [WIKI TEAM MEMBERS]"
