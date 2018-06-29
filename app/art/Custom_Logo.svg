@@ -17,7 +17,7 @@
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="Custom_Logo.svg"
-   inkscape:export-filename="C:\Users\Mantissa\VGEM-2018\art\Wireframe_Logo_Dark_Final.png"
+   inkscape:export-filename="C:\Users\Mantissa\Projects\igem-2018-wiki\app\images\vgem-logo.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -30,7 +30,7 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994951"
-     inkscape:cx="291.56961"
+     inkscape:cx="127.41982"
      inkscape:cy="406.53803"
      inkscape:document-units="mm"
      inkscape:current-layer="layer7"
@@ -79,14 +79,14 @@
      style="display:none;opacity:1"
      transform="translate(0,105.83333)">
     <image
-       sodipodi:absref="C:\Users\Mantissa\VGEM-2018\art\uva.jpg"
+       sodipodi:absref="C:\Users\Mantissa\Projects\igem-2018-wiki\app\art\uva.jpg"
        xlink:href="uva.jpg"
-       y="-39.142918"
-       x="78.945251"
-       id="image870"
-       preserveAspectRatio="none"
+       width="98.020073"
        height="75.840347"
-       width="98.020073" />
+       preserveAspectRatio="none"
+       id="image870"
+       x="78.945251"
+       y="-39.142918" />
   </g>
   <g
      inkscape:groupmode="layer"

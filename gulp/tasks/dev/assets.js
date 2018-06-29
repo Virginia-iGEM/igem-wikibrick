@@ -23,7 +23,7 @@ gulp.task('build:js', function(){
     //.pipe(uglify().on('error', log)) // Minification increases load speeds
     .pipe(concat('wiki.js')) // Note use of concat to compact all JS files into one
     .pipe(sourcemaps.write())
-    .pipe(targets.banner.js)
+    .pipe(targets.banner.js())
     .pipe(gulpif(global.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.js));
 });
@@ -34,7 +34,7 @@ gulp.task('build:css', function(){
     return gulp.src(srcs.css)
     .pipe(postcss([ autoprefixer() ]))
     .pipe(minifyCSS()) // Minification increases load speeds
-    .pipe(targets.banner.css)
+    .pipe(targets.banner.css())
     .pipe(gulpif(global.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.css));
 });
@@ -43,7 +43,7 @@ gulp.task('build:sass', function(){
     return gulp.src(srcs.scss)
     .pipe(sass({includePaths: [].concat(bourbon, neat)}) // Bourbon + neat includepaths
         .on('error', sass.logError)) // Minification increases load speeds
-    .pipe(targets.banner.css)
+    .pipe(targets.banner.css())
     .pipe(gulpif(global.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.css));
 });

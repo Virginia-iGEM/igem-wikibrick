@@ -33,13 +33,13 @@ Some features:
 - **Flexible Build and Package support.** Becuase we're using `gulp`, a Node.js based task automation tool, you can add thousands of gulp plugins and Node.js modules to your wiki to do all the things you ever wished you could. Want to use more advanced templating to reuse as much code as you can? `npm install -D gulp-handlebars`. Want an interactive experience that teaches your users how your project works? `npm install -D impactjs`. Want fluid, scriptable animations that react to the user? `npm install -D createjs-tweenjs`. You have access to literally the largest repository of open source packages in existence, `npm`, coming it at over 350,000 packages.
 - **Markdown, Google Docs and Word Document Conversion [UNDER CONSTRUCTION].** Are you the only programmer on your team? Worse yet, are you _not a programmer at all,_ but you bit the bullet and volunteered to spearhead your team's wiki? Either way, `igem-wikibrick`'s got your back. (Future) integration of Markdown and word processor document compiling will make incorporating your teammates' work into the wiki seamless and easy.
 
-### 3.3 Details
 ## 5 Todo
 
 ### 5.1 High Priority
 
 - Make `dev/live` a switch instead of a pair of independent flags.
 - Either eliminate global variable use in gulp build or make global variable names more specific
+- Figure out why `gulp publish` sometimes doesn't perform the URL replace.
 - Fork igemwiki-api and modify line ~90 of upload.js to correctly catch timeout errors instead of erroring out before... Continuing execution on user input.
 - Update tutorials to reflect Build-Tool's current state
 - Automatically prepend watermark/license to the beginning of every file produced with the tool. Something along the lines of "THIS FILE WAS PRODUCED WITH [BUILD-TOOL-NAME], DEVELOPED BY THE VIRGINIA 2018 IGEM TEAM MEMBERS [WIKI TEAM MEMBERS]"
