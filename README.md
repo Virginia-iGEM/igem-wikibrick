@@ -10,11 +10,11 @@
 
 ## 2 Tutorial
 
-See [igem-wikibrick tutorials, examples and templates]. The tutorial contained therein is aimed at individuals who may have never worked with webdevelopment before.
+See [igem-wikibrick tutorials, examples and templates](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/tutorial). The tutorial contained therein is aimed at individuals who may have never worked with webdevelopment before.
 
 ## 3 Programmer's Guide
 
-See [programmer's guide]. This is a more technical document containing information on the architecture of igem-wikibrick, and is valuable both for new users trying to get a deeper understanding of how the tool works and how to modify it, as well as for well-versed developers who have no need of an introduction, and are looking to modify the tool for their own use as quickly as possible.
+See [programmer's guide](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide). This is a more technical document containing information on the architecture of igem-wikibrick, and is valuable both for new users trying to get a deeper understanding of how the tool works and how to modify it, as well as for well-versed developers who have no need of an introduction, and are looking to modify the tool for their own use as quickly as possible.
 
 ## 4 Description
 
@@ -82,11 +82,11 @@ Some features:
 
 ### 6.1 Build Dependencies
 
-See [packages.json]
+See [packages.json](https://github.com/Virginia-iGEM/2018-wiki/blob/master/package.json)
 
 ### 6.2 Live Dependencies
 
-See [bower.json]
+See [bower.json](https://github.com/Virginia-iGEM/2018-wiki/blob/master/bower.json)
 
 ## 7 Attributions and Works Cited
 
