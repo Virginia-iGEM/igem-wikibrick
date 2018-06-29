@@ -49,6 +49,7 @@ Some features:
 - Update tutorials to reflect Build-Tool's current state
 - Automatically prepend watermark/license to the beginning of every file produced with the tool. Something along the lines of "THIS FILE WAS PRODUCED WITH [BUILD-TOOL-NAME], DEVELOPED BY THE VIRGINIA 2018 IGEM TEAM MEMBERS [WIKI TEAM MEMBERS]"
 - Move imagemap.json to a folder other than `build`, so it isn't deleted on clean
+- Check for imagemap.json's existence before reading it, or try/catch the error that is produced when it doesn't exist. Tell user to `push:images` or `publish` before `live build`ing in error message instead of just vomiting exceptions.
 
 ### 5.2 Medium Priority
 
