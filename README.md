@@ -35,15 +35,19 @@ Some features:
 
 ## 5 Todo
 
+### Known Issues
+
+- `gulp publish` sometimes doesn't perform the URL replace. Reason is unknown; workaround is to enter `gulp live build` then `gulp live push:content` following a `gulp pulish` that fails to rewrite relative URLs.
+- Upload timeouts will _sometimes_ throw large, verbose errors that aren't caught by our error handling code.
+  - Same for login timeouts
+  - Fork igemwiki-api and modify line ~90 of upload.js to correctly catch timeout errors instead of erroring out before... Continuing execution on user input.
+
 ### 5.1 High Priority
 
 - Make `dev/live` a switch instead of a pair of independent flags.
 - Either eliminate global variable use in gulp build or make global variable names more specific
-- Figure out why `gulp publish` sometimes doesn't perform the URL replace.
-- Fork igemwiki-api and modify line ~90 of upload.js to correctly catch timeout errors instead of erroring out before... Continuing execution on user input.
 - Update tutorials to reflect Build-Tool's current state
 - Automatically prepend watermark/license to the beginning of every file produced with the tool. Something along the lines of "THIS FILE WAS PRODUCED WITH [BUILD-TOOL-NAME], DEVELOPED BY THE VIRGINIA 2018 IGEM TEAM MEMBERS [WIKI TEAM MEMBERS]"
-- Fix URL substitution sometimes not working at all when using `gulp publish`
 - Move imagemap.json to a folder other than `build`, so it isn't deleted on clean
 
 ### 5.2 Medium Priority
