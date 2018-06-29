@@ -146,13 +146,13 @@ upload = function(promises) {
                 .then(results => { // Generate imagemaps if we're uploading any images
                     if(conf.type == 'image') {
                         imageupload = true;
-                        imagemap[conf.dest] = results.target;
+                        imagemap[conf.dest] = results.targets;
                     }
                 })
                 , {concurrency: 1})
                 .then(() => { // Write out imagemaps if they've been generated
                     if(imageupload) {
-                        fs.writeFile(imagemapfilename, JSON.stringify(imagemap), 'utf8', () => {
+                        fs.writeFile(imagemapfilename ,JSON.stringify(imagemap), 'utf8', () => {
                         console.log('Wrote image mappings to '.concat(imagemapfilename));
                         });
                     }
