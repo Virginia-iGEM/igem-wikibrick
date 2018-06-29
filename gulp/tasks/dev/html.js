@@ -6,6 +6,7 @@ var Promise = require('bluebird');
 var browsersync = require('browser-sync');
 var replace = require('gulp-replace');
 var rename = require('gulp-rename');
+var _ = require('lodash');
 
 const path = require('path');
 const url = require('url');
@@ -113,7 +114,7 @@ function prepHTML(src, dest) {
             }
         }))) // Think about using lazypipe here
         .pipe(gulpif(global.live(), replace(/<!DOCTYPE html>/g, '')))
-        .pipe(targets.banner.html)
+        .pipe(targets.banner.html())
         .pipe(gulpif(global.serve(), browsersync.stream()))
         .pipe(gulp.dest(dest));
     }

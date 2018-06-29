@@ -84,33 +84,36 @@ const suffixes = {
 
 // using data from package.json
 var pkg = require('./package.json');
-var banner_js = ['/**',
+var banner_js = () => {return header(['/**',
   ' * <%= pkg.name %> - <%= pkg.description %>',
   ' * @version v<%= pkg.version %>',
   ' * @link <%= pkg.homepage %>',
   ' * @license <%= pkg.license %>',
   ' */',
-  ''].join('\n');
-var banner_html = ['<!--',
+  ''].join('\n'), {pkg: pkg});
+}
+var banner_html = () => {return header(['<!--',
   ' * <%= pkg.name %> - <%= pkg.description %>',
   ' * @version v<%= pkg.version %>',
   ' * @link <%= pkg.homepage %>',
   ' * @license <%= pkg.license %>',
   ' *-->',
-  ''].join('\n');
-var banner_css = ['/**',
+  ''].join('\n'), {pkg: pkg});
+}
+var banner_css = () => {return header(['/**',
   ' * <%= pkg.name %> - <%= pkg.description %>',
   ' * @version v<%= pkg.version %>',
   ' * @link <%= pkg.homepage %>',
   ' * @license <%= pkg.license %>',
   ' */',
-  ''].join('\n');
+  ''].join('\n'), {pkg: pkg});
+}
  
 module.exports = {
     banner: {
-        html: header(banner_html, {pkg: pkg}),
-        css: header(banner_css, {pkg: pkg}),
-        js: header(banner_js, {pkg: pkg})
+        html: banner_html,
+        css: banner_css,
+        js: banner_js
     },
     src: src,
     build: build,
