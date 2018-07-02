@@ -3,10 +3,10 @@
 This guide is directed at technical readers who want a more detailed understanding of the build tool. The _Programmer's Guide_ is organized hierarchically, starting with a high-level overview before diving into the details of the different components that make it work.
 
 ## 1 Table of Contents
-(https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#1-gitting-started)
-1. [**Table of Contents**](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide##1-Table-of-Contents)
-2. [**Recommended Readings**](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide##2-Recommended-Readings)
+1. [**Table of Contents**](#1-table-of-contents)
+2. [**Recommended Readings**](#2-recommended-readings)
 3. [**High Level Architecture**](#3-high-level-architecture)
+  3.1. [Usage and Task Definitions](#3.1-usage-and-task-definitions)
 
 ## 2 Recommended Readings
 
@@ -37,7 +37,7 @@ Linked above are recommended readings for understanding these things. You do not
 
 1. The core build system is composed of a [main gulpfile](https://github.com/Mantissa-23/VGEM-2018/blob/igemwiki-api/wiki/gulpfile.js) and a bunch of different [smaller sub-gulpfiles](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/gulp/tasks). These files collectively define a bunch of different _gulp tasks,_ which are (mostly) separate executable units of logic that take in a collection of different files under the `app` directory (equivalent to a `src` directory in other software development contexts), **transforming** them in some way depending on their content, and then placing the transformed output under the `build` directory. These _built_ files can be interpreted by anyone's web browser to display a webpage. They can also be uploaded and displayed on the iGEM Wiki through the iGEM's webserver with the right transformations.
   - These transformations vary a lot in what they do. Some are _preprocessors_ while others are _postprocessors._ All gulpfiles are heavily commented; in order to get a better idea of what a transformation consists of, I would recommend starting with the main gulpfile and reading the sub-gulpfiles as necessary.
-2. [igemwiki-api](https://github.com/igemuoftATG/igemwiki-api/tree/master/recipes): This `npm` package enables us to upload files to the iGEM Wiki. It was built by iGEM Toronto's 2016 team, and has been extended and expanded into a full-blown automated build tool, `igem-wikibrick`. It provides an interface that takes advantage of Mediawiki's API. The way `igem-wikibrick` makes use of this tool is documented under [`gulp/tasks/live/push.js`](https://github.com/Virginia-iGEM/igem-wikibrick/blob/master/gulp/tasks/live/push.js).
+2. [igemwiki-api](https://github.com/igemuoftATG/igemwiki-api/tree/master/recipes): This `npm` package enables us to upload files to the iGEM Wiki. It was built by iGEM Toronto's 2016 team, and has been extended and expanded into a full-blown automated build tool, `igem-wikibrick`. It provides an interface that takes advantage of Mediawiki's API. The way `igem-wikibrick` makes use of this tool is documented under [`gulp/tasks/live/push.js`](https://github.com/Virginia-iGEM/igem-wikibrick/blob/master/gulp/tasks/live/push.js
 
 ### 3.1 Usage and Task Definitions
 
