@@ -29,13 +29,15 @@ var login = function(logincount) {
                 resolve();
             })
             .catch(error =>{
-                if(error.toString().match(/RequestError: Error: connect ETIMEDOUT.*/) &&logincount > 0){
+                if(error.toString().match(/RequestError: Error: connect ETIMEDOUT.*/) && logincount > 0){
                     console.log("Error. Login failed. Try again.");
                     logincount--;
                     login(logincount).then(resolve);
                 }
                 else{
+                    console.log("Try running gulp publish again.");
                     throw error;
+                    reject();
                 }
             });
         }
