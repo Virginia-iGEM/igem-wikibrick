@@ -4,9 +4,9 @@ This guide is directed at technical readers who want a more detailed understandi
 
 ## 1 Table of Contents
 
-1. [**Table of Contents**](1-Table-of-Contents)
-2. [**Recommended Readings**](2-Recommended-Readings)
-3. [**High Level Architecture**](3-High-Level-Architecture)
+1. [**Table of Contents**](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide##1-Table-of-Contents)
+2. [**Recommended Readings**](#2-Recommended-Readings)
+3. [**High Level Architecture**](#3-High-Level-Architecture)
 
 ## 2 Recommended Readings
 
