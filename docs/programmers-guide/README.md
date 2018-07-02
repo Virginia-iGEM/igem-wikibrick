@@ -1,10 +1,14 @@
 # `igem-wikibrick` Programmer's Guide
 
-This guide is directed at technical readers who want to understand every aspect of the build tool, as well as the creators understand it. The Programmer's Guide is organized hierarchically, starting with a high-level overview before diving into the details of the different components that make it tick.
+This guide is directed at technical readers who want a more detailed understanding of the build tool. The _Programmer's Guide_ is organized hierarchically, starting with a high-level overview before diving into the details of the different components that make it work.
 
 ## 1 Table of Contents
 
-## 2 Reccommended Readings
+1. [**Table of Contents**](1-Table-of-Contents)
+2. [**Recommended Readings**](2-Recommended-Readings)
+3. [**High Level Architecture**](3-High-Level-Architecture)
+
+## 2 Recommended Readings
 
 Understanding the build system's different componenets minimally requires a basic, conceptual understanding of the following:
 
