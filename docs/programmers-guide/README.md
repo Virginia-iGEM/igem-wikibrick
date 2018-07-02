@@ -48,8 +48,38 @@ Major composite tasks can be found in the [main gulpfile](https://github.com/Man
 - `gulp dev build`: Builds a set of development files on your local computer. This development version can be run on your local machine by double-clicking on the HTML files found under the `build` folder, or alternatively through `gulp serve`.
 - The `live/dev` switch: Any gulp command can be prefixed with `live` or `dev`. This is currently only useful for `build`, as `gulp serve` automatically sets the switch to `dev` while `publish` automatically sets the switch to `live`.
 - `gulp serve`: Builds a set of development files via `gulp dev build` before launching a local webserver which hosts out of the `build` folder and watches the `app` folder for any changes to relevant content files. In the event of a change, these files will be automatically built before being streamed to the webserver for immediate display in your browser. This enables rapid development and should be used when editing stylesheets, HTML or JavaScript for use on the wiki.
-- `gulp publish`: First builds and pushes images to the wiki, which is necessary in order to generate their URLs. Images uploaded to the iGEM Wiki do not have predictable URLs, and so before a live build with URL substitution can be performed, images must first be uploaded. Once this is done, a live build executes, using a saved map of image locations under `build/imagemap.json` and a predictable URL map, defined by `.config/igem-wikibrick` to substitute relative URLs for absolute URLs. Then the remaining files, HTML, JS, CSS and vendor files are pushed to the iGEM server.
+- `gulp publish`: First builds and pushes images to the wiki, which is necessary in order to generate their URLs.Image s uploaded to the iGEM Wiki do not have predictable URLs, and so before a live build with URL substitution can be performed, images must first be uploaded. Once this is done, a live build executes, using a saved map of image locations under `build/imagemap.json` and a predictable URL map, defined by `.config/igem-wikibrick` to substitute relative URLs for absolute URLs. Then the remaining files, HTML, JS, CSS and vendor files are pushed to the iGEM server.
 
 Breakdown of subtasks:
 
-TODO
+Since there are two versions, live and build, there are different subtasks associated with both: 
+
+**Live version** (found under `push.js`)  
+- Most of the subtasks associated with the live version are relatively self-explanatory, such as `push:index`, `push:pages`, `push:templates`,`push:css`, etc. These subtasks will push the changes that have been made in each of the respective files onto the webpage. 
+- `push:images` uses a saved map of image locations under `build/imagemap.json` and a predictable URL map, defined by `.config/igem-wikibrick`, which substitutes relative URLs for absolute URLs for the images we upload to the iGEM wiki.
+
+**Build version**  
+Under `asset.js`:  
+- `build.js` and 'build:css' minifies and stages the respective files. Minification allows for a faster build time, as it strips away the whitespace, new character lines, and anything that does not change the code's functionality.
+- `build:sass` includes Bourboun and Neat as well as Sass files and minification.
+- `build:images` stages all .png and .jpg images.  
+
+Under `bower.js`:  
+- `build:bower:js` and `build:bower:css` stages JavaScript (JQuery, Bourboun and Neat, and any other future live dependencies) and CSS libraries, respectively.  
+
+Under `clean.js`:  
+- `clean`...as you may have guessed, cleans your gulpfile and essentially "resets" everything back to the default settings. 
+
+Under `DEP_markdown.js`:  
+- `build:markdown` uses markdown to convert text blocks from Markdown to HTML easily, so that non-CS people on your team can also help out too! 
+
+Under `html.js`:  
+- `build:index`, `build:pages`, `build:templates` builds the respective pages for developmental view. 
+
+
+
+
+
+
+
+
