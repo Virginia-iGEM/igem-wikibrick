@@ -3,10 +3,10 @@
 This guide is directed at technical readers who want a more detailed understanding of the build tool. The _Programmer's Guide_ is organized hierarchically, starting with a high-level overview before diving into the details of the different components that make it work.
 
 ## 1 Table of Contents
-
+(https://github.com/Mantissa-23/VGEM-2018/tree/master/.getting_started#1-gitting-started)
 1. [**Table of Contents**](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide##1-Table-of-Contents)
 2. [**Recommended Readings**](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide##2-Recommended-Readings)
-3. [**High Level Architecture**](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide##3-High-Level-Architecture)
+3. [**High Level Architecture**](#3-high-level-architecture)
 
 ## 2 Recommended Readings
 
@@ -31,7 +31,7 @@ Understanding the build system's different components requires a basic, conceptu
 
 Linked above are recommended readings for understanding these things. You do not need to follow all of these tutorials to the end or read every article in detail; they are simply here to give a general understanding of what each of these core components are and what they do. Skim them and look up any words you don't understand.
 
-## 3 High-Level Architecture
+## 3 High Level Architecture
 
 `igem-wikibrick` is composed of two key components:
 
@@ -39,7 +39,7 @@ Linked above are recommended readings for understanding these things. You do not
   - These transformations vary a lot in what they do. Some are _preprocessors_ while others are _postprocessors._ All gulpfiles are heavily commented; in order to get a better idea of what a transformation consists of, I would recommend starting with the main gulpfile and reading the sub-gulpfiles as necessary.
 2. [igemwiki-api](https://github.com/igemuoftATG/igemwiki-api/tree/master/recipes): This `npm` package enables us to upload files to the iGEM Wiki. It was built by iGEM Toronto's 2016 team, and has been extended and expanded into a full-blown automated build tool, `igem-wikibrick`. It provides an interface that takes advantage of Mediawiki's API. The way `igem-wikibrick` makes use of this tool is documented under [`gulp/tasks/live/push.js`](https://github.com/Virginia-iGEM/igem-wikibrick/blob/master/gulp/tasks/live/push.js).
 
-# 3.1 Usage and Task Definitions
+### 3.1 Usage and Task Definitions
 
 `igem-wikibrick` is used primarily via the `gulp` command, which is followed by a list of tasks to execute. As mentioned, all of these tasks are defined in gulpfiles that will be listed below.
 
