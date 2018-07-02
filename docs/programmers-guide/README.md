@@ -6,7 +6,7 @@ This guide is directed at technical readers who want a more detailed understandi
 1. [**Table of Contents**](#1-table-of-contents)
 2. [**Recommended Readings**](#2-recommended-readings)
 3. [**High Level Architecture**](#3-high-level-architecture)
-  3.1. [Usage and Task Definitions](#3.1-usage-and-task-definitions)
+  - 3a [_Usage and Task Definitions_](#3a-usage-and-task-definitions)
 
 ## 2 Recommended Readings
 
@@ -39,7 +39,7 @@ Linked above are recommended readings for understanding these things. You do not
   - These transformations vary a lot in what they do. Some are _preprocessors_ while others are _postprocessors._ All gulpfiles are heavily commented; in order to get a better idea of what a transformation consists of, I would recommend starting with the main gulpfile and reading the sub-gulpfiles as necessary.
 2. [igemwiki-api](https://github.com/igemuoftATG/igemwiki-api/tree/master/recipes): This `npm` package enables us to upload files to the iGEM Wiki. It was built by iGEM Toronto's 2016 team, and has been extended and expanded into a full-blown automated build tool, `igem-wikibrick`. It provides an interface that takes advantage of Mediawiki's API. The way `igem-wikibrick` makes use of this tool is documented under [`gulp/tasks/live/push.js`](https://github.com/Virginia-iGEM/igem-wikibrick/blob/master/gulp/tasks/live/push.js
 
-### 3.1 Usage and Task Definitions
+### 3a Usage and Task Definitions
 
 `igem-wikibrick` is used primarily via the `gulp` command, which is followed by a list of tasks to execute. As mentioned, all of these tasks are defined in gulpfiles that will be listed below.
 
