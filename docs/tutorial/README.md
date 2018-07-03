@@ -5,6 +5,7 @@ This tutorial is for first-time users who are setting up the igem-wikibrick tuto
 ## 1 Table of Contents
 1. [**Table of Contents**](#1-table-of-contents)
 2. [**Set Up**](#2-set-up)
+3. [**The Basics**](#3-the-basics)
 
 ## 2 Set Up
 
@@ -27,6 +28,26 @@ _Altenatively_, if you know that you're going to forget to type `npm install` an
 Note: the `.git` folder may not show up, as it may be a hidden folder. [This website](https://www.howtogeek.com/howto/windows-vista/show-hidden-files-and-folders-in-windows-vista/) shows you how to find it. 
 
 Once you're here, create a new file named `post-rewrite` and copy [this code](https://gist.github.com/digitaljhelms/7901283#file-post-rewrite) into that file. 
+
+## 3 The Basics
+
+### Components
+
+`gulpfile.js` is the main file that executes all the tasks that will build the wiki. There are two types of builds that the gulpfile can create, `live` and `dev`. 
+- `live` will publish the build to the iGEM wiki website using `igemwiki-api`, made by Toronto iGEM.   
+- `dev` is used for developmental and debugging purposes and is a local copy of the wiki on your laptop that can be used to quickly make edits.   
+
+For more details, refer to the [Programmer's Guide](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide#3-high-level-architecture) for specific commands that can be used for each build.  
+
+### Making edits   
+
+So now that you have all these **tools** at your disposal, how do you get started on making that butt-kicking wiki design?   
+
+There are two folders in specific that you want to keep in mind when editing your webpage: `app` and `build`. 
+- `app` folder is where you will edit your respective .css, .html, etc. files.
+- `build` folder is where all these changes will be reflected after you build your website. 
+
+After you `gulp serve`, all your changes in the `app` folder will be reflected on the website immediately.
 
 
 
