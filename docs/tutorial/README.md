@@ -41,10 +41,10 @@ For more details, refer to the [Programmer's Guide](https://github.com/Virginia-
 
 ### Making edits   
 
-So now that you have all these **tools** at your disposal, how do you get started on making that butt-kicking wiki design?   
+So now that you have all these tools at your disposal, how do you get started on making that butt-kicking wiki design?   
 
 There are two folders in specific that you want to keep in mind when editing your webpage: `app` and `build`. 
-- `app` folder is where you will edit your respective .css, .html, etc. files.
+- `app` folder is where you will directly edit your respective .css, .html, etc. files.
 - `build` folder is where all these changes will be reflected after you build your website. 
 
 After you `gulp serve`, all your changes in the `app` folder will be reflected on the website immediately.
