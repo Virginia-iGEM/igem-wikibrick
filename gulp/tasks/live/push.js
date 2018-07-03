@@ -148,7 +148,7 @@ upload = function(promises) {
                 .then(results => { // Generate imagemaps if we're uploading any images
                     if(conf.type == 'image') {
                         imageupload = true;
-                        imagemap[conf.dest] = results.targets;
+                        imagemap[conf.dest] = results.target;
                     }
                 })
                 , {concurrency: 1})

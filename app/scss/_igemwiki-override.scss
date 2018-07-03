@@ -55,3 +55,8 @@ ul {
         margin: 0;
     }
 }
+
+//MathJax CSS hack to remove annoyning right-side spans (from 2016 Team Peshwar)
+.MathJax nobr>span.math>span {
+    border-left-width: 0 !important;
+}
