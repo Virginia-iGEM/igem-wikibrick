@@ -3,6 +3,7 @@
 This guide is directed at technical readers who want a more detailed understanding of the build tool. The _Programmer's Guide_ is organized hierarchically, starting with a high-level overview before diving into the details of the different components that make it work.
 
 ## 1 Table of Contents
+
 1. [**Table of Contents**](#1-table-of-contents)
 2. [**Recommended Readings**](#2-recommended-readings)
 3. [**High Level Architecture**](#3-high-level-architecture)
@@ -52,34 +53,28 @@ Major composite tasks can be found in the [main gulpfile](https://github.com/Man
 
 #### Breakdown of subtasks:
 
-Since there are two versions, live and build, there are different subtasks associated with both: 
+Since there are two versions, live and build, there are different subtasks associated with both:
 
-**Live version** (`push.js`)  
+##### Live version (`push.js`)  
+
 - Most of the subtasks associated with the live version are relatively self-explanatory, such as `push:index`, `push:pages`, `push:templates`,`push:css`, etc. These subtasks will push the changes that have been made in each of the respective files onto the webpage. 
 - `push:images` uses a saved map of image locations under `build/imagemap.json` and a predictable URL map, defined by `.config/igem-wikibrick`, which substitutes relative URLs for absolute URLs for the images we upload to the iGEM wiki.
 
-**Build version**  
-`asset.js`:  
-- `build.js` and 'build:css' minifies and stages the respective files. Minification allows for a faster build time, as it strips away the whitespace, new character lines, and anything that does not change the code's functionality.
-- `build:sass` includes Bourboun and Neat as well as Sass files and minification.
-- `build:images` stages all .png and .jpg images.  
+##### Build version
 
-`bower.js`:  
-- `build:bower:js` and `build:bower:css` stages JavaScript (JQuery, Bourboun and Neat, and any other future live dependencies) and CSS libraries, respectively.  
+- `asset.js`:  
+  - `build.js` and 'build:css' minifies and stages the respective files. Minification allows for a faster build time, as it strips away the whitespace, new character lines, and anything that does not change the code's functionality.
+  - `build:sass` includes Bourboun and Neat as well as Sass files and minification.
+  - `build:images` stages all .png and .jpg images.  
 
-`clean.js`:  
-- `clean`...as you may have guessed, cleans your gulpfile and essentially "resets" everything back to the default settings. 
+- `bower.js`:  
+  - `build:bower:js` and `build:bower:css` stages JavaScript (JQuery, Bourboun and Neat, and any other future live dependencies) and CSS libraries, respectively.  
 
-`DEP_markdown.js`:  
-- `build:markdown` uses markdown to convert text blocks from Markdown to HTML easily, so that non-CS people on your team can also help out too! 
+- `clean.js`:  
+  - `clean`...as you may have guessed, cleans your gulpfile and essentially "resets" everything back to the default settings. 
 
-`html.js`:  
-- `build:index`, `build:pages`, `build:templates` builds the respective pages for developmental view. 
+- `DEP_markdown.js`:  
+  - `build:markdown` uses markdown to convert text blocks from Markdown to HTML easily, so that non-CS people on your team can also help out too! 
 
-
-
-
-
-
-
-
+- `html.js`:  
+  - `build:index`, `build:pages`, `build:templates` builds the respective pages for developmental view. 
