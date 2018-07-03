@@ -50,7 +50,7 @@ Major composite tasks can be found in the [main gulpfile](https://github.com/Man
 - `gulp serve`: Builds a set of development files via `gulp dev build` before launching a local webserver which hosts out of the `build` folder and watches the `app` folder for any changes to relevant content files. In the event of a change, these files will be automatically built before being streamed to the webserver for immediate display in your browser. This enables rapid development and should be used when editing stylesheets, HTML or JavaScript for use on the wiki.
 - `gulp publish`: First builds and pushes images to the wiki, which is necessary in order to generate their URLs.Image s uploaded to the iGEM Wiki do not have predictable URLs, and so before a live build with URL substitution can be performed, images must first be uploaded. Once this is done, a live build executes, using a saved map of image locations under `build/imagemap.json` and a predictable URL map, defined by `.config/igem-wikibrick` to substitute relative URLs for absolute URLs. Then the remaining files, HTML, JS, CSS and vendor files are pushed to the iGEM server.
 
-Breakdown of subtasks:
+#### Breakdown of subtasks:
 
 Since there are two versions, live and build, there are different subtasks associated with both: 
 
