@@ -54,26 +54,26 @@ Breakdown of subtasks:
 
 Since there are two versions, live and build, there are different subtasks associated with both: 
 
-**Live version** (found under `push.js`)  
+**Live version** (`push.js`)  
 - Most of the subtasks associated with the live version are relatively self-explanatory, such as `push:index`, `push:pages`, `push:templates`,`push:css`, etc. These subtasks will push the changes that have been made in each of the respective files onto the webpage. 
 - `push:images` uses a saved map of image locations under `build/imagemap.json` and a predictable URL map, defined by `.config/igem-wikibrick`, which substitutes relative URLs for absolute URLs for the images we upload to the iGEM wiki.
 
 **Build version**  
-Under `asset.js`:  
+`asset.js`:  
 - `build.js` and 'build:css' minifies and stages the respective files. Minification allows for a faster build time, as it strips away the whitespace, new character lines, and anything that does not change the code's functionality.
 - `build:sass` includes Bourboun and Neat as well as Sass files and minification.
 - `build:images` stages all .png and .jpg images.  
 
-Under `bower.js`:  
+`bower.js`:  
 - `build:bower:js` and `build:bower:css` stages JavaScript (JQuery, Bourboun and Neat, and any other future live dependencies) and CSS libraries, respectively.  
 
-Under `clean.js`:  
+`clean.js`:  
 - `clean`...as you may have guessed, cleans your gulpfile and essentially "resets" everything back to the default settings. 
 
-Under `DEP_markdown.js`:  
+`DEP_markdown.js`:  
 - `build:markdown` uses markdown to convert text blocks from Markdown to HTML easily, so that non-CS people on your team can also help out too! 
 
-Under `html.js`:  
+`html.js`:  
 - `build:index`, `build:pages`, `build:templates` builds the respective pages for developmental view. 
 
 
