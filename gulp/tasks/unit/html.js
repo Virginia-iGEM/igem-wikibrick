@@ -7,6 +7,7 @@ var browsersync = require('browser-sync');
 var replace = require('gulp-replace');
 var rename = require('gulp-rename');
 var _ = require('lodash');
+var banner = require('../../banner');
 
 const path = require('path');
 const url = require('url');
@@ -116,7 +117,7 @@ function prepHTML(src, dest) {
             }
         }))) // Think about using lazypipe here
         .pipe(gulpif(env.relative2absolute, replace(/<!DOCTYPE html>/g, '')))
-        .pipe(gulpif(env.banner, config.banner.html()))
+        .pipe(gulpif(env.banner, banner.html()))
         .pipe(gulpif(env.serve, browsersync.stream()))
         .pipe(gulp.dest(dest));
     }

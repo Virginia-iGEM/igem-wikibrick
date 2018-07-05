@@ -1,14 +1,14 @@
 {
-  "name": "vgem-2018-wiki",
-  "version": "0.0.3",
-  "description": "Contains all webcontent that will be found on http://2018.igem.org/Team:Virginia.",
+  "name": "igem-wikibrick",
+  "version": "0.0.4",
+  "description": "Build tool capable of automatically building and publish iGEM Wiki sites. Created by Virginia iGEM 2018's Wiki Team.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "Dylan Culfogienis",
-  "license": "ISC",
+  "keywords": ["iGEM", "wiki", "build", "gulp", "api", "tool", "automatic", "upload"],
+  "author": "Dylan Culfogienis, Grace Wu",
+  "license": "MIT",
   "dependencies": {
     "npm": "^6.1.0"
   },
@@ -38,7 +38,7 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-uglify": "^3.0.0",
     "gulp-wrap": "^0.14.0",
-    "igemwiki-api": "github:Virginia-iGEM/igemwiki-api",
+    "igemwiki-api": "github:Virginia-iGEM/igemwiki-api^0.0.4",
     "jshint": "^2.9.5",
     "lodash": "^4.17.10",
     "lodash.clonedeep": "^4.5.0",
@@ -50,11 +50,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mantissa-23/VGEM-2018.git"
+    "url": "git+https://github.com/Virginia-iGEM/igem-wikibrick.git"
   },
   "bugs": {
-    "url": "https://github.com/Mantissa-23/VGEM-2018/issues"
+    "url": "https://github.com/Virginia-iGEM/igem-wikibrick/issues"
   },
-  "homepage": "https://github.com/Mantissa-23/VGEM-2018#readme",
-  "browserslist": ["defaults"]
+  "homepage": "https://github.com/Virginia-iGEM/igem-wikibrick",
+  "browserslist": ["defaults"],
+  "banner": "This page and wiki was built with the help of igem-wikibrick, a tool created by Virginia iGEM 2018"
 }

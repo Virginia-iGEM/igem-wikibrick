@@ -10,6 +10,7 @@ var gulpif = require('gulp-if');
 var browsersync = require('browser-sync');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
+var banner = require('../../banner');
 
 var config = global.wikibrick;
 var env = config.environment;
@@ -24,7 +25,7 @@ gulp.task('build:js', function(){
     //.pipe(uglify().on('error', log)) // Minification increases load speeds
     .pipe(concat('wiki.js')) // Note use of concat to compact all JS files into one
     .pipe(sourcemaps.write())
-    .pipe(gulpif(env.banner, config.banner.js()))
+    .pipe(gulpif(env.banner, banner.js()))
     .pipe(gulpif(env.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.js));
 });
@@ -35,7 +36,7 @@ gulp.task('build:css', function(){
     return gulp.src(srcs.css)
     .pipe(postcss([ autoprefixer() ]))
     .pipe(gulpif(env.minify, minifyCSS())) // Minification increases load speeds
-    .pipe(gulpif(env.banner, config.banner.css()))
+    .pipe(gulpif(env.banner, banner.css()))
     .pipe(gulpif(env.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.css));
 });
@@ -46,7 +47,7 @@ gulp.task('build:sass', function(){
         .on('error', sass.logError))
     .pipe(postcss([ autoprefixer() ]))
     .pipe(gulpif(env.minify, minifyCSS())) // Minification increases load speeds
-    .pipe(gulpif(env.banner, config.banner.css()))
+    .pipe(gulpif(env.banner, banner.css()))
     .pipe(gulpif(env.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.css));
 });
