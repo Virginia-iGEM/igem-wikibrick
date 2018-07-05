@@ -1,4 +1,7 @@
-var argv = require('yargs').argv;
+var argv = require('yargs')
+.boolean(['--dev', '-d'])
+.boolean(['--live', '-l'])
+.argv;
 
 const path = require('path');
 const header = require('gulp-header');
@@ -141,7 +144,16 @@ module.exports = function(root) {
         }
     }
 
-    var environment = Object.assign(environments[argv.env || 'dev'], {name: argv.env || 'dev'});
+    var shortflag;
+    if (argv.l) {
+        shortflag = 'live'
+    }
+    else if (argv.d) {
+        shortflag = 'dev'
+    }
+
+    var userenv = argv.env || shortflag || 'dev'; // Try env variable, else fallback on shortflag, else assume we're in dev
+    var environment = Object.assign(environments[userenv], {name: userenv});
 
     return {
         teaminfo: teaminfo,

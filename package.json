@@ -56,5 +56,5 @@
     "url": "https://github.com/Mantissa-23/VGEM-2018/issues"
   },
   "homepage": "https://github.com/Mantissa-23/VGEM-2018#readme",
-  "browserslist": "defaults"
+  "browserslist": ["defaults"]
 }
