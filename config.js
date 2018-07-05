@@ -130,11 +130,6 @@ module.exports = function(root) {
         dev: {
             banner: false,
             relative2absolute: false,
-            serve: false
-        },
-        serve: {
-            banner: false,
-            relative2absolute: false,
             serve: true
         },
         live: {
