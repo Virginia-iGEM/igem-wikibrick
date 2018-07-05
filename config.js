@@ -150,7 +150,7 @@ module.exports = function(root) {
             unit: './gulp/tasks/unit/*.js',
             compound: './gulp/tasks/compound/*.js'
         },
-        environment: environments[argv.env || 'dev'], // Default to development environment, otherwise whatever is passed in
+        environment: Object.assign(environments[argv.env || 'dev'], {name: argv.env || 'dev'}), // Default to development environment, otherwise whatever is passed in
         targets: {
             root: root,
             clean: [build + '/**', '!' + build, '!' + build + '/imagemap.json'], // Clean directives; kill everything but imagemap.json

@@ -61,6 +61,7 @@ Some features:
 
 ### 5.3 Low Priority
 
+- Wrap the whole tool in a custom commandline tool
 - Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies for team members and future teams.
   - Add git hook that causes an npm install and bower install on package.json or bower.json change.
   - Must be added on a repository-by-repository basis
