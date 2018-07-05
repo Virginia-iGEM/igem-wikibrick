@@ -34,7 +34,7 @@ gulp.task('build:js', function(){
 gulp.task('build:css', function(){
     return gulp.src(srcs.css)
     .pipe(postcss([ autoprefixer() ]))
-    .pipe(minifyCSS()) // Minification increases load speeds
+    .pipe(gulpif(env.minify, minifyCSS())) // Minification increases load speeds
     .pipe(gulpif(env.banner, config.banner.css()))
     .pipe(gulpif(env.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.css));
@@ -43,7 +43,9 @@ gulp.task('build:css', function(){
 gulp.task('build:sass', function(){
     return gulp.src(srcs.scss)
     .pipe(sass({includePaths: [].concat(bourbon, neat)}) // Bourbon + neat includepaths
-        .on('error', sass.logError)) // Minification increases load speeds
+        .on('error', sass.logError))
+    .pipe(postcss([ autoprefixer() ]))
+    .pipe(gulpif(env.minify, minifyCSS())) // Minification increases load speeds
     .pipe(gulpif(env.banner, config.banner.css()))
     .pipe(gulpif(env.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.css));
@@ -52,7 +54,7 @@ gulp.task('build:sass', function(){
 // Task to stage all images, .png or .jpg
 gulp.task('build:images', function() {
     return gulp.src(srcs.images)
-    .pipe(imagemin()) // Minification increases load speeds
+    .pipe(gulpif(env.minify, imagemin())) // Minification increases load speeds
     .pipe(gulpif(env.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.images));
 });

@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 var minifyCSS = require('gulp-csso');
 var mainBowerFiles = require('main-bower-files');
@@ -8,7 +9,9 @@ var autoprefixer = require('autoprefixer');
 
 var log = require('fancy-log');
 
-var targets = global.wikibrick.targets;
+var config = global.wikibrick;
+var targets = config.targets;
+var env = config.environment;
 var srcs = targets.buildsrc;
 var dests = targets.buildtarget;
 
@@ -16,7 +19,7 @@ var dests = targets.buildtarget;
 // Note: See bower.json for exceptions important to successfully uploading bootstrap.
 gulp.task('build:bower:js', () => gulp
     .src(mainBowerFiles('**/*.js'), {base: 'bower_components' })
-    .pipe(uglify().on('error', log))
+    .pipe(gulpif(env.minify, uglify().on('error', log)))
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest(dests.bowerjs))
 );
@@ -26,6 +29,6 @@ gulp.task('build:bower:css', () => gulp
     .src(mainBowerFiles('**/*.css'), {base: 'bower_components' })
     .pipe(concat('vendor.css'))
     .pipe(postcss([ autoprefixer() ]))
-    .pipe(minifyCSS())
+    .pipe(gulpif(env.minify, minifyCSS()))
     .pipe(gulp.dest(dests.bowercss))
 );

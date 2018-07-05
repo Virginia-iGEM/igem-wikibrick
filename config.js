@@ -129,11 +129,13 @@ module.exports = function(root) {
     var environments = {
         dev: {
             banner: false,
+            minify: false,
             relative2absolute: false,
             serve: true
         },
         live: {
             banner: true,
+            minify: true,
             relative2absolute: true,
             serve: false
         }
