@@ -29,8 +29,8 @@ function assembleUploadSrc(srcitem, targetitem) {
 
 module.exports = function(root) {
 
-    var app = root + '/app';
-    var build = root + '/build';
+    var app = root + '/app/';
+    var build = root + '/build/';
 
     // Teaminfo. Duh.
     const teaminfo = {
@@ -144,13 +144,16 @@ module.exports = function(root) {
         }
     }
 
+    var environment = Object.assign(environments[argv.env || 'dev'], {name: argv.env || 'dev'});
+
     return {
         teaminfo: teaminfo,
         gulp: {
             unit: './gulp/tasks/unit/*.js',
             compound: './gulp/tasks/compound/*.js'
         },
-        environment: Object.assign(environments[argv.env || 'dev'], {name: argv.env || 'dev'}), // Default to development environment, otherwise whatever is passed in
+        environment: environment, // Default to development environment, otherwise whatever is passed in
+        environments: environments,
         targets: {
             root: root,
             clean: [build + '/**', '!' + build, '!' + build + '/imagemap.json'], // Clean directives; kill everything but imagemap.json
