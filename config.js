@@ -29,8 +29,8 @@ function assembleUploadSrc(srcitem, targetitem) {
 
 module.exports = function(root) {
 
-    var app = root + '/app/';
-    var build = root + '/build/';
+    var app = root + '/app';
+    var build = root + '/build';
 
     // Teaminfo. Duh.
     const teaminfo = {
@@ -153,6 +153,7 @@ module.exports = function(root) {
         environment: environments[argv.env || 'dev'], // Default to development environment, otherwise whatever is passed in
         targets: {
             root: root,
+            clean: [build + '/**', '!' + build, '!' + build + '/imagemap.json'], // Clean directives; kill everything but imagemap.json
             app: app,
             build: build,
             buildsrc: buildsrc, 
