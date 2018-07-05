@@ -8,7 +8,7 @@ var autoprefixer = require('autoprefixer');
 
 var log = require('fancy-log');
 
-var targets = require(global.targets);
+var targets = global.wikibrick.targets;
 var srcs = targets.buildsrc;
 var dests = targets.buildtarget;
 

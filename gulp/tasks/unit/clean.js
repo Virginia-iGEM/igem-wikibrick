@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var del = require('del');
 
-var targets = require(global.targets);
+var targets = global.wikibrick.targets;
 
 gulp.task('clean', function(done) {
     return del(targets.build, done);

@@ -12,7 +12,9 @@ const path = require('path');
 const url = require('url');
 const fs = require('fs');
 
-const targets = require(global.targets);
+var config = global.wikibrick;
+var targets = config.targets;
+var env = config.environment;
 var srcs = targets.buildsrc;
 var dests = targets.buildtarget;
 
@@ -107,15 +109,15 @@ function prepHTML(src, dest) {
         .pipe(rename(function (path) {
             path.extname = '.html';
         })) */
-        .pipe(gulpif(global.live(), cheerio({
+        .pipe(gulpif(env.relative2absolute, cheerio({
             run: relative2absolute,
             parserOptions: {
                 decodeEntities: false
             }
         }))) // Think about using lazypipe here
-        .pipe(gulpif(global.live(), replace(/<!DOCTYPE html>/g, '')))
-        .pipe(targets.banner.html())
-        .pipe(gulpif(global.serve(), browsersync.stream()))
+        .pipe(gulpif(env.relative2absolute, replace(/<!DOCTYPE html>/g, '')))
+        .pipe(gulpif(env.banner, config.banner.html()))
+        .pipe(gulpif(env.serve, browsersync.stream()))
         .pipe(gulp.dest(dest));
     }
 };

@@ -44,7 +44,6 @@ Some features:
 
 ### 5.1 High Priority
 
-- Make `dev/live` a switch instead of a pair of independent flags.
 - Either eliminate global variable use in gulp build or make global variable names more specific
 - Update tutorials to reflect Build-Tool's current state
 - Automatically prepend watermark/license to the beginning of every file produced with the tool. Something along the lines of "THIS FILE WAS PRODUCED WITH [BUILD-TOOL-NAME], DEVELOPED BY THE VIRGINIA 2018 IGEM TEAM MEMBERS [WIKI TEAM MEMBERS]"

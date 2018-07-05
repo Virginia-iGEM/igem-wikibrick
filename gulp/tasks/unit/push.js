@@ -1,18 +1,16 @@
 // See https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki for descriptions of packages
 var gulp = require('gulp');
-
-// Core node, https://nodejs.org/api/path.html
 const path = require('path')
 const fs = require('fs');
-
-const targets = require(global.targets);
-
-const igemwiki = require('igemwiki-api')(targets.teaminfo)
 const Promise = require('bluebird')
 const globby = require ('globby')
 const _ = require('lodash')
 
-const imagemapfilename = path.join(global.buildRoot, 'build/imagemap.json').toString();
+const config = global.wikibrick;
+const targets = config.targets;
+const igemwiki = require('igemwiki-api')(config.teaminfo)
+
+const imagemapfilename = path.join(targets.build, '/imagemap.json').toString();
 
 var loggedin = false;
 var loginjar;

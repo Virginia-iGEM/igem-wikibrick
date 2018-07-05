@@ -26,7 +26,6 @@
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.1",
     "gulp-declare": "^0.3.0",
-    "gulp-environments": "^0.1.2",
     "gulp-header": "^2.0.5",
     "gulp-hub": "^0.8.0",
     "gulp-if": "^2.0.2",
@@ -46,7 +45,8 @@
     "main-bower-files": "^2.13.1",
     "node-bourbon": "^4.2.8",
     "node-neat": "^2.0.0-beta.0",
-    "require-dir": "^1.0.0"
+    "require-dir": "^1.0.0",
+    "yargs": "^12.0.1"
   },
   "repository": {
     "type": "git",
