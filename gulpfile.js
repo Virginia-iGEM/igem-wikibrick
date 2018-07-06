@@ -6,6 +6,10 @@ global.wikibrick = require('./config')(path.resolve(__dirname)); // Pass in loca
 
 var config = global.wikibrick;
 
+// Require default igem-wikibrick tasks
+hub(['./node_modules/igem-wikibrick/gulp/unit'])
+hub(['./node_modules/igem-wikibrick/gulp/compound'])
+
 // Require unit tasks
 hub([config.gulp.unit]);
 
