@@ -37,7 +37,7 @@ Some features:
 
 ### Known Issues
 
-- `gulp publish` sometimes doesn't perform the URL replace. Reason is unknown; workaround is to enter `gulp live build` then `gulp live push:content` following a `gulp pulish` that fails to rewrite relative URLs.
+- `gulp publish -l` sometimes doesn't perform the URL replace. Reason is unknown; workaround is to enter `gulp build -l` then `gulp push:content -l` following a `gulp publish -l` that fails to rewrite relative URLs.
 - Upload timeouts will _sometimes_ throw large, verbose errors that aren't caught by our error handling code.
   - Same for login timeouts
   - Fork igemwiki-api and modify line ~90 of upload.js to correctly catch timeout errors instead of erroring out before... Continuing execution on user input.
@@ -49,18 +49,19 @@ Some features:
 
 ### 5.2 Medium Priority
 
+- Make it so that `gulp publish` automatically sets the environment to `live`, while `gulp serve`, at least in its current state, automatically sets the environment to development.
 - Added error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
-  - Modify `gulpfile.js` so that the `default` task runs both `dev` and `live` builds independently, pushing them into to `bulid-dev` and `build-live` respectively.
 - Fix MathJax with [#10 - Misc from this article](https://2016.igem.org/Team:Peshawar/Wiki)
-- Modify dev/html.js so that it also accepts markdown files.
+- Modify `gulp/unit/html.js` so that it also accepts markdown files.
   - The code's there, just commented out; need to keep markdown processor from mangling `<!DOCTYPE>` tag.
   - Should probably compile markdown files exclusively and load them in using templates.
   - Also add Google Drive support?
+- Replace bower with npm development dependencies. Bower is being phased out, not just in our project but across the web.
 
 ### 5.3 Low Priority
 
-- Wrap the whole tool in a custom commandline tool
+- Wrap the whole tool in a custom commandline tool?
 - Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies for team members and future teams.
   - Add git hook that causes an npm install and bower install on package.json or bower.json change.
   - Must be added on a repository-by-repository basis
