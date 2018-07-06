@@ -147,6 +147,7 @@ module.exports = function(root) {
                 server: './build',
                 port: 9999
             }
-        }
+        },
+        browserslist: ["defaults"]
     }
 };

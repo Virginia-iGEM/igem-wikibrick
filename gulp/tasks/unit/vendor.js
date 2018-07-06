@@ -28,7 +28,7 @@ gulp.task('build:bower:js', () => gulp
 gulp.task('build:bower:css', () => gulp
     .src(mainBowerFiles('**/*.css'), {base: 'bower_components' })
     .pipe(concat('vendor.css'))
-    .pipe(postcss([ autoprefixer() ]))
+    .pipe(postcss([ autoprefixer(config.browserslist) ]))
     .pipe(gulpif(env.minify, minifyCSS()))
     .pipe(gulp.dest(dests.bowercss))
 );

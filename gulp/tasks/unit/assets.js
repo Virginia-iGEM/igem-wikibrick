@@ -34,7 +34,7 @@ gulp.task('build:js', function(){
 // Optional: Include less() in pipeline before minifyCSS to use {less} CSS package
 gulp.task('build:css', function(){
     return gulp.src(srcs.css)
-    .pipe(postcss([ autoprefixer() ]))
+    .pipe(postcss([ autoprefixer(config.browserslist) ]))
     .pipe(gulpif(env.minify, minifyCSS())) // Minification increases load speeds
     .pipe(gulpif(env.banner, banner.css()))
     .pipe(gulpif(env.serve, browsersync.stream()))
@@ -45,7 +45,7 @@ gulp.task('build:sass', function(){
     return gulp.src(srcs.scss)
     .pipe(sass({includePaths: [].concat(bourbon, neat)}) // Bourbon + neat includepaths
         .on('error', sass.logError))
-    .pipe(postcss([ autoprefixer() ]))
+    .pipe(postcss([ autoprefixer(config.browserslist) ]))
     .pipe(gulpif(env.minify, minifyCSS())) // Minification increases load speeds
     .pipe(gulpif(env.banner, banner.css()))
     .pipe(gulpif(env.serve, browsersync.stream()))

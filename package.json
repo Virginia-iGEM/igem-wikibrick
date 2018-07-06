@@ -63,8 +63,5 @@
     "url": "https://github.com/Virginia-iGEM/igem-wikibrick/issues"
   },
   "homepage": "https://github.com/Virginia-iGEM/igem-wikibrick",
-  "browserslist": [
-    "defaults"
-  ],
   "banner": "This page and wiki was built with the help of igem-wikibrick, a tool created by Virginia iGEM 2018"
 }
