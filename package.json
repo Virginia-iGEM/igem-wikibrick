@@ -6,7 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["iGEM", "wiki", "build", "gulp", "api", "tool", "automatic", "upload"],
+  "keywords": [
+    "iGEM",
+    "wiki",
+    "build",
+    "gulp",
+    "api",
+    "tool",
+    "automatic",
+    "upload"
+  ],
   "author": "Dylan Culfogienis, Grace Wu",
   "license": "MIT",
   "dependencies": {
@@ -45,8 +54,7 @@
     "require-dir": "^1.0.0",
     "yargs": "^12.0.1"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Virginia-iGEM/igem-wikibrick.git"
@@ -55,6 +63,8 @@
     "url": "https://github.com/Virginia-iGEM/igem-wikibrick/issues"
   },
   "homepage": "https://github.com/Virginia-iGEM/igem-wikibrick",
-  "browserslist": ["defaults"],
+  "browserslist": [
+    "defaults"
+  ],
   "banner": "This page and wiki was built with the help of igem-wikibrick, a tool created by Virginia iGEM 2018"
 }
