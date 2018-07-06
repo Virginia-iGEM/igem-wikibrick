@@ -10,9 +10,6 @@
   "author": "Dylan Culfogienis, Grace Wu",
   "license": "MIT",
   "dependencies": {
-    "npm": "^6.1.0"
-  },
-  "devDependencies": {
     "autoprefixer": "^8.6.3",
     "bluebird": "^3.5.1",
     "bower": "^1.8.4",
@@ -47,6 +44,8 @@
     "node-neat": "^2.0.0-beta.0",
     "require-dir": "^1.0.0",
     "yargs": "^12.0.1"
+  },
+  "devDependencies": {
   },
   "repository": {
     "type": "git",
