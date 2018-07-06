@@ -1,11 +1,14 @@
+var path = require('path');
+
 var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 var minifyCSS = require('gulp-csso');
-var mainBowerFiles = require('main-bower-files');
+var mainNpmFiles = require('gulp-main-npm-files');
 var concat = require('gulp-concat');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
+var filter = require('gulp-filter');
 
 var log = require('fancy-log');
 
@@ -15,20 +18,26 @@ var env = config.environment;
 var srcs = targets.buildsrc;
 var dests = targets.buildtarget;
 
+var npmoptions = {
+    nodeModulesPath: path.join(targets.root, '/node_modules'),
+    packageJsonPath: path.join(targets.root, '/package.json')
+}
 // Task to stage library JS, such as JQuery, Bootstrap and any future live dependencies.
 // Note: See bower.json for exceptions important to successfully uploading bootstrap.
-gulp.task('build:bower:js', () => gulp
-    .src(mainBowerFiles('**/*.js'), {base: 'bower_components' })
+gulp.task('build:vendor:js', () => gulp
+    .src(mainNpmFiles(npmoptions), {base: './'})
+    .pipe(filter(['**/*.js']))
     .pipe(gulpif(env.minify, uglify().on('error', log)))
     .pipe(concat('vendor.js'))
-    .pipe(gulp.dest(dests.bowerjs))
+    .pipe(gulp.dest(dests.vendorjs))
 );
 
 // Task to stage library CSS, particularly Bootstrap.
-gulp.task('build:bower:css', () => gulp
-    .src(mainBowerFiles('**/*.css'), {base: 'bower_components' })
+gulp.task('build:vendor:css', () => gulp
+    .src(mainNpmFiles(npmoptions), {base: './'})
+    .pipe(filter(['**/*.css']))
     .pipe(concat('vendor.css'))
     .pipe(postcss([ autoprefixer() ]))
     .pipe(gulpif(env.minify, minifyCSS()))
-    .pipe(gulp.dest(dests.bowercss))
+    .pipe(gulp.dest(dests.vendorcss))
 );

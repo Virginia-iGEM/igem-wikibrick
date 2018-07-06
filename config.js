@@ -62,8 +62,8 @@ module.exports = function(root) {
         templates: build + 'templates/',
         css: build + 'css/',
         js: build + 'js/',
-        bowerjs: build + 'dist/js/',
-        bowercss: build + 'dist/css/',
+        vendorjs: build + 'dist/js/',
+        vendorcss: build + 'dist/css/',
         images: build + 'images/',
         markdownpages: build + 'pages/'
     }
@@ -76,8 +76,8 @@ module.exports = function(root) {
         templates: assembleUploadSrc(buildsrc.templates, buildtarget.templates),
         css: assembleUploadSrc(buildsrc.css, buildtarget.css),
         js: assembleUploadSrc(buildsrc.js, buildtarget.js),
-        bowerjs: buildtarget.bowerjs.concat('**/*.js'),
-        bowercss: buildtarget.bowercss.concat('**/*.css'),
+        vendorjs: buildtarget.vendorjs.concat('**/*.js'),
+        vendorcss: buildtarget.vendorcss.concat('**/*.css'),
         images: assembleUploadSrc(buildsrc.images, buildtarget.images),
         markdownpages: assembleUploadSrc(buildsrc.markdownpages, buildtarget.markdownpages)
     }
