@@ -144,7 +144,7 @@ module.exports = function(root) {
         },
         browsersync: {
             development: {
-                server: './build',
+                server: build,
                 port: 9999
             }
         },
