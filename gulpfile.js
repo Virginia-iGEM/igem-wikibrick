@@ -37,6 +37,8 @@ gulp.task('serve', gulp.series('build', gulp.parallel('browsersync', function() 
 // Dev task is currently analagous to default, will change in future
 gulp.task('default', gulp.series('serve'));
 
+module.exports = gulp;
+
 /*
 // Require default igem-wikibrick tasks
 hub(['./node_modules/igem-wikibrick/gulp/unit'])
