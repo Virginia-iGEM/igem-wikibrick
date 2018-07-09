@@ -4,26 +4,25 @@ var argv = require('yargs')
 .argv;
 
 const path = require('path');
-const header = require('gulp-header');
 
 // Format function
 String.prototype.format = function (args) {
-			var str = this;
-			return str.replace(String.prototype.format.regex, function(item) {
-				var intVal = parseInt(item.substring(1, item.length - 1));
-				var replace;
-				if (intVal >= 0) {
-					replace = args[intVal];
-				} else if (intVal === -1) {
-					replace = "{";
-				} else if (intVal === -2) {
-					replace = "}";
-				} else {
-					replace = "";
-				}
-				return replace;
-			});
-		};
+    var str = this;
+    return str.replace(String.prototype.format.regex, function(item) {
+        var intVal = parseInt(item.substring(1, item.length - 1));
+        var replace;
+        if (intVal >= 0) {
+            replace = args[intVal];
+        } else if (intVal === -1) {
+            replace = "{";
+        } else if (intVal === -2) {
+            replace = "}";
+        } else {
+            replace = "";
+        }
+        return replace;
+    });
+};
 String.prototype.format.regex = new RegExp("{-?[0-9]+}", "g");
 
 function assembleUploadSrc(srcitem, targetitem) {
@@ -32,8 +31,8 @@ function assembleUploadSrc(srcitem, targetitem) {
 
 module.exports = function(root) {
 
-    var app = root + '/app/';
-    var build = root + '/build/';
+    var app = path.join(root, '/app/');
+    var build = path.join(root, '/build/');
 
     // Teaminfo. Duh.
     const teaminfo = {
@@ -44,28 +43,28 @@ module.exports = function(root) {
     // Listed file sources for all tasks. Note use of glob patterns and wildcarding.
     // Used by any build tasks.
     var buildsrc = {
-        index: app + 'index.html',
-        pages: app + 'pages/**/*.html',
-        templates: app + 'templates/**/*.html',
-        css: app + 'css/**/*.css',
-        scss: app + 'scss/**/*.scss',
-        js: app + 'js/**/*.js',
-        images: app + 'images/**/*.{png,jpg}',
-        markdownpages: app + 'pages/**/*.md'
+        index: path.join(app, 'index.html'),
+        pages: path.join(app, 'pages/**/*.html'),
+        templates: path.join(app, 'templates/**/*.html'),
+        css: path.join(app, 'css/**/*.css'),
+        scss: path.join(app, 'scss/**/*.scss'),
+        js: path.join(app, 'js/**/*.js'),
+        images: path.join(app, 'images/**/*.{png,jpg}'),
+        markdownpages: path.join(app, 'pages/**/*.md')
     }
 
     // Destination directory for build, source directories for upload.
     // Used by any build tasks.
     var buildtarget = {
         index: build,
-        pages: build + 'pages/',
-        templates: build + 'templates/',
-        css: build + 'css/',
-        js: build + 'js/',
-        bowerjs: build + 'dist/js/',
-        bowercss: build + 'dist/css/',
-        images: build + 'images/',
-        markdownpages: build + 'pages/'
+        pages: path.join(build, 'pages/'),
+        templates: path.join(build, 'templates/'),
+        css: path.join(build, 'css/'),
+        js: path.join(build, 'js/'),
+        bowerjs: path.join(build, 'dist/js/'),
+        bowercss: path.join(build, 'dist/css/'),
+        images: path.join(build, 'images/'),
+        markdownpages: path.join(build, 'pages/')
     }
 
     // Used by push.js. Note that for the most part, 
@@ -133,7 +132,7 @@ module.exports = function(root) {
         environments: environments,
         targets: {
             root: root,
-            clean: [build + '/**', '!' + build, '!' + build + '/imagemap.json'], // Clean directives; kill everything but imagemap.json
+            clean: [path.join(build, '/**'), '!' + build, '!' + path.join(build, '/imagemap.json')], // Clean directives; kill everything but imagemap.json
             app: app,
             build: build,
             buildsrc: buildsrc, 
