@@ -33,7 +33,7 @@
     "gulp-csso": "^3.0.1",
     "gulp-declare": "^0.3.0",
     "gulp-header": "^2.0.5",
-    "gulp-hub": "^0.8.0",
+    "gulp-hub": "github:frankwallis/gulp-hub#4.2.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^4.1.0",
     "gulp-markdown": "^2.0.1",
