@@ -1,29 +1,11 @@
+const path = require('path');
+var format = require('string-format');
+format.extend(String.prototype, {})
+
 var argv = require('yargs')
 .boolean(['--dev', '-d'])
 .boolean(['--live', '-l'])
 .argv;
-
-const path = require('path');
-
-// Format function
-String.prototype.format = function (args) {
-    var str = this;
-    return str.replace(String.prototype.format.regex, function(item) {
-        var intVal = parseInt(item.substring(1, item.length - 1));
-        var replace;
-        if (intVal >= 0) {
-            replace = args[intVal];
-        } else if (intVal === -1) {
-            replace = "{";
-        } else if (intVal === -2) {
-            replace = "}";
-        } else {
-            replace = "";
-        }
-        return replace;
-    });
-};
-String.prototype.format.regex = new RegExp("{-?[0-9]+}", "g");
 
 function assembleUploadSrc(srcitem, targetitem) {
     return path.join(targetitem, path.basename(srcitem));
@@ -83,11 +65,11 @@ module.exports = function(root) {
 
     // URLs used by realtive2absolute
     var urls = {
-        standard: 'http://{0}.igem.org/Team:{1}/'.format([teaminfo.year, teaminfo.teamName]),
-        template: 'http://{0}.igem.org/Template:{1}/'.format([teaminfo.year, teaminfo.teamName]),
-        js: 'http://{0}.igem.org/Template:{1}/js/'.format([teaminfo.year, teaminfo.teamName]),
-        css: 'http://{0}.igem.org/Template:{1}/css/'.format([teaminfo.year, teaminfo.teamName]),
-        images: 'http://{0}.igem.org/File:T--{1}--{0}'.format([teaminfo.year, teaminfo.teamName])
+        standard: 'http://{0}.igem.org/Team:{1}/'.format(teaminfo.year, teaminfo.teamName),
+        template: 'http://{0}.igem.org/Template:{1}/'.format(teaminfo.year, teaminfo.teamName),
+        js: 'http://{0}.igem.org/Template:{1}/js/'.format(teaminfo.year, teaminfo.teamName),
+        css: 'http://{0}.igem.org/Template:{1}/css/'.format(teaminfo.year, teaminfo.teamName),
+        images: 'http://{0}.igem.org/File:T--{1}--{0}'.format(teaminfo.year, teaminfo.teamName)
     }
 
     // Suffixes used by relative2absolute
