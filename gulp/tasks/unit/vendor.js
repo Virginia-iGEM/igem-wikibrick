@@ -15,9 +15,6 @@ var env = config.environment;
 var srcs = targets.buildsrc;
 var dests = targets.buildtarget;
 
-console.log(mainBowerFiles('**/*.js'));
-console.log(mainBowerFiles('**/*.css'));
-
 // Task to stage library JS, such as JQuery, Bootstrap and any future live dependencies.
 // Note: See bower.json for exceptions important to successfully uploading bootstrap.
 gulp.task('build:bower:js', () => {

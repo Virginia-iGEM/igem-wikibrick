@@ -12,8 +12,6 @@ var hub = new HubRegistry([
   config.gulp.unit
 ]);
 
-//console.log(hub);
-
 gulp.registry(hub);
 
 const buildtasks = [ 'build:index', 'build:pages', 'build:templates', 'build:sass', 'build:js', 'build:images', 'build:bower:js', 'build:bower:css'];
