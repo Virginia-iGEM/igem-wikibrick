@@ -2,7 +2,12 @@ var gulp = require('gulp');
 var HubRegistry = require('gulp-hub');
 var path = require('path');
 
-global.wikibrick = require('./config')(path.resolve(__dirname)); // Pass in local directory name
+var importflag;
+
+// Only generate configs if we aren't being imported by another module
+if (!importflag) {
+  global.wikibrick = require('./config')(path.resolve(__dirname)); // Pass in local directory name
+}
 
 var config = global.wikibrick;
 var targets = config.targets;
@@ -35,16 +40,7 @@ gulp.task('serve', gulp.series('build', gulp.parallel('browsersync', function() 
 // Dev task is currently analagous to default, will change in future
 gulp.task('default', gulp.series('serve'));
 
-module.exports = gulp;
-
-/*
-// Require default igem-wikibrick tasks
-hub(['./node_modules/igem-wikibrick/gulp/unit'])
-hub(['./node_modules/igem-wikibrick/gulp/compound'])
-
-// Require unit tasks
-hub([config.gulp.unit]);
-
-// Require compound tasks once unit tasks are defined
-hub([config.gulp.compound]);
-*/
+module.exports = function() {
+  importflag = true;
+  return gulp;
+}
