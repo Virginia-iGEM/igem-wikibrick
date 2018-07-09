@@ -13,7 +13,6 @@ var config = global.wikibrick;
 var targets = config.targets;
 
 var hub = new HubRegistry([
-  'node_modules/igem-wikibrick/gulp/tasks/unit/*.js',
   config.gulp.unit
 ]);
 
@@ -26,7 +25,6 @@ gulp.task('build', gulp.parallel(buildtasks));
 
 // Live build runs dev and then uploads, will change in future
 gulp.task('publish', gulp.series('push:images', 'build', 'push:content'));
-
 
 gulp.task('serve', gulp.series('build', gulp.parallel('browsersync', function() {
   gulp.watch(targets.buildsrc.index, gulp.series('build:index'));
