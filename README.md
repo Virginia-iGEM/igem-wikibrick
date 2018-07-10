@@ -1,24 +1,41 @@
 # igem-wikibrick
 
+A user-friendly tool that makes developing wikis and webpages for the iGEM wiki behave as much like normal web development as possible. Automates building, image, HTML, CSS, Javascript and Package uploads.
+
+**Warning: igem-wikibrick is still under fairly active development. The package is working as intended _for us,_ but has not been thoroughly tested for bugs and corner cases. If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork, modify and submit a pull request. If you are on an iGEM team, this can count towards your collaboration requirements.**
+
 ## 1 Table of Contents
 
 1. **Table of Contents**
-2. **Tutorial**
-3. **Description**
-4. **Todo**
-5. **Attributions, Dependencies and Works Cited**
+2. **Installation**
+3. **Tutorial**
+4. **Description**
+5. **Todo**
+6. **Attributions, Dependencies and Works Cited**
+
+## 2 Installation
+
+In the future: Run an install script. For now:
+
+If creating a new project: `npm init`  
+`npm install -g gulp@next bower`  
+`npm install -D igem-wikibrick gulp@next bower string-format`  
+`npm update` - May or may not be necessary due to [a bug with npm's package management](https://github.com/npm/npm/issues/1341).  
+`cp node_modules/igem-wikibrick/config.js ./`  
+`cp node_modules/igem-wikibrick/examples/gulpfile.js ./`  
+If you would like a sample project:  
+`mkdir app`  
+`cp -r node_modules/igem-wikbrick/examples/app ./app`
 
 ## 2 Tutorial
 
-See [igem-wikibrick tutorials, examples and templates](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/tutorial). The tutorial contained therein is aimed at individuals who may have never worked with webdevelopment before.
+See [igem-wikibrick tutorials, examples and templates](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/tutorial). The tutorial contained therein is aimed at individuals who may have never worked with webdevelopment before, and includes more detailed installation instructions.
 
 ## 3 Programmer's Guide
 
 See [programmer's guide](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide). This is a more technical document containing information on the architecture of igem-wikibrick, and is valuable both for new users trying to get a deeper understanding of how the tool works and how to modify it, as well as for well-versed developers who have no need of an introduction, and are looking to modify the tool for their own use as quickly as possible.
 
 ## 4 Description
-
-**Warning: igem-wikibrick is currently under active development and is not yet working as intended. The package should be functional by early July; contact dtc9bb@virginia.edu for further information, questions, and concerns. Use at your own risk.**
 
 `igem-wikibrick` is an open-source Node.js package, build system and/or template for iGEM teams that automates the creation of iGEM wiki pages. It is a significant improvement over the Mediawiki in-browser page editors and enables teams to rapidly iterate on their wiki design and style and incorporate automated build tasks into their workflow, allowing the entire team to contribute to the wiki, using the full benefits of version control and automated builds. Using the tool requires a cursory understanding of web development; however, the tool is designed to easily incorporate workflows from other parts of the team, enabling team members of a non-CS background to easily contribute.
 

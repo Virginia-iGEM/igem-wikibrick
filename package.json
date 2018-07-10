@@ -19,7 +19,6 @@
   "author": "Dylan Culfogienis, Grace Wu",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^6.0.0",
     "string-format": "^2.0.0",
     "autoprefixer": "^8.6.3",
     "bluebird": "^3.5.1",

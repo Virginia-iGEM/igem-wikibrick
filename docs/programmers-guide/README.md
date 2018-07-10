@@ -9,7 +9,9 @@ This guide is directed at technical readers who want a more detailed understandi
 3. [**High Level Architecture**](#3-high-level-architecture)
   - 3a [_Usage and Task Definitions_](#3a-usage-and-task-definitions)
 
-## 2 Recommended Readings
+## 2 Recommended Readings for the Uninitiated
+
+If you are new to webdevelopment or programming, all of the following are _strongly_ reccommended to get a basic understanding of how the tool works. If you are just looking to get the wiki up and running, this is probably unnecessary, but if you are interested in what's under the hood, you'll need this prerequisite knowledge.
 
 Understanding the build system's different components requires a basic, conceptual understanding of the following:
 
@@ -30,7 +32,7 @@ Understanding the build system's different components requires a basic, conceptu
   - [npm](https://www.npmjs.com/)
   - [bower](https://bower.io/)
 
-Linked above are recommended readings for understanding these things. You do not need to follow all of these tutorials to the end or read every article in detail; they are simply here to give a general understanding of what each of these core components are and what they do. Skim them and look up any words you don't understand.
+You do not need to follow all of these tutorials to the end or read every article in detail; they are simply here to give a general understanding of what each of these core components are and what they do. Skim them and look up any words you don't understand.
 
 ## 3 High Level Architecture
 
@@ -38,6 +40,7 @@ Linked above are recommended readings for understanding these things. You do not
 
 1. The core build system is composed of a [main gulpfile](https://github.com/Mantissa-23/VGEM-2018/blob/igemwiki-api/wiki/gulpfile.js) and a bunch of different [smaller sub-gulpfiles](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/gulp/tasks). These files collectively define a bunch of different _gulp tasks,_ which are (mostly) separate executable units of logic that take in a collection of different files under the `app` directory (equivalent to a `src` directory in other software development contexts), **transforming** them in some way depending on their content, and then placing the transformed output under the `build` directory. These _built_ files can be interpreted by anyone's web browser to display a webpage. They can also be uploaded and displayed on the iGEM Wiki through the iGEM's webserver with the right transformations.
   - These transformations vary a lot in what they do. Some are _preprocessors_ while others are _postprocessors._ All gulpfiles are heavily commented; in order to get a better idea of what a transformation consists of, I would recommend starting with the main gulpfile and reading the sub-gulpfiles as necessary.
+  - This gulpfile is wrapped up in a Node.js module, which is then `require`'d by _your_ package; this module was made available to your package when you installed it.
 2. [igemwiki-api](https://github.com/igemuoftATG/igemwiki-api/tree/master/recipes): This `npm` package enables us to upload files to the iGEM Wiki. It was built by iGEM Toronto's 2016 team, and has been extended and expanded into a full-blown automated build tool, `igem-wikibrick`. It provides an interface that takes advantage of Mediawiki's API. The way `igem-wikibrick` makes use of this tool is documented under [`gulp/tasks/live/push.js`](https://github.com/Virginia-iGEM/igem-wikibrick/blob/master/gulp/tasks/live/push.js
 
 ### 3a Usage and Task Definitions
@@ -46,8 +49,11 @@ Linked above are recommended readings for understanding these things. You do not
 
 Major composite tasks can be found in the [main gulpfile](https://github.com/Mantissa-23/VGEM-2018/blob/igemwiki-api/wiki/gulpfile.js):
 
-- `gulp dev build`: Builds a set of development files on your local computer. This development version can be run on your local machine by double-clicking on the HTML files found under the `build` folder, or alternatively through `gulp serve`.
-- The `live/dev` switch: Any gulp command can be prefixed with `live` or `dev`. This is currently only useful for `build`, as `gulp serve` automatically sets the switch to `dev` while `publish` automatically sets the switch to `live`.
+- `gulp build` or `gulp build -d`: Builds a set of development files on your local computer. This development version can be run on your local machine by double-clicking on the HTML files found under the `build` folder, or alternatively through `gulp serve`.
+- The `-l/-d` switch: Any gulp command can be flagged with `-l` or `-d`. These are short for `--env=live` and `--env=dev`, respectively. Both are different build environments that affect the way `gulp` transforms our files in `app` into files in `build`.
+  - The `dev` environment prepares files to run on your local machine. It is also the default, implied environment; if you use `-d` or `--env=dev` in a command, you can simply omit it to achieve the same effect. This setting is most commonly used with `gulp serve`, though can also be used with `gulp build` to produce files that can be run through any web browser.
+  - The `live` environment prepares files for uploading to the iGEM wiki, and should only be used when you want to modify your actual, _live_ wiki page on igem.org.
+  - Note that these environments are not hard-coded but defined in 
 - `gulp serve`: Builds a set of development files via `gulp dev build` before launching a local webserver which hosts out of the `build` folder and watches the `app` folder for any changes to relevant content files. In the event of a change, these files will be automatically built before being streamed to the webserver for immediate display in your browser. This enables rapid development and should be used when editing stylesheets, HTML or JavaScript for use on the wiki.
 - `gulp publish`: First builds and pushes images to the wiki, which is necessary in order to generate their URLs.Image s uploaded to the iGEM Wiki do not have predictable URLs, and so before a live build with URL substitution can be performed, images must first be uploaded. Once this is done, a live build executes, using a saved map of image locations under `build/imagemap.json` and a predictable URL map, defined by `.config/igem-wikibrick` to substitute relative URLs for absolute URLs. Then the remaining files, HTML, JS, CSS and vendor files are pushed to the iGEM server.
 
