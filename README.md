@@ -37,6 +37,7 @@ Some features:
 
 ### Known Issues
 
+- `npm install` will not correctly install this package due to problems with npm's dependency resolution. Workaround is to run `npm update` directly following an `npm install`. The install script will automatically do this.
 - `gulp publish -l` sometimes doesn't perform the URL replace. Reason is unknown; workaround is to enter `gulp build -l` then `gulp push:content -l` following a `gulp publish -l` that fails to rewrite relative URLs.
 - Upload timeouts will _sometimes_ throw large, verbose errors that aren't caught by our error handling code.
   - Same for login timeouts
