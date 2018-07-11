@@ -2,10 +2,8 @@ var gulp = require('gulp');
 var HubRegistry = require('gulp-hub');
 var path = require('path');
 
-var config = global.wikibrick;
-var targets = config.targets;
-
 module.exports = function(config) {
+  var targets = config.targets;
   var hub = new HubRegistry([
     './tasks/unit/*js'
   ]);
