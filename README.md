@@ -22,7 +22,7 @@ If creating a new project: `npm init`
 `npm install -D igem-wikibrick gulp@next bower string-format`  
 `npm update` - May or may not be necessary due to [a bug with npm's package management](https://github.com/npm/npm/issues/1341).  
 `cp node_modules/igem-wikibrick/config.js ./`  
-`cp node_modules/igem-wikibrick/examples/gulpfile.js ./`  
+`cp node_modules/igem-wikibrick/gulpfile.js ./`  
 If you would like a sample project:  
 `mkdir app`  
 `cp -r node_modules/igem-wikbrick/app ./app`
