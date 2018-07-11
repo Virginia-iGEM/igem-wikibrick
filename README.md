@@ -2,7 +2,7 @@
 
 A user-friendly tool that makes developing wikis and webpages for the iGEM wiki behave as much like normal web development as possible. Automates building, image, HTML, CSS, Javascript and Package uploads.
 
-**Warning: igem-wikibrick is still under fairly active development. The package is working as intended _for us,_ but has not been thoroughly tested for bugs and corner cases. If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork, modify and submit a pull request. If you are on an iGEM team, this can count towards your collaboration requirements.**
+**Warning: igem-wikibrick is still under fairly active development. The package is working as intended _for us,_ but has not been thoroughly tested for bugs and corner cases. If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork, modify and submit a pull request. If you are on an iGEM team, this can count towards your collaboration requirements. Contact us for more information.**
 
 ## 1 Table of Contents
 
@@ -25,7 +25,7 @@ If creating a new project: `npm init`
 `cp node_modules/igem-wikibrick/examples/gulpfile.js ./`  
 If you would like a sample project:  
 `mkdir app`  
-`cp -r node_modules/igem-wikbrick/examples/app ./app`
+`cp -r node_modules/igem-wikbrick/app ./app`
 
 ## 2 Tutorial
 
