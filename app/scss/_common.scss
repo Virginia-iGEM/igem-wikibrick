@@ -1,0 +1,74 @@
+@import "igemwiki-override";
+@import "bourbon";
+@import "neat";
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,900italic,500italic,500,400italic);
+
+/* UVA Colors
+$background-dark-color:     #232D4B;
+$background-light-color:    #ffffff;
+$accent-color:              #E57200;
+$light-accent-color:        rgb(255, 191, 128);
+$text-light:                #ffffff;
+$text-dark-color:                 #666666;
+$link-color:                #EB5F0C;
+*/
+
+/* Cherenkov Colors
+$background-dark-color:#282828;
+$background-light-color:#C3C3D8;
+$accent-color: #BFFBF9;
+$text-light: #E8F9F9;
+$text-dark-color: #001C4E;
+$link-color: #3DD4DF;
+*/
+
+/*Passion Fruit Colors*/
+/*
+$background-dark-color:#FAF4E0;
+$background-light-color:rgb(128, 39, 81);
+$accent-color: #F5287F;
+$light-accent-color: rgb(255, 142, 189);
+$text-light: #1E0811;
+$text-dark-color: #FFF0EF;
+$link-color: #FBB645;
+*/
+
+// Current site colors
+$background-dark-color: rgb(37, 37, 37);
+$background-light-color: rgb(247, 245, 233);
+$accent-color: rgb(44, 106, 148);
+$accent-light-color: rgb(0, 195, 255);
+$text-light-color: rgb(255, 253, 255);
+$text-dark-color: rgb(129, 127, 116);
+$link-color: rgb(255, 218, 159);
+
+$breakpoint: 1000px; // If the screen is under this width, switch to mobile view
+
+@mixin shadow-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+@mixin shadow-2 {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+@mixin shadow-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+@mixin shadow-4 {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+@mixin shadow-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+@mixin circular {
+    border-radius: 50%;
+}
+
+@mixin block-height($height) {
+    line-height: $height;
+    height: $height;
+}

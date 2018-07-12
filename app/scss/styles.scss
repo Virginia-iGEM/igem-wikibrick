@@ -1,51 +1,4 @@
-@import "igemwiki-override";
-@import "bourbon";
-@import "neat";
-@import "style_mixins";
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,900italic,500italic,500,400italic);
-
-/* Begin actual Virginia iGEm 2018 Code */
-
-/* UVA Colors
-$background-dark-color:     #232D4B;
-$background-light-color:    #ffffff;
-$accent-color:              #E57200;
-$light-accent-color:        rgb(255, 191, 128);
-$text-light:                #ffffff;
-$text-dark-color:                 #666666;
-$link-color:                #EB5F0C;
-*/
-
-/* Cherenkov Colors
-$background-dark-color:#282828;
-$background-light-color:#C3C3D8;
-$accent-color: #BFFBF9;
-$text-light: #E8F9F9;
-$text-dark-color: #001C4E;
-$link-color: #3DD4DF;
-*/
-
-/*Passion Fruit Colors*/
-/*
-$background-dark-color:#FAF4E0;
-$background-light-color:rgb(128, 39, 81);
-$accent-color: #F5287F;
-$light-accent-color: rgb(255, 142, 189);
-$text-light: #1E0811;
-$text-dark-color: #FFF0EF;
-$link-color: #FBB645;
-*/
-
-// Current site colors
-$background-dark-color: rgb(37, 37, 37);
-$background-light-color: rgb(247, 245, 233);
-$accent-color: rgb(44, 106, 148);
-$accent-light-color: rgb(0, 195, 255);
-$text-light-color: rgb(255, 253, 255);
-$text-dark-color: rgb(129, 127, 116);
-$link-color: rgb(255, 218, 159);
-
-$breakpoint: 1000px; // If the screen is under this width, switch to mobile view
+@import "common";
 
 /*Applies to all*/
 body, #mw-content-text {
@@ -85,10 +38,18 @@ img {
     width: auto;
     height: auto;
     position: relative;
-    @include grid-container;
+    //@include grid-container;
     background-color: $background-light-color;
     //@include grid-visual;
     
+    h1 {
+        padding: 3% 1%;
+    }
+    p {
+        margin: 1%;
+        line-height: 2em;
+    }
+    /*
     div#media{    
         @include grid-column(4, $grid-content);
         text-align: center;
@@ -97,16 +58,8 @@ img {
         bottom: 20px;
     }
     div#text{
-        @include grid-column(8, $grid-content);
-        h1 {
-            padding: 3% 1%;
-        }
-        p {
-            margin: 1%;
-            line-height: 2em;
-        }
     }
-    
+    */
 }
 
 #media {

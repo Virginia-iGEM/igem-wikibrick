@@ -7,4 +7,4 @@ $(window).scroll(function() {
         $('.scrolltop').stop(true, true).fadeOut();
     }
 });
-$(function(){$(".scroll").click(function(){$("html,body").animate({scrollTop:$(".thetop").offset().top},"1000");return false})})
+$(function(){$(".scroll").click(function(){$("html,body").animate({scrollTop:$(".top").offset().top},"1000");return false})})

@@ -1,5 +1,4 @@
-@import "styles";
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,700italic,900,900italic,500italic,500,400italic);
+@import "common";
 
 .category-gallery {
     $category-grid: (
@@ -21,24 +20,25 @@
 
         a {
             position: relative;
-            text-align: center;
-            min-width: 100%;
-            min-height: 100%;
             display: block;
+            overflow: hidden;
             p {
+                font-size: 2em;
                 display: none;
                 position: absolute;
                 top: 50%;
                 left: 50%;
-                transform: translate(-50%, -100%);
+                transform: translate(-50%, -50%);
+                margin-top: -0.5em;
+                margin-left: -0.25em;
                 z-index: 9; /*overlay text over*/
                 transition: all 0.2s;
+                text-align: center;
             }
             &:hover img {
-                background-color: #4799b4cc;
+                //background-color: black;
                 image-orientation: from-image;
-                filter: blur(2px) contrast(25%) brightness(25%);
-                opacity: 0.5;
+                opacity: 0.10;
             }
             &:hover p {
                 display: block;
@@ -46,10 +46,10 @@
             img {
                 @include circular;
                 image-orientation: from-image;
-                transition: all 0.3s cubic-bezier(.25,.8,.25,1);
                 margin-bottom: 25px;
-                width: 90%;
-                height: 90%;
+                min-width: 90%;
+                min-height: 90%;
+                transition: opacity ease-in-out 0.2s, background-color ease-in-out 0.7s;
             }
         }
     }

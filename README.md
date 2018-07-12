@@ -62,6 +62,7 @@ Some features:
 
 ### 5.1 High Priority
 
+- Fix _igemwiki-override.scss so that it actually corrects for the wiki styles and the published site reflects the local build site 1:1
 - Update tutorials to reflect Build-Tool's current state
 - Check for imagemap.json's existence before reading it, or try/catch the error that is produced when it doesn't exist. Tell user to `push:images` or `publish` before `live build`ing in error message instead of just vomiting exceptions.
 
