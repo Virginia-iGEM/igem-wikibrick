@@ -59,12 +59,13 @@ Some features:
 - Upload timeouts will _sometimes_ throw large, verbose errors that aren't caught by our error handling code.
   - Same for login timeouts
   - Fork igemwiki-api and modify line ~90 of upload.js to correctly catch timeout errors instead of erroring out before... Continuing execution on user input.
+- Attempting to `gulp build -l` without first `gulp push:images -l` will result in a big error and broken URL substitutions. Tell user to `push:images` or `publish` before `live build`ing in error message instead of just vomiting exceptions.
+- `gulp publish` can be performed without the `-l` flag, which makes no sense. An error should be thrown which tells the user that the `-l` flag is necessary for publishing.
 
 ### 5.1 High Priority
 
-- Fix _igemwiki-override.scss so that it actually corrects for the wiki styles and the published site reflects the local build site 1:1
+- Fix _igemwiki-override.scss_ so that it actually corrects for the wiki styles and the published site reflects the local build site 1:1
 - Update tutorials to reflect Build-Tool's current state
-- Check for imagemap.json's existence before reading it, or try/catch the error that is produced when it doesn't exist. Tell user to `push:images` or `publish` before `live build`ing in error message instead of just vomiting exceptions.
 
 ### 5.2 Medium Priority
 

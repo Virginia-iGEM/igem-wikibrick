@@ -16,7 +16,8 @@
     "automatic",
     "upload"
   ],
-  "author": "Dylan Culfogienis, Grace Wu",
+  "author": "Dylan Culfogienis",
+  "contributors": ["Grace Wu"],
   "license": "MIT",
   "dependencies": {
     "string-format": "^2.0.0",
