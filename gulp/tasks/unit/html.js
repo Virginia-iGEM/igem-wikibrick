@@ -62,7 +62,7 @@ relative2absolute = function($, file) {
             }
             
             if(script.text() != null) {
-                urlReplace = new RegExp("\\.load\\( *'(\\.\\/)?(.*)\\.html' *\\);", 'g');
+                urlReplace = /\.load\( *'(\.)?(\/)?(.*)\.html' *\);/gi;
 
                 script.text(script.text().replace(urlReplace, function (match, $1, $2, offest, original) {
                     return ".load('".concat(urls.template).concat(path.basename($2)).concat(targets.suffixes.js).concat("');");
@@ -81,7 +81,7 @@ relative2absolute = function($, file) {
             var a = $(this);
             var relname = a.attr('href');
             if (relname != null && relname != "index.html" && urlIsRelative(relname)) {
-                if (!relname.match(/^(\.\/)?pages\//)) {
+                if (!relname.match(/^(\.)?(\/)?pages\//)) {
                     a.attr('href', urls.standard.concat(path.basename(a.attr('href')).replace('.html', '')));
                 }
                 else { //Todo: Make this support nested pages
