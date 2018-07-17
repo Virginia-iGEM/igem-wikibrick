@@ -110,15 +110,17 @@ var retryUpload = function(conf, retries) {
             }
             if (retries > 0) {
                 console.log("Upload failed, retrying upload...");
-                retryUpload(conf, retries);
+                retryUpload(conf, retries).then(results => {resolve(results)});
             }
             else{
                 console.log("Retry count exceeded.")
                 throw error;
-                reject();
+                reject(error);
             }
         })
-        .then(resolve)
+        .then(results => {
+            resolve(results);
+        })
     })
 }
 
