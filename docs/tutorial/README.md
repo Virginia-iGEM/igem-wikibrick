@@ -81,11 +81,62 @@ Once you're here, create a new file named `post-rewrite` with your favorite text
 
 Note, if a new version of `igem-wikbrick` is released, the tool can be updated with `npm update`.
 
-## 3 Project Organization
+### 2.4 Configuration
+
+Once you've set up, we need to make a few changes before the tool is ready to go.
+
+Open `config.js` and modify the following lines:
+
+```
+20     const teaminfo = {
+21         year: 2018,
+22         teamName: 'Virginia'
+```
+
+Enter your team name and year. The team name _must_ match your team name as registered on the iGEM wiki _exactly,_ including case. Note that this file contains most configurable settings for the tool; as you use it more, you will come to understand what each of these entries means and how they modify the way the tool works. For now, this is all you need to modify.
+
+## 3 Workflow
+
+### 3.1 Building
+
+Once this is done, we're going to first run `gulp serve`. This is the first important command you will learn. After you hit enter, a few status indicators will print before a local webserver is launched. All of the files designated by the `buildsrc` variable on line 27 of `config.js` will be transformed by various functions and tasks defined by `igem-wikibrick`. Once these are built, if you have a default browser set on your computer, a link to your `index.html` page will open. This webserver runs out of the `./build` folder (designated in `config.js` as the variable `build` on line 17).
+
+If no page opens, copy-and-paste http://localhost:9999/ into your browser's URL bar.
+
+This local webserver runs on your computer and allows you to see changes you make to the project files in real time. If you modify any files in the `app` directory, they will be automatically built and streamed to the webserver. Try modifying one of the HTML or CSS files now to see this in action.
+
+In addition to `gulp serve`, `gulp build` will also be useful for local editing. This command will process all files as defined above, but will not run a local webserver. This is useful for proofreading small changes and looking at compiled HTML, CSS and JS.
+
+Once the server is running, you can make any and all changes you want to HTML, styles and JS, building your website on your local machine. This is the first part of the workflow; the build cycle. You construct your wiki offline, in collaboration with your other teammates.
+
+Some important notes for editing your website locally:
+
+- Use relative URLs to refer to other pages and content within your project. Note that in `index.html`, all links to webpages defined in `pages`, links to scripts and links to stylesheets are all relative URLs. These will automatically be replaced with absolute URLs that reference your iGEM wiki when the files are uploaded to the iGEM Wiki.
+  - All relative URLs are relative to the root directory of the webserver, which is in this case `build`.
+  - Note the use of AJAX Loads for the header and footer of pages. These also use relative URLs and reference partial HTML defined in the `template` folder.
+
+Some notes for working with our particular setup:
+
+- When searching for tutorials to underestand how our stack of tools works, understand that you can build a website as you "normally would," writing normal HTML, CSS (in .scss files) and JavaScript. We simply provide some additional libraries and pre/postprocessing to make things easier.
+- Note that, for the most part, HTML containers only have one or two `class` or `id` attributes, which are usually referenced exactly once in our JavaScript or SCSS. This is a practice known as `idiomatic` HTML, where the HTML contains only contains its content, and its purpose on the page. _Any_ styling is handled in SCSS. Similarly to splitting up source code into multiple files, the point of this is to maintain orthogonality and reduce code duplication.
+- Note that for scripts, a single `/js/wiki.js` file is referenced. This contains all of the JavaScript files from the `app/js` folder concatenated together. A similar monolithic CSS file can also be obtained by simply using `@import` directives for partial SCSS files (those that are prefixed with underscores will not be directly compiled, such as _common.scss and _footer.scss)
+- Note that we do not have any browser-specific styling tags with prefixes in our SCSS, such as `-webkit-user-select` or `-webkit-transition`. These tags will automatically be added by a tool called `autoprefixer`, which can be configured in `config.js` on line 132.
+
+### 3.2 Publishing
+
+Once you are satisfied with the way your wiki pages looking, the pages, including HTML, JavaScript, CSS, images, and any packages installed with Bower can be built and uploaded with `gulp publish -l`.
+
+This command is a shortcut for the following series of commands:
+
+- `gulp push:images -l`: This command will upload all images under `build/images` to igem.org, under your team's name. This upload must come first because it saves the URLs of all uploaded images, which are not predictable before the upload actually occurs. These URLs will be saved under `build/imagemap.json`, which will be read during the next step to perform URL substitution.
+- `gulp build -l`
+- `gulp push:content -l`
+
+## 4 Project Organization
 
 To better understand how to use the tool, let's look at the folder structure of Virginia 2018's wiki. Note that if you have copied the example project, only the `app` folder and certain files will show up in your directory; this is fine. The existence of most directories are explained below; if you would like to explore them further in a working project, you can visit our wiki's GitHub page at https://github.com/Virginia-iGEM/2018-wiki.
 
-### 3.1 Overall Structure
+### 5.1 Overall Structure
 
 This is here for quick reference, we'll look at each subdirectory one-by-one:
 
@@ -119,7 +170,7 @@ igem-2018-wiki
 └── README.md
 ```
 
-### 3.2 igem-2018-wiki/app
+### 5.2 igem-2018-wiki/app
 
 The `app` folder contains all of our _source files._ These are the files that we will edit and commit to our Git repository; they are processed by the `igem-wikibrick` build tool in order to create our wiki.
 
@@ -162,38 +213,38 @@ igem-2018-wiki
 - The `scss` folder contains `.scss` files. This is a compiled language that is a superset of `CSS`, or Cascading Style Sheets; `scss` stands for Sassy CSS, usually just known as SASS. SASS is a language that makes writing CSS files far more concise and readable, while still being backwards-compatible with standard CSS. A list of SASS features can be found at https://sass-lang.com/guide. Otherwise, these files should be written like standard CSS.
 - The templates folder contains HTML that will be uploaded under the `http://2018.igem.org/Template:Teamname/` root. It should generally be used for HTML or other content that will be _included_ on other pages but not directly seen.
 
-### 3.3 igem-2018-wiki/build
+### 5.3 igem-2018-wiki/build
 
 This directory will be created and populated once you start using the tool, and is explained in the next section. If you have just duplicated the example project, it should not yet exist and will be created automatically for you as you continue.
 
-### 3.3 igem-2018-wiki/docs
+### 5.3 igem-2018-wiki/docs
 
 This is a folder for placing developer documentation. We use it for storing tutorials for internal team use as well as developer notes.
 
-### 3.4 igem-2018-wiki/gulp
+### 5.4 igem-2018-wiki/gulp
 
 This folder contains any user-written gulpfiles. These files are explained in detail in the [Programmer's Guide](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide); if you are interested in modifying the build pipeline using custom `gulp` plugins or other Node.js packages, look here. Otherwise this directory is unnecessary.
 
-### 3.5 igem-2018-wiki/bower_components and igem-2018-wiki/bower.json
+### 5.5 igem-2018-wiki/bower_components and igem-2018-wiki/bower.json
 
 `bower_components` contains all live dependencies, and will be populated when running `bower install`. Any packages installed with `bower` will be wrapped up and uploaded to igem.org.
 
-### 3.6 igem-2018-wiki/node_modules, igem-2018-wiki/package.json and igem-2018-wiki/package-lock.json
+### 5.6 igem-2018-wiki/node_modules, igem-2018-wiki/package.json and igem-2018-wiki/package-lock.json
 
 `node_modules` and the two json files belong to `Node.js` and `npm`. `node_modules` is similar to `bower_components`; it contains all packages and their dependencies that are installed via `npm install`. `package.json` contains a list of these dependencies so they can be quickly installed by other team members cloning the repository via the command `npm install`. It also contains metadata regarding your project, such as version, author, license, name and description. `package-lock.json` contains a record of all installed packages and prevents dependency conflicts; you won't have to worry about this last file.
 
-### 3.7 igem-2018-wiki/gulpfile.js
+### 5.7 igem-2018-wiki/gulpfile.js
 
 This file contains all of your `gulp tasks`. These will also be explored in the next section; it is a short file that contains references to tasks defined by `igem-wikibrick`, and where you can define additional build tasks, or overwrite ones defined by `igem-wikibrick`.
 
-### 3.8 LICENSE
+### 5.8 LICENSE
 
 This is just a plaintext file containing your open source license. This license defines what other people can legally do with your code.
 
-### 3.9 README.md
+### 5.9 README.md
 
 This file will be displayed on your GitHub page, and should be used to direct teammembers and other visitors to where they need to go. There's a good likelihood that this page, the one you're reading right now, is a README.md file host on GitHub.
 
-### 4 Workflow
+## Closing Remarks
 
 TODO

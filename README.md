@@ -69,6 +69,7 @@ Some features:
 
 ### 5.2 Medium Priority
 
+- Make the actual path/name of `imagemap.json` something defined in `config.js`, instead of hardcoded.
 - Make it so that `gulp publish` automatically sets the environment to `live`, while `gulp serve`, at least in its current state, automatically sets the environment to development.
 - Added error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
 - Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
