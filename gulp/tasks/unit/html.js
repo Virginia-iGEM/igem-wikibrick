@@ -71,7 +71,7 @@ relative2absolute = function($, file) {
         });
 
         // Set absolute path for index
-        index = $('a[href="index.html"]').each(function () {
+        index = $('a[href="/index.html"]').each(function () {
             var a = $(this);
             a.attr('href', urls.standard);
         });
