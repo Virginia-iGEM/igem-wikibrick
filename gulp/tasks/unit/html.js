@@ -64,8 +64,8 @@ relative2absolute = function($, file) {
             if(script.text() != null) {
                 urlReplace = /\.load\( *'(\.)?(\/)?(.*)\.html' *\);/gi;
 
-                script.text(script.text().replace(urlReplace, function (match, $1, $2, offest, original) {
-                    return ".load('".concat(urls.template).concat(path.basename($2)).concat(targets.suffixes.js).concat("');");
+                script.text(script.text().replace(urlReplace, function (match, $1, $2, $3, offest, original) {
+                    return ".load('".concat(urls.template).concat(path.basename($3)).concat(targets.suffixes.js).concat("');");
                 }));
             }
         });

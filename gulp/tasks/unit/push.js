@@ -103,7 +103,9 @@ const getImages = globby([ targets.uploadsrc.images ]).then(images => images.map
 var myError = new Error('RequestError');
 var retryUpload = function(conf, retries) {
     return new Promise((resolve, reject) => {
-        igemwiki.upload(conf).catch(error => {
+        igemwiki.upload(conf).then(results => {
+            resolve(results);
+        }, error => {
             retries--;
             if(error.toString().match(/RequestError: Error: connect ETIMEDOUT.*/)){
                 console.log("Request Error. Trying again...");
@@ -117,9 +119,6 @@ var retryUpload = function(conf, retries) {
                 throw error;
                 reject(error);
             }
-        })
-        .then(results => {
-            resolve(results);
         })
     })
 }
@@ -148,7 +147,7 @@ upload = function(promises) {
                 .then(results => { // Generate imagemaps if we're uploading any images
                     if(conf.type == 'image') {
                         imageupload = true;
-                        imagemap[conf.dest] = results.target;
+                       imagemap[conf.dest] = results.target;
                     }
                 })
                 , {concurrency: 1})
