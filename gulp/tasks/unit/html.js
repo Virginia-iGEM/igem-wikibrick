@@ -85,7 +85,7 @@ relative2absolute = function($, file) {
                     a.attr('href', urls.standard.concat(path.basename(a.attr('href')).replace('.html', '')));
                 }
                 else { //Todo: Make this support nested pages
-                    a.attr('href', urls.standard_concat(path.basename(a.attr('href')).replace('.html', '')))
+                    a.attr('href', urls.standard.concat(path.basename(a.attr('href')).replace('.html', '')))
                 }
             }
         })
