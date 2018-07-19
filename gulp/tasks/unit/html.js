@@ -12,6 +12,7 @@ var lazypipe = require('lazypipe');
 var handlebars = require('gulp-compile-handlebars');
 var pandoc = require('gulp-pandoc');
 var glob = require('globby');
+var tap = require('gulp-tap');
 
 const path = require('path');
 const url = require('url');
@@ -126,7 +127,9 @@ var renameToHTML = lazypipe()
     })
 
 var prepHBS = lazypipe()
-    .pipe(handlebars, {}, {
+    .pipe(renameToHTML)
+    .pipe(tap, function(file, t) {
+        return t.through(handlebars, [{}, {
         ignorePartials: true,
         // The world's shittiest hack:tm: to get around the erorr thrown by gulp-compile-handlebars
         // when srcs.partials is empty and no batch files are available
@@ -135,12 +138,15 @@ var prepHBS = lazypipe()
                 return [srcs.partials];
             }
             else {
-                return
+                return;
             }
         }(),
-        helpers: {} // Helper functions go here
+        helpers: {
+            contentpath: function(context) {
+                return path.posix.join('/content/', path.basename(file.path));
+            }
+        }}])
     })
-    .pipe(renameToHTML)
 
 
 // TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
