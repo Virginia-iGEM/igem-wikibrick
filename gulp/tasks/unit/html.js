@@ -10,6 +10,8 @@ var _ = require('lodash');
 var banner = require('../../banner');
 var lazypipe = require('lazypipe');
 var handlebars = require('gulp-compile-handlebars');
+var pandoc = require('gulp-pandoc');
+var glob = require('globby');
 
 const path = require('path');
 const url = require('url');
@@ -118,32 +120,70 @@ var prepHTML = lazypipe()
     .pipe(() => gulpif(env.banner, banner.html()))
     .pipe(() => gulpif(env.serve, browsersync.stream()))
 
-var prepHBS = lazypipe()
-    .pipe(handlebars, {}, {
-            ignorePartials: true,
-            batch: [srcs.partials],
-            helpers: {} // Helper functions go here
-        }
-    )
-    .pipe(rename, function (path) {
+var renameToHTML = lazypipe()
+    .pipe(rename, function(path) {
         path.extname = '.html';
     })
+
+var prepHBS = lazypipe()
+    .pipe(handlebars, {}, {
+        ignorePartials: true,
+        // The world's shittiest hack:tm: to get around the erorr thrown by gulp-compile-handlebars
+        // when srcs.partials is empty and no batch files are available
+        batch: function() {
+            if (glob.sync(srcs.partials).length > 0) {
+                return [srcs.partials];
+            }
+            else {
+                return
+            }
+        }(),
+        helpers: {} // Helper functions go here
+    })
+    .pipe(renameToHTML)
+
 
 // TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
 
 // Task to prep all non-home pages, I.E. Project Description, Team, etc.
-gulp.task('build:html:pages', () => 
+gulp.task('build:html:pages', () =>
     gulp.src(srcs.htmlpages)
     .pipe(prepHTML())
     .pipe(gulp.dest(dests.pages))
 );
 
 // Task to prep all non-home pages, I.E. Project Description, Team, etc.
-gulp.task('build:hbs:pages', () => 
+gulp.task('build:hbs:pages', () =>
     gulp.src(srcs.hbspages)
     .pipe(prepHBS())
     .pipe(prepHTML())
+    .pipe(renameToHTML())
     .pipe(gulp.dest(dests.pages))
+);
+
+gulp.task('build:html:content', () =>
+    gulp.src(srcs.htmlcontent)
+    .pipe(prepHTML())
+    .pipe(gulp.dest(dests.content))
+);
+
+gulp.task('build:markdown:content', () =>
+    gulp.src(srcs.markdowncontent)
+    .pipe(markdown())
+    .pipe(prepHTML())
+    .pipe(renameToHTML())
+    .pipe(gulp.dest(dests.content))
+);
+
+gulp.task('build:docx:content', () =>
+    gulp.src(srcs.docxcontent)
+    .pipe(prepHTML())
+    .pipe(pandoc({
+        from: 'docx',
+        to: 'html5',
+        ext: '.html'
+    }))
+    .pipe(gulp.dest(dests.content))
 );
 
 // Task to prep templates like headers, footers, etc. that can be reused on many pages

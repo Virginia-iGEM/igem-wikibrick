@@ -10,7 +10,7 @@ module.exports = function(config) {
 
   gulp.registry(hub);
 
-  const buildtasks = [ 'build:html:pages','build:templates', 'build:scss', 'build:js', 'build:images', 'build:bower:js', 'build:bower:css'];
+  const buildtasks = [ 'build:html:pages', 'build:hbs:pages', 'build:html:content', 'build:markdown:content', 'build:docx:content', 'build:templates', 'build:scss', 'build:css', 'build:js', 'build:images', 'build:bower:js', 'build:bower:css'];
 
   // Default task runs both dev and live build
   gulp.task('build', gulp.parallel(buildtasks));
