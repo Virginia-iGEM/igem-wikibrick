@@ -74,6 +74,17 @@ const getTemplates = globby(targets.uploadsrc.templates).then(function (template
     })
 })
 
+// Mapping for content.
+const getContent = globby(targets.uploadsrc.content).then(function (contents) {
+    return contents.map(function (content) {
+        return {
+            type: 'template',
+            fileName: path.resolve(__dirname, content),
+            page: path.basename(content).replace('.html', '')
+        }
+    })
+})
+
 // Mapping for CSS
 const getCSS = globby(targets.uploadsrc.css).then((stylesheets) => {
     return stylesheets.map((stylesheet) => {
@@ -182,6 +193,10 @@ gulp.task('push:templates', function(done){
     upload(getTemplates).then(done);
 });
 
+gulp.task('push:content', function(done) {
+    upload(getContent).then(done);
+});
+
 gulp.task('push:css', function(done) {
     upload(getCSS).then(done);
 });
@@ -194,4 +209,4 @@ gulp.task('push:images', function(done) {
     upload(getImages).then(done);
 });
 
-gulp.task('push:content', gulp.series('push:index', 'push:pages', 'push:templates', 'push:css', 'push:js'));
+gulp.task('push:all', gulp.series('push:index', 'push:content', 'push:pages', 'push:templates', 'push:css', 'push:js'));

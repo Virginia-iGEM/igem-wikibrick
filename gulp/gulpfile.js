@@ -16,7 +16,7 @@ module.exports = function(config) {
   gulp.task('build', gulp.parallel(buildtasks));
 
   // Live build runs dev and then uploads, will change in future
-  gulp.task('publish', gulp.series('push:images', 'build', 'push:content'));
+  gulp.task('publish', gulp.series('push:images', 'build', 'push:all'));
 
   gulp.task('serve', gulp.series('build', gulp.parallel('browsersync', function() {
     gulp.watch(targets.buildsrc.index, gulp.series('build:index'));
