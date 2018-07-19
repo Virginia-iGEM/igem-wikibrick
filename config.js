@@ -7,10 +7,6 @@ var argv = require('yargs')
 .boolean(['--live', '-l'])
 .argv;
 
-function assembleUploadSrc(srcitem, targetitem) {
-    return path.join(targetitem, path.basename(srcitem));
-}
-
 module.exports = function(root) {
 
     var app = path.join(root, '/app/');
@@ -25,42 +21,45 @@ module.exports = function(root) {
     // Listed file sources for all tasks. Note use of glob patterns and wildcarding.
     // Used by any build tasks.
     var buildsrc = {
-        index: path.join(app, 'index.html'),
-        pages: path.join(app, 'pages/**/*.html'),
+        htmlpages: [path.join(app, '**/*.html'), path.join('!', app, '{templates,partials,content}/**/*.html')],
+        hbspages: [path.join(app, '**/*.hbs'), path.join('!', app, '{templates,partials,content}/**/*.hbs')],
+        htmlcontent: path.join(app, 'content/**/*.html'),
+        markdowncontent: path.join(app, 'content/**/*.md'),
+        docxcontent: path.join(app, 'content/**/*.docx'),
+        //drivecontent: TODO,
+        partials: path.join(app, 'partials/**/*.hbs'),
         templates: path.join(app, 'templates/**/*.html'),
-        css: path.join(app, 'css/**/*.css'),
-        scss: path.join(app, 'scss/**/*.scss'),
-        js: path.join(app, 'js/**/*.js'),
+        css: path.join(app, 'scripts/**/*.css'),
+        scss: path.join(app, 'scripts/**/*.scss'),
+        js: path.join(app, 'scripts/**/*.js'),
         images: path.join(app, 'images/**/*.{png,jpg}'),
-        markdownpages: path.join(app, 'pages/**/*.md')
     }
 
     // Destination directory for build, source directories for upload.
     // Used by any build tasks.
     var buildtarget = {
-        index: build,
-        pages: path.join(build, 'pages/'),
+        pages: build,
         templates: path.join(build, 'templates/'),
+        content: path.join(build, 'content/'),
         css: path.join(build, 'css/'),
         js: path.join(build, 'js/'),
         bowerjs: path.join(build, 'dist/js/'),
         bowercss: path.join(build, 'dist/css/'),
         images: path.join(build, 'images/'),
-        markdownpages: path.join(build, 'pages/')
     }
 
     // Used by push.js. Note that for the most part, 
     // upload srcs are the same as built targets.
     var uploadsrc = {
-        index: assembleUploadSrc('index.html', buildtarget.index),
-        pages: assembleUploadSrc(buildsrc.pages, buildtarget.pages),
-        templates: assembleUploadSrc(buildsrc.templates, buildtarget.templates),
-        css: assembleUploadSrc(buildsrc.css, buildtarget.css),
-        js: assembleUploadSrc(buildsrc.js, buildtarget.js),
+        index: path.join(buildtarget.pages, 'index.html'),
+        pages: [path.join(buildtarget.pages, '*.html'), path.join('!', buildtarget.pages, 'index.html')],
+        templates: path.join(buildtarget.templates, '*.html'),
+        content: path.join(buildtarget.content, '*.html'),
+        css: path.join(buildtarget.css, '*.css'),
+        js: path.join(buildtarget.js, '*.js'),
         bowerjs: buildtarget.bowerjs.concat('**/*.js'),
         bowercss: buildtarget.bowercss.concat('**/*.css'),
-        images: assembleUploadSrc(buildsrc.images, buildtarget.images),
-        markdownpages: assembleUploadSrc(buildsrc.markdownpages, buildtarget.markdownpages)
+        images: path.join(buildtarget.images, buildsrc.images),
     }
 
     // URLs used by realtive2absolute

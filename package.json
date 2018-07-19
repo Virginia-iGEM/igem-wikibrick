@@ -17,10 +17,11 @@
     "upload"
   ],
   "author": "Dylan Culfogienis",
-  "contributors": ["Grace Wu"],
+  "contributors": [
+    "Grace Wu"
+  ],
   "license": "MIT",
   "dependencies": {
-    "string-format": "^2.0.0",
     "autoprefixer": "^8.6.3",
     "bluebird": "^3.5.1",
     "bower": "^1.8.4",
@@ -34,6 +35,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.1",
     "gulp-declare": "^0.3.0",
+    "gulp-google-drive": "^1.4.2",
     "gulp-header": "^2.0.5",
     "gulp-hub": "github:frankwallis/gulp-hub#4.2.0",
     "gulp-if": "^2.0.2",
@@ -54,9 +56,14 @@
     "node-bourbon": "^4.2.8",
     "node-neat": "^2.0.0-beta.0",
     "require-dir": "^1.0.0",
+    "string-format": "^2.0.0",
     "yargs": "^12.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp-compile-handlebars": "^0.6.1",
+    "gulp-pandoc": "^0.2.2",
+    "lazypipe": "^1.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Virginia-iGEM/igem-wikibrick.git"

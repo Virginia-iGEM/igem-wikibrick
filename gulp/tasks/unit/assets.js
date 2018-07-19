@@ -41,7 +41,7 @@ gulp.task('build:css', function(){
     .pipe(gulp.dest(dests.css));
 });
 
-gulp.task('build:sass', function(){
+gulp.task('build:scss', function(){
     return gulp.src(srcs.scss)
     .pipe(sass({includePaths: [].concat(bourbon, neat)}) // Bourbon + neat includepaths
         .on('error', sass.logError))

@@ -53,7 +53,7 @@ const index = [{
 }];
 
 // Mapping for all standard HTML pages. Note use of Globby wildcards to find files.
-const getPages = globby([ targets.uploadsrc.pages ]).then(function (pages) {
+const getPages = globby(targets.uploadsrc.pages).then(function (pages) {
     return pages.map(function (page) {
         return {
             type: 'page',
@@ -64,7 +64,7 @@ const getPages = globby([ targets.uploadsrc.pages ]).then(function (pages) {
 })
 
 // Mapping for templates.
-const getTemplates = globby([ targets.uploadsrc.templates ]).then(function (templates) {
+const getTemplates = globby(targets.uploadsrc.templates).then(function (templates) {
     return templates.map(function (template) {
         return {
             type: 'template',
@@ -75,7 +75,7 @@ const getTemplates = globby([ targets.uploadsrc.templates ]).then(function (temp
 })
 
 // Mapping for CSS
-const getCSS = globby([ targets.uploadsrc.css ]).then((stylesheets) => {
+const getCSS = globby(targets.uploadsrc.css).then((stylesheets) => {
     return stylesheets.map((stylesheet) => {
         return {
             type: 'stylesheet',
@@ -86,14 +86,14 @@ const getCSS = globby([ targets.uploadsrc.css ]).then((stylesheets) => {
 })
 
 // Mapping for Javascript
-const getJS = globby([ targets.uploadsrc.js ]).then(scripts => scripts.map(script => ({
+const getJS = globby(targets.uploadsrc.js).then(scripts => scripts.map(script => ({
     type: 'script',
     fileName: path.resolve(__dirname, script),
     page: path.basename(script).replace('.js', '')
 })))
 
 // Mapping for images
-const getImages = globby([ targets.uploadsrc.images ]).then(images => images.map(image => ({
+const getImages = globby(targets.uploadsrc.images).then(images => images.map(image => ({
     type: 'image',
     fileName: path.resolve(__dirname, image),
     page: path.basename(image)

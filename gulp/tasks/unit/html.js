@@ -8,6 +8,8 @@ var replace = require('gulp-replace');
 var rename = require('gulp-rename');
 var _ = require('lodash');
 var banner = require('../../banner');
+var lazypipe = require('lazypipe');
+var handlebars = require('gulp-compile-handlebars');
 
 const path = require('path');
 const url = require('url');
@@ -105,36 +107,48 @@ relative2absolute = function($, file) {
 // Function shared by all HTML processing tasks for development builds. 
 // Currently just stages HTML files to build folder.
 
-function prepHTML(src, dest) {
-    return function() {
-        return gulp.src(src)
-        /*.pipe(markdown({
-            sanitize: false,
-            mangle: false
-        })) // Run file through the markdown processor ony if it is a markdown file
-        .pipe(rename(function (path) {
-            path.extname = '.html';
-        })) */
-        .pipe(gulpif(env.relative2absolute, cheerio({
-            run: relative2absolute,
-            parserOptions: {
-                decodeEntities: false
-            }
-        }))) // Think about using lazypipe here
-        .pipe(gulpif(env.relative2absolute, replace(/<!DOCTYPE html>/g, '')))
-        .pipe(gulpif(env.banner, banner.html()))
-        .pipe(gulpif(env.serve, browsersync.stream()))
-        .pipe(gulp.dest(dest));
-    }
-};
+var prepHTML = lazypipe()
+    .pipe(() => gulpif(env.relative2absolute, cheerio({
+        run: relative2absolute,
+        parserOptions: {
+            decodeEntities: false
+        }
+    }))) // Think about using lazypipe here
+    .pipe(() => gulpif(env.relative2absolute, replace(/<!DOCTYPE html>/g, '')))
+    .pipe(() => gulpif(env.banner, banner.html()))
+    .pipe(() => gulpif(env.serve, browsersync.stream()))
+
+var prepHBS = lazypipe()
+    .pipe(handlebars, {}, {
+            ignorePartials: true,
+            batch: [srcs.partials],
+            helpers: {} // Helper functions go here
+        }
+    )
+    .pipe(rename, function (path) {
+        path.extname = '.html';
+    })
 
 // TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
 
-// Task to prep index.html which is uploaded as the home page
-gulp.task('build:index', prepHTML(srcs.index, dests.index));
+// Task to prep all non-home pages, I.E. Project Description, Team, etc.
+gulp.task('build:html:pages', () => 
+    gulp.src(srcs.htmlpages)
+    .pipe(prepHTML())
+    .pipe(gulp.dest(dests.pages))
+);
 
 // Task to prep all non-home pages, I.E. Project Description, Team, etc.
-gulp.task('build:pages', prepHTML(srcs.pages, dests.pages));
+gulp.task('build:hbs:pages', () => 
+    gulp.src(srcs.hbspages)
+    .pipe(prepHBS())
+    .pipe(prepHTML())
+    .pipe(gulp.dest(dests.pages))
+);
 
 // Task to prep templates like headers, footers, etc. that can be reused on many pages
-gulp.task('build:templates', prepHTML(srcs.templates, dests.templates));
+gulp.task('build:templates', () =>
+    gulp.src(srcs.templates)
+    .pipe(prepHTML())
+    .pipe(gulp.dest(dests.templates))
+);
