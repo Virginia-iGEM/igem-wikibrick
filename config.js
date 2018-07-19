@@ -29,8 +29,8 @@ module.exports = function(root) {
         //drivecontent: TODO,
         partials: path.join(app, 'partials/'),
         templates: path.join(app, 'templates/**/*.html'),
-        css: path.join(app, 'scripts/**/*.css'),
-        scss: path.join(app, 'scripts/**/*.scss'),
+        css: path.join(app, 'styles/**/*.css'),
+        scss: path.join(app, 'styles/**/*.scss'),
         js: path.join(app, 'scripts/**/*.js'),
         images: path.join(app, 'images/**/*.{png,jpg}'),
     }
