@@ -1,26 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="/dist/js/vendor.js"></script>
-  <link rel="stylesheet" href="/dist/css/vendor.css">
-  <script>
-    $(function() {
-      $('#virginia-header').load('/templates/header.html');
-      $('#virginia-footer').load('/templates/footer.html');
-    })
-  </script>
-  <link rel="stylesheet" href="/css/styles.css">
-  <script src="/js/wiki.js"></script>
+  {{> head}}
   <link rel="stylesheet" href="/css/index.css">
 </head>
 
 <body>
-  <div id="igem-navbar-placeholder">
-    <p>Placeholder for iGEM Navbar</p>
-  </div>
-  <div id="virginia-header"></div>
+  {{> navbar}}
+
   <div id="main" class="top">
       <!--Images-->
     <div id="text">
@@ -76,11 +63,7 @@
     </div>
   </div>
 
-  <div id="virginia-footer"></div>
-  <!--SMOOTH SCROLL UP-->
-  <div class='scrolltop'>
-    <div class='scroll icon'><i class="fa fa-4x fa-angle-up"></i></div>
-  </div>
+  {{> footer}}
 </body>
 </html>
 

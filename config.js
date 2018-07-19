@@ -27,7 +27,7 @@ module.exports = function(root) {
         markdowncontent: path.join(app, 'content/**/*.md'),
         docxcontent: path.join(app, 'content/**/*.docx'),
         //drivecontent: TODO,
-        partials: path.join(app, 'partials/**/*.hbs'),
+        partials: path.join(app, 'partials/'),
         templates: path.join(app, 'templates/**/*.html'),
         css: path.join(app, 'scripts/**/*.css'),
         scss: path.join(app, 'scripts/**/*.scss'),
