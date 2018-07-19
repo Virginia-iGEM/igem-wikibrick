@@ -57,12 +57,12 @@
     "node-neat": "^2.0.0-beta.0",
     "require-dir": "^1.0.0",
     "string-format": "^2.0.0",
-    "yargs": "^12.0.1"
-  },
-  "devDependencies": {
+    "yargs": "^12.0.1",
     "gulp-compile-handlebars": "^0.6.1",
     "gulp-pandoc": "^0.2.2",
     "lazypipe": "^1.0.1"
+  },
+  "devDependencies": {
   },
   "repository": {
     "type": "git",
