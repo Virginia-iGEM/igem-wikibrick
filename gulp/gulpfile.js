@@ -10,13 +10,15 @@ module.exports = function(config) {
 
   gulp.registry(hub);
 
-  const buildtasks = [ 'build:html:pages', 'build:hbs:pages', 'build:html:content', 'build:markdown:content', 'build:docx:content', 'build:templates', 'build:scss', 'build:css', 'build:js', 'build:images', 'build:bower:js', 'build:bower:css'];
+  const prebuildtasks = ['build:images', 'build:fonts'];
+  const buildtasks = [ 'build:html:pages', 'build:hbs:pages', 'build:html:content', 'build:markdown:content', 'build:docx:content', 'build:templates', 'build:scss', 'build:css', 'build:js', 'build:bower:js', 'build:bower:css'];
 
   // Default task runs both dev and live build
   gulp.task('build', gulp.parallel(buildtasks));
+  gulp.task('prebuild', gulp.parallel(prebuildtasks));
 
   // Live build runs dev and then uploads, will change in future
-  gulp.task('publish', gulp.series('push:images', 'build', 'push:all'));
+  gulp.task('publish', gulp.series('prebuild', 'push:files', 'build', 'push:all'));
 
   gulp.task('serve', gulp.series('build', gulp.parallel('browsersync', function() {
     gulp.watch(targets.buildsrc.htmlpages, gulp.series('build:html:pages'));
