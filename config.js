@@ -33,7 +33,7 @@ module.exports = function(root) {
         scss: path.join(app, 'styles/**/*.scss'),
         js: path.join(app, 'scripts/**/*.js'),
         images: path.join(app, 'images/**/*.{png,jpg}'),
-        fonts: path.join(app, 'fonts/*.{ttf,otf,woff}')
+        fonts: path.join(app, 'fonts/**/*.{ttf,otf,woff}')
     }
 
     // Destination directory for build, source directories for upload.
@@ -61,7 +61,7 @@ module.exports = function(root) {
         js: path.join(buildtarget.js, '*.js'),
         bowerjs: buildtarget.bowerjs.concat('**/*.js'),
         bowercss: buildtarget.bowercss.concat('**/*.css'),
-        files: [path.join(build, 'images/*.{png,jpg}'), path.join(build, 'fonts/*.{ttf,otf,woff}')]
+        files: [path.join(build, 'images/*.{png,jpg}'), path.join(build, 'fonts/**/*.{ttf,otf,woff}')]
     }
 
     // URLs used by realtive2absolute
