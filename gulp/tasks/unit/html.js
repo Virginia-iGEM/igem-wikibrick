@@ -141,12 +141,8 @@ var prepHBS = lazypipe()
                 return;
             }
         }(),
-        helpers: {
-            contentpath: function(context) {
-                return path.posix.join('/content/', path.basename(file.path));
-            }
-        }}])
-    })
+        helpers: config.handlebars.helpers
+    }])})
 
 
 // TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences

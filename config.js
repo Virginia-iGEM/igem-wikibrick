@@ -103,6 +103,11 @@ module.exports = function(root) {
     var userenv = argv.env || shortflag || 'dev'; // Try env variable, else fallback on shortflag, else assume we're in dev
     var environment = Object.assign(environments[userenv], {name: userenv});
 
+    var handlebarsHelpers = {
+        contentpath: function(context) {
+            return path.posix.join('/content/', path.basename(file.path));
+        }
+    }
     return {
         teaminfo: teaminfo,
         gulp: {
@@ -127,6 +132,9 @@ module.exports = function(root) {
                 server: build,
                 port: 9999
             }
+        },
+        handlebars: {
+            helpers: handlebarsHelpers
         },
         browserslist: ["defaults"]
     }
