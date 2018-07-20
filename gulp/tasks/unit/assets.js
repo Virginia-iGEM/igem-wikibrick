@@ -59,3 +59,8 @@ gulp.task('build:images', function() {
     .pipe(gulpif(env.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.images));
 });
+
+gulp.task('build:fonts', function() {
+    return gulp.src(srcs.fonts)
+    .pipe(gulp.dest(dests.fonts))
+});

@@ -16,7 +16,7 @@ module.exports = function(config) {
   gulp.task('build', gulp.parallel(buildtasks));
 
   // Live build runs dev and then uploads, will change in future
-  gulp.task('publish', gulp.series('push:images', 'build', 'push:all'));
+  gulp.task('publish', gulp.series('push:files', 'build', 'push:all'));
 
   gulp.task('serve', gulp.series('build', gulp.parallel('browsersync', function() {
     gulp.watch(targets.buildsrc.htmlpages, gulp.series('build:html:pages'));
@@ -29,6 +29,7 @@ module.exports = function(config) {
     gulp.watch(targets.buildsrc.css, gulp.series('build:css'));
     gulp.watch(targets.buildsrc.js, gulp.series('build:js'));
     gulp.watch(targets.buildsrc.images, gulp.series('build:images'));
+    gulp.watch(targets.buildsrc.fonts, gulp.series('build:fonts'));
   })));
 
   // Dev task is currently analagous to default, will change in future
