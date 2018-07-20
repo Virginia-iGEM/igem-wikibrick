@@ -10,7 +10,7 @@ const config = global.wikibrick;
 const targets = config.targets;
 const igemwiki = require('igemwiki-api')(config.teaminfo)
 
-const uploadmapfilename = path.join(targets.build, '/uploadmap.json').toString();
+const imagemapfilename = path.join(targets.build, '/imagemap.json').toString();
 
 var loggedin = false;
 var loginjar;
@@ -104,10 +104,10 @@ const getJS = globby(targets.uploadsrc.js).then(scripts => scripts.map(script =>
 })))
 
 // Mapping for images
-const getFiles = globby(targets.uploadsrc.files).then(files => files.map(file => ({
-    type: 'upload',
-    fileName: path.resolve(__dirname, file),
-    page: path.basename(file)
+const getImages = globby(targets.uploadsrc.images).then(images => images.map(image => ({
+    type: 'image',
+    fileName: path.resolve(__dirname, image),
+    page: path.basename(image)
 })))
 
 // Drop-in replacement for igemwiki.upload under `upload`
@@ -141,7 +141,7 @@ upload = function(promises) {
         // generating an actual map list from the patterns we specified.
         Promise.all(promises).then((confs) => {
             confs = _.flatten(confs);
-            var uploadmap = new Object(); // We don't necessarily need this for every kind of upload,
+            var imagemap = new Object(); // We don't necessarily need this for every kind of upload,
             // but it's there for image uploads.
 
             // Encapsulate files in a configuration file compatible with igemwiki-api
@@ -153,19 +153,19 @@ upload = function(promises) {
                     source: c.fileName, // Take from the source specified in fileName
                     // force: true
                 }))
-                var fileupload = false;
+                var imageupload = false;
                 Promise.map(confs, conf => retryUpload(conf, 5) // Do the actual upload, retry 5 times upon failure
-                .then(results => { // Generate uploadmaps if we're uploading any images
+                .then(results => { // Generate imagemaps if we're uploading any images
                     if(conf.type == 'image') {
-                        fileupload = true;
-                       uploadmap[conf.dest] = results.target;
+                        imageupload = true;
+                       imagemap[conf.dest] = results.target;
                     }
                 })
                 , {concurrency: 1})
-                .then(() => { // Write out uploadmaps if they've been generated
-                    if(fileupload) {
-                        fs.writeFile(uploadmapfilename ,JSON.stringify(uploadmap), 'utf8', () => {
-                        console.log('Wrote file mappings to '.concat(uploadmapfilename));
+                .then(() => { // Write out imagemaps if they've been generated
+                    if(imageupload) {
+                        fs.writeFile(imagemapfilename ,JSON.stringify(imagemap), 'utf8', () => {
+                        console.log('Wrote image mappings to '.concat(imagemapfilename));
                         });
                     }
                 })
@@ -205,8 +205,8 @@ gulp.task('push:js', function(done) {
     upload(getJS).then(done);
 });
 
-gulp.task('push:files', function(done) {
-    upload(getFiles).then(done);
+gulp.task('push:images', function(done) {
+    upload(getImages).then(done);
 });
 
 gulp.task('push:all', gulp.series('push:index', 'push:content', 'push:pages', 'push:templates', 'push:css', 'push:js'));

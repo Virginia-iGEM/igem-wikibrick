@@ -35,17 +35,17 @@ relative2absolute = function($, file) {
     return new Promise((resolve, reject) => {
 
         // This part is synchronous and probably doesn't need to be
-        var uploadmap = JSON.parse(fs.readFileSync('./build/uploadmap.json', 'utf8'));
-        if(uploadmap == '' || uploadmap == null) {
-            console.log("No uploadmap found, image paths will not be substituted. Run push:images to generate uploadmap.")
+        var imagemap = JSON.parse(fs.readFileSync('./build/imagemap.json', 'utf8'));
+        if(imagemap == '' || imagemap == null) {
+            console.log("No imagemap found, image paths will not be substituted. Run push:images to generate imagemap.")
         }
 
         // Set absolute paths for images
         images =  $('img').each(function () {
             var img = $(this);
             var relname = img.attr('src');
-            if (relname != null && urlIsRelative(relname) && uploadmap.hasOwnProperty(path.basename(relname))) { // Check to see if a map exists, otherwise do not change
-                img.attr('src', uploadmap[path.basename(relname)]);
+            if (relname != null && urlIsRelative(relname) && imagemap.hasOwnProperty(path.basename(relname))) { // Check to see if a map exists, otherwise do not change
+                img.attr('src', imagemap[path.basename(relname)]);
             }
         });
 
