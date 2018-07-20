@@ -103,9 +103,12 @@ module.exports = function(root) {
     var userenv = argv.env || shortflag || 'dev'; // Try env variable, else fallback on shortflag, else assume we're in dev
     var environment = Object.assign(environments[userenv], {name: userenv});
 
-    var handlebarsHelpers = {
-        contentpath: function(context) {
-            return path.posix.join('/content/', path.basename(file.path));
+    var handlebarsHelpers = function(file, t) {
+
+        return {
+            contentpath: function(context) {
+                return path.posix.join('/content/', path.basename(file.path));
+            }
         }
     }
     return {

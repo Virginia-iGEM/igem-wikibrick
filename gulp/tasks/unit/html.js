@@ -141,7 +141,7 @@ var prepHBS = lazypipe()
                 return;
             }
         }(),
-        helpers: config.handlebars.helpers
+        helpers: config.handlebars.helpers(file, t)
     }])})
 
 
