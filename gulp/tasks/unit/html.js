@@ -16,7 +16,6 @@ var tap = require('gulp-tap');
 
 const path = require('path');
 const url = require('url');
-const fs = require('fs');
 
 var config = global.wikibrick;
 var targets = config.targets;
@@ -27,25 +26,18 @@ var dests = targets.buildtarget;
 const urls = targets.urls;
 const suffixes = targets.suffixes;
 
-var urlIsRelative = (str) => {
-    return !str.match(/^https?:\/\//);
-}
+urlIsRelative = require('./relative2absolute').urlIsRelative;
+uploadmap = require('./relative2absolute').uploadmap;
 
 relative2absolute = function($, file) {
     return new Promise((resolve, reject) => {
-
-        // This part is synchronous and probably doesn't need to be
-        var imagemap = JSON.parse(fs.readFileSync('./build/imagemap.json', 'utf8'));
-        if(imagemap == '' || imagemap == null) {
-            console.log("No imagemap found, image paths will not be substituted. Run push:images to generate imagemap.")
-        }
 
         // Set absolute paths for images
         images =  $('img').each(function () {
             var img = $(this);
             var relname = img.attr('src');
-            if (relname != null && urlIsRelative(relname) && imagemap.hasOwnProperty(path.basename(relname))) { // Check to see if a map exists, otherwise do not change
-                img.attr('src', imagemap[path.basename(relname)]);
+            if (relname != null && urlIsRelative(relname) && uploadmap.hasOwnProperty(path.basename(relname))) { // Check to see if a map exists, otherwise do not change
+                img.attr('src', uploadmap[path.basename(relname)]);
             }
         });
 

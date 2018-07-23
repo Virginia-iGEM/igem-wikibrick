@@ -1,6 +1,7 @@
 #virginia-header {
     // Establish variables
-    $nav-height: 3rem; // Navbar height
+    $nav-height: 3em; // Navbar height
+    $nav-padding: 1em;
     /*Keeps the nav bar sticking on the top*/ 
     $nav-background-color: $background-dark-color;
     $nav-text-color: $text-light-color;
@@ -17,42 +18,49 @@
         gutter: 0px,
     );
 
+    font-size: $font-size;
+    font-family: $font-family;
+
     // BEGIN STYLING
     &, * {
         box-sizing: border-box; // Use box sizing for entire navbar to avoid clipping
-        font-size: 1em;
     }
     // Stick to top of window
     position: sticky; // Stick to top of screen
     top: $igem-navbar-height; // Compensate for the iGEM Wiki builtin navbar.
+    margin: 0 auto;
+    padding: $nav-padding 0;
     z-index: 999; // This goes over *everything*
+    width: max-content;
+    text-align: center;
+
+    transition: all 0.1s;
+    //transform: translateX(25vw);
+    opacity: 1;
+    &.scrollUp {
+        //transform: translateY(-$nav-height) translateX(25vw);
+        opacity: 0;
+    }
 
     #navbar {
         height: $nav-height;
-        width: 100%;
+        //width: 100%;
         display: block;
         @include shadow-2;
         ul {
-            @include grid-container;
+            //@include grid-container;
             list-style: none;
             margin: 0px;
             padding: 0px;
             background-color: $nav-background-color;
             li {
-                @include grid-column(1, $nav-grid);
+                //@include grid-column(1, $nav-grid);
                 float: left;
                 position: relative; // This is required for dropdowns to be positioned relative to the navbar instead of the browser window
                 line-height: $nav-height; // Center text
                 height: $nav-height; // Set container height to navbar height
                 /*a, related to link*/
                 a, a:visited {
-                    img {
-                        display: inline-block;
-                        padding: 0.5rem;
-                        max-height: 100%;
-                        height: auto;
-                        width: auto;
-                    }
                     display: flex;
                     align-items: center;
                     padding: 0 20px;
@@ -60,9 +68,17 @@
                     width: 100%;
                     background: $nav-background-color;
                     color: $nav-text-color;
+                    font-size: 1em;
                     white-space: nowrap; // Text is occlude dinstead of wrapped
                     // Re-add link glow to fix animation
                     transition: all 0.2s ease-in-out;
+                    img {
+                        display: inline-block;
+                        padding: 0.5rem;
+                        max-height: 100%;
+                        height: auto;
+                        width: auto;
+                    }
                     &:hover {
                         color: $accent-light-color;
                         text-shadow: 0px 0px 8px $accent-light-color;
@@ -82,6 +98,7 @@
                     z-index: -1; // Show up underneath the navbar
                     visibility: hidden;
                     opacity: 0;
+                    top: 100%;
                     transform: translateY(-2em);
                     transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
 
@@ -103,3 +120,4 @@
         }
     }
 }
+

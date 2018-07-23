@@ -10,6 +10,9 @@ $accent        : $accent-light-color; //#c648c8;
         columns: 12,
         gutter: 0px
     );
+    font-size: $font-size;
+    font-family: $font-family;
+
     @include grid-container;
     box-sizing: border-box;
     background-color: $background-dark-color;
