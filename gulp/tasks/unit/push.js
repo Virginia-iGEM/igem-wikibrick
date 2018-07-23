@@ -104,7 +104,7 @@ const getJS = globby(targets.uploadsrc.js).then(scripts => scripts.map(script =>
 })))
 
 // Mapping for images
-const getImages = globby(targets.uploadsrc.images).then(images => images.map(image => ({
+const getImages = globby(targets.uploadsrc.files).then(images => images.map(image => ({
     type: 'image',
     fileName: path.resolve(__dirname, image),
     page: path.basename(image)

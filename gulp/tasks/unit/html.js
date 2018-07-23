@@ -165,6 +165,7 @@ gulp.task('build:hbs:pages', () =>
 
 gulp.task('build:html:content', () =>
     gulp.src(srcs.htmlcontent)
+    .pipe(prepHBS())
     .pipe(prepHTML())
     .pipe(gulp.dest(dests.content))
 );
@@ -172,13 +173,14 @@ gulp.task('build:html:content', () =>
 gulp.task('build:markdown:content', () =>
     gulp.src(srcs.markdowncontent)
     .pipe(markdown())
+    .pipe(prepHBS())
     .pipe(prepHTML())
-    .pipe(renameToHTML())
     .pipe(gulp.dest(dests.content))
 );
 
 gulp.task('build:docx:content', () =>
     gulp.src(srcs.docxcontent)
+    .pipe(prepHBS())
     .pipe(prepHTML())
     .pipe(pandoc({
         from: 'docx',
