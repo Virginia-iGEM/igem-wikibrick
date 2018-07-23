@@ -112,6 +112,10 @@ module.exports = function(root) {
             }
         }
     }
+
+    var markdownOptions = {
+
+    }
     return {
         teaminfo: teaminfo,
         gulp: {
@@ -139,6 +143,9 @@ module.exports = function(root) {
         },
         handlebars: {
             helpers: handlebarsHelpers
+        },
+        markdown: {
+            options: markdownOptions
         },
         browserslist: ["defaults"]
     }

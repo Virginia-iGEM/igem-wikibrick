@@ -172,7 +172,7 @@ gulp.task('build:html:content', () =>
 
 gulp.task('build:markdown:content', () =>
     gulp.src(srcs.markdowncontent)
-    .pipe(markdown())
+    .pipe(markdown(config.markdown.options))
     .pipe(prepHBS())
     .pipe(prepHTML())
     .pipe(gulp.dest(dests.content))
