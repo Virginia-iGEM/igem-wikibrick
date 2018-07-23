@@ -20,9 +20,10 @@ var srcs = config.targets.buildsrc;
 var dests = config.targets.buildtarget;
 
 var urlIsRelative = require('./relative2absolute').urlIsRelative;
-var uploadmap = require('./relative2absolute').uploadmap;
 
 var relative2absolute = function(css, opts) {
+    var uploadmap = require('./relative2absolute').uploadmap;
+
     css.walkDecls(function(decl) {
         if(decl.prop === 'src' && urlIsRelative(decl.value)) {
             decl.value = uploadmap[decl.value];
@@ -32,7 +33,14 @@ var relative2absolute = function(css, opts) {
 
 var postcssplugins = [ 
     autoprefixer(config.browserslist),
-    relative2absolute
+    function() {
+        if(env.relative2absolute) {
+            return relative2absolute;
+        }
+        else {
+            return;
+        }
+    }()
 ];
 
 // Task to minify and stage our in-house JavaScript files.

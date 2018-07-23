@@ -27,9 +27,10 @@ const urls = targets.urls;
 const suffixes = targets.suffixes;
 
 urlIsRelative = require('./relative2absolute').urlIsRelative;
-uploadmap = require('./relative2absolute').uploadmap;
 
 relative2absolute = function($, file) {
+    var uploadmap = require('./relative2absolute').uploadmap;
+
     return new Promise((resolve, reject) => {
 
         // Set absolute paths for images
