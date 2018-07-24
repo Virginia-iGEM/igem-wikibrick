@@ -22,7 +22,7 @@ var dests = config.targets.buildtarget;
 var urlIsRelative = require('./relative2absolute').urlIsRelative;
 
 var relative2absolute = function(css, opts) {
-    var uploadmap = require('./relative2absolute').uploadmap;
+    var uploadmap = require('./relative2absolute').uploadmap();
 
     css.walkDecls(function(decl) {
         if(decl.prop === 'src' && urlIsRelative(decl.value)) {

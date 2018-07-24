@@ -29,7 +29,7 @@ const suffixes = targets.suffixes;
 urlIsRelative = require('./relative2absolute').urlIsRelative;
 
 relative2absolute = function($, file) {
-    var uploadmap = require('./relative2absolute').uploadmap;
+    var uploadmap = require('./relative2absolute').uploadmap();
 
     return new Promise((resolve, reject) => {
 

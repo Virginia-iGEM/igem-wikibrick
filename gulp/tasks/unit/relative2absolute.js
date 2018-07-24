@@ -11,5 +11,5 @@ module.exports = {
       throw new Error("No uploadmap found, image paths will not be substituted. Run `gulp push:files` to generate uploadmap.");
     }
     return _uploadmap;
-  }()
+  }
 }
