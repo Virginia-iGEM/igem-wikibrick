@@ -47,6 +47,7 @@ module.exports = function(root) {
         bowerjs: path.join(build, 'dist/js/'),
         bowercss: path.join(build, 'dist/css/'),
         images: path.join(build, 'images/'),
+        fonts: path.join(build, 'fonts/')
     }
 
     // Used by push.js. Note that for the most part, 
@@ -60,7 +61,7 @@ module.exports = function(root) {
         js: path.join(buildtarget.js, '*.js'),
         bowerjs: buildtarget.bowerjs.concat('**/*.js'),
         bowercss: buildtarget.bowercss.concat('**/*.css'),
-        files: [path.join(build, 'images/*.{png,jpg}'), path.join(build, 'fonts/**/*.{ttf,otf,woff}')]
+        files: [path.join(build, 'images/**/*.{png,jpg}'), path.join(build, 'fonts/**/*.{ttf,otf,woff}')]
     }
 
     // URLs used by realtive2absolute
@@ -69,7 +70,7 @@ module.exports = function(root) {
         template: 'http://{0}.igem.org/Template:{1}/'.format(teaminfo.year, teaminfo.teamName),
         js: 'http://{0}.igem.org/Template:{1}/js/'.format(teaminfo.year, teaminfo.teamName),
         css: 'http://{0}.igem.org/Template:{1}/css/'.format(teaminfo.year, teaminfo.teamName),
-        images: 'http://{0}.igem.org/File:T--{1}--{0}'.format(teaminfo.year, teaminfo.teamName)
+        files: 'http://{0}.igem.org/File:T--{1}--{0}'.format(teaminfo.year, teaminfo.teamName)
     }
 
     // Suffixes used by relative2absolute
