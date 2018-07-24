@@ -32,16 +32,12 @@ var relative2absolute = function(css, opts) {
 };
 
 var postcssplugins = [ 
-    autoprefixer(config.browserslist),
-    function() {
-        if(env.relative2absolute) {
-            return relative2absolute;
-        }
-        else {
-            return;
-        }
-    }()
+    autoprefixer(config.browserslist)
 ];
+
+if(env.relative2absolute) {
+    postcssplugins.push(relative2absolute);
+}
 
 // Task to minify and stage our in-house JavaScript files.
 // TODO: Fix JS minificatoin for in-house JS
