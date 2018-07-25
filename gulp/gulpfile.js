@@ -14,13 +14,14 @@ module.exports = function(config) {
   const buildtasks = [ 'build:html:pages', 'build:hbs:pages', 'build:html:content', 'build:markdown:content', 'build:docx:content', 'build:templates', 'build:scss', 'build:css', 'build:js', 'build:bower:js', 'build:bower:css'];
 
   // Default task runs both dev and live build
-  gulp.task('build', gulp.parallel(buildtasks));
+  gulp.task('partialbuild', gulp.parallel(buildtasks));
   gulp.task('prebuild', gulp.parallel(prebuildtasks));
+  gulp.task('build', gulp.series('prebuild', 'partialbuild'));
 
   // Live build runs dev and then uploads, will change in future
-  gulp.task('publish', gulp.series('prebuild', 'push:files', 'build', 'push:all'));
+  gulp.task('publish', gulp.series('prebuild', 'push:files', 'partialbuild', 'push:all'));
 
-  gulp.task('serve', gulp.series('build', gulp.parallel('browsersync', function() {
+  gulp.task('serve', gulp.series('bulid', gulp.parallel('browsersync', function() {
     gulp.watch(targets.buildsrc.htmlpages, gulp.series('build:html:pages'));
     gulp.watch(targets.buildsrc.hbspages, gulp.series('build:hbs:pages'));
     gulp.watch(targets.buildsrc.htmlcontent, gulp.series('build:html:content'));
