@@ -21,7 +21,7 @@ module.exports = function(config) {
   // Live build runs dev and then uploads, will change in future
   gulp.task('publish', gulp.series('prebuild', 'push:files', 'partialbuild', 'push:all'));
 
-  gulp.task('serve', gulp.series('bulid', gulp.parallel('browsersync', function() {
+  gulp.task('serve', gulp.series('build', gulp.parallel('browsersync', function() {
     gulp.watch(targets.buildsrc.htmlpages, gulp.series('build:html:pages'));
     gulp.watch(targets.buildsrc.hbspages, gulp.series('build:hbs:pages'));
     gulp.watch(targets.buildsrc.htmlcontent, gulp.series('build:html:content'));
