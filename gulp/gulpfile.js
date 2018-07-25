@@ -32,6 +32,7 @@ module.exports = function(config) {
     gulp.watch(targets.buildsrc.css, gulp.series('build:css'));
     gulp.watch(targets.buildsrc.js, gulp.series('build:js'));
     gulp.watch(targets.buildsrc.images, gulp.series('build:images'));
+    gulp.watch(targets.buildsrc.fonts, gulp.series('build:fonts'));
   })));
 
   // Dev task is currently analagous to default, will change in future

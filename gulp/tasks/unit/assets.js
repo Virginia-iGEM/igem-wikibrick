@@ -81,3 +81,10 @@ gulp.task('build:images', function() {
     .pipe(gulpif(env.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.images));
 });
+
+// Task to stage all images, .png or .jpg
+gulp.task('build:fonts', function() {
+    return gulp.src(srcs.fonts)
+    .pipe(gulpif(env.serve, browsersync.stream()))
+    .pipe(gulp.dest(dests.fonts));
+});
