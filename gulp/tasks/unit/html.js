@@ -52,7 +52,7 @@ relative2absolute = function($, file) {
         });
 
         // Set absolute paths for scripts
-        scripts = $('script', 'head').each(function () {
+        scripts = $('script').each(function () {
             var script = $(this);
             var relname = script.attr('src');
             if (relname != null && urlIsRelative(relname)) {
