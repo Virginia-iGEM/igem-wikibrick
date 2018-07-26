@@ -1,6 +1,4 @@
 const path = require('path');
-var format = require('string-format');
-format.extend(String.prototype, {})
 
 var argv = require('yargs')
 .boolean(['--dev', '-d'])
@@ -63,13 +61,14 @@ module.exports = function(root) {
     files: [path.join(build, 'images/**/*.{png,jpg}'), path.join(build, 'fonts/**/*.{ttf,otf,woff}')]
   }
 
+  var secure = ''; // Change to 's' to enable secure html
   // URLs used by realtive2absolute
   var urls = {
-    standard: 'https://{0}.igem.org/Team:{1}/'.format(teaminfo.year, teaminfo.teamName),
-    template: 'https://{0}.igem.org/Template:{1}/'.format(teaminfo.year, teaminfo.teamName),
-    js: 'https://{0}.igem.org/Template:{1}/js/'.format(teaminfo.year, teaminfo.teamName),
-    css: 'https://{0}.igem.org/Template:{1}/css/'.format(teaminfo.year, teaminfo.teamName),
-    files: 'https://{0}.igem.org/File:T--{1}--{0}'.format(teaminfo.year, teaminfo.teamName)
+    standard: `http${secure}://${teaminfo.year}.igem.org/Team:${teaminfo.name}/`,
+    template: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}/`,
+    js: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}/js/`,
+    css: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}/css/`,
+    files: `http${secure}://${teaminfo.year}.igem.org/File:T--${teaminfo.name}--{0}`,
   }
 
   // Suffixes used by relative2absolute
@@ -131,6 +130,7 @@ module.exports = function(root) {
   }
   return {
     teaminfo: teaminfo,
+    uploadmap: path.join(root, 'uploadmap.json'),
     gulp: {
       unit: './gulp/tasks/unit/*.js',
       compound: './gulp/tasks/compound/*.js'
@@ -139,7 +139,7 @@ module.exports = function(root) {
     environments: environments,
     targets: {
       root: root,
-      clean: [path.join(build, '/**'), '!' + build, '!' + path.join(build, '/uploadmap.json')], // Clean directives; kill everything but imagemap.json
+      clean: path.join(build, '/**'),
       app: app,
       build: build,
       buildsrc: buildsrc, 

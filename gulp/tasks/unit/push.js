@@ -10,7 +10,7 @@ const config = global.wikibrick;
 const targets = config.targets;
 const igemwiki = require('igemwiki-api')(config.teaminfo)
 
-const uploadmapfilename = path.join(targets.build, '/uploadmap.json').toString();
+const uploadmapfilename = config.uploadmap;
 
 var loggedin = false;
 var loginjar;
