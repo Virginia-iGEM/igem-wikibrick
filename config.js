@@ -66,11 +66,11 @@ module.exports = function(root) {
 
     // URLs used by realtive2absolute
     var urls = {
-        standard: 'http://{0}.igem.org/Team:{1}/'.format(teaminfo.year, teaminfo.teamName),
-        template: 'http://{0}.igem.org/Template:{1}/'.format(teaminfo.year, teaminfo.teamName),
-        js: 'http://{0}.igem.org/Template:{1}/js/'.format(teaminfo.year, teaminfo.teamName),
-        css: 'http://{0}.igem.org/Template:{1}/css/'.format(teaminfo.year, teaminfo.teamName),
-        files: 'http://{0}.igem.org/File:T--{1}--{0}'.format(teaminfo.year, teaminfo.teamName)
+        standard: 'https://{0}.igem.org/Team:{1}/'.format(teaminfo.year, teaminfo.teamName),
+        template: 'https://{0}.igem.org/Template:{1}/'.format(teaminfo.year, teaminfo.teamName),
+        js: 'https://{0}.igem.org/Template:{1}/js/'.format(teaminfo.year, teaminfo.teamName),
+        css: 'https://{0}.igem.org/Template:{1}/css/'.format(teaminfo.year, teaminfo.teamName),
+        files: 'https://{0}.igem.org/File:T--{1}--{0}'.format(teaminfo.year, teaminfo.teamName)
     }
 
     // Suffixes used by relative2absolute
