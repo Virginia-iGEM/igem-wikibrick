@@ -111,7 +111,6 @@ var prepHTML = lazypipe()
         }
     }))) // Think about using lazypipe here
     .pipe(() => gulpif(env.relative2absolute, replace(/<!DOCTYPE html>/g, '')))
-    .pipe(() => gulpif(env.banner, banner.html()))
     .pipe(() => gulpif(env.serve, browsersync.stream()))
 
 var renameToHTML = lazypipe()
@@ -147,12 +146,13 @@ gulp.task('build:html:pages', () =>
     .pipe(gulp.dest(dests.pages))
 );
 
-// Task to prep all non-home pages, I.E. Project Description, Team, etc.
+// Task to prep all pages, I.E. Project Description, Team, etc.
 gulp.task('build:hbs:pages', () =>
     gulp.src(srcs.hbspages)
     .pipe(prepHBS())
     .pipe(prepHTML())
     .pipe(renameToHTML())
+    .pipe(gulpif(env.banner, banner.html())) // Only bannerize top-level pages
     .pipe(gulp.dest(dests.pages))
 );
 
