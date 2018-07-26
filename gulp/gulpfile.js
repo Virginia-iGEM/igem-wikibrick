@@ -15,7 +15,7 @@ module.exports = function(config) {
 
   // Default task runs both dev and live build
   gulp.task('partialbuild', gulp.parallel(buildtasks));
-  gulp.task('prebuild', gulp.parallel(prebuildtasks));
+  gulp.task('prebuild', gulp.series('clean', gulp.parallel(prebuildtasks)));
   gulp.task('build', gulp.series('prebuild', 'partialbuild'));
 
   // Live build runs dev and then uploads, will change in future
