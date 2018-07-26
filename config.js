@@ -12,7 +12,7 @@ module.exports = function(root) {
   // Teaminfo. Duh.
   const teaminfo = {
     year: 2018,
-    teamName: 'Virginia'
+    name: 'Virginia'
   }
 
   // Listed file sources for all tasks. Note use of glob patterns and wildcarding.
