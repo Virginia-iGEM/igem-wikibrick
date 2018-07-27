@@ -47,7 +47,7 @@ relative2absolute = function($, file) {
             var link = $(this);
             var relname = link.attr('href');
             if (relname != null && urlIsRelative(relname)) {
-                link.attr('href', new URL(path.basename(relname).replace('.css', '') + suffixes.css, urls.css));
+                link.attr('href', new URL(path.basename(relname).replace('.css', ''), urls.css)) + suffixes.css;
             }
         });
 
@@ -56,14 +56,14 @@ relative2absolute = function($, file) {
             var script = $(this);
             var relname = script.attr('src');
             if (relname != null && urlIsRelative(relname)) {
-                script.attr('src', new URL(path.basename(relname).replace('.js', '') + suffixes.js, urls.js));
+                script.attr('src', new URL(path.basename(relname).replace('.js', ''), urls.js)) + suffixes.js;
             }
             
             if(script.text() != null) {
                 urlReplace = /\.load\( *'(\.)?(\/)?(.*)\.html' *\);/gi;
 
                 script.text(script.text().replace(urlReplace, function (match, $1, $2, $3, offest, original) {
-                    return ".load('" + new URL(urls.template, path.basename($3) + targets.suffixes.js) + "');";
+                    return ".load('" + new URL(urls.template, path.basename($3)) + targets.suffixes.js + "');";
                 }));
             }
         });
