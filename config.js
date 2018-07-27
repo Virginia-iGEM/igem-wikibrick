@@ -64,10 +64,10 @@ module.exports = function(root) {
   var secure = ''; // Change to 's' to enable secure html
   // URLs used by realtive2absolute
   var urls = {
-    standard: `http${secure}://${teaminfo.year}.igem.org/Team:${teaminfo.name}/`,
-    template: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}/`,
-    js: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}/js/`,
-    css: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}/css/`,
+    standard: `http${secure}://${teaminfo.year}.igem.org/Team:${teaminfo.name}`,
+    template: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}`,
+    js: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}/js`,
+    css: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}/css`,
     files: `http${secure}://${teaminfo.year}.igem.org/File:T--${teaminfo.name}--{0}`,
   }
 

@@ -47,7 +47,7 @@ relative2absolute = function($, file) {
             var link = $(this);
             var relname = link.attr('href');
             if (relname != null && urlIsRelative(relname)) {
-                link.attr('href', urls.css.concat(path.basename(relname).replace('.css', '')).concat(suffixes.css));
+                link.attr('href', new URL(path.basename(relname).replace('.css', '') + suffixes.css, urls.css));
             }
         });
 
@@ -56,14 +56,14 @@ relative2absolute = function($, file) {
             var script = $(this);
             var relname = script.attr('src');
             if (relname != null && urlIsRelative(relname)) {
-                script.attr('src', urls.js.concat(path.basename(relname).replace('.js', '')).concat(suffixes.js));
+                script.attr('src', new URL(path.basename(relname).replace('.js', '') + suffixes.js, urls.js));
             }
             
             if(script.text() != null) {
                 urlReplace = /\.load\( *'(\.)?(\/)?(.*)\.html' *\);/gi;
 
                 script.text(script.text().replace(urlReplace, function (match, $1, $2, $3, offest, original) {
-                    return ".load('".concat(urls.template).concat(path.basename($3)).concat(targets.suffixes.js).concat("');");
+                    return ".load('" + new URL(urls.template, path.basename($3) + targets.suffixes.js) + "');";
                 }));
             }
         });
@@ -80,10 +80,10 @@ relative2absolute = function($, file) {
             var relname = a.attr('href');
             if (relname != null && relname != "index.html" && urlIsRelative(relname)) {
                 if (!relname.match(/^(\.)?(\/)?pages\//)) {
-                    a.attr('href', urls.standard.concat(path.basename(a.attr('href')).replace('.html', '')));
+                    a.attr('href', new URL(path.basename(a.attr('href')).replace('.html', ''), urls.standard));
                 }
                 else { //Todo: Make this support nested pages
-                    a.attr('href', urls.standard.concat(path.basename(a.attr('href')).replace('.html', '')))
+                    a.attr('href', new URL(path.basename(a.attr('href')).replace('.html', ''), urls.standard));
                 }
             }
         })
@@ -123,8 +123,9 @@ var prepHBS = lazypipe()
     .pipe(tap, function(file, t) {
         return t.through(handlebars, [{}, {
         ignorePartials: true,
-        // The world's shittiest hack:tm: to get around the erorr thrown by gulp-compile-handlebars
-        // when srcs.partials is empty and no batch files are available
+        // The world's shittiest hack:tm: to get around the errrr thrown by 
+        // gulp-compile-handlebars when srcs.partials is empty and no batch 
+        // files are available
         batch: function() {
             if (glob.sync(srcs.partials).length > 0) {
                 return [srcs.partials];
@@ -135,9 +136,6 @@ var prepHBS = lazypipe()
         }(),
         helpers: config.handlebars.helpers(file, t)
     }])})
-
-
-// TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
 
 // Task to prep all non-home pages, I.E. Project Description, Team, etc.
 gulp.task('build:html:pages', () =>
