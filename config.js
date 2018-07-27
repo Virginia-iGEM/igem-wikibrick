@@ -12,7 +12,7 @@ module.exports = function(root) {
   // Teaminfo. Duh.
   const teaminfo = {
     year: 2018,
-    name: 'Virginia'
+    teamName: 'Virginia'
   }
 
   // Listed file sources for all tasks. Note use of glob patterns and wildcarding.
@@ -64,11 +64,11 @@ module.exports = function(root) {
   var secure = ''; // Change to 's' to enable secure html
   // URLs used by realtive2absolute
   var urls = {
-    standard: `http${secure}://${teaminfo.year}.igem.org/Team:${teaminfo.name}`,
-    template: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}`,
-    js: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}/js`,
-    css: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.name}/css`,
-    files: `http${secure}://${teaminfo.year}.igem.org/File:T--${teaminfo.name}--{0}`,
+    standard: `http${secure}://${teaminfo.year}.igem.org/Team:${teaminfo.teamName}`,
+    template: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.teamName}`,
+    js: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.teamName}/js`,
+    css: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.teamName}/css`,
+    files: `http${secure}://${teaminfo.year}.igem.org/File:T--${teaminfo.teamName}--{0}`,
   }
 
   // Suffixes used by relative2absolute
@@ -104,7 +104,11 @@ module.exports = function(root) {
   var environment = Object.assign(environments[userenv], {name: userenv});
 
   const glossary = {
-    "quorum sensing": "Def1"
+    "quorum sensing": ["Short Def", "Long Def"],
+    "autoinducer": ["Short Def", "Long Def"],
+    "operon": ["Short Def", "Long Def"],
+    "Lsr operon": ["Short Def", "Long Def"],
+    "E.coli": ["Short Def", "Long Def"]
   }
 
   var handlebarsHelpers = function(file, t) {
@@ -115,8 +119,9 @@ module.exports = function(root) {
       },
       define: function(context) {
         if (context in glossary) {
-          var word_definition = glossary[context];
-          return `<span class="tooltip">${context}<span class="tooltiptext">${word_definition}</span> </span>`;
+                    var word_short_definition = glossary[context][0];
+                    var word_long_definition = glossary[context][1];
+                    return `<span class="tooltip">${context}<span class="shortdef">${word_short_definition}</span><span class="longdef">${word_long_definition}</span> </span>`;
         }
         else {
           return context;
