@@ -13,9 +13,9 @@ var handlebars = require('gulp-compile-handlebars');
 var pandoc = require('gulp-pandoc');
 var glob = require('globby');
 var tap = require('gulp-tap');
+var urljoin = require('url-join');
 
 const path = require('path');
-const url = require('url');
 
 var config = global.wikibrick;
 var targets = config.targets;
@@ -47,7 +47,7 @@ relative2absolute = function($, file) {
             var link = $(this);
             var relname = link.attr('href');
             if (relname != null && urlIsRelative(relname)) {
-                link.attr('href', new URL(path.basename(relname).replace('.css', ''), urls.css)) + suffixes.css;
+                link.attr('href', urljoin(urls.css, path.basename(relname).replace('.css', '')) + suffixes.css);
             }
         });
 
@@ -56,14 +56,14 @@ relative2absolute = function($, file) {
             var script = $(this);
             var relname = script.attr('src');
             if (relname != null && urlIsRelative(relname)) {
-                script.attr('src', new URL(path.basename(relname).replace('.js', ''), urls.js)) + suffixes.js;
+                script.attr('src', urljoin(urls.js, path.basename(relname).replace('.js', '')) + suffixes.js);
             }
             
             if(script.text() != null) {
                 urlReplace = /\.load\( *'(\.)?(\/)?(.*)\.html' *\);/gi;
 
                 script.text(script.text().replace(urlReplace, function (match, $1, $2, $3, offest, original) {
-                    return ".load('" + new URL(urls.template, path.basename($3)) + targets.suffixes.js + "');";
+                    return ".load('" + urljoin(urls.template, path.basename($3)) + targets.suffixes.js + "');";
                 }));
             }
         });
@@ -80,10 +80,10 @@ relative2absolute = function($, file) {
             var relname = a.attr('href');
             if (relname != null && relname != "index.html" && urlIsRelative(relname)) {
                 if (!relname.match(/^(\.)?(\/)?pages\//)) {
-                    a.attr('href', new URL(path.basename(a.attr('href')).replace('.html', ''), urls.standard));
+                    a.attr('href', urljoin(urls.standard, path.basename(a.attr('href')).replace('.html', '')));
                 }
                 else { //Todo: Make this support nested pages
-                    a.attr('href', new URL(path.basename(a.attr('href')).replace('.html', ''), urls.standard));
+                    a.attr('href', urljoin(urls.standard, path.basename(a.attr('href')).replace('.html', '')));
                 }
             }
         })

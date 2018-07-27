@@ -1,6 +1,6 @@
 {
   "name": "igem-wikibrick",
-  "version": "0.3.20",
+  "version": "0.3.21",
   "description": "Build tool capable of automatically building and publish iGEM Wiki sites. Created by Virginia iGEM 2018's Wiki Team.",
   "main": "index.js",
   "scripts": {
@@ -63,7 +63,9 @@
     "string-format": "^2.0.0",
     "yargs": "^12.0.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "url-join": "^4.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Virginia-iGEM/igem-wikibrick.git"
