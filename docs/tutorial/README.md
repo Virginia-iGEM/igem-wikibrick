@@ -25,18 +25,27 @@ We also **strongly** reccommend having Git installed, and knowing how to use it 
 
 For now, we have step-by-step instructions.
 
-Create a new directory (a new folder) in a location where you would like to keep your project. Your Desktop, Documents, or a Project folder in your home folder are all appropriate locations.
+Create a new directory (a new folder) in a location where you would like to keep your project. Your Desktop, Documents, or a Project folder in your home folder are all appropriate locations. Make sure to name your directory something easy to remember. 
 
-Launch a terminal and navigate to this folder; for Windows users, use Powershell. This can be launched by typing `powershell` in the search bar. Linux users should use any modern terminal emulator. For Mac users, I reccommend [iTerm2](https://iterm2.com/). If you have never used a terminal before, the following commands an get you pretty far:  
-`dir` for Windows or `ls` for Unix: List all files and folders in your current directory. A regular terminal will launch in your Home directory, `C:\Users\<your-username>\` in Windows or `/home/<your-username>` in Unix.  
-`cd [dirname]`: Stands for change directory. Type in `cd Documents`, for example, to enter your Documents folder. `cd ..` will take you back to the parent directory.  
-`mkdir [dirname]`: Creates a new folder with dirname. In order to create a folder with spaces in the name, it should be encapsulated in double quotes, I.E. `mkdir "My iGEM Folder"`.  
-`exit` to safely close your terminal without interrupting any processes.  
+Launch a terminal and navigate to this folder; for Windows users, use Powershell. This can be launched by typing `powershell` in the search bar. Linux users should use any modern terminal emulator. For Mac users, I recommend [iTerm2](https://iterm2.com/). 
+
+![2-1a](https://github.com/Virginia-iGEM/igem-wikibrick/blob/master/docs/tutorial/2-1a.PNG)
+*What Powershell looks like in Windows. It may look different for Linux and Mac users.*
+
+If you have never used a terminal before, the following commands can get you pretty far:  
+- `dir` for Windows or `ls` for Unix: List all files and folders in your current directory. A regular terminal will launch in your Home directory, `C:\Users\<your-username>\` in Windows or `/home/<your-username>` in Unix.  
+- `cd [dirname]`: Stands for change directory. Type in `cd Documents`, for example, to enter your Documents folder. `cd ..` will take you back to the parent directory.  
+- `mkdir [dirname]`: Creates a new folder with dirname. In order to create a folder with spaces in the name, it should be encapsulated in double quotes, I.E. `mkdir "My iGEM Folder"`.  
+- `exit` to safely close your terminal without interrupting any processes.  
+
 These commands should get you pretty far; further details can be found by entering `[commandname] --help` or `man [commandname]` on Unix. Google is your best friend if you want to know more.
 
-In addition to use of this tool, we reccommend creating a GitHub page to share the repository among your team members. You can create an Organization Account for your iGEM team [here](https://github.com/organizations/new); instructions for creating a repository can be found [here](https://help.github.com/articles/create-a-repo/). **NOTE: DO NOT tick the 'Initialize this repository with a README' box so that you can push your local repository to GitHub.**
+![2-1b](https://github.com/Virginia-iGEM/igem-wikibrick/blob/master/docs/tutorial/2-1b.PNG)    
+*An example of some commands that can be run in the terminal.*
 
-Enter the following series of commands, omitting any commands starting with `git` if you are not using Git, or are using another version control system.
+In addition to use of this tool, we recommend creating a GitHub page to share the repository among your team members. You can create an Organization Account for your iGEM team [here](https://github.com/organizations/new); instructions for creating a repository can be found [here](https://help.github.com/articles/create-a-repo/). **NOTE: DO NOT tick the 'Initialize this repository with a README' box so that you can push your local repository to GitHub.**
+
+Enter the following series of commands to download the `igem-wikibrick`: 
 
 If creating a new project: `npm init`  
 `npm install -g gulp@next bower`  
