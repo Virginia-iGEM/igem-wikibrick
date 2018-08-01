@@ -2,15 +2,15 @@
 
 A user-friendly tool that makes developing wikis and webpages for the iGEM wiki behave as much like normal web development as possible. Automates building, image, HTML, CSS, Javascript and Package uploads.
 
-**Warning: igem-wikibrick is still under fairly active development. The package is working as intended _for us,_ but has not been thoroughly tested for bugs and corner cases. If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork, modify and submit a pull request. If you are on an iGEM team, this can count towards your collaboration requirements. Contact us for more information.**
+**Warning: igem-wikibrick is still under fairly active development. The package is working as intended _for us,_ but has not been thoroughly tested for bugs and corner cases. If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork, modify and submit a pull request. If you are on an iGEM team, this can count towards your collaboration requirements. Contact us at virginia.igem@gmail.com for more information.**
 
 ## 1 Table of Contents
 
-1. **Table of Contents**
-2. **Installation**
-3. **Tutorial**
-4. **Description**
-5. **Todo**
+1. [**Table of Contents**](#1-table-of-contents)
+2. [**Installation**](#2-installation)
+3. [**Tutorial**](#3-tutorial)
+4. [**Description**](#4-description)
+5. [**Todo**](#5-todo)
 6. **Attributions, Dependencies and Works Cited**
 
 ## 2 Installation
@@ -27,11 +27,11 @@ If you would like a sample project:
 `mkdir app`  
 `cp -r node_modules/igem-wikbrick/app ./app`
 
-## 2 Tutorial
+## 3 Tutorial
 
 See [igem-wikibrick tutorials, examples and templates](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/tutorial). The tutorial contained therein is aimed at individuals who may have never worked with webdevelopment before, and includes more detailed installation instructions.
 
-## 3 Programmer's Guide
+### Programmer's Guide
 
 See [programmer's guide](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/programmers-guide). This is a more technical document containing information on the architecture of igem-wikibrick, and is valuable both for new users trying to get a deeper understanding of how the tool works and how to modify it, as well as for well-versed developers who have no need of an introduction, and are looking to modify the tool for their own use as quickly as possible.
 

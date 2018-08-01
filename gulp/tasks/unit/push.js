@@ -10,7 +10,7 @@ const config = global.wikibrick;
 const targets = config.targets;
 const igemwiki = require('igemwiki-api')(config.teaminfo)
 
-const imagemapfilename = path.join(targets.build, '/imagemap.json').toString();
+const uploadmapfilename = config.uploadmap;
 
 var loggedin = false;
 var loginjar;
@@ -53,7 +53,7 @@ const index = [{
 }];
 
 // Mapping for all standard HTML pages. Note use of Globby wildcards to find files.
-const getPages = globby([ targets.uploadsrc.pages ]).then(function (pages) {
+const getPages = globby(targets.uploadsrc.pages).then(function (pages) {
     return pages.map(function (page) {
         return {
             type: 'page',
@@ -64,7 +64,7 @@ const getPages = globby([ targets.uploadsrc.pages ]).then(function (pages) {
 })
 
 // Mapping for templates.
-const getTemplates = globby([ targets.uploadsrc.templates ]).then(function (templates) {
+const getTemplates = globby(targets.uploadsrc.templates).then(function (templates) {
     return templates.map(function (template) {
         return {
             type: 'template',
@@ -74,8 +74,19 @@ const getTemplates = globby([ targets.uploadsrc.templates ]).then(function (temp
     })
 })
 
+// Mapping for content.
+const getContent = globby(targets.uploadsrc.content).then(function (contents) {
+    return contents.map(function (content) {
+        return {
+            type: 'template',
+            fileName: path.resolve(__dirname, content),
+            page: path.basename(content).replace('.html', '')
+        }
+    })
+})
+
 // Mapping for CSS
-const getCSS = globby([ targets.uploadsrc.css ]).then((stylesheets) => {
+const getCSS = globby(targets.uploadsrc.css).then((stylesheets) => {
     return stylesheets.map((stylesheet) => {
         return {
             type: 'stylesheet',
@@ -86,17 +97,17 @@ const getCSS = globby([ targets.uploadsrc.css ]).then((stylesheets) => {
 })
 
 // Mapping for Javascript
-const getJS = globby([ targets.uploadsrc.js ]).then(scripts => scripts.map(script => ({
+const getJS = globby(targets.uploadsrc.js).then(scripts => scripts.map(script => ({
     type: 'script',
     fileName: path.resolve(__dirname, script),
     page: path.basename(script).replace('.js', '')
 })))
 
 // Mapping for images
-const getImages = globby([ targets.uploadsrc.images ]).then(images => images.map(image => ({
-    type: 'image',
-    fileName: path.resolve(__dirname, image),
-    page: path.basename(image)
+const getFiles = globby(targets.uploadsrc.files).then(files => files.map(file => ({
+    type: 'upload',
+    fileName: path.resolve(__dirname, file),
+    page: path.basename(file)
 })))
 
 // Drop-in replacement for igemwiki.upload under `upload`
@@ -130,7 +141,7 @@ upload = function(promises) {
         // generating an actual map list from the patterns we specified.
         Promise.all(promises).then((confs) => {
             confs = _.flatten(confs);
-            var imagemap = new Object(); // We don't necessarily need this for every kind of upload,
+            var uploadmap = new Object(); // We don't necessarily need this for every kind of upload,
             // but it's there for image uploads.
 
             // Encapsulate files in a configuration file compatible with igemwiki-api
@@ -144,17 +155,17 @@ upload = function(promises) {
                 }))
                 var imageupload = false;
                 Promise.map(confs, conf => retryUpload(conf, 5) // Do the actual upload, retry 5 times upon failure
-                .then(results => { // Generate imagemaps if we're uploading any images
-                    if(conf.type == 'image') {
+                .then(results => { // Generate uploadmaps if we're uploading any images
+                    if(conf.type == 'upload') {
                         imageupload = true;
-                       imagemap[conf.dest] = results.target;
+                       uploadmap[conf.dest] = results.target;
                     }
                 })
                 , {concurrency: 1})
-                .then(() => { // Write out imagemaps if they've been generated
+                .then(() => { // Write out uploadmaps if they've been generated
                     if(imageupload) {
-                        fs.writeFile(imagemapfilename ,JSON.stringify(imagemap), 'utf8', () => {
-                        console.log('Wrote image mappings to '.concat(imagemapfilename));
+                        fs.writeFile(uploadmapfilename ,JSON.stringify(uploadmap), 'utf8', () => {
+                        console.log('Wrote image mappings to '.concat(uploadmapfilename));
                         });
                     }
                 })
@@ -182,6 +193,10 @@ gulp.task('push:templates', function(done){
     upload(getTemplates).then(done);
 });
 
+gulp.task('push:content', function(done) {
+    upload(getContent).then(done);
+});
+
 gulp.task('push:css', function(done) {
     upload(getCSS).then(done);
 });
@@ -190,8 +205,8 @@ gulp.task('push:js', function(done) {
     upload(getJS).then(done);
 });
 
-gulp.task('push:images', function(done) {
-    upload(getImages).then(done);
+gulp.task('push:files', function(done) {
+    upload(getFiles).then(done);
 });
 
-gulp.task('push:content', gulp.series('push:index', 'push:pages', 'push:templates', 'push:css', 'push:js'));
+gulp.task('push:all', gulp.series('push:index', 'push:content', 'push:pages', 'push:templates', 'push:css', 'push:js'));

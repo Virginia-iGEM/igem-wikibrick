@@ -8,10 +8,14 @@ var replace = require('gulp-replace');
 var rename = require('gulp-rename');
 var _ = require('lodash');
 var banner = require('../../banner');
+var lazypipe = require('lazypipe');
+var handlebars = require('gulp-compile-handlebars');
+var pandoc = require('gulp-pandoc');
+var glob = require('globby');
+var tap = require('gulp-tap');
+var urljoin = require('url-join');
 
 const path = require('path');
-const url = require('url');
-const fs = require('fs');
 
 var config = global.wikibrick;
 var targets = config.targets;
@@ -22,25 +26,19 @@ var dests = targets.buildtarget;
 const urls = targets.urls;
 const suffixes = targets.suffixes;
 
-var urlIsRelative = (str) => {
-    return !str.match(/^https?:\/\//);
-}
+urlIsRelative = require('./relative2absolute').urlIsRelative;
 
 relative2absolute = function($, file) {
-    return new Promise((resolve, reject) => {
+    var uploadmap = require('./relative2absolute').uploadmap();
 
-        // This part is synchronous and probably doesn't need to be
-        var imagemap = JSON.parse(fs.readFileSync('./build/imagemap.json', 'utf8'));
-        if(imagemap == '' || imagemap == null) {
-            console.log("No imagemap found, image paths will not be substituted. Run push:images to generate imagemap.")
-        }
+    return new Promise((resolve, reject) => {
 
         // Set absolute paths for images
         images =  $('img').each(function () {
             var img = $(this);
             var relname = img.attr('src');
-            if (relname != null && urlIsRelative(relname) && imagemap.hasOwnProperty(path.basename(relname))) { // Check to see if a map exists, otherwise do not change
-                img.attr('src', imagemap[path.basename(relname)]);
+            if (relname != null && urlIsRelative(relname) && uploadmap.hasOwnProperty(path.basename(relname))) { // Check to see if a map exists, otherwise do not change
+                img.attr('src', uploadmap[path.basename(relname)]);
             }
         });
 
@@ -49,23 +47,23 @@ relative2absolute = function($, file) {
             var link = $(this);
             var relname = link.attr('href');
             if (relname != null && urlIsRelative(relname)) {
-                link.attr('href', urls.css.concat(path.basename(relname).replace('.css', '')).concat(suffixes.css));
+                link.attr('href', urljoin(urls.css, path.basename(relname).replace('.css', '')) + suffixes.css);
             }
         });
 
         // Set absolute paths for scripts
-        scripts = $('script', 'head').each(function () {
+        scripts = $('script').each(function () {
             var script = $(this);
             var relname = script.attr('src');
             if (relname != null && urlIsRelative(relname)) {
-                script.attr('src', urls.js.concat(path.basename(relname).replace('.js', '')).concat(suffixes.js));
+                script.attr('src', urljoin(urls.js, path.basename(relname).replace('.js', '')) + suffixes.js);
             }
             
             if(script.text() != null) {
                 urlReplace = /\.load\( *'(\.)?(\/)?(.*)\.html' *\);/gi;
 
                 script.text(script.text().replace(urlReplace, function (match, $1, $2, $3, offest, original) {
-                    return ".load('".concat(urls.template).concat(path.basename($3)).concat(targets.suffixes.js).concat("');");
+                    return ".load('" + urljoin(urls.template, path.basename($3)) + targets.suffixes.js + "');";
                 }));
             }
         });
@@ -82,10 +80,10 @@ relative2absolute = function($, file) {
             var relname = a.attr('href');
             if (relname != null && relname != "index.html" && urlIsRelative(relname)) {
                 if (!relname.match(/^(\.)?(\/)?pages\//)) {
-                    a.attr('href', urls.standard.concat(path.basename(a.attr('href')).replace('.html', '')));
+                    a.attr('href', urljoin(urls.standard, path.basename(a.attr('href')).replace('.html', '')));
                 }
                 else { //Todo: Make this support nested pages
-                    a.attr('href', urls.standard.concat(path.basename(a.attr('href')).replace('.html', '')))
+                    a.attr('href', urljoin(urls.standard, path.basename(a.attr('href')).replace('.html', '')));
                 }
             }
         })
@@ -105,36 +103,87 @@ relative2absolute = function($, file) {
 // Function shared by all HTML processing tasks for development builds. 
 // Currently just stages HTML files to build folder.
 
-function prepHTML(src, dest) {
-    return function() {
-        return gulp.src(src)
-        /*.pipe(markdown({
-            sanitize: false,
-            mangle: false
-        })) // Run file through the markdown processor ony if it is a markdown file
-        .pipe(rename(function (path) {
-            path.extname = '.html';
-        })) */
-        .pipe(gulpif(env.relative2absolute, cheerio({
-            run: relative2absolute,
-            parserOptions: {
-                decodeEntities: false
+var prepHTML = lazypipe()
+    .pipe(() => gulpif(env.relative2absolute, cheerio({
+        run: relative2absolute,
+        parserOptions: {
+            decodeEntities: false
+        }
+    }))) // Think about using lazypipe here
+    .pipe(() => gulpif(env.relative2absolute, replace(/<!DOCTYPE html>/g, '')))
+    .pipe(() => gulpif(env.serve, browsersync.stream()))
+
+var renameToHTML = lazypipe()
+    .pipe(rename, function(path) {
+        path.extname = '.html';
+    })
+
+var prepHBS = lazypipe()
+    .pipe(renameToHTML)
+    .pipe(tap, function(file, t) {
+        return t.through(handlebars, [{}, {
+        ignorePartials: true,
+        // The world's shittiest hack:tm: to get around the errrr thrown by 
+        // gulp-compile-handlebars when srcs.partials is empty and no batch 
+        // files are available
+        batch: function() {
+            if (glob.sync(srcs.partials).length > 0) {
+                return [srcs.partials];
             }
-        }))) // Think about using lazypipe here
-        .pipe(gulpif(env.relative2absolute, replace(/<!DOCTYPE html>/g, '')))
-        .pipe(gulpif(env.banner, banner.html()))
-        .pipe(gulpif(env.serve, browsersync.stream()))
-        .pipe(gulp.dest(dest));
-    }
-};
-
-// TODO: Allow tasks to pass in a prepHTML function to support dev/live build differences
-
-// Task to prep index.html which is uploaded as the home page
-gulp.task('build:index', prepHTML(srcs.index, dests.index));
+            else {
+                return;
+            }
+        }(),
+        helpers: config.handlebars.helpers(file, t)
+    }])})
 
 // Task to prep all non-home pages, I.E. Project Description, Team, etc.
-gulp.task('build:pages', prepHTML(srcs.pages, dests.pages));
+gulp.task('build:html:pages', () =>
+    gulp.src(srcs.htmlpages)
+    .pipe(prepHTML())
+    .pipe(gulp.dest(dests.pages))
+);
+
+// Task to prep all pages, I.E. Project Description, Team, etc.
+gulp.task('build:hbs:pages', () =>
+    gulp.src(srcs.hbspages)
+    .pipe(prepHBS())
+    .pipe(prepHTML())
+    .pipe(renameToHTML())
+    .pipe(gulpif(env.banner, banner.html())) // Only bannerize top-level pages
+    .pipe(gulp.dest(dests.pages))
+);
+
+gulp.task('build:html:content', () =>
+    gulp.src(srcs.htmlcontent)
+    .pipe(prepHBS())
+    .pipe(prepHTML())
+    .pipe(gulp.dest(dests.content))
+);
+
+gulp.task('build:markdown:content', () =>
+    gulp.src(srcs.markdowncontent)
+    .pipe(prepHBS())
+    .pipe(markdown(config.markdown.options))
+    .pipe(prepHTML())
+    .pipe(gulp.dest(dests.content))
+);
+
+gulp.task('build:docx:content', () =>
+    gulp.src(srcs.docxcontent)
+    .pipe(prepHBS())
+    .pipe(prepHTML())
+    .pipe(pandoc({
+        from: 'docx',
+        to: 'html5',
+        ext: '.html'
+    }))
+    .pipe(gulp.dest(dests.content))
+);
 
 // Task to prep templates like headers, footers, etc. that can be reused on many pages
-gulp.task('build:templates', prepHTML(srcs.templates, dests.templates));
+gulp.task('build:templates', () =>
+    gulp.src(srcs.templates)
+    .pipe(prepHTML())
+    .pipe(gulp.dest(dests.templates))
+);
