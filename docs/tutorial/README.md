@@ -47,7 +47,8 @@ In addition to use of this tool, we recommend creating a GitHub page to share th
 
 Enter the following series of commands to download the `igem-wikibrick`: 
 
-If creating a new project: `npm init`  
+If creating a new project:  
+`npm init`  
 `npm install -g gulp@next bower`  
 `npm install -D igem-wikibrick gulp@next bower string-format`  
 `bower install jquery`
@@ -55,22 +56,22 @@ If creating a new project: `npm init`
 `cp node_modules/igem-wikibrick/config.js ./`  
 `cp node_modules/igem-wikibrick/gulpfile.js ./`
 
-Now we're going to copy the example project from igem-wikibrick:  
+Now we're going to create a folder called `app` and copy the example project from igem-wikibrick:  
 `mkdir app`  
 `cp -r node_modules/igem-wikbrick/app ./app`  
 
 It is important to note that you will have to retype in `npm install` and `bower install` in the `igem-wikibrick` folder every time **packages change in the repository or you choose to clone the repository**. Otherwise, things will not work the way you want them to...which is bad.
 
-### 2.2 First steps for Existing Projects
+### 2.2 First Steps for Existing Projects
 
-If you already have content on your wiki, see the example project for how you would organize your HTML, Javascript and CSS. This will differ for every team as iGEM wikis can be set up very differently from one another. To help you migrate, once you have Node.js installed, you can install the igemwiki-api commandline tool, which will allow you to quickly download your existing wiki pages. This can be done with:  
+If you already have content on your wiki, see the example project for how you would organize your HTML, Javascript and CSS. This will differ for every team, as iGEM wikis can be set up very differently from one another. To help you migrate (once you have Node.js installed), you can install the igemwiki-api commandline tool, which will allow you to quickly download your existing wiki pages. This can be done with:  
 `npm install -g igemwiki-api`  
-restart your terminal, then run  
-`igemwiki backup -n [yourtamname] -y [yourteamyear]`
+Restart your terminal by closing the window or typing `exit` in the terminal, then run:  
+`igemwiki backup -n [yourteamname] -y [yourteamyear]`
 
-This will place all your existing wiki pages under a folder named `backup` in your current working directory. This should make migrating to use of `igem-wikibrick` slightly more streamlined.
+This will place all your existing wiki pages under a folder named `backup` in your current working directory. From here, you can pick and choose which files you would like to keep by moving them to the `app` folder. This should make migrating your existing project with the use of `igem-wikibrick` slightly more streamlined.
 
-If you already have webcontent that runs on your local machine or on a standard webserver, this webcontent should _just work_ when used with the tool, as the files are named correctly. Again, see the example project for file naming conventions and use of different kinds of files.
+If you already have webcontent that runs on your local machine or on a standard webserver, this webcontent should _just work_ when used with the tool, as the files should be named correctly. Again, see the example project for file naming conventions and use of different kinds of files.
 
 Regardless, the same steps for a new project can be used for an existing project. Omit `npm init` if you already have a `package.json` file in your project's root directory. Omit `git init` if you are already using git.
 
