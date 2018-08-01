@@ -3,31 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="/dist/js/vendor.js"></script>
-  <link rel="stylesheet" href="/dist/css/vendor.css">
+  <!--link rel="stylesheet" href="dist/css/vendor.css"-->
+  <script src="dist/js/vendor.js"></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="js/wiki.js"></script>
   <script>
     $(function() {
-      $('#virginia-header').load('/templates/header.html');
-      $('#virginia-footer').load('/templates/footer.html');
+      $('#virginia-header').load('./templates/header.html');
+      $('#virginia-footer').load('./templates/footer.html');
     })
   </script>
-  <link rel="stylesheet" href="/css/styles.css">
-  <script src="/js/wiki.js"></script>
-  <link rel="stylesheet" href="/css/index.css">
 </head>
+
+<!-- NAVIGATION BAR -->
 
 <body>
   <div id="igem-navbar-placeholder">
     <p>Placeholder for iGEM Navbar</p>
   </div>
   <div id="virginia-header"></div>
-  <div id="main" class="top">
+  <div id="main" class="thetop">
       <!--Images-->
     <div id="text">
       <h1> Project Description</h1>
-      <p>Heterogeneity of cell populations caused by quorum sensing leads to variability in gene expression that is hard to predict. During biomanufacturing, elevating quorum-induced protein expression will lead to gain of profit. Decreasing this expression can also be beneficial in situations where undesirable biofilms may form on medical equipment or controlling virulence in bacteria. We will modify the existing bacterial quorum sensing system controlled by the Lsr operon by upregulating the synthesis and excretion of Autoinducer-2, a unviersal quorum molecule. This will increase population-scale AI-2 intake and phosphorylation after the initial AI-2 threshold concentrations have been reached to reduce variability in induced gene expression.
-
-        A model is used to predict the impacts of manipulating the expression of quorum sensing genes and guide design and experimentation. DNA assembly of a Biobricks containing pLsr, T7 RNA Polymerase, LsrK, LsrACDB, LuxS, YdgG, and superfolding Green Fluorescent Protein (sfGFP) enables both the enhancement of natural quorum sensing and the quantification of protein activation among the bacteria in a colony. This device will improve the viability of autoinduction as an induction method in industries such as biomanufacturing by decreasing the variability of a cell phenotypes and increasaing expression within a single culture to reduce costs leading to an increase in profits. In addition, by insertion of T7 polymerase into a quorum-sensitive region of the genome of E. coli, we will create a chassis with specific, customizable quorum response for engineering and scientific applications.</p>
+      <p>Heterogeneity of cell populations caused by quorum sensing leads to variability in gene expression that is hard to predict. During biomanufacturing, elevating quorum-induced protein expression will lead to gain of profit. Decreasing this expression can also be beneficial in situations where undesirable biofilms may form on medical equipment or controlling virulence in bacteria. We will modify the existing bacterial quorum sensing system controlled by the Lsr operon by upregulating the synthesis and excretion of Autoinducer-2, a unviersal quorum molecule. This will increase population-scale AI-2 intake and phosphorylation after the initial AI-2 threshold concentrations have been reached to reduce variability in induced gene expression.</p>
+      <br>
+      <p>A model is used to predict the impacts of manipulating the expression of quorum sensing genes and guide design and experimentation. DNA assembly of a Biobricks containing pLsr, T7 RNA Polymerase, LsrK, LsrACDB, LuxS, YdgG, and superfolding Green Fluorescent Protein (sfGFP) enables both the enhancement of natural quorum sensing and the quantification of protein activation among the bacteria in a colony. This device will improve the viability of autoinduction as an induction method in industries such as biomanufacturing by decreasing the variability of a cell phenotypes and increasaing expression within a single culture to reduce costs leading to an increase in profits. In addition, by insertion of T7 polymerase into a quorum-sensitive region of the genome of E. coli, we will create a chassis with specific, customizable quorum response for engineering and scientific applications.</p>
     </div>
     <div id="media">
       <div class="petri-dish">
@@ -36,40 +38,40 @@
       <!--Content and text-->
     </div>
   </div>
-
+  
   <div class="category-gallery">
     <div>
-      <a class="internal" href="/pages/Team.html">
+      <a class="internal" href="Team.html">
         <img src="images/vgem-logo.png" alt="Team">
         <p><strong>Team</strong></p>
       </a>
     </div>
     <div>
-      <a class="internal" href="/pages/Description.html">
+      <a class="internal" href="Description.html">
         <img src="images/vgem-logo.png" alt="Project">
         <p><strong>Project</strong></p>   
       </a>
     </div>
     <div>
-      <a class="internal" href="/pages/Parts.html">
+      <a class="internal" href="Parts.html">
         <img src="images/vgem-logo.png" alt="Parts">
         <p><strong>Parts</strong></p>
       </a>
     </div>
     <div>
-      <a class="internal" href="/pages/Safety.html">
+      <a class="internal" href="Safety.html">
         <img src="images/vgem-logo.png" alt="Safety">
         <p><strong>Safety</strong></p>
       </a>
     </div>
     <div>
-      <a class="internal" href="/pages/Human_Practices.html">
+      <a class="internal" href="Human_Practices.html">
         <img src="images/vgem-logo.png" alt="Human Practices">
         <p><strong>Human Practices</strong></p>
       </a>
     </div>
     <div>
-      <a class="internal" href="/pages/Awards.html">
+      <a class="internal" href="Awards.html">
         <img src="images/vgem-logo.png" alt="Awards">
         <p><strong>Awards</strong></p>
       </a>
