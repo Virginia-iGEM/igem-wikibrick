@@ -2,7 +2,7 @@
 
 A user-friendly tool that makes developing wikis and webpages for the iGEM wiki behave as much like normal web development as possible. Automates building, image, HTML, CSS, Javascript and Package uploads.
 
-**Warning: igem-wikibrick is still under fairly active development. The package is working as intended _for us,_ but has not been thoroughly tested for bugs and corner cases. If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork, modify and submit a pull request. If you are on an iGEM team, this can count towards your collaboration requirements. Contact us at virginia.igem@gmail.com for more information.**
+**Warning: igem-wikibrick is still under fairly active development. The package is working as intended _for us,_ but has not been thoroughly tested for bugs and corner cases. If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork, modify and submit a pull request. If you are on an iGEM team, this can count either of these things towards your collaboration requirements. Contact us at virginia.igem@gmail.com for more information.**
 
 ## 1 Table of Contents
 
@@ -11,25 +11,19 @@ A user-friendly tool that makes developing wikis and webpages for the iGEM wiki 
 3. [**Tutorial**](#3-tutorial)
 4. [**Description**](#4-description)
 5. [**Todo**](#5-todo)
-6. **Attributions, Dependencies and Works Cited**
+6. [**Attributions, Dependencies and Works Cited**](#attributions-and-works-cited)
 
 ## 2 Installation
 
-In the future: Run an install script. For now:
+For new projects, see our Yeoman generaotr, [generator-igemwiki](https://github.com/Virginia-iGEM/generator-igemwiki). **This option is strongly reccommended for users new to webdevelopment.** This will give you an entire template for your wiki in addition to installing the tool for you.
 
-If creating a new project: `npm init`  
-`npm install -g gulp@next bower`  
-`npm install -D igem-wikibrick gulp@next bower string-format`  
-`npm update` - May or may not be necessary due to [a bug with npm's package management](https://github.com/npm/npm/issues/1341).  
-`cp node_modules/igem-wikibrick/config.js ./`  
-`cp node_modules/igem-wikibrick/gulpfile.js ./`  
-If you would like a sample project:  
-`mkdir app`  
-`cp -r node_modules/igem-wikbrick/app ./app`
+If you have an existing project, either an existing wiki you've been writing on igem.org, or content you have saved locally that you'd like to get on the iGEM server, and would like help moving to our tool, see the [migration guide](https://github.com/Virginia-iGEM/generator-igemwiki).
+
+If you already have a project and already know what you're doing: `npm install -D igem-wikibrick`. Gulp commands and compatible directory layouts can be found in the Programmer's Guide.
 
 ## 3 Tutorial
 
-See [igem-wikibrick tutorials, examples and templates](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/tutorial). The tutorial contained therein is aimed at individuals who may have never worked with webdevelopment before, and includes more detailed installation instructions.
+See the [tutorial](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/tutorial) page. You *must* have already installed the tool, either with `generator-igemwiki`, or standalone by following the migration guide.
 
 ### Programmer's Guide
 
@@ -114,3 +108,13 @@ This list is not up-to-date, and will be updated once the tool enters a stable s
 
 - University of Toronto: igemwiki-api, used to automate uploads to iGEM wiki
 - iGEM Peshawar 2016: General information regarding wiki development
+
+## 8 Contributing
+
+If you're interested in JavaScript, Handlebars, Markdown, Webpack, templating libraries like Handlebars, view libraries like React.js or Angular, and the future of frameworks support the iGEM wiki, and would like to contribute to the tools used to make the `igemwiki` stack run, we welcome pull requests, issue submissiosn and emails at [virginia.igem@gmail.com](mailto:virginia.igem@gmail.com).
+
+Links to repositories that make this tool work:
+
+- The original [igemwiki-api](https://github.com/igemuoftATG/igemwiki-api), written by Toronto 2016's Julian Mazzitelli
+  - Our fork of [igemwiki-api](https://github.com/Virginia-iGEM/igemwiki-api), which fixes a few bugs with Julian's code and may be pulled in the future. `igem-wikibrick` runs off of this library.
+- [generator-igemwiki](https://github.com/Virginia-iGEM/generator-igemwiki), a Yeoman generator which depends on this tool.
