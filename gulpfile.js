@@ -7,17 +7,17 @@ var path = require('path'); // Need path to to absolutify dirname
 global.wikibrick = require('./config')(path.resolve(__dirname));
 // Require gulp from the igem-wikibrick module
 // Pass in configuration
-//var gulp = require('igem-wikibrick/gulp-gulpfile')(global.wikibrick)
+var gulp = require('igem-wikibrick/gulp-gulpfile')(global.wikibrick)
 // TODO: Separate wikibrick gulpfile from generated gulpfile
-var gulp = require('./gulp/gulpfile')(global.wikibrick); // Uncomment for debugging in wikibrick
+//var gulp = require('./gulp/gulpfile')(global.wikibrick); // Uncomment for debugging in wikibrick
 
 // If you would like to split your gulp tasks up into subfiles under the ./gulp directory, 
 // first install gulp-hub with 
 // npm i -D gulp-hub@next
 // then uncomment these three lines
-//var HubRegistry = require('gul-hub'); 
-//var hub = new HubRegistry(global.wikibrick.gulp.unit);
-//gulp.registry(hub);
+var HubRegistry = require('gulp-hub'); 
+var hub = new HubRegistry(global.wikibrick.gulp.unit);
+gulp.registry(hub);
 
 // ----------------------- //
 // WRITE CUSTOM TASKS HERE //
