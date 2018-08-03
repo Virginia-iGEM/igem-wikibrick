@@ -63,6 +63,10 @@ This is a known issue and likely relates to the fact that we package JQuery 3.3 
 
 A current known workaround is to write inline JavaScript in `<script>` tags instead of writing them under the js folder. If you need to use your JavaScript in multiple documents, you can place your script tag in the `app/partials/_head.hbs` partial. This will cause JQuery code to behave as it should.
 
+### I keep making modifications but whenever I build, they're overwritten!
+
+**Make sure you are editing files in `app` and not in `build`. Any edits to any files in `build` will be overwritten when the next build is run. Never edit any files in `build` as the edits will always be trampled.**
+
 ### The `gulp serve` task cannot be found.
 
 Try running `npm install -D igem-wikibrick` in your project folder. This is another known issue, and a rare one at that; we've only encountered it twice and it hasn't showed up since. If it persists, push any changes you've made, delete your project folder and reclone your project from GitHub.
@@ -97,37 +101,37 @@ Run `gulp prebuild` first. `push:files` works out of the build directory, which 
 
 ### 6.2 High Priority
 
-- Fix _igemwiki-override.scss_ so that it actually corrects for the wiki styles and the published site reflects the local build site 1:1
-- Update tutorials to reflect Build-Tool's current state
+- API CHANGE: Make it so that `gulp publish` automatically sets the environment to `live`, while `gulp serve`, at least in its current state, automatically sets the environment to development.
+- FEATURE: Have `gulp push:` tasks log any uploaded files along with their hashes in a Git-tracked `uploadlog.json` file. Only upload files whose hashes have changed since the last upload.
+- FEATURE: Add a Handlebars helper function that accepts Google Drive links and can pull down Google Docs and use them as HTML content.
+- Added error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
 
 ### 6.3 Medium Priority
 
-- Make the actual path/name of `imagemap.json` something defined in `config.js`, instead of hardcoded.
-- Make it so that `gulp publish` automatically sets the environment to `live`, while `gulp serve`, at least in its current state, automatically sets the environment to development.
-- Added error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
-- Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
-- Fix MathJax with [#10 - Misc from this article](https://2016.igem.org/Team:Peshawar/Wiki)
-- Modify `gulp/unit/html.js` so that it also accepts markdown files.
-  - The code's there, just commented out; need to keep markdown processor from mangling `<!DOCTYPE>` tag.
-  - Should probably compile markdown files exclusively and load them in using templates.
-  - Also add Google Drive support?
 - Replace bower with npm development dependencies. Bower is being phased out, not just in our project but across the web.
+  - Perhaps there's also room for webpack/browserify to take Bower's place?
+  - Yarn may also be an appropriate replacement
+  - npm can also manage frontend dependencies, though this would require browserify and may result in confusion between vulnerabilities in live and dev.
 
 ### 6.4 Low Priority
 
-- Wrap the whole tool in a custom commandline tool?
-- Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies for team members and future teams.
-  - Add git hook that causes an npm install and bower install on package.json or bower.json change.
-  - Must be added on a repository-by-repository basis
 - Pick a JavaScript styleguide, fix the awful inconsistencies in style to adhere to it.
   - Standardize variable and function naming schemes.
   - Should probably 'use strict'.
-- Replace bower with npm or yarn for managing live dependencies.
 
 ### 6.5 Questionable Value
 
+- Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies for team members and future teams.
+  - Add git hook that causes an npm install and bower install on package.json or bower.json change.
+  - Must be added on a repository-by-repository basis
+  - The Yeoman generator already kinda does all of this.
+- Wrap the whole tool in a custom commandline tool?
+  - Honestly a gulp --help command would be enough.
+- Modify `gulpfile.js` so that separate directories, `build-dev` and `build-live` are created for each respective build.
+  - I feel like this would just further clutter the project folder
 - Eliminate synchronous file read in gulp task live/push.js
   - JSON.parse is synchronous anyways, so will need a different JSON library?
+  - Also it happens really quickly so async is probably not needed
 - Update build-tool so that it scans for existing files and whether or not their srcs have changed under `./build` before building. Would need some kind of hash of each file, or a look at the date-last-changed.
   - Probably not that necessary, just more work for little gain considering how fast builds are
 
