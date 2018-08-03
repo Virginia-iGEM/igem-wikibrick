@@ -206,3 +206,11 @@ This is just a plaintext file containing your open source license. This license 
 ### 4.8 README.md
 
 This file will be displayed on your GitHub page, and should be used to direct teammembers and other visitors to where they need to go. There's a good likelihood that this page, the one you're reading right now, is a README.md file host on GitHub.
+
+## 5 Breakdown of config.js
+
+TODO
+
+## 5 Adding or Modifing Gulp Tasks
+
+TODO
