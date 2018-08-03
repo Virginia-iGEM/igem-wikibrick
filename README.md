@@ -137,13 +137,7 @@ Run `gulp prebuild` first. `push:files` works out of the build directory, which 
 
 ## 7 Dependencies
 
-### 7.1 Build Dependencies
-
-See [packages.json](https://github.com/Virginia-iGEM/2018-wiki/blob/master/package.json)
-
-### 7.2 Live Dependencies
-
-See [bower.json](https://github.com/Virginia-iGEM/2018-wiki/blob/master/bower.json)
+See [packages.json](https://github.com/Virginia-iGEM/igem-wikibrick/blob/master/package.json)
 
 ## 8 Attributions and Works Cited
 
