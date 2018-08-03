@@ -7,6 +7,9 @@ This guide is directed at technical readers who want a more detailed understandi
 1. [**Table of Contents**](#1-table-of-contents)
 2. [**Recommended Readings**](#2-recommended-readings)
 3. [**High Level Architecture**](#3-high-level-architecture)
+4. [**Project Structure**](#4-project-structure)
+5. [**Breakdown of config.js**](#5-breakdown-of-config-js)
+6. [**Adding or Modifying Gulp Tasks**](#6-adding-or-modifying-gulp-tasks)
 
 ## 2 Recommended Readings for the Uninitiated
 
@@ -41,6 +44,8 @@ You do not need to follow all of these tutorials to the end or read every articl
   - These transformations vary a lot in what they do. Some are _preprocessors_ while others are _postprocessors._ All gulpfiles are heavily commented; in order to get a better idea of what a transformation consists of, I would recommend starting with the main gulpfile and reading the sub-gulpfiles as necessary.
   - This gulpfile is wrapped up in a Node.js module, which is then `require`'d by _your_ package; this module was made available to your package when you installed it.
 2. [igemwiki-api](https://github.com/igemuoftATG/igemwiki-api/tree/master/recipes): This `npm` package enables us to upload files to the iGEM Wiki. It was built by iGEM Toronto's 2016 team, and has been extended and expanded into a full-blown automated build tool, `igem-wikibrick`. It provides an interface that takes advantage of Mediawiki's API. The way `igem-wikibrick` makes use of this tool is documented under [`gulp/tasks/live/push.js`](https://github.com/Virginia-iGEM/igem-wikibrick/blob/master/gulp/tasks/live/push.js
+
+The organization of these components and how to correctly modify them is explained in [5 Adding or Modifying Gulp Tasks](#5-adding-or-modifying-gulp-tasks).
 
 ### 3.1 Usage and Task Definitions
 
@@ -209,8 +214,51 @@ This file will be displayed on your GitHub page, and should be used to direct te
 
 ## 5 Breakdown of config.js
 
-TODO
+`config.js` is the first place you should look if you need to modify or add custom functionality to the build process. The second place you should look is under [gulp tasks](#5-adding-or-modifying-gulp-tasks).
 
-## 5 Adding or Modifing Gulp Tasks
+We will give quick overview of what settings `config.js` sets here, but the best way to understand `config.js` is to open up the file and read it. The code is heavily commented and for the most part self-documenting.
 
-TODO
+```JavaScript
+{
+  teaminfo: teaminfo,  // Contains teamname and year, used for URL subs
+  uploadmap: uploadmap, // Filename for JSON file storing image URLs after upload
+  gulp: gulp,  // Directories for gulp subtasks
+  environment: environment, // Current build environment
+  environments: environments, // List of all available environments
+  targets: {
+    root: root, // The root project directory
+    clean: clean, // The directory to delete when the clean command is run
+    app: app, // The source directory for builds
+    build: build, // The destination directory for builds
+    buildsrc: buildsrc, // All sources for content that is processed in builds
+    buildtarget: buildtarget, // All destinations for content that is processed in builds
+    uploadsrc: uploadsrc, // All sources for content that will be uploaded to the wiki
+    urls: urls, // All destinations for content that will be uploaded to the wiki
+    suffixes: suffixes, // Suffixes needed for pulling down CSS, JS and AJAX loads
+  },
+  browsersync: { // Settings for browsersync
+    development: {
+      server: build, // The directory the server is run out of
+      port: 9999 // Which local port the server runs on, I.E. localhost:9999
+    }
+  }
+}
+```
+
+Note that all of these variables are more clearly defined in `config.js`.
+
+## 6 Adding or Modifing Gulp Tasks
+
+We've added support for creating your own gulp tasks or modifying our own, so that you can modify the build pipeline if you'd like.
+
+### Modifying tasks
+
+In order to modify a subtask (such as a `build:` or `push:` task), you must copy its relevant file from `node_modules/igem-wikibrick/gulp/tasks/unit` into your own `gulp/tasks/unit` folder. Once the file is there, it will overwrite any subtasks defined in `igem-wikibrick`. You can comment out or delete any tasks you don't need to overwrite, and otherwise modify subtasks as needed.
+
+In order to modify or add top-level tasks, simply append them after the `// WRITE CUSTOM TASKS HERE //` banner in your `gulpfile.js`. See `node_modules/igem-wikibrick/gulp/gulpfile.js` for examples of how to write top-level gulp tasks.
+
+### Adding new subtasks
+
+As you might've guessed, to add a new subtask task you can just add a new file to `gulp/tasks/unit`. It doesn't matter what the name of the file is; you don't have to index it anywhere, it will be automatically loaded in. Once this is done, you can reference the subtasks in your top-level gulp tasks, or reference them directly wth `gulp taskname`.
+
+Note that the actual filename does not matter; task names are determined when they are created using `gulp.task('taskname', ...)`.
