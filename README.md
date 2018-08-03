@@ -2,7 +2,7 @@
 
 A user-friendly tool that makes developing wikis and webpages for the iGEM wiki behave as much like normal web development as possible. Automates building, image, HTML, CSS, Javascript and Package uploads.
 
-Warning: igem-wikibrick is still under fairly active development and may not behave as expected at all times. If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork and submit a pull request. See [contributing](#8-contributing) for more information.
+*Warning: igem-wikibrick is still under fairly active development and may not behave as expected at all times. If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork and submit a pull request. See [contributing](#8-contributing) for more information.*
 
 ## 1 Table of Contents
 
@@ -47,7 +47,41 @@ Our goal in building this tool was to enable us to create an iGEM website that w
 
 ## 5 FAQ
 
-TODO
+### Why does my wiki look different on igem.org than it does locally?
+
+As much as we've tried to streamline this, we've encountered this same issue. Every team runs into it in one way or another. This issue occurs for a number of reasons, including igem.org's `load.php` styles taking precedence over any stylesheets we load in, as well as preloaded stylesheets associated with the wiki template that is automatically loaded into every team's page.
+
+You can avoid this by doing the following:
+
+- **Do not leave your publish for last minute.** Publish semi-regularly to ensure that your styling, content and JS works on both the wiki and on your local webserver.
+- Do not style `<body>` tags. At all. To do global styling for your whole page, instead wrap all the content in your body in a `<div id="teamname_content"></div>` and style the `#teamname_content` id.
+- Inspect an iGEM wiki page and take note of the names of HTML tags they use. For example, they have a `<div>` with the id `#content`, so you will not be able to use a `<div>` with the `content` id without clashing with iGEM Wiki styling
+
+### Why does my JQuery code behave strangely?
+
+This is a known issue and likely relates to the fact that we package JQuery 3.3 using Bower by default, while iGEM provides JQuery 1.1 forcibly to all wikis. We are currently attempting to resolve the issue ourselves.
+
+A current known workaround is to write inline JavaScript in `<script>` tags instead of writing them under the js folder. If you need to use your JavaScript in multiple documents, you can place your script tag in the `app/partials/_head.hbs` partial. This will cause JQuery code to behave as it should.
+
+### The `gulp serve` task cannot be found.
+
+Try running `npm install -D igem-wikibrick` in your project folder. This is another known issue, and a rare one at that; we've only encountered it twice and it hasn't showed up since. If it persists, push any changes you've made, delete your project folder and reclone your project from GitHub.
+
+If you have any insights as to why this issue may be occurring, we'd love to get it fixed. See [Contributing](#9-contributing) for contact information.
+
+### Some of my URLs aren't substituted?
+
+99% of the time this is because you've misspelled the image's filename. It's case-sensitive and you have to get the path exactly right, otherwise the substituter will not find it. If you are using `gulp build -l`, ensure that you have _recently_ performed a `gulp push:files`.
+
+### NONE of my URLs are substituted!
+
+Remember that `gulp publish -l`, not `gulp publish` is the correct way to publish. This is due to a limitation with the way our build system is set up, and will be corrected in the future so that `gulp publish` correctly performs a live build.
+
+If your URLs _still_ aren't substituted, please contact us for further assistance. This is another known, rare issue that we have encountered in the past but no longer do despite it never being officially fixed.
+
+### I can't push:files
+
+Run `gulp prebuild` first. `push:files` works out of the build directory, which is populated by prebuild. You should notice a lot of large red errors if this is happening.
 
 ## 6 Todo
 
@@ -112,6 +146,7 @@ See [bower.json](https://github.com/Virginia-iGEM/2018-wiki/blob/master/bower.js
 This list is not up-to-date, and will be updated once the tool enters a stable state.
 
 - University of Toronto: igemwiki-api, used to automate uploads to iGEM wiki
+  - Particularly, Julian Mazitelli for both creating the igemwiki-api and the original generator-igemwiki that ours is based on.
 - iGEM Peshawar 2016: General information regarding wiki development
 
 ## 9 Contributing
