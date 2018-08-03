@@ -6,7 +6,7 @@ This tutorial is intended for those that have followed the [generator-igemwiki i
 
 Our workflow consists of two cycles: Local Development (what we call Building and Serving) and Publishing.
 
-![wiki-workflow](wiki-workflow.PNG)
+![wiki-workflow](../images/wiki-workflow.PNG)
 
 Building consists of making iterative changes on your computer and viewing the results of those changes in your webbrowser. Publishing consists of packaging up all your modifications and uploading them to igem.org for others to see.
 

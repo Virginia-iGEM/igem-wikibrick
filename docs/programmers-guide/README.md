@@ -81,7 +81,7 @@ Major composite tasks can be found in the [main gulpfile](https://github.com/Man
 
 The build proceeds as follows, using the builtin gulp tasks:
 
-![wikibrick-flowchart](wikibrick-flowchart.PNG)
+![wikibrick-flowchart](../images/wikibrick-flowchart.PNG)
 
 ## 4 Project Structure
 
