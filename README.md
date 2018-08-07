@@ -18,7 +18,7 @@ A user-friendly tool that makes developing wikis and webpages for the iGEM wiki 
 
 ## 2 Installation
 
-For new projects, see our Yeoman generator, [generator-igemwiki](https://github.com/Virginia-iGEM/generator-igemwiki). **This option is strongly reccommended for users new to webdevelopment.** This will give you an entire template for your wiki in addition to installing the tool for you.
+For new projects, see our Yeoman generator, [generator-igemwiki](https://github.com/Virginia-iGEM/generator-igemwiki). **This option is strongly recommended for users new to web development.** This will give you an entire template for your wiki in addition to installing the tool for you.
 
 If you have an existing project, either an existing wiki you've been writing on igem.org, or content you have saved locally that you'd like to get on the iGEM server, and would like help moving to our tool, see the [migration guide](https://github.com/Virginia-iGEM/igem-wikibrick/tree/master/docs/migration-guide).
 
