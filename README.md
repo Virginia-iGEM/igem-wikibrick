@@ -91,24 +91,25 @@ Run `gulp prebuild` first. `push:files` works out of the build directory, which 
 
 ### 6.1 Known Issues
 
-- `npm install` will not correctly install this package due to problems with npm's dependency resolution. Workaround is to run `npm update` directly following an `npm install`. The install script will automatically do this.
-- `gulp publish -l` sometimes doesn't perform the URL replace. Reason is unknown; workaround is to enter `gulp build -l` then `gulp push:content -l` following a `gulp publish -l` that fails to rewrite relative URLs.
+- `npm install` will consistently incorrectly install this package on an `npm install` due to problems with npm's dependency resolution. Workaround is to either `npm install -D igem-wikibrick` or run `npm update` directly following an `npm install`. The install script will automatically do this.
+- [UNCOMMON] `gulp publish -l` sometimes doesn't perform the URL replace. Reason is unknown; workaround is to enter `gulp build -l` then `gulp push:content -l` following a `gulp publish -l` that fails to rewrite relative URLs.
 - Upload timeouts will _sometimes_ throw large, verbose errors that aren't caught by our error handling code.
   - Same for login timeouts
-  - Fork igemwiki-api and modify line ~90 of upload.js to correctly catch timeout errors instead of erroring out before... Continuing execution on user input.
-- Attempting to `gulp build -l` without first `gulp push:images -l` will result in a big error and broken URL substitutions. Tell user to `push:images` or `publish` before `live build`ing in error message instead of just vomiting exceptions.
-- `gulp publish` can be performed without the `-l` flag, which makes no sense. An error should be thrown which tells the user that the `-l` flag is necessary for publishing.
+  - May have been resolved by modifying `igemwiki-api`
+  - Modified `igemwiki-api`'s CLI needs to be tested to make sure our changes aren't breaking, as they change the way the library handles errors. May be necessary to ensure that `igemwiki-api` does not catch errors when used as a library and catches them when used as a CLI.
+- Attempting to `gulp build -l` without first `gulp push:images -l` will result in a big series of repeated file read errors and broken URL substitutions. Instead error out and tell user to `push:images` or `publish` before `live build`ing in error message instead of just vomiting exceptions.
+- `gulp publish` can be performed without the `-l` flag, which makes no sense. An error should be thrown which tells the user that the `-l` flag is necessary for publishing, or the `-l` flag is automatically and always set on publish for the user. See item #1 in High Priority.
 
 ### 6.2 High Priority
 
-- API CHANGE: Make it so that `gulp publish` automatically sets the environment to `live`, while `gulp serve`, at least in its current state, automatically sets the environment to development.
-- FEATURE: Have `gulp push:` tasks log any uploaded files along with their hashes in a Git-tracked `uploadlog.json` file. Only upload files whose hashes have changed since the last upload.
-- FEATURE: Add a Handlebars helper function that accepts Google Drive links and can pull down Google Docs and use them as HTML content.
-- Added error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
+- [API CHANGE] Make it so that `gulp publish` automatically sets the environment to `live`, while `gulp serve`, at least in its current state, automatically sets the environment to development.
+- [FEATURE] Have `gulp push:` tasks log any uploaded files along with their hashes in a Git-tracked `uploadlog.json` file. Only upload files whose hashes have changed since the last upload.
+- [FEATURE] Add a Handlebars helper function that accepts Google Drive links and can pull down Google Docs and use them as HTML content.
+- Add error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
 
 ### 6.3 Medium Priority
 
-- Replace bower with npm development dependencies. Bower is being phased out, not just in our project but across the web.
+- [API CHANGE] Replace bower with npm development dependencies. Bower is being phased out, not just in our project but across the web.
   - Perhaps there's also room for webpack/browserify to take Bower's place?
   - Yarn may also be an appropriate replacement
   - npm can also manage frontend dependencies, though this would require browserify and may result in confusion between vulnerabilities in live and dev.
@@ -118,8 +119,9 @@ Run `gulp prebuild` first. `push:files` works out of the build directory, which 
 - Pick a JavaScript styleguide, fix the awful inconsistencies in style to adhere to it.
   - Standardize variable and function naming schemes.
   - Should probably 'use strict'.
+  - 'use strict' seems to have gone out of style though?
 
-### 6.5 Questionable Value
+### 6.5 Questionable Value (discuss before implementing)
 
 - Create shell scripts (`.sh`, `.bat` files) that automatically install Node.js and all required npm and bower dependencies for team members and future teams.
   - Add git hook that causes an npm install and bower install on package.json or bower.json change.
