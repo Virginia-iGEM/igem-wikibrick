@@ -103,7 +103,8 @@ Run `gulp prebuild` first. `push:files` works out of the build directory, which 
 ### 6.2 High Priority
 
 - [API CHANGE] Make it so that `gulp publish` automatically sets the environment to `live`, while `gulp serve`, at least in its current state, automatically sets the environment to development.
-- [FEATURE] Have `gulp push:` tasks log any uploaded files along with their hashes in a Git-tracked `uploadlog.json` file. Only upload files whose hashes have changed since the last upload.
+- [FEATURE] Have `gulp push:` tasks log any uploaded files along with their hashes in a Git-tracked `uploadlog.json` file. Only upload files whose hashes have changed since the last upload. This is important to reduce upload times AND load on the iGEM server. Currently `igemwiki-api` attempts to do this by first attempting to _download_ the file from the wiki that is being uploaded, hashing it, and skipping it if the hashes are identical. However, either due to a bug in `igemwiki-api` or just igem.org being inconsistent, it sometimes skips items that should be uploaded and uploads items that should be skipped.
+  - If this is implemented in `wikibrick`, a `force` flag should be added to `igemwiki-api` so that it doesn't bother downloading and checking the file. A similar `force` flag may already exist; I don't recall.
 - [FEATURE] Add a Handlebars helper function that accepts Google Drive links and can pull down Google Docs and use them as HTML content.
 - Add error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
 
