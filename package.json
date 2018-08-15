@@ -1,6 +1,6 @@
 {
   "name": "igem-wikibrick",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Build tool capable of automatically building and publish iGEM Wiki sites. Created by Virginia iGEM 2018's Wiki Team.",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,6 @@
     "gulp-cheerio": "^0.6.3",
     "gulp-compile-handlebars": "^0.6.1",
     "gulp-concat": "^2.6.1",
-    "gulp-csso": "^3.0.1",
     "gulp-declare": "^0.3.0",
     "gulp-google-drive": "^1.4.2",
     "gulp-header": "^2.0.5",
@@ -65,6 +64,7 @@
     "url-join": "^4.0.0"
   },
   "devDependencies": {
+    "gulp-csso": "^3.0.1"
   },
   "repository": {
     "type": "git",
