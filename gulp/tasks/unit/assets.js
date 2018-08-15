@@ -1,6 +1,7 @@
 var path = require('path');
 
 var gulp = require('gulp');
+var globby = require('globby');
 var minifyCSS = require('gulp-csso');
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
@@ -13,6 +14,9 @@ var browsersync = require('browser-sync');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var banner = require('../../banner');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
+var through = require('through2');
 
 var config = global.wikibrick;
 var env = config.environment;
@@ -28,7 +32,7 @@ var relative2absolute = function(css, opts) {
         if(decl.prop === 'src' && urlIsRelative(decl.value)) {
             decl.value = uploadmap[decl.value];
         }
-    })
+    });
 };
 
 var postcssplugins = [ 
@@ -50,6 +54,35 @@ gulp.task('build:js', function(){
     .pipe(gulpif(env.banner, banner.js()))
     .pipe(gulpif(env.serve, browsersync.stream()))
     .pipe(gulp.dest(dests.js));
+});
+
+gulp.task('build:js', function(){
+    var bundledStream = through();
+
+    bundledStream
+        .pipe(source(srcs.js))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(gulpif(env.minify, uglify()))
+        .on('error', log.error)
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulpif(env.banner, banner.js()))
+        .pipe(gulpif(env.serve, browsersync.stream()))
+        .pipe(gulp.dest(dests.js));
+
+    globby(srcs.js).then(function(entries) {
+        var b = browserify({
+            entries: entries,
+            debug: true,
+            transform: []
+        });
+
+        b.bundle().pipe(bundledStream);
+    }).catch(function(err) {
+        bundledStream.emit('error', err);
+    });
+
+    return bundledStream;
 });
 
 // Task to minify and stage our in-house CSS stylesheets
