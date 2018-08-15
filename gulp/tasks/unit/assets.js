@@ -67,7 +67,7 @@ gulp.task('build:js', function(){
         .pipe(buffer())
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(gulpif(env.minify, uglify()))
-        .on('error', log.error)
+        .on('error', log)
         .pipe(sourcemaps.write('./'))
         .pipe(gulpif(env.banner, banner.js()))
         .pipe(gulpif(env.serve, browsersync.stream()))
