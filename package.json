@@ -1,6 +1,6 @@
 {
   "name": "igem-wikibrick",
-  "version": "0.4.10",
+  "version": "0.4.11",
   "description": "Build tool capable of automatically building and publish iGEM Wiki sites. Created by Virginia iGEM 2018's Wiki Team.",
   "main": "index.js",
   "scripts": {
@@ -42,6 +42,7 @@
     "gulp-hub": "github:frankwallis/gulp-hub#4.2.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^4.1.0",
+    "gulp-log": "0.0.0",
     "gulp-markdown": "^2.0.1",
     "gulp-pandoc": "^0.2.2",
     "gulp-postcss": "^7.0.1",

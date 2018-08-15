@@ -19,6 +19,7 @@ var banner = require('../../banner');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var through = require('through2');
+var log = require('gulp-log');
 
 var config = global.wikibrick;
 var env = config.environment;
