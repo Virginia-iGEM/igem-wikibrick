@@ -48,6 +48,7 @@ gulp.task('build:js', function(){
             insertGlobals: true,
             debug: !env.debug
         }))
+        .pipe(concat('wiki.js'))
         .pipe(gulpif(env.banner, banner.js()))
         .pipe(gulpif(env.serve, browsersync.stream()))
         .pipe(gulp.dest(dests.js));
