@@ -1,6 +1,7 @@
 var path = require('path');
 
-var browserify = reqiure('browserify');
+var uglify = require('gulp-uglify');
+var browserify = require('browserify');
 var gulp = require('gulp');
 var globby = require('globby');
 var minifyCSS = require('gulp-csso');
