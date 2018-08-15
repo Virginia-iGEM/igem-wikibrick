@@ -1,5 +1,6 @@
 var path = require('path');
 
+var browserify = require('gulp-browserify');
 var gulp = require('gulp');
 var minifyCSS = require('gulp-csso');
 var concat = require('gulp-concat');
@@ -28,7 +29,7 @@ var relative2absolute = function(css, opts) {
         if(decl.prop === 'src' && urlIsRelative(decl.value)) {
             decl.value = uploadmap[decl.value];
         }
-    })
+    });
 };
 
 var postcssplugins = [ 
@@ -43,13 +44,13 @@ if(env.relative2absolute) {
 // TODO: Fix JS minificatoin for in-house JS
 gulp.task('build:js', function(){
     return gulp.src(srcs.js)
-    .pipe(sourcemaps.init()) // Used for debugging
-    //.pipe(uglify().on('error', log)) // Minification increases load speeds
-    .pipe(concat('wiki.js')) // Note use of concat to compact all JS files into one
-    .pipe(sourcemaps.write())
-    .pipe(gulpif(env.banner, banner.js()))
-    .pipe(gulpif(env.serve, browsersync.stream()))
-    .pipe(gulp.dest(dests.js));
+        .pipe(browserify({
+            insertGlobals: true,
+            debug: !env.debug
+        }))
+        .pipe(gulpif(env.banner, banner.js()))
+        .pipe(gulpif(env.serve, browsersync.stream()))
+        .pipe(gulp.dest(dests.js));
 });
 
 // Task to minify and stage our in-house CSS stylesheets
