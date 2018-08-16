@@ -26,6 +26,7 @@ var relative2absolute = function(css, opts) {
     var uploadmap = require('./relative2absolute').uploadmap();
 
     css.walkDecls(function(decl) {
+        console.log(decl);
         if(decl.prop === 'src' && urlIsRelative(decl.value)) {
             decl.value = uploadmap[decl.value];
         }
