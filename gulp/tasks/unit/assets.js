@@ -1,6 +1,7 @@
 var path = require('path');
 
-var browserify = require('gulp-browserify');
+var browserify = require('browserify');
+var transform = require('vinyl-transform');
 var gulp = require('gulp');
 var minifyCSS = require('gulp-csso');
 var concat = require('gulp-concat');
@@ -13,7 +14,7 @@ var gulpif = require('gulp-if');
 var browsersync = require('browser-sync');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
-var banner = require('../../banner');
+var banner = require('.././banner');
 
 var config = global.wikibrick;
 var env = config.environment;
@@ -44,12 +45,14 @@ if(env.relative2absolute) {
 // Task to minify and stage our in-house JavaScript files.
 // TODO: Fix JS minificatoin for in-house JS
 gulp.task('build:js', function(){
+    var browserified = transform(function(filename) {
+        var b = browserify(filename);
+        return b.budle();
+    });
+
     return gulp.src(srcs.js)
-        .pipe(browserify({
-            insertGlobals: true,
-            debug: !env.debug
-        }))
-        .pipe(concat('wiki.js'))
+        .pipe(browserified)
+        //.pipe(concat('wiki.js'))
         .pipe(gulpif(env.banner, banner.js()))
         .pipe(gulpif(env.serve, browsersync.stream()))
         .pipe(gulp.dest(dests.js));
