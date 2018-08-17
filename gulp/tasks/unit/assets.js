@@ -19,6 +19,7 @@ var autoprefixer = require('autoprefixer');
 var banner = require('../../banner');
 var log = require('fancy-log');
 var uglify = require('gulp-uglify');
+var glob = require('globby');
 
 var config = global.wikibrick;
 var env = config.environment;
@@ -48,23 +49,19 @@ if(env.relative2absolute) {
 
 // Task to minify and stage our in-house JavaScript files.
 // TODO: Fix JS minificatoin for in-house JS
-gulp.task('build:js', function(){
-    var b = browserify({
-        entries: './wiki.js',
-        debug: env.debug
+gulp.task('build:js', function(done){
+    glob(srcs.js, function(err, files) {
+        if (err) done(err);
+
+        var tasks = files.map(function(entry) {
+            return browserify({entries: [entry]})
+                .bundle()
+                .pipe(source(entry))
+                .pipe(concat('wiki.js'))
+                .pipe(gulp.dest(dests.js));
+        });
+        es.merge(tasks).on('end', done);
     });
-    
-    return b.bundle()
-        .pipe(source(srcs.js))
-        .pipe(buffer())
-        .pipe(gulpif(env.debug, sourcemaps.init({loadMaps: true})))
-        .pipe(gulpif(env.minify, uglify()))
-        .on('error', log)
-        .pipe(gulpif(env.debug, sourcemaps.write('./')))
-        //.pipe(concat('wiki.js'))
-        .pipe(gulpif(env.banner, banner.js()))
-        .pipe(gulpif(env.serve, browsersync.stream()))
-        .pipe(gulp.dest(dests.js));
 });
 
 // Task to minify and stage our in-house CSS stylesheets
