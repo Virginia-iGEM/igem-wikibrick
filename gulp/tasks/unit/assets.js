@@ -1,7 +1,6 @@
 var path = require('path');
 
-var browserify = require('browserify');
-var transform = require('vinyl-transform');
+var gulpBrowser = require('gulp-browser');
 var gulp = require('gulp');
 var minifyCSS = require('gulp-csso');
 var concat = require('gulp-concat');
@@ -45,13 +44,8 @@ if(env.relative2absolute) {
 // Task to minify and stage our in-house JavaScript files.
 // TODO: Fix JS minificatoin for in-house JS
 gulp.task('build:js', function(){
-    var browserified = transform(function(filename) {
-        var b = browserify(filename);
-        return b.bundle();
-    });
-
     return gulp.src(srcs.js)
-        .pipe(browserified)
+        .pipe(gulpBrowser.browserify())
         //.pipe(concat('wiki.js'))
         .pipe(gulpif(env.banner, banner.js()))
         .pipe(gulpif(env.serve, browsersync.stream()))
