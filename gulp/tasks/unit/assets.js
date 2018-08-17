@@ -3,6 +3,7 @@ var path = require('path');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
+var es = require('event-stream');
 
 var gulp = require('gulp');
 var minifyCSS = require('gulp-csso');
