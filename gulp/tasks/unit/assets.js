@@ -47,7 +47,7 @@ if(env.relative2absolute) {
 gulp.task('build:js', function(){
     var browserified = transform(function(filename) {
         var b = browserify(filename);
-        return b.budle();
+        return b.bundle();
     });
 
     return gulp.src(srcs.js)
