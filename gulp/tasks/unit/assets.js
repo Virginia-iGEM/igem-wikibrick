@@ -18,6 +18,7 @@ var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var banner = require('../../banner');
 var log = require('fancy-log');
+var uglify = require('gulp-uglify');
 
 var config = global.wikibrick;
 var env = config.environment;
