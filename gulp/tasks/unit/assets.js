@@ -14,7 +14,7 @@ var gulpif = require('gulp-if');
 var browsersync = require('browser-sync');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
-var banner = require('.././banner');
+var banner = require('../../banner');
 
 var config = global.wikibrick;
 var env = config.environment;
