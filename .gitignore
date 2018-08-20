@@ -178,3 +178,6 @@ typings/
 
 # Ignore scratch work directory
 **/spike
+
+# Ignore app directory; we don't need to track our tests
+app/
