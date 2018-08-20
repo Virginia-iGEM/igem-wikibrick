@@ -50,18 +50,20 @@ if(env.relative2absolute) {
 
 // Task to minify and stage our in-house JavaScript files.
 // TODO: Fix JS minificatoin for in-house JS
-gulp.task('build:js', function(done){
-    glob(srcs.js, function(err, files) {
-        if (err) done(err);
+gulp.task('build:js', function(){
+    return new Promise(function(resolve, reject) {
+        glob(srcs.js, function(err, files) {
+            if (err) reject(err);
 
-        var tasks = files.map(function(entry) {
-            return browserify({entries: [entry]})
-                .bundle()
-                .pipe(source(entry))
-                .pipe(concat('wiki.js'))
-                .pipe(gulp.dest(dests.js));
+            var tasks = files.map(function(entry) {
+                return browserify({entries: [entry]})
+                    .bundle()
+                    .pipe(source(entry))
+                    .pipe(concat('wiki.js'))
+                    .pipe(gulp.dest(dests.js));
+            });
+            es.merge(tasks).on('end', resolve);
         });
-        es.merge(tasks).on('end', done);
     });
 });
 
