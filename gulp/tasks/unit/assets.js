@@ -50,7 +50,9 @@ if (env.relative2absolute) {
 
 // Task to minify and stage our in-house JavaScript files.
 // TODO: Fix JS minificatoin for in-house JS
-// Welcome to Function Hell:tm:
+// gulp + browserify + glob recipe courtesy of Hafiz Ismail
+// https://wehavefaces.net/gulp-browserify-the-gulp-y-way-bb359b3f9623
+
 gulp.task('build:js', function() {
     return new Promise(function(resolve, reject) {
         glob(srcs.js, {}, function(err, files) {
