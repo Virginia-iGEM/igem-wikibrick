@@ -181,3 +181,6 @@ typings/
 
 # Ignore app directory; we don't need to track our tests
 app/
+
+# ignore uploadmap for debugging
+uploadmap.json

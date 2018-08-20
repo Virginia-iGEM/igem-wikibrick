@@ -41,12 +41,22 @@ var relative2absolute = function(css, opts) { // relative2absolute function for 
     });
 };
 
+var importantify = function(css, opts) { // importantify adds !important to literally every CSS declaration. Yeah. I know.
+    css.walkDecls(function (decl) {
+        decl.value = decl.value + " !important";
+    });
+};
+
 var postcssplugins = [
     autoprefixer(config.browserslist)
 ];
 
 if (env.relative2absolute) {
     postcssplugins.push(relative2absolute);
+}
+
+if (env.importantify) {
+    postcssplugins.push(importantify);
 }
 
 // Task to minify and stage our in-house JavaScript files.
