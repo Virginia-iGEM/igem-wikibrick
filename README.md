@@ -67,7 +67,7 @@ A current known workaround is to write inline JavaScript in `<script>` tags inst
 
 **Make sure you are editing files in `app` and not in `build`. Any edits to any files in `build` will be overwritten when the next build is run. Never edit any files in `build` as the edits will always be trampled.**
 
-### The `gulp serve` task cannot be found.
+### `gulp serve` task cannot be found. Or any other tasks.
 
 Try running `npm install -D igem-wikibrick` in your project folder. This is another known issue, and a rare one at that; we've only encountered it twice and it hasn't showed up since. If it persists, push any changes you've made, delete your project folder and reclone your project from GitHub.
 
