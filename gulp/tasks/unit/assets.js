@@ -54,22 +54,38 @@ if (env.relative2absolute) {
 // https://wehavefaces.net/gulp-browserify-the-gulp-y-way-bb359b3f9623
 
 gulp.task('build:js', function() {
-    return new Promise(function(resolve, reject) {
-        glob(srcs.js, {}, function(err, files) {
-            if (err) {reject(err);}
+    if (env.browserify) {
+        return new Promise(function(resolve, reject) {
+            glob(srcs.js, {}, function(err, files) {
+                if (err) {reject(err);}
 
-            var b = browserify();
-            files.forEach(function (file) {
-                b.add(file);
+                var b = browserify({
+                    debug: env.debug
+                });
+                files.forEach(function (file) {
+                    b.add(file);
+                });
+                b.bundle()
+                    .pipe(source('wiki.js'))
+                    .pipe(buffer())
+                    .pipe(gulpif(env.minify, uglify()))
+                    .pipe(gulpif(env.banner, banner.js()))
+                    .pipe(gulpif(env.serve, browsersync.stream()))
+                    .pipe(gulp.dest(dests.js));
+                resolve();
             });
-            b.bundle()
-                .pipe(source('wiki.js'))
-                .pipe(buffer())
-                .pipe(uglify())
-                .pipe(gulp.dest(dests.js));
-            resolve();
         });
-    });
+    }
+    else {
+        return gulp.src(srcs.js)
+            .pipe(sourcemaps.init()) // Used for debugging
+        //.pipe(uglify().on('error', log)) // Minification increases load speeds
+            .pipe(concat('wiki.js')) // Note use of concat to compact all JS files into one
+            .pipe(sourcemaps.write())
+            .pipe(gulpif(env.banner, banner.js()))
+            .pipe(gulpif(env.serve, browsersync.stream()))
+            .pipe(gulp.dest(dests.js));
+    }
 });
 
 // Task to minify and stage our in-house CSS stylesheets

@@ -10,10 +10,10 @@ module.exports = function(root) {
     var build = path.join(root, '/build/');
 
     // Teaminfo. Duh.
-    const teaminfo = {
+    var teaminfo = {
         year: 2018,
         teamName: 'Virginia'
-    }
+    };
 
     // Listed file sources for all tasks. Note use of glob patterns and wildcarding.
     // Used by any build tasks.
@@ -31,7 +31,7 @@ module.exports = function(root) {
         js: path.join(app, 'scripts/**/*.js'),
         images: path.join(app, 'images/**/*.{png,jpg}'),
         fonts: path.join(app, 'fonts/**/*.{ttf,otf,woff}')
-    }
+    };
 
     // Destination directory for build, source directories for upload.
     // Used by any build tasks.
@@ -45,7 +45,7 @@ module.exports = function(root) {
         bowercss: path.join(build, 'dist/css/'),
         images: path.join(build, 'images/'),
         fonts: path.join(build, 'fonts/')
-    }
+    };
 
     // Used by push.js. Note that for the most part, 
     // upload srcs are the same as built targets.
@@ -59,7 +59,7 @@ module.exports = function(root) {
         bowerjs: buildtarget.bowerjs.concat('**/*.js'),
         bowercss: buildtarget.bowercss.concat('**/*.css'),
         files: [path.join(build, 'images/**/*.{png,jpg}'), path.join(build, 'fonts/**/*.{ttf,otf,woff}')]
-    }
+    };
 
     var secure = ''; // Change to 's' to enable secure html
     // URLs used by realtive2absolute
@@ -69,13 +69,13 @@ module.exports = function(root) {
         js: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.teamName}/js`,
         css: `http${secure}://${teaminfo.year}.igem.org/Template:${teaminfo.teamName}/css`,
         files: `http${secure}://${teaminfo.year}.igem.org/File:T--${teaminfo.teamName}--{0}`,
-    }
+    };
 
     // Suffixes used by relative2absolute
     var suffixes = {
         js: '?action=raw&ctype=text/javascript',
         css: '?action=raw&ctype=text/css'
-    }
+    };
 
     var environments = {
         dev: {
@@ -83,14 +83,16 @@ module.exports = function(root) {
             minify: false,
             relative2absolute: false,
             serve: true,
-            debug: true
+            debug: true,
+            browserify: true
         },
         live: {
             banner: true,
             minify: true,
             relative2absolute: true,
             serve: false,
-            debug: false
+            debug: false,
+            browserify: true
         }
     }
 
