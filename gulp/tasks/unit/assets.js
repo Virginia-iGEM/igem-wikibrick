@@ -53,23 +53,19 @@ if (env.relative2absolute) {
 // Welcome to Function Hell:tm:
 gulp.task('build:js', function() {
     return new Promise(function(resolve, reject) {
-        glob(srcs.js, function(err, files) {
-            if (err) reject(err);
-            console.log("Beginning browserify");
+        glob(srcs.js, {}, function(err, files) {
+            if (err) {reject(err);}
 
-            var tasks = files.map(function(entry) {
-                return browserify({
-                        entries: [entry],
-                    })
-                    .bundle()
-                    .pipe(source(entry))
-                    //.pipe(buffer())
-                    .pipe(gulp.dest(dests.js));
+            var b = browserify();
+            files.forEach(function (file) {
+                b.add(file);
             });
-
-            console.log("Ending browserify");
-            es.merge(tasks)
-                .on('end', resolve);
+            b.bundle()
+                .pipe(source('wiki.js'))
+                .pipe(buffer())
+                .pipe(uglify())
+                .pipe(gulp.dest(dests.js));
+            resolve();
         });
     });
 });
