@@ -1,16 +1,16 @@
 // See https://github.com/Mantissa-23/VGEM-2018/tree/master/wiki for descriptions of packages
 var gulp = require('gulp');
-const path = require('path')
-const fs = require('fs');
-const Promise = require('bluebird')
-const globby = require ('globby')
-const _ = require('lodash')
+var path = require('path');
+var fs = require('fs');
+var Promise = require('bluebird');
+var globby = require ('globby');
+var _ = require('lodash');
 
-const config = global.wikibrick;
-const targets = config.targets;
-const igemwiki = require('igemwiki-api')(config.teaminfo)
+var config = global.wikibrick;
+var targets = config.targets;
+var igemwiki = require('igemwiki-api')(config.teaminfo);
 
-const uploadmapfilename = config.uploadmap;
+var uploadmapfilename = config.uploadmap;
 
 var loggedin = false;
 var loginjar;
@@ -26,7 +26,7 @@ var login = function(logincount) {
                 loginjar = jar;
                 resolve();
             })
-            .catch(error =>{
+            .catch(error => {
                 if(error.toString().match(/RequestError: Error: connect ETIMEDOUT.*/) && logincount > 0){
                     console.log("Error. Login failed. Try again.");
                     logincount--;
@@ -34,8 +34,7 @@ var login = function(logincount) {
                 }
                 else{
                     console.log("Try running gulp publish again.");
-                    throw error;
-                    reject();
+                    reject(error);
                 }
             });
         }

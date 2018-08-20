@@ -29,13 +29,14 @@ var dests = config.targets.buildtarget;
 
 var urlIsRelative = require('./relative2absolute').urlIsRelative;
 
-var relative2absolute = function(css, opts) {
+var relative2absolute = function(css, opts) { // relative2absolute function for converting @font-face srcs
     var uploadmap = require('./relative2absolute').uploadmap();
 
     css.walkDecls(function(decl) {
-        console.log(decl);
+        //console.log(decl);
         if (decl.prop === 'src' && urlIsRelative(decl.value)) {
-            decl.value = uploadmap[decl.value];
+            //console.log(decl.value.replace(/(url\("|"\))/gi,'')); 
+            decl.value = 'url("' + uploadmap[path.basename(decl.value.replace(/(url\("|"\))/gi,''))] + '")'; // Remove url identifier for uploadmap
         }
     });
 };

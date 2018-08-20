@@ -88,7 +88,7 @@ module.exports = function(root) {
         },
         live: {
             banner: true,
-            minify: true,
+            minify: false,
             relative2absolute: true,
             serve: false,
             debug: false,
