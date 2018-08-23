@@ -2,7 +2,10 @@
 
 A user-friendly tool that makes developing wikis and webpages for the iGEM wiki behave as much like normal web development as possible. Automates building, image, HTML, CSS, Javascript and Package uploads.
 
-*Warning: igem-wikibrick is still under fairly active development and may not behave as expected at all times. If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork and submit a pull request. See [contributing](#8-contributing) for more information.*
+If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork and submit a pull request. See [contributing](#8-contributing) for more information.
+
+_Note: As of version 0.6.0 igem-wikibrick has largely stabilized. Some small changes to the CLI will be made in the future, but the tool should not radically change henceforth save for patches, bugfixes and optional off-by-default features. **Please see the [FAQ](#5-faq) before using, as there are some persistent issues that you must be aware of while using the tool.**_
+
 
 ## 1 Table of Contents
 
@@ -53,15 +56,20 @@ As much as we've tried to streamline this, we've encountered this same issue. Ev
 
 You can avoid this by doing the following:
 
+- **Liberally use and abuse the !important flag.** As much as it bad practice, this is the easiest way to override stylesheets enforced by `igem.org`. Does something appear different on the `igem.org` website than on your local server? Find the style that makes it appear different, and add `!important` to the end of it, just before the semicolon. This will fix 95% of these issues.
 - **Do not leave your publish for last minute.** Publish semi-regularly to ensure that your styling, content and JS works on both the wiki and on your local webserver.
-- Do not style `<body>` tags. At all. To do global styling for your whole page, instead wrap all the content in your body in a `<div id="teamname_content"></div>` and style the `#teamname_content` id.
+- Do not style `<body>` tags. At all. To do global styling for your whole page, instead wrap all the content in your body in a div tag and style that tag. Example: `<div id="teamname_content"></div>` and style the `#teamname_content` id.
 - Inspect an iGEM wiki page and take note of the names of HTML tags they use. For example, they have a `<div>` with the id `#content`, so you will not be able to use a `<div>` with the `content` id without clashing with iGEM Wiki styling
 
 ### Why does my JQuery code behave strangely?
 
-This is a known issue and likely relates to the fact that we package JQuery 3.3 using Bower by default, while iGEM provides JQuery 1.1 forcibly to all wikis. We are currently attempting to resolve the issue ourselves.
+~~This is a known issue and likely relates to the fact that we package JQuery 3.3 using Bower by default, while iGEM provides JQuery 1.1 forcibly to all wikis. We are currently attempting to resolve the issue ourselves.~~
 
-A current known workaround is to write inline JavaScript in `<script>` tags instead of writing them under the js folder. If you need to use your JavaScript in multiple documents, you can place your script tag in the `app/partials/_head.hbs` partial. This will cause JQuery code to behave as it should.
+~~A current known workaround is to write inline JavaScript in `<script>` tags instead of writing them under the js folder. If you need to use your JavaScript in multiple documents, you can place your script tag in the `app/partials/_head.hbs` partial. This will cause JQuery code to behave as it should.~~
+
+Fixed! Both templates served by `generator-igemwiki` now use Browserify to package the newest version of JQuery, 3.3.1, with your JavaScript. This allows you to use the newest version of JavaScript while `igem.org`'s AJAX loads will still function perfectly with JQuery 1.11.1.
+
+If you aren't using the generator, update to the latest version of `igem-wikibrick` with `npm install -D igem-wikibrick@latest`, install Node.js JQuery with `npm install jquery` and then add `jq = require('jquery')` to the top of all your JavaScript files. Use `jq` in place of `$` if you wish to use JavaScript 3.3.1. If for whatever reason you want to use JavaScript 1.11.1, use the `$` instead. _Do not mix and match._
 
 ### I keep making modifications but whenever I build, they're overwritten!
 
@@ -69,9 +77,13 @@ A current known workaround is to write inline JavaScript in `<script>` tags inst
 
 ### The `gulp serve` task cannot be found.
 
-Try running `npm install -D igem-wikibrick` in your project folder. This is another known issue, and a rare one at that; we've only encountered it twice and it hasn't showed up since. If it persists, push any changes you've made, delete your project folder and reclone your project from GitHub.
+Try running `npm install -D igem-wikibrick@latest` in your project folder. This is another known issue, and a rare one at that; we've only encountered it twice and it hasn't showed up since. If it persists, push any changes you've made, delete your project folder and reclone your project from GitHub.
 
 If you have any insights as to why this issue may be occurring, we'd love to get it fixed. See [Contributing](#9-contributing) for contact information.
+
+This issue seems to sometimes occur when you clone down a new copy of your project and then run `npm install`. Try running `npm update` instead of `npm install`; this seems to correctly duplicate `igem-wikibrick`'s necessary dependencies.'
+
+This appears to be an issue with `npm install`'s dependency resolution code, and so fixing this problem is largley out of our power. `yarn` may prove superior; if you are interested in helping us migrate `igem-wikibrick` to `yarn` instead of `npm`, we'd love to talk to you.
 
 ### Some of my URLs aren't substituted?
 
@@ -106,6 +118,7 @@ Run `gulp prebuild` first. `push:files` works out of the build directory, which 
 - [FEATURE] Have `gulp push:` tasks log any uploaded files along with their hashes in a Git-tracked `uploadlog.json` file. Only upload files whose hashes have changed since the last upload. This is important to reduce upload times AND load on the iGEM server. Currently `igemwiki-api` attempts to do this by first attempting to _download_ the file from the wiki that is being uploaded, hashing it, and skipping it if the hashes are identical. However, either due to a bug in `igemwiki-api` or just igem.org being inconsistent, it sometimes skips items that should be uploaded and uploads items that should be skipped.
   - If this is implemented in `wikibrick`, a `force` flag should be added to `igemwiki-api` so that it doesn't bother downloading and checking the file. A similar `force` flag may already exist; I don't recall.
 - [FEATURE] Add a Handlebars helper function that accepts Google Drive links and can pull down Google Docs and use them as HTML content.
+  - Decently complicated change as it requires prompting the user to log in to Google Drive and dealing with Google Drive APIs.
 - Add error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
 
 ### 6.3 Medium Priority
