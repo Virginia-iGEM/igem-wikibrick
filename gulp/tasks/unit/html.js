@@ -74,6 +74,13 @@ relative2absolute = function($, file) {
             a.attr('href', urls.standard);
         });
 
+        // Set absolute path AJAX loads of content
+        href = $('article[href]').each(function () {
+            var a = $(this);
+	    var link = a.attr('href');
+            a.attr('href', urljoin(urls.template, path.basename(link, '.html')));
+        });
+
         // Set absolute path for all internal links
         links = $('a').each(function () {
             var a = $(this);
@@ -86,18 +93,18 @@ relative2absolute = function($, file) {
                     a.attr('href', urljoin(urls.standard, path.basename(a.attr('href')).replace('.html', '')));
                 }
             }
-        })
+        });
 
         // Unwrap head and body elements
         unwrap = $('head, body').each(function () {
             var u = $(this);
             u.replaceWith(u.html());
-        })
+        });
 
         // Remove iGEM Navbar Placeholder
         removeplaceholders = $('#igem-navbar-placeholder').replaceWith('');
 
-        Promise.all([images, stylesheets, scripts, index, links, removeplaceholders]).then(resolve);
+        Promise.all([images, stylesheets, scripts, index, href, links, unwrap, removeplaceholders]).then(resolve);
     });
 }
 // Function shared by all HTML processing tasks for development builds. 
@@ -111,12 +118,12 @@ var prepHTML = lazypipe()
         }
     }))) // Think about using lazypipe here
     .pipe(() => gulpif(env.relative2absolute, replace(/<!DOCTYPE html>/g, '')))
-    .pipe(() => gulpif(env.serve, browsersync.stream()))
+    .pipe(() => gulpif(env.serve, browsersync.stream()));
 
 var renameToHTML = lazypipe()
     .pipe(rename, function(path) {
         path.extname = '.html';
-    })
+    });
 
 var prepHBS = lazypipe()
     .pipe(renameToHTML)
@@ -135,7 +142,7 @@ var prepHBS = lazypipe()
             }
         }(),
         helpers: config.handlebars.helpers(file, t)
-    }])})
+	}]);});
 
 // Task to prep all non-home pages, I.E. Project Description, Team, etc.
 gulp.task('build:html:pages', () =>
