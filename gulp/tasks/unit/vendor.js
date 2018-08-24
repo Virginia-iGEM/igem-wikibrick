@@ -18,7 +18,9 @@ var dests = targets.buildtarget;
 // Task to stage library JS, such as JQuery, Bootstrap and any future live dependencies.
 // Note: See bower.json for exceptions important to successfully uploading bootstrap.
 gulp.task('build:bower:js', () => {
-    var src = mainBowerFiles('**/*.js')
+    var src = mainBowerFiles('**/*.js');
+
+    console.log(src);
 
     if (src.length == 0) {
         return Promise.resolve();
@@ -27,7 +29,7 @@ gulp.task('build:bower:js', () => {
         return gulp.src(src, {base: 'bower_components' })
         .pipe(gulpif(env.minify, uglify().on('error', log)))
         .pipe(concat('vendor.js'))
-        .pipe(gulp.dest(dests.bowerjs))
+            .pipe(gulp.dest(dests.bowerjs));
     }
 });
 

@@ -1,4 +1,4 @@
-const path = require('path');
+﻿const path = require('path');
 
 var argv = require('yargs')
     .boolean(['--dev', '-d'])
@@ -6,14 +6,49 @@ var argv = require('yargs')
     .argv;
 
 module.exports = function(root) {
+    var environments = {
+        dev: {
+            banner: false,
+            minify: false,
+            relative2absolute: false,
+            serve: true,
+            debug: true,
+            browserify: true,
+            importantify: false
+        },
+        live: {
+            banner: true,
+            minify: false,
+            relative2absolute: true,
+            serve: false,
+            debug: false,
+            browserify: true,
+            importantify: false
+        }
+    };
+
+    var shortflag;
+    if (argv.l) {
+        shortflag = 'live';
+    }
+    else if (argv.d) {
+        shortflag = 'dev';
+    }
+
+    var userenv = argv.env || shortflag || 'dev'; // Try env variable, else fallback on shortflag, else assume we're in dev
+    var environment = Object.assign(environments[userenv], {name: userenv});
+
     var app = path.join(root, '/app/');
     var build = path.join(root, '/build/');
 
     // Teaminfo. Duh.
-    var teaminfo = {
+    const teaminfo = {
         year: 2018,
         teamName: 'Virginia'
     };
+
+    const imagetypes = '{png,jpg,gif,svg}';
+    const fonttypes = '{ttf,otf,woff}';
 
     // Listed file sources for all tasks. Note use of glob patterns and wildcarding.
     // Used by any build tasks.
@@ -24,13 +59,13 @@ module.exports = function(root) {
         markdowncontent: path.join(app, 'content/**/*.md'),
         docxcontent: path.join(app, 'content/**/*.docx'),
         //drivecontent: TODO,
-        partials: path.join(app, 'partials/'),
+      partials: [path.join(app, 'partials/')],
         templates: path.join(app, 'templates/**/*.html'),
         css: path.join(app, 'styles/**/*.css'),
         scss: path.join(app, 'styles/**/*.scss'),
         js: path.join(app, 'scripts/**/*.js'),
-        images: path.join(app, 'images/**/*.{png,jpg}'),
-        fonts: path.join(app, 'fonts/**/*.{ttf,otf,woff}')
+        images: path.join(app, `images/**/*.${imagetypes}`),
+        fonts: path.join(app, `fonts/**/*.${fonttypes}`)
     };
 
     // Destination directory for build, source directories for upload.
@@ -58,7 +93,7 @@ module.exports = function(root) {
         js: path.join(buildtarget.js, '*.js'),
         bowerjs: buildtarget.bowerjs.concat('**/*.js'),
         bowercss: buildtarget.bowercss.concat('**/*.css'),
-        files: [path.join(build, 'images/**/*.{png,jpg}'), path.join(build, 'fonts/**/*.{ttf,otf,woff}')]
+        files: [path.join(build, `images/**/*.${imagetypes}`), path.join(build, `fonts/**/*.${fonttypes}`)]
     };
 
     var secure = ''; // Change to 's' to enable secure html
@@ -77,68 +112,64 @@ module.exports = function(root) {
         css: '?action=raw&ctype=text/css'
     };
 
-    var environments = {
-        dev: {
-            banner: false,
-            minify: false,
-            relative2absolute: false,
-            serve: true,
-            debug: true,
-            browserify: true,
-            importantify: true
-        },
-        live: {
-            banner: true,
-            minify: false,
-            relative2absolute: true,
-            serve: false,
-            debug: false,
-            browserify: true,
-            importantify: true
-        }
-    }
 
-    var shortflag;
-    if (argv.l) {
-        shortflag = 'live'
-    } else if (argv.d) {
-        shortflag = 'dev'
-    }
-
-    var userenv = argv.env || shortflag || 'dev'; // Try env variable, else fallback on shortflag, else assume we're in dev
-    var environment = Object.assign(environments[userenv], {
-        name: userenv
-    });
-
+/*tooltip*/
     const glossary = {
-        "quorum sensing": ["Short Def", "Long Def"],
-        "autoinducer": ["Short Def", "Long Def"],
-        "operon": ["Short Def", "Long Def"],
-        "Lsr operon": ["Short Def", "Long Def"],
-        "E.coli": ["Short Def", "Long Def"]
-    }
+        "Autoinducer-2": ["A universal signaling molecule used by microorganisms to coordinate group behavior through quorum sensing."],
+        "autoinduction": ["The activation of a phenotype without external stimuli."],
+        "biofilms": ["A protective, adhesive matrix of polymers typically produced after quorum activation."],
+        "E.coli": ["Escherichia coli. A commonly used chassis also found in the human gut microbiome."],
+        "LsrACDB": ["Active import protein for AI-2."],        
+        "LsrK": ["AI-2 kinase, which catalyzes the phosphorylation of A1-2 to phospho-AI-2."],        
+        "Lsr operon": ["LuxS Regulated (Lsr) operon responsive to AI-2."], 
+        "LuxS": ["An enzyme closely linked to the production of AI-2."],
+        "operon": ["A functional unit of DNA containing a cluster of genes under the control of a single promoter."],
+        "phosphorylation": [" The addition of a phosphate group to an organic compound. "],
+        "pLsr": ["The bidirectional promoter of the Lsr Operon."],
+        "quorum sensing": ["The ability to detect and to respond to cell population density by gene regulation."],
+        "sfGFP": ["superfolding Green Fluorescent Protein"],
+"T7 RNA Polymerase" : ["An RNA polymerase from the T7 bacteriophage is highly selective for the pT7 promoter."],     
+        "virulence": ["The likelihood of a microbe to cause disease based on its phenotypic state."],
+        "YdgG": ["Active export protein for AI-2."]  
+    };
 
     var handlebarsHelpers = function(file, t) {
 
         return {
             contentpath: function(context) {
-                return path.posix.join('/content/', path.basename(file.path));
+		if(environment.relative2absolute) {
+		    return urls.template + '/' + path.basename(file.path, '.html');
+		}
+		else {
+		    return path.posix.join('/content/', path.basename(file.path));
+		}
             },
+	    url: function(context1, context2) {
+		if(environment.relative2absolute) {
+		    return urls[context1] + '/' + path.basename(context2, '.html');
+		}
+		else {
+		    return path.posix.join('/content/', path.basename(context2));
+		}
+		return '';
+	    },
             define: function(context) {
                 if (context in glossary) {
                     var word_short_definition = glossary[context][0];
                     var word_long_definition = glossary[context][1];
-                    return `<span class="tooltip">${context}<span class="shortdef">${word_short_definition}</span><span class="longdef">${word_long_definition}</span> </span>`;
-                } else {
+                    return `<span class="tooltip">${context}<span class="shortdef">${word_short_definition}</span><span class="longdef" tabindex = "1">${word_long_definition}</span> </span>`;
+                }
+                else {
                     return context;
                 }
             }
-        }
-    }
+        };
+    };
 
     var markdownOptions = {
         sanitize: false
-    }
+    };
+
     return {
         teaminfo: teaminfo,
         uploadmap: path.join(root, 'uploadmap.json'),
@@ -153,9 +184,9 @@ module.exports = function(root) {
             clean: path.join(build, '/**'),
             app: app,
             build: build,
-            buildsrc: buildsrc,
-            buildtarget: buildtarget,
-            uploadsrc: uploadsrc,
+            buildsrc: buildsrc, 
+            buildtarget: buildtarget, 
+            uploadsrc: uploadsrc, 
             urls: urls,
             suffixes: suffixes,
         },
@@ -172,5 +203,5 @@ module.exports = function(root) {
             options: markdownOptions
         },
         browserslist: ["defaults"]
-    }
+    };
 };

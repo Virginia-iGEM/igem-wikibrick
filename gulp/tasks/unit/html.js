@@ -60,7 +60,7 @@ relative2absolute = function($, file) {
             }
             
             if(script.text() != null) {
-                urlReplace = /\.load\( *'(\.)?(\/)?(.*)\.html' *\);/gi;
+                urlReplace = /\.load\( *['"](\.)?(\/)?(.*)\.html['"] *\);/gi;
 
                 script.text(script.text().replace(urlReplace, function (match, $1, $2, $3, offest, original) {
                     return ".load('" + urljoin(urls.template, path.basename($3)) + targets.suffixes.js + "');";
@@ -77,8 +77,10 @@ relative2absolute = function($, file) {
         // Set absolute path AJAX loads of content
         href = $('article[load]').each(function () {
             var a = $(this);
-	    var link = a.attr('load');
-            a.attr('load', urljoin(urls.template, path.basename(link, '.html')));
+	    if(a[0].hasAttribute('load')) {
+		var link = a.attr('load');
+		a.attr('load', urljoin(urls.template, path.basename(link, '.html')));
+	    }
         });
 
         // Set absolute path for all internal links
