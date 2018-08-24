@@ -75,10 +75,10 @@ relative2absolute = function($, file) {
         });
 
         // Set absolute path AJAX loads of content
-        href = $('article[href]').each(function () {
+        href = $('article[load]').each(function () {
             var a = $(this);
-	    var link = a.attr('href');
-            a.attr('href', urljoin(urls.template, path.basename(link, '.html')));
+	    var link = a.attr('load');
+            a.attr('load', urljoin(urls.template, path.basename(link, '.html')));
         });
 
         // Set absolute path for all internal links
@@ -135,7 +135,7 @@ var prepHBS = lazypipe()
         // files are available
         batch: function() {
             if (glob.sync(srcs.partials).length > 0) {
-                return [srcs.partials];
+                return srcs.partials;
             }
             else {
                 return;
