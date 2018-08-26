@@ -27,8 +27,8 @@ gulp.task('build:bower:js', () => {
     }
     else {
         return gulp.src(src, {base: 'bower_components' })
-        .pipe(gulpif(env.minify, uglify().on('error', log)))
-        .pipe(concat('vendor.js'))
+	    .pipe(gulpif(env.minify, uglify().on('error', log)))
+	    .pipe(concat('vendor.js'))
             .pipe(gulp.dest(dests.bowerjs));
     }
 });
@@ -42,9 +42,9 @@ gulp.task('build:bower:css', () => {
     }
     else {
         return gulp.src(src, {base: 'bower_components' })
-        .pipe(postcss([ autoprefixer(config.browserslist) ]))
-        .pipe(gulpif(env.minify, minifyCSS()))
-        .pipe(concat('vendor.css'))
-        .pipe(gulp.dest(dests.bowercss))
+	    .pipe(postcss([ autoprefixer(config.browserslist) ]))
+	    .pipe(gulpif(env.minify, minifyCSS()))
+	    .pipe(concat('vendor.css'))
+            .pipe(gulp.dest(dests.bowercss));
     }
 });
