@@ -21,7 +21,7 @@ var mbfOptions = {
     paths: targets.root,
     overrides: {
 	jquery: {
-	    ignore: true // Do not upload Jquery 1.11.1 as iGEM will autolaod it
+	    ignore: env.relative2absolute // Do not upload Jquery 1.11.1 as iGEM will autolaod it
 	}
     }
 };
