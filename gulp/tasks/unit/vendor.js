@@ -31,7 +31,7 @@ gulp.task('build:bower:js', () => {
 	}
     });
 
-    console.log(src);
+    //console.log(src);
 
     if (src.length == 0) {
         return Promise.resolve();
@@ -55,7 +55,7 @@ gulp.task('build:bower:css', () => {
 	}
     });
 
-    console.log(src);
+    //console.log(src);
     
     if (src.length == 0) {
         return Promise.resolve();
