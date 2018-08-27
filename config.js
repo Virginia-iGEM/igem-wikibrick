@@ -13,7 +13,7 @@ module.exports = function(root) {
             relative2absolute: false,
             serve: true,
             debug: true,
-            browserify: true,
+            browserify: false,
             importantify: false
         },
         live: {
@@ -22,7 +22,7 @@ module.exports = function(root) {
             relative2absolute: true,
             serve: false,
             debug: false,
-            browserify: true,
+            browserify: false,
             importantify: false
         }
     };
@@ -137,16 +137,16 @@ module.exports = function(root) {
 
         return {
             contentpath: function(context) {
-		if(environment.relative2absolute) {
-		    return urls.template + '/' + path.basename(file.path, '.html');
-		}
-		else {
+		//if(environment.relative2absolute) {
+		    //return urls.template + '/' + path.basename(file.path, '.html') + suffixes.js;
+		//}
+		//else {
 		    return path.posix.join('/content/', path.basename(file.path));
-		}
+		//}
             },
 	    url: function(context1, context2) {
 		if(environment.relative2absolute) {
-		    return urls[context1] + '/' + path.basename(context2, '.html');
+		    return urls[context1] + '/' + path.basename(context2, '.html') + suffixes.js;
 		}
 		else {
 		    return path.posix.join('/content/', path.basename(context2));

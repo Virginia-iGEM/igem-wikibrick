@@ -17,21 +17,21 @@ var env = config.environment;
 var srcs = targets.buildsrc;
 var dests = targets.buildtarget;
 
-var mbfOptions = {
-    paths: targets.root,
-    overrides: {
-	jquery: {
-	    ignore: env.relative2absolute // Do not upload Jquery 1.11.1 as iGEM will autolaod it
-	}
-    }
-};
+//var mbfOptions = ;
 
 // Task to stage library JS, such as JQuery, Bootstrap and any future live dependencies.
 // Note: See bower.json for exceptions important to successfully uploading bootstrap.
 gulp.task('build:bower:js', () => {
-    var src = mainBowerFiles('**/*.js', mbfOptions);
+    var src = mainBowerFiles('**/*.js', {
+	paths: targets.root,
+	overrides: {
+	    jquery: {
+		ignore: env.relative2absolute // Do not upload Jquery 1.11.1 as iGEM will autolaod it
+	    }
+	}
+    });
 
-    //console.log(src);
+    console.log(src);
 
     if (src.length == 0) {
         return Promise.resolve();
@@ -46,8 +46,17 @@ gulp.task('build:bower:js', () => {
 
 // Task to stage library CSS, particularly Bootstrap.
 gulp.task('build:bower:css', () => {
-    var src = mainBowerFiles('**/*.css', mbfOptions);
+    var src = mainBowerFiles('**/*.css', {
+	paths: targets.root,
+	overrides: {
+	    jquery: {
+		ignore: env.relative2absolute // Do not upload Jquery 1.11.1 as iGEM will autolaod it
+	    }
+	}
+    });
 
+    console.log(src);
+    
     if (src.length == 0) {
         return Promise.resolve();
     }
