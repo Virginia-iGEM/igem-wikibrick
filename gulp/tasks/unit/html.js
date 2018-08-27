@@ -132,7 +132,7 @@ var prepHBS = lazypipe()
     .pipe(tap, function(file, t) {
         return t.through(handlebars, [{}, {
         ignorePartials: true,
-        // The world's shittiest hack:tm: to get around the errrr thrown by 
+        // The world's shittiest hack:tm: to get around the error thrown by 
         // gulp-compile-handlebars when srcs.partials is empty and no batch 
         // files are available
         batch: function() {
