@@ -65,7 +65,15 @@ When you run this command, the terminal will prompt you for your username and pa
 
 ## Troubleshooting
 
-See the [FAQ](https://github.com/Virginia-iGEM/igem-wikibrick#5-faq) section on the main page.
+See the [FAQ](https://github.com/Virginia-iGEM/igem-wikibrick#5-faq) section on the main page. If things are still broken, email as at virginia.igem@gmail.com.
+
+## But wait, I don't know how to do the actual web development part...
+
+Teaching web development is beyond the scope of our tutorials. We strongly reccommend w3schools.com for learning the basics; this is how we taught ourselves HTML and CSS. JavaScript can be learned as you go if you've used a similar programming language before (JavaScript has almost identical syntax to C-based languages such as C++, Java and of course C itself, though many conventions are different).
+
+We believe the best way to learn advanced HTML, CSS and JavaScript is to set goals for yourself, and read about whatever it is you need to reach that goal. Want everything to look pretty and well-styled? Look up how to do general CSS styling and apply that. Want a fancy interactive navbar? Look it up and apply what you learn. Take things bite by bite and slowly work on the wiki once piece at a time.
+
+That being said, we do have a set of [general reccommendations available on our tutorials page](https://github.com/Virginia-iGEM/2018-tutorials/blob/master/wiki/README.md), which will take you to other resources. Additionally, see the FAQ [FAQ](https://github.com/Virginia-iGEM/igem-wikibrick#5-faq), which has additionally reccommendations.
 
 ## Closing Remarks
 
