@@ -187,12 +187,7 @@ upload = function(promises) {
                 if (err) { // Make a fresh one if we can't find the file
                     uploadmap = {
                         "file": {},
-                        "srcs": {
-                            "html": {},
-                            "css": {},
-                            "js": {},
-                            "vendor": {}
-                        }
+                        "hash": {}
                     };
                 }
                 else {
