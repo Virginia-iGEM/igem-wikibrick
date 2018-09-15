@@ -37,8 +37,11 @@ relative2absolute = function($, file) {
         images =  $('img').each(function () {
             var img = $(this);
             var relname = img.attr('src');
-            if (relname != null && urlIsRelative(relname) && uploadmap.file.hasOwnProperty(path.basename(relname))) { // Check to see if a map exists, otherwise do not change
-                img.attr('src', uploadmap.file[path.basename(relname)]);
+            var f = path.relative(targets.build, path.join(targets.build, relname)).toString();
+            //console.log(f);
+            if (relname != null && urlIsRelative(relname) && f in uploadmap.file) { // Check to see if a map exists, otherwise do not change
+                //console.log(f);
+                img.attr('src', uploadmap.file[f]);
             }
         });
 

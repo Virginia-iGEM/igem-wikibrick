@@ -78,7 +78,7 @@ var login = function(logincount) {
 // Mapping for index (home) page
 var index = [{
     type: 'page',
-    fileName: path.resolve(__dirname, targets.uploadsrc.index),
+    fileName: path.resolve(targets.root, targets.uploadsrc.index),
     page: 'INDEX'
 }];
 
@@ -87,7 +87,7 @@ var getPages = globby(targets.uploadsrc.pages).then(function (pages) {
     return pages.map(function (page) {
         return {
             type: 'page',
-            fileName: path.resolve(__dirname, page),
+            fileName: path.resolve(targets.root, page),
             page: path.basename(page).replace('.html', '')
         };
     });
@@ -98,7 +98,7 @@ var getTemplates = globby(targets.uploadsrc.templates).then(function (templates)
     return templates.map(function (template) {
         return {
             type: 'template',
-            fileName: path.resolve(__dirname, template),
+            fileName: path.resolve(targets.root, template),
             page: path.basename(template).replace('.html', '')
         };
     });
@@ -109,7 +109,7 @@ var getContent = globby(targets.uploadsrc.content).then(function (contents) {
     return contents.map(function (content) {
         return {
             type: 'template',
-            fileName: path.resolve(__dirname, content),
+            fileName: path.resolve(targets.root, content),
             page: path.basename(content).replace('.html', '')
         };
     });
@@ -120,7 +120,7 @@ var getCSS = globby(targets.uploadsrc.css).then((stylesheets) => {
     return stylesheets.map((stylesheet) => {
         return {
             type: 'stylesheet',
-            fileName: path.resolve(__dirname, stylesheet),
+            fileName: path.resolve(targets.root, stylesheet),
             page: (path.basename(stylesheet).replace('.css', ''))
         };
     });
@@ -129,14 +129,14 @@ var getCSS = globby(targets.uploadsrc.css).then((stylesheets) => {
 // Mapping for Javascript
 var getJS = globby(targets.uploadsrc.js).then(scripts => scripts.map(script => ({
     type: 'script',
-    fileName: path.resolve(__dirname, script),
+    fileName: path.resolve(targets.root, script),
     page: path.basename(script).replace('.js', '')
 })));
 
 // Mapping for images
 var getFiles = globby(targets.uploadsrc.files).then(files => files.map(file => ({
     type: 'upload',
-    fileName: path.resolve(__dirname, file),
+    fileName: path.resolve(targets.root, file),
     page: path.basename(file)
 })));
 
@@ -145,8 +145,10 @@ var myError = new Error('RequestError');
 var retryUpload = function(conf, uploadmap, retries) {
     return new Promise((resolve, reject) => {
         fileHash(conf.source).then(hash  => {
-            if (hash == uploadmap.hash[conf.source]) {
+            //console.log(path.relative(targets.build, conf.source));
+            if (path.relative(targets.build, conf.source) in uploadmap.hash && hash == uploadmap.hash[path.relative(targets.build, conf.source)]) {
                 resolve({}, true);
+                console.log("skipped: file " + path.basename(conf.source) + " has not changed.");
             }
             else {
                 igemwiki.upload(conf).then(results => {
@@ -158,7 +160,7 @@ var retryUpload = function(conf, uploadmap, retries) {
                     }
                     if (retries > 0) {
                         console.log("Upload failed, retrying upload...");
-                        retryUpload(conf, retries).then(results => {resolve(results, false);});
+                        retryUpload(conf, uploadmap, retries).then(results => {resolve(results, false);});
                     }
                     else{
                         console.log("Retry count exceeded.");
@@ -182,7 +184,7 @@ upload = function(promises) {
         // Run all mapping functions asynchronously with bluebird, 
         // generating an actual map list from the patterns we specified.
         Promise.all(promises).then((confs) => {
-            fs.open(uploadmapfilename, 'w+', (err, fd) => {
+            fs.open(uploadmapfilename, 'r', (err, fd) => {
                 var uploadmap;
                 if (err) { // Make a fresh one if we can't find the file
                     uploadmap = {
@@ -191,7 +193,7 @@ upload = function(promises) {
                     };
                 }
                 else {
-                    uploadmap = JSON.parse(fd);
+                    uploadmap = require('./relative2absolute').uploadmap();
                 }
 
                 confs = _.flatten(confs);
@@ -208,11 +210,13 @@ upload = function(promises) {
                                 .then((results, skipped) => { // Generate uploadmaps if we're uploading any images
                                     return new Promise((resolve1, reject1) => {
                                         if (!skipped) {
-                                            hashFile(conf.source).then((hash) => {
+                                            fileHash(conf.source).then((hash) => {
                                                 if(conf.type == 'upload') {
-                                                    uploadmap.file[conf.dest] = results.target;
+                                                    console.log('upload');
+                                                    uploadmap.file[path.relative(targets.build, conf.source)] = results.target;
+                                                    console.log(results.target);
                                                 }
-                                                uploadmap.hash[conf.source] = hash;
+                                                uploadmap.hash[path.relative(targets.build, conf.source)] = hash;
                                                 resolve1();
                                             });
                                         }
@@ -223,7 +227,7 @@ upload = function(promises) {
                                 }), {concurrency: 1})
                         .then(() => { // Write out uploadmaps if they've been generated
                             fs.writeFile(uploadmapfilename ,JSON.stringify(uploadmap), 'utf8', () => {
-                                console.log('Wrote image mappings to '.concat(uploadmapfilename));
+                                console.log('Wrote file mappings to '.concat(uploadmapfilename));
                             });
                         })
                         .then(() => {
