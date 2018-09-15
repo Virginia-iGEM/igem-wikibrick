@@ -146,13 +146,13 @@ var retryUpload = function(conf, uploadmap, retries) {
     return new Promise((resolve, reject) => {
         fileHash(conf.source).then(hash  => {
             //console.log(path.relative(targets.build, conf.source));
-            if (path.relative(targets.build, conf.source) in uploadmap.hash && hash == uploadmap.hash[path.relative(targets.build, conf.source)]) {
-                resolve({}, true);
+            if (path.relative(targets.build, conf.source) in uploadmap.hash && hash == uploadmap.hash[path.relative(targets.build, conf.source)] && path.relative(targets.build, conf.source) in uploadmap.file) {
                 console.log("skipped: file " + path.basename(conf.source) + " has not changed.");
+                resolve();
             }
             else {
                 igemwiki.upload(conf).then(results => {
-                    resolve(results, false);
+                    resolve(results);
                 }, error => {
                     retries--;
                     if(error.toString().match(/RequestError: Error: connect ETIMEDOUT.*/)){
@@ -185,9 +185,12 @@ upload = function(promises) {
         // generating an actual map list from the patterns we specified.
         Promise.all(promises).then((confs) => {
             fs.open(uploadmapfilename, 'r', (err, fd) => {
+                var version = "0.1.0";
                 var uploadmap;
-                if (err) { // Make a fresh one if we can't find the file
+                if (err || require('./relative2absolute').uploadmap().version != version) { // Make a fresh one if we can't find the file or the version is out of date
+                    console.log("No existing uploadmap found, creating new one.");
                     uploadmap = {
+                        "version": version,
                         "file": {},
                         "hash": {}
                     };
@@ -207,14 +210,12 @@ upload = function(promises) {
                         // force: true
                     }));
                     Promise.map(confs, conf => retryUpload(conf, uploadmap, 7) // Do the actual upload, retry 5 times upon failure
-                                .then((results, skipped) => { // Generate uploadmaps if we're uploading any images
+                                .then((results) => { // Generate uploadmaps if we're uploading any images
                                     return new Promise((resolve1, reject1) => {
-                                        if (!skipped) {
+                                        if (results) {
                                             fileHash(conf.source).then((hash) => {
                                                 if(conf.type == 'upload') {
-                                                    console.log('upload');
                                                     uploadmap.file[path.relative(targets.build, conf.source)] = results.target;
-                                                    console.log(results.target);
                                                 }
                                                 uploadmap.hash[path.relative(targets.build, conf.source)] = hash;
                                                 resolve1();
