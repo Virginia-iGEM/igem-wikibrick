@@ -146,7 +146,7 @@ var retryUpload = function(conf, uploadmap, retries) {
     return new Promise((resolve, reject) => {
         fileHash(conf.source).then(hash  => {
             //console.log(path.relative(targets.build, conf.source));
-            if (path.relative(targets.build, conf.source) in uploadmap.hash && hash == uploadmap.hash[path.relative(targets.build, conf.source)] && path.relative(targets.build, conf.source) in uploadmap.file) {
+            if (path.relative(targets.build, conf.source) in uploadmap.hash && hash == uploadmap.hash[path.relative(targets.build, conf.source)]) {
                 console.log("skipped: file " + path.basename(conf.source) + " has not changed.");
                 resolve();
             }
