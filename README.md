@@ -119,6 +119,7 @@ Run `gulp prebuild` first. `push:files` works out of the build directory, which 
 - [FEATURE] Add a Handlebars helper function that accepts Google Drive links and can pull down Google Docs and use them as HTML content.
   - Decently complicated change as it requires prompting the user to log in to Google Drive and dealing with Google Drive APIs.
 - Add error-checker that asks the user if they want to upload `dev` build files to the iGEM wiki, instead of just blindly uploading them. Should probably use a `lock` file of some kind under the `build` directory that indicates what the last build environment was.
+- Modify handlebars substitution so that a malformed handlebars template will cause an error to be thrown, and the handlebars file to not be processed, as opposed to the entire build to crash out.
 
 ### 6.3 Medium Priority
 
