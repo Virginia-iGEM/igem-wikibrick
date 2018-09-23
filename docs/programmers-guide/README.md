@@ -259,6 +259,6 @@ In order to modify or add top-level tasks, simply append them after the `// WRIT
 
 ### Adding new subtasks
 
-As you might've guessed, to add a new subtask task you can just add a new file to `gulp/tasks/unit`. It doesn't matter what the name of the file is; you don't have to index it anywhere, it will be automatically loaded in. Once this is done, you can reference the subtasks in your top-level gulp tasks, or reference them directly wth `gulp taskname`.
+As you might've guessed, to add a new subtask task you can just add a new file to `gulp/tasks/unit`. It doesn't matter what the name of the file is; you don't have to index it anywhere, it will be automatically loaded in. Once this is done, you can reference the subtasks in your top-level gulp tasks, or execute them directly wth `gulp taskname`.
 
 Note that the actual filename does not matter; task names are determined when they are created using `gulp.task('taskname', ...)`.
