@@ -247,7 +247,7 @@ We will give quick overview of what settings `config.js` sets here, but the best
 
 Note that all of these variables are more clearly defined in `config.js`.
 
-## 6 Adding or Modifing Gulp Tasks
+## 6 Adding or Modifying Gulp Tasks
 
 We've added support for creating your own gulp tasks or modifying our own, so that you can modify the build pipeline if you'd like.
 
