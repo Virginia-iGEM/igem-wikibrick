@@ -50,6 +50,12 @@ Our goal in building this tool was to enable us to create an iGEM website that w
 
 ## 5 FAQ
 
+### `gulp publish -l` doesn't upload assets, sometimes.
+
+This is a known issue, workaround is to issue a `gulp push:all` directly after the `gulp publish -l`. If you have `gulp serve`d in the meantime, you must `gulp build -l` then `gulp push:all`.
+
+We are not aware of what causes this, it appears to be an intermittent issue. We believe it has something to do with the local hash check skip.
+
 ### Why does my wiki look different on igem.org than it does locally?
 
 As much as we've tried to streamline this, we've encountered this same issue. Every team runs into it in one way or another. This issue occurs for a number of reasons, including igem.org's `load.php` styles taking precedence over any stylesheets we load in, as well as preloaded stylesheets associated with the wiki template that is automatically loaded into every team's page.
