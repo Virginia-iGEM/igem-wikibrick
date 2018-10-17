@@ -73,7 +73,7 @@ Teaching web development is beyond the scope of our tutorials. We strongly recco
 
 We believe the best way to learn advanced HTML, CSS and JavaScript is to set goals for yourself, and read about whatever it is you need to reach that goal. Want everything to look pretty and well-styled? Look up how to do general CSS styling and apply that. Want a fancy interactive navbar? Look it up and apply what you learn. Take things bite by bite and slowly work on the wiki once piece at a time.
 
-That being said, we do have a set of [general reccommendations available on our tutorials page](https://github.com/Virginia-iGEM/2018-tutorials/blob/master/wiki/README.md), which will take you to other resources. Additionally, see the FAQ [FAQ](https://github.com/Virginia-iGEM/igem-wikibrick#5-faq), which has additionally reccommendations.
+That being said, we do have a set of [general reccommendations available on our tutorials page](https://github.com/Virginia-iGEM/2018-tutorials/blob/master/wiki/README.md), which will take you to other resources. Additionally, see the [FAQ](https://github.com/Virginia-iGEM/igem-wikibrick#5-faq), which has additionally reccommendations.
 
 ## Closing Remarks
 
