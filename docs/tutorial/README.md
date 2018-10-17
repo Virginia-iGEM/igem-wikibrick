@@ -59,7 +59,7 @@ This command is a shortcut for the following series of commands:
 
 - `gulp push:files -l`: This command will upload all images and fonts under `build/images` and `build/fonts` respectively to igem.org, under your team's name. This upload must come first because it saves the URLs of all uploaded images, which are not predictable before the upload actually occurs. These URLs will be saved under `build/imagemap.json`, which will be read during the next step to perform URL substitution.
 - `gulp build -l`: Perform a live build. A live build does a little bit more than a development build, primarily minification and URL substitution.
-- `gulp push:content -l`: This is the "main" upload step, and pushes HTML, CSS and JS to the wiki. After this completes, your publish will be complete and you should be able to see your wiki on the `<year>.igem.org/Team:<teamname>` domain.
+- `gulp push:all -l`: This is the "main" upload step, and pushes HTML, CSS and JS to the wiki. After this completes, your publish will be complete and you should be able to see your wiki on the `<year>.igem.org/Team:<teamname>` domain.
 
 When you run this command, the terminal will prompt you for your username and password. This is the same username and password you use to login to the iGEM wiki. These credentials will not be stored, and you currently must enter them on every publish. Do not accidentally commit a file containing these credentials to your repository. If you do, remove said file with the [git bfg repo cleaner](https://rtyley.github.io/bfg-repo-cleaner/)
 
