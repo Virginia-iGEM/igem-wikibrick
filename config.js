@@ -14,6 +14,7 @@ module.exports = function(root) {
             serve: true,
             debug: true,
             browserify: false,
+            concat: false,
             importantify: false
         },
         live: {
@@ -23,6 +24,7 @@ module.exports = function(root) {
             serve: false,
             debug: false,
             browserify: false,
+            concat: false,
             importantify: false
         }
     };

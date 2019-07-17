@@ -91,7 +91,7 @@ gulp.task('build:js', function() {
         return gulp.src(srcs.js)
             .pipe(sourcemaps.init()) // Used for debugging
         //.pipe(uglify().on('error', log)) // Minification increases load speeds
-            .pipe(concat('wiki.js')) // Note use of concat to compact all JS files into one
+            .pipe(gulpif(env.concat, concat('wiki.js'))) // Note use of concat to compact all JS files into one
             .pipe(sourcemaps.write())
             .pipe(gulpif(env.banner, banner.js()))
             .pipe(gulpif(env.serve, browsersync.stream()))
