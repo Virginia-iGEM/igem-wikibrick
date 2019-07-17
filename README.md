@@ -4,8 +4,9 @@ A user-friendly tool that makes developing wikis and webpages for the iGEM wiki 
 
 If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork and submit a pull request. See [contributing](#8-contributing) for more information.
 
-_Note: As of version 0.6.0 igem-wikibrick has largely stabilized. Some small changes to the CLI will be made in the future, but the tool should not radically change henceforth save for patches, bugfixes and optional off-by-default features. **Please see the [FAQ](#5-faq) before using, as there are some persistent issues that you must be aware of while using the tool.**_
+_Note: As of version 0.7.4 igem-wikibrick has largely stabilized. Some small changes to the CLI will be made in the future, but the tool should not radically change henceforth save for patches, bugfixes and optional off-by-default features. **Please see the [FAQ](#5-faq) before using, as there are some persistent issues that you must be aware of while using the tool.**_
 
+**If you are interested in updating and maintaining this package, please message me at dtc9bb@virginia.edu.** I am no longer on an iGEM team, and this tool still has a number of intermittent bugs that need to be fixed, and to be honest, it needs a v1.0 that doesn't use bower, and probably shouldn't use gulp.
 
 ## 1 Table of Contents
 
