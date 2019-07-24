@@ -1,5 +1,7 @@
 # igem-wikibrick
 
+**Public Service Announcement: Because of iGEM's adpotion of HTTPS and simultaneous non-adoption of TLS v1.2+, this tool will only work with Node.js > 11.4.0. Please ensure that your Node is up to date, and that your project contains the gulp.json file within this repository that enables TLS v1.0 compatibility.**
+
 A user-friendly tool that makes developing wikis and webpages for the iGEM wiki behave as much like normal web development as possible. Automates building, image, HTML, CSS, Javascript and Package uploads.
 
 If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork and submit a pull request. See [contributing](#8-contributing) for more information.
