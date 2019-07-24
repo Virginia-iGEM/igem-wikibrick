@@ -1,6 +1,6 @@
 {
     "name": "igem-wikibrick",
-    "version": "0.7.9",
+    "version": "0.7.10",
     "description": "Build tool capable of automatically building and publish iGEM Wiki sites. Created by Virginia iGEM 2018's Wiki Team.",
     "main": "index.js",
     "scripts": {
@@ -27,6 +27,7 @@
         "bower": "^1.8.4",
         "browser-sync": "^2.24.4",
         "browserify": "^16.2.2",
+        "compare-versions": "^3.5.0",
         "del": "^3.0.0",
         "delay": "^3.0.0",
         "event-stream": "^3.3.4",

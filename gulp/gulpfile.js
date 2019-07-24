@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var HubRegistry = require('gulp-hub');
 var path = require('path');
+var compareVersions = require('compare-versions')
 
 module.exports = function(config) {
   var targets = config.targets;
@@ -19,7 +20,18 @@ module.exports = function(config) {
   gulp.task('build', gulp.series('prebuild', 'partialbuild'));
 
   // Live build runs dev and then uploads, will change in future
-  gulp.task('publish', gulp.series('prebuild', 'push:files', 'partialbuild', 'push:all'));
+  gulp.task('versioncheck', function() {
+    return new Promise(function(resolve, reject) {
+      if (compareVersions.compare(process.versions.node, '11.4.0', '<')) {
+        reject("Node.js version " + process.versions.node + " < 11.4.0. Please update Node.js to 11.4.0 or later to use the publish command; this limitation is out of our control and is due to recent updates to iGEM's website as of July 2019.");
+      }
+      else {
+        console.log("Version check ok")
+        resolve()
+      }
+    })
+  })
+  gulp.task('publish', gulp.series('versioncheck', 'prebuild', 'push:files', 'partialbuild', 'push:all'));
 
   gulp.task('serve', gulp.series('build', gulp.parallel('browsersync', function() {
     gulp.watch(targets.buildsrc.htmlpages, gulp.series('build:html:pages'));
