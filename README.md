@@ -1,14 +1,25 @@
 # igem-wikibrick
 
-**Public Service Announcement: Because of iGEM's adpotion of HTTPS and simultaneous non-adoption of TLS v1.2+, this tool will only work with Node.js > 11.4.0. Please ensure that your Node is up to date, and that your project contains the gulp.json file within this repository that enables TLS v1.0 compatibility.**
-
 A user-friendly tool that makes developing wikis and webpages for the iGEM wiki behave as much like normal web development as possible. Automates building, image, HTML, CSS, Javascript and Package uploads.
+
+**Public Service Announcement: Because of iGEM's adpotion of HTTPS and simultaneous non-adoption of TLS v1.2+, this tool will only work with Node.js >= 11.4.0, or significantly older versions of Node. Please ensure that your Node is up to date, and that your project contains the gulp.json file within this repository's root directoy that whitelists TLS v1.0 compatibility.**
 
 If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork and submit a pull request. See [contributing](#8-contributing) for more information.
 
-_Note: As of version 0.7.4 igem-wikibrick has largely stabilized. Some small changes to the CLI will be made in the future, but the tool should not radically change henceforth save for patches, bugfixes and optional off-by-default features. **Please see the [FAQ](#5-faq) before using, as there are some persistent issues that you must be aware of while using the tool.**_
+**Please see the [FAQ](#5-faq) before using, as there are some persistent issues that you must be aware of while using the tool.**
 
 **If you are interested in updating and maintaining this package, please message me at dtc9bb@virginia.edu.** I am no longer on an iGEM team, and this tool still has a number of intermittent bugs that need to be fixed, and to be honest, it needs a v1.0 that doesn't use bower, and probably shouldn't use gulp.
+
+## Changelog
+
+```
+v0.8.0: Added 'data-nosub' attribute, which can be added to any HTML tag that would normally have its URLs substituted to prevent URL substitution.
+v0.7.10: igem-wikibrick will now ensure Node.js version >= 11.4.0 before publish, or fail
+v0.7.9: Updated certain out-of-date packages to fix TLS compatibility issues
+v0.7.8: config.js updated to reflect HTTPS standards adopted by iGEM in 2019; 
+v0.7.5-0.7.7: 'noconcat' config setting added to prevent tool from merging javascript files if unwanted
+v0.7.4: Fixed corner-case compatibility-breaking issue with gulp4 installation
+```
 
 ## 1 Table of Contents
 
