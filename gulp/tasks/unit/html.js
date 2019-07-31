@@ -37,9 +37,11 @@ relative2absolute = function($, file) {
         images =  $('img').each(function () {
             var img = $(this);
             var relname = img.attr('src');
+            var attr = img.attr('data-nosub')
+            var noreplace = (typeof attr !== typeof undefined && attr !== false)
             var f = path.relative(targets.build, path.join(targets.build, relname)).toString();
             //console.log(f);
-            if (relname != null && urlIsRelative(relname) && f in uploadmap.file) { // Check to see if a map exists, otherwise do not change
+            if (relname != null && urlIsRelative(relname) && f in uploadmap.file && !noreplace) { // Check to see if a map exists, otherwise do not change
                 //console.log(f);
                 img.attr('src', uploadmap.file[f]);
             }
@@ -49,7 +51,9 @@ relative2absolute = function($, file) {
         stylesheets = $('link[rel=stylesheet]', 'head').each(function () {
             var link = $(this);
             var relname = link.attr('href');
-            if (relname != null && urlIsRelative(relname)) {
+            var attr = link.attr('data-nosub')
+            var noreplace = (typeof attr !== typeof undefined && attr !== false)
+            if (relname != null && urlIsRelative(relname) && !noreplace) {
                 link.attr('href', urljoin(urls.css, path.basename(relname).replace('.css', '')) + suffixes.css);
             }
         });
@@ -58,11 +62,13 @@ relative2absolute = function($, file) {
         scripts = $('script').each(function () {
             var script = $(this);
             var relname = script.attr('src');
-            if (relname != null && urlIsRelative(relname)) {
+            var attr = script.attr('data-nosub')
+            var noreplace = (typeof attr !== typeof undefined && attr !== false)
+            if (relname != null && urlIsRelative(relname) && !noreplace) {
                 script.attr('src', urljoin(urls.js, path.basename(relname).replace('.js', '')) + suffixes.js);
             }
             
-            if(script.text() != null) {
+            if(script.text() != null && !noreplace) {
                 urlReplace = /\.load\( *['"](\.)?(\/)?(.*)\.html['"] *\);/gi;
 
                 script.text(script.text().replace(urlReplace, function (match, $1, $2, $3, offest, original) {
@@ -90,7 +96,9 @@ relative2absolute = function($, file) {
         links = $('a').each(function () {
             var a = $(this);
             var relname = a.attr('href');
-            if (relname != null && relname != "index.html" && urlIsRelative(relname)) {
+            var attr = a.attr('data-nosub')
+            var noreplace = (typeof attr !== typeof undefined && attr !== false)
+            if (relname != null && relname != "index.html" && urlIsRelative(relname) && !noreplace) {
                 if (!relname.match(/^(\.)?(\/)?pages\//)) {
                     a.attr('href', urljoin(urls.standard, path.basename(a.attr('href')).replace('.html', '')));
                 }
