@@ -1,5 +1,5 @@
 {
-  flags: {
-    nodeFlags: '--tls-min-v1.0'
+  "flags": {
+    "nodeFlags": "--tls-min-v1.0"
   }
 }
