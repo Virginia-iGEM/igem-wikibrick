@@ -17,6 +17,7 @@ If you encounter an error, problem or issue, please report it via our [issue tra
 ## Changelog
 
 ```
+v0.8.2: Updated gulpfile.js to force TLSv1.0 compatibility.
 v0.8.0: Added 'data-nosub' attribute, which can be added to any HTML tag that would normally have its URLs substituted to prevent URL substitution.
 v0.7.10: igem-wikibrick will now ensure Node.js version >= 11.4.0 before publish, or fail
 v0.7.9: Updated certain out-of-date packages to fix TLS compatibility issues
