@@ -1,5 +1,17 @@
 # igem-wikibrick
 
+⚠️ **DEPRECATION NOTICE** ⚠️
+
+As of October, 2020, I'm declaring this tool deprecated. As far as I can tell, it is still functional - teams have been continuing to use it successfully with minor hiccups along the way. However, the tooling Wikibrick is built on was deprecated back in 2018, and now that I'm an older software engineer I can no longer give this tool a glowing recommendation. It's more of a lukewarm, use-at-your-own-risk.
+
+My reasons for this are partially selfish - I don't want to maintain the tool when iGEM invariably breaks some part of the framework or upgrades/downgrades/removes SSL - but also because I don't want people using my tooling if it's shoddy. This tool could and should be completely rewritten to be much simpler and less bug-prone, making use of newer, better technologies, such as Webpack or Rome, probably in TypeScript, with minimal dependencies. Furthermore it needs to be a more robust tool because of how the iGEM servers... Well, are not.
+
+For this reason I'm removing any messages in the README about looking for a maintainer - this software should be considered legacy, and would benefit infinitely more from a completely new v2 written from scratch as opposed to a new maintainer.
+
+I will still accept pull requests and address small maintenance issues/bugfixes, but the major quirks and bugs with this tool will not be fixed, and major issues will be addressed but not fixed.
+
+---
+
 A user-friendly tool that makes developing wikis and webpages for the iGEM wiki behave as much like normal web development as possible. Automates building, image, HTML, CSS, Javascript and Package uploads.
 
 **Public Service Announcement: Because of iGEM's adpotion of HTTPS and simultaneous non-adoption of TLS v1.2+, this tool will only work with Node.js >= 11.4.0. Due to the tool's age, we also strongly recommend the use of Node.js v12.18.0 specifically, the current LTS version.**
@@ -11,8 +23,6 @@ Please also contact your iGEM representative and inform them that their organiza
 If you encounter an error, problem or issue, please report it via our [issue tracker](https://github.com/Virginia-iGEM/igem-wikibrick/issues). If you would like to contribute, feel free to fork and submit a pull request. See [contributing](#8-contributing) for more information.
 
 **Please see the [FAQ](#5-faq) before using, as there are some persistent issues that you must be aware of while using the tool.**
-
-**If you are interested in updating and maintaining this package, please message me at dtc9bb@virginia.edu.** I am no longer on an iGEM team, and this tool still has a number of intermittent bugs that need to be fixed, and to be honest, it needs a v1.0 that doesn't use bower, and probably shouldn't use gulp.
 
 ## Changelog
 
@@ -208,9 +218,7 @@ This list is not up-to-date, and will be updated once the tool enters a stable s
 
 ## 9 Contributing
 
-If you're interested in JavaScript, Handlebars, Markdown, Webpack, templating libraries like Handlebars, view libraries like React.js or Angular, and the future of frameworks support the iGEM wiki, and would like to contribute to the tools used to make the `igemwiki` stack run, we welcome pull requests, issue submissiosn and emails at [virginia.igem@gmail.com](mailto:virginia.igem@gmail.com).
-
-If you are on an iGEM team, helping us by submitting issues, or forking and pull requesting can count towards a collaboration for your team.
+This repository is open to pull requests for bugfixes, but closed to new features. If you really feel an urge to make this tool better, you should write a new one.
 
 Links to repositories that make this tool work:
 
